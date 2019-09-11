@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Card, Button, ButtonGroup } from 'react-native-elements';
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Card, Button, ButtonGroup, SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Geocoder from '../Geocoder';
@@ -95,7 +95,21 @@ class OmniCard extends Component {
 						/>
 						<Text>accessmap</Text>
 					</View>
-					<Geocoder />
+					{true ? <TouchableWithoutFeedback
+						onPress={() => this.props.navigation.navigate(
+							'Search')}
+					>
+						<View pointerEvents='box-only'>
+						<SearchBar
+					placeholder='Enter address'
+					lightTheme={true}
+					containerStyle={{backgroundColor: '#EEEEEE', padding: 0}}
+					inputContainerStyle={{backgroundColor: '#DDDDDD'}}
+					inputStyle={{margin: 0, padding: 0, fontSize: 14,}}
+							editable={false}
+						/>
+						</View>
+					</TouchableWithoutFeedback>: <Geocoder />}
 					<View style={{flex: 1, flexDirection: 'row', right: 0, left: 0, justifyContent: 'space-between'}}>
 						<View style={{flexDirection: 'row'}}>
 							<ModeButton name='user-circle'
