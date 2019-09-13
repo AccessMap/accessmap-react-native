@@ -11,11 +11,13 @@ const MainNavigator = createStackNavigator({
 	Search: {screen: SearchPage},
 	}, {
 		transitionConfig : () => ({
-		transitionSpec: {
-			duration: 0,
-			timing: Animated.timing,
-			easing: Easing.step0,
-		},
+			transitionSpec: {
+				duration: 0,
+				timing: Animated.timing,
+				easing: Easing.step0,
+			},
+		}, {
+			initialRouteName: 'Map',
 		}),
 	});
 
