@@ -46,7 +46,7 @@ export default {
 		],
 		lineBlur: 0.5,
 	},
-	sidewalkInaccessible: {
+	inaccessible: {
 		lineWidth: [
 			'interpolate',
 			['exponential', 1.5],
@@ -90,6 +90,27 @@ export default {
 			20, OUTLINE_WIDTH,
 		],
 		lineBlur: 0.5,
- 
+	},
+	crossingUnmarked: {
+		lineColor: '#444444',
+		lineCap: 'round',
+		lineGapWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			10, 0.05,
+			16, 2,
+			20, 14,
+		],
+		lineWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			10, OUTLINE_WIDTH / 10,
+			16, OUTLINE_WIDTH / 5,
+			20, OUTLINE_WIDTH,
+		],
+
+		lineBlur: 0.5,
 	},
 };

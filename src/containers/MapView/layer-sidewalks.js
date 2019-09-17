@@ -62,7 +62,7 @@ const LayerSidewalks = props => {
 				sourceLayerID='transportation'
 				filter={['!', accessibleExpression]}
 				layerIndex={80}
-				style={styles.sidewalkInaccessible}
+				style={styles.inaccessible}
 			/>
 		</MapboxGL.VectorSource>
 	);
