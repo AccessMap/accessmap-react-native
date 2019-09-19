@@ -5,14 +5,13 @@ import styles from './map-styles';
 import { connect }  from 'react-redux';
 
 import {
-	MOBILITY_MODE_CUSTOM,
 	MOBILITY_MODE_WHEELCHAIR,
 	MOBILITY_MODE_POWERED,
 	MOBILITY_MODE_CANE,
 } from '../../constants';
 
 const LayerSidewalks = props => {
-	var incline = [100 * props.customUphill, -100 * props.customDownhill];
+	var incline = [props.customUphill, -1 * props.customDownhill];
 	switch (props.mobilityMode) {
 		case MOBILITY_MODE_WHEELCHAIR:
 			incline = [8, -10];
@@ -40,6 +39,14 @@ const LayerSidewalks = props => {
 			id='pedestrian'
 			url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
 		>
+			<MapboxGL.LineLayer
+				id='sidewalk-press'
+				sourceID='pedestrian'
+				sourceLayerID='transportation'
+				filter={isSidewalkExpression}
+				layerIndex={81}
+				style={styles.sidewalkPress}
+			/>
 			<MapboxGL.LineLayer
 				id='sidewalk'
 				sourceID='pedestrian'

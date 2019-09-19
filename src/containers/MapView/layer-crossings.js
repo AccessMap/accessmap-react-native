@@ -1,10 +1,25 @@
 import React from 'react';
 import MapboxGL from '@react-native-mapbox-gl/maps';
-
+import { connect } from 'react-redux';
 import styles from './map-styles';
 
+import {
+	MOBILITY_MODE_CUSTOM,
+	MOBILITY_MODE_CANE,
+} from '../../constants';
+
 const LayerCrossings = props => {
-	const avoidCurbs = true;
+	var avoidCurbs = props.avoidRaisedCurbs;
+	switch (props.mobilityMode) {
+		case MOBILITY_MODE_CUSTOM:
+			break;
+		case MOBILITY_MODE_CANE:
+			avoidCurbs = false;
+			break;
+		default:
+			avoidCurbs = true;
+			break;
+	}
 
 	const isCrossing = ['==', ['get', 'footway'], 'crossing'];
 
@@ -34,6 +49,14 @@ const LayerCrossings = props => {
 			id='pedestrian'
 			url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
 		>
+			<MapboxGL.LineLayer
+				id='crossing-press'
+				sourceID='pedestrian'
+				sourceLayerID='transportation'
+				layerIndex={81}
+				filter={isCrossing}
+				style={styles.crossingPress}
+			/>
 			<MapboxGL.LineLayer
 				id='crossing-marked'
 				sourceID='pedestrian'
@@ -70,4 +93,11 @@ const LayerCrossings = props => {
 	);
 }
 
-export default LayerCrossings;
+const mapStateToProps = state => {
+	return {
+		avoidRaisedCurbs: state.avoidRaisedCurbs,
+		mobilityMode: state.mobilityMode,
+	};
+}
+
+export default connect(mapStateToProps)(LayerCrossings);

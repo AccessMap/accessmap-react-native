@@ -26,6 +26,18 @@ export default {
 			],
 		}
 	},
+	sidewalkPress: {
+		lineCap: 'round',
+		lineWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			10, 0.1,
+			16, 5,
+			20, 24,
+		],
+		lineOpacity: 0.000001,
+	},
 	sidewalkOutlines: {
 		lineCap: 'round',
 		lineGapWidth: [
@@ -69,6 +81,18 @@ export default {
 			16, 3.5,
 			20, 20,
 		],
+	},
+	crossingPress: {
+		lineCap: 'round',
+		lineWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			10, 0.07,
+			16, 3.5,
+			20, 20,
+		],
+		lineOpacity: 0.000001,
 	},
 	crossingOutline: {
 		lineColor: '#EEEEEE',

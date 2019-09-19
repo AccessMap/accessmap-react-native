@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableHighlight, FlatList, Dimensions} from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { connect } from 'react-redux';
@@ -25,48 +24,7 @@ const iconStyle = {
 		['get', 'icon'],
 		'pin',
 		0.75,
-		'airport-icon',
-		1.2,
-		/* default */ 1,
-	],
-};
-
-const featureCollection = {
-	type: 'FeatureCollection',
-	features: [
-		{
-			type: 'Feature',
-			id: 'focus',
-			properties: {
-				icon: 'pin',
-			},
-			geometry: {
-				type: 'Point',
-				coordinates: [-122.3321, 47.6062],
-			},
-		},
-		{
-			type: 'Feature',
-			id: 'origin',
-			properties: {
-				icon: 'pin',
-			},
-			geometry: {
-				type: 'Point',
-				coordinates: [-122.33, 47.60],
-			},
-		},
-		{
-			type: 'Feature',
-			id: 'destination',
-			properties: {
-				icon: 'pin',
-			},
-			geometry: {
-				type: 'Point',
-				coordinates: [-122.335, 47.60],
-			},
-		},
+		/* default */ 0.75,
 	],
 };
 
@@ -92,15 +50,15 @@ class MapView extends Component {
 		if (pinLocation !== prevProps.pinLocation) {
 			this.camera.setCamera({
 				centerCoordinate: pinLocation,
-				//zoomLevel: 20,
 				animationDuration: 1000,
 			});
 		}
 	}
 
 	featureCollection() {
+		const { pinLocation, origin, destination } = this.props;
 		const features = [];
-		if (this.props.pinLocation != null) {
+		if (pinLocation) {
 			features.push({
 				type: 'Feature',
 				id: 'map-pin',
@@ -109,11 +67,49 @@ class MapView extends Component {
 				},
 				geometry: {
 					type: 'Point',
-					coordinates: this.props.pinLocation,
+					coordinates: pinLocation,
+				},
+			});
+		}
+		if (origin) {
+			features.push({
+				type: 'Feature',
+				id: 'origin',
+				properties: {
+					icon: 'origin',
+				},
+				geometry: {
+					type: 'Point',
+					coordinates: origin,
+				},
+			});
+		}
+		if (destination) {
+			features.push({
+				type: 'Feature',
+				id: 'destination',
+				properties: {
+					icon: 'destination',
+				},
+				geometry: {
+					type: 'Point',
+					coordinates: destination,
 				},
 			});
 		}
 		return {type: 'FeatureCollection', features};
+	}
+
+	_onPress = async e => {
+		const center = e.geometry.coordinates;
+		this.props.goToLocation({center});
+
+		const {screenPointX, screenPointY} = e.properties;
+		const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
+				[screenPointX, screenPointY], null, ['sidewalk-press', 'crossing-press']);
+		if (featureCollection.features.length) {
+			console.log(featureCollection);
+		}
 	}
 
 	render() {
@@ -126,10 +122,7 @@ class MapView extends Component {
 			<MapboxGL.MapView 
 				ref={component => this._map = component}
 				style={styles.map}
-				onPress={(e) => {
-					const center = e.geometry.coordinates;
-					goToLocation({center});
-				}}
+				onPress={this._onPress}
 			>
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
@@ -137,7 +130,11 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 				/>
 
-				<MapboxGL.Images images={{pin: pinIcon}}/>
+				<MapboxGL.Images images={{
+					pin: pinIcon,
+					origin: originIcon,
+					destination: destinationIcon,
+				}}/>
 				<MapboxGL.ShapeSource
 					id='annotations'
 					shape={this.featureCollection()}
@@ -157,6 +154,7 @@ const mapStateToProps = state => {
 		centerCoordinate: state.centerCoordinate,
 		zoomLevel: state.zoomLevel,
 		pinLocation: state.pinLocation,
+		origin: state.origin,
 	};
 };
 

@@ -10,6 +10,7 @@ import MapView from '../containers/MapView';
 import Zooms from '../containers/MapButtons/Zooms';
 import OmniCard from '../containers/OmniCard';
 import LinkOverlay from '../containers/LinkOverlay';
+import FeatureCard from '../containers/FeatureCard';
 
 class MapPage extends Component {
 	static navigationOptions = {title: 'Map', header: null};
@@ -38,6 +39,7 @@ class MapPage extends Component {
 					<MapView />
 					<OmniCard navigation={this.props.navigation} />
 					<Zooms />
+					<FeatureCard />
 				</View>
 			</View>
 			</Drawer>

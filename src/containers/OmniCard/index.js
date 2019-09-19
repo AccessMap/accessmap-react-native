@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Geocoder from '../Geocoder';
 import UphillSlider from '../Settings/UphillSlider';
 import DownhillSlider from '../Settings/DownhillSlider';
+import BarrierSwitch from '../Settings/BarrierSwitch';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -39,7 +40,7 @@ const ModeButtonRender = props => {
 	const selected = props.mode == props.mobilityMode;
 	return (
 		<IconButton
-			style={selected ? {backgroundColor: 'blue'} : null }
+			style={selected ? {backgroundColor: '#0000AA'} : null }
 			label={selected ? props.label : null}
 			name={props.name}
 			onPress={_onPress}
@@ -152,7 +153,9 @@ class OmniCard extends Component {
 
 					{this.state.customIndex == 0 ?
 					<UphillSlider /> :
-					<DownhillSlider />}
+					this.state.customIndex == 1 ?
+					<DownhillSlider /> :
+					<BarrierSwitch />}
 				</View>}
 			</Card>
 		);
@@ -163,7 +166,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(OmniCard);
 
 const styles = StyleSheet.create({
 	omniCardStyle: {
-		backgroundColor: '#EEEEEE',
+		backgroundColor: '#FFFFFF',
 		position: 'absolute',
 		flex: 1,
 		flexDirection: 'column', 
@@ -176,7 +179,7 @@ const styles = StyleSheet.create({
 		zIndex: 10,
 	},
 	iconButton: {
-		backgroundColor: '#EEEEEE',
+		backgroundColor: '#FFFFFF',
 		borderRadius: 20,
 		marginTop: 5,
 		marginRight: 5,

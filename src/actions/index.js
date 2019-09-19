@@ -28,6 +28,21 @@ export function setCustomDownhill(incline) {
 	return { type: SET_CUSTOM_DOWNHILL, incline };
 }
 
+export const TOGGLE_BARRIERS = 'TOGGLE_BARRIERS';
+export function toggleBarriers() {
+	return { type: TOGGLE_BARRIERS };
+}
+
+export const SET_ORIGIN = 'SET_ORIGIN';
+export function setOrigin() {
+	return { type: SET_ORIGIN };
+}
+
+export const SET_DESTINATION = 'SET_DESTINATION';
+export function setDestination() {
+	return { type: SET_DESTINATION };
+}
+
 export const OPEN_DRAWER = 'OPEN_DRAWER';
 export function openDrawer() {
 	return { type: OPEN_DRAWER };

@@ -6,6 +6,9 @@ import {
 	SET_MOBILITY_MODE,
 	SET_CUSTOM_UPHILL,
 	SET_CUSTOM_DOWNHILL,
+	TOGGLE_BARRIERS,
+	SET_ORIGIN,
+	SET_DESTINATION,
 	OPEN_DRAWER,
 	CLOSE_DRAWER,
 } from '../actions';
@@ -20,46 +23,40 @@ const defaultState = {
 	zoomLevel: 14,
 	centerCoordinate: [-122.3321, 47.6062],
 	pinLocation: null,
+	pinFeatures: null,
+	origin: null,
+	destination: null,
 	mobilityMode: MOBILITY_MODE_CUSTOM,
-	customUphill: 0.08,
-	customDownhill: 0.08,
+	customUphill: 8,
+	customDownhill: 10,
+	avoidRaisedCurbs: true,
 	drawerOpen: false,
 }
 
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
 		case ZOOM_IN:
-			return Object.assign({}, state, {
-				zoomLevel: state.zoomLevel + 1,
-			});
+			return {...state, zoomLevel: state.zoomLevel + 1};
 		case ZOOM_OUT:
-			return Object.assign({}, state, {
-				zoomLevel: state.zoomLevel - 1,
-			});
+			return {...state, zoomLevel: state.zoomLevel - 1};
 		case GO_TO_LOCATION:
-			return Object.assign({}, state, {
-				pinLocation: action.item.center,
-			});
+			return {...state, pinLocation: action.item.center};
 		case SET_MOBILITY_MODE:
-			return Object.assign({}, state, {
-				mobilityMode: action.mode,
-			});
+			return {...state, mobilityMode: action.mode};
 		case SET_CUSTOM_UPHILL:
-			return Object.assign({}, state, {
-				customUphill: action.incline
-			});
+			return {...state, customUphill: action.incline};
 		case SET_CUSTOM_DOWNHILL:
-			return Object.assign({}, state, {
-				customDownhill: action.incline
-			});
+			return {...state, customDownhill: action.incline};
+		case TOGGLE_BARRIERS:
+			return {...state, avoidRaisedCurbs: !state.avoidRaisedCurbs};
+		case SET_ORIGIN:
+			return {...state, origin: state.pinLocation, pinLocation: null};
+		case SET_DESTINATION:
+			return {...state, destination: state.pinLocation, pinLocation: null};
 		case OPEN_DRAWER:
-			return Object.assign({}, state, {
-				openDrawer: true,
-			});
+			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:
-			return Object.assign({}, state, {
-				openDrawer: false,
-			});
+			return {...state, openDrawer: false};
 		default:
 			return state;
 	}
