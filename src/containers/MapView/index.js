@@ -7,7 +7,7 @@ import LayerSidewalks from './layer-sidewalks';
 import LayerCrossings from './layer-crossings';
 import LayerRoute from './layer-route';
 import styles from '../../styles';
-import { goToLocation } from '../../actions';
+import { placePin } from '../../actions';
 
 import pinIcon from '../../../assets/map-pin.png';
 import originIcon from '../../../assets/origin.png';
@@ -38,7 +38,7 @@ class MapView extends Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		const { zoomLevel, pinLocation } = this.props;
+		const { zoomLevel, geocodeCoords } = this.props;
 		if (zoomLevel !== prevProps.zoomLevel) {
 			const currZoom = await this._map.getZoom();
 			if (zoomLevel > prevProps.zoomLevel) {
@@ -47,18 +47,18 @@ class MapView extends Component {
 				this.camera.zoomTo(currZoom - 1, 200);
 			}
 		}
-		if (pinLocation !== prevProps.pinLocation) {
+		if (geocodeCoords !== prevProps.geocodeCoords) {
 			this.camera.setCamera({
-				centerCoordinate: pinLocation,
+				centerCoordinate: geocodeCoords,
 				animationDuration: 1000,
 			});
 		}
 	}
 
 	featureCollection() {
-		const { pinLocation, origin, destination } = this.props;
+		const { pinFeatures, origin, destination } = this.props;
 		const features = [];
-		if (pinLocation) {
+		if (pinFeatures) {
 			features.push({
 				type: 'Feature',
 				id: 'map-pin',
@@ -67,7 +67,7 @@ class MapView extends Component {
 				},
 				geometry: {
 					type: 'Point',
-					coordinates: pinLocation,
+					coordinates: pinFeatures.center,
 				},
 			});
 		}
@@ -102,19 +102,15 @@ class MapView extends Component {
 
 	_onPress = async e => {
 		const center = e.geometry.coordinates;
-		this.props.goToLocation({center});
-
 		const {screenPointX, screenPointY} = e.properties;
 		const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
 				[screenPointX, screenPointY], null, ['sidewalk-press', 'crossing-press']);
-		if (featureCollection.features.length) {
-			console.log(featureCollection);
-		}
+
+		this.props.placePin({...featureCollection, center});
 	}
 
 	render() {
 		const {
-			goToLocation,
 			zoomLevel,
 			centerCoordinate,
 		} = this.props;
@@ -153,15 +149,17 @@ const mapStateToProps = state => {
 	return {
 		centerCoordinate: state.centerCoordinate,
 		zoomLevel: state.zoomLevel,
-		pinLocation: state.pinLocation,
+		geocodeCoords: state.geocodeCoords,
+		pinFeatures: state.pinFeatures,
 		origin: state.origin,
+		destination: state.destination,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		goToLocation: item => {
-			dispatch(goToLocation(item));
+		placePin: item => {
+			dispatch(placePin(item));
 		}
 	};
 };

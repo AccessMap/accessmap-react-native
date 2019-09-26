@@ -13,6 +13,11 @@ export function goToLocation(item) {
 	return { type: GO_TO_LOCATION, item };
 }
 
+export const PLACE_PIN = 'PLACE_PIN';
+export function placePin(item) {
+	return { type: PLACE_PIN, item };
+}
+
 export const SET_MOBILITY_MODE = 'SET _MOBILITY_MODE';
 export function setMobilityMode(mode) {
 	return { type: SET_MOBILITY_MODE, mode };
@@ -41,6 +46,11 @@ export function setOrigin() {
 export const SET_DESTINATION = 'SET_DESTINATION';
 export function setDestination() {
 	return { type: SET_DESTINATION };
+}
+
+export const REVERSE_ROUTE = 'REVERSE_ROUTE';
+export function reverseRoute() {
+	return { type: REVERSE_ROUTE };
 }
 
 export const OPEN_DRAWER = 'OPEN_DRAWER';

@@ -3,8 +3,6 @@ import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { connect } from 'react-redux';
-
 const OverlayButton = props => {
 		return (
 			<TouchableHighlight style={{alignItems: 'stretch'}}
@@ -163,4 +161,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default connect(null, null)(LinkOverlay);
+export default LinkOverlay;

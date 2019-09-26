@@ -39,7 +39,7 @@ class MapPage extends Component {
 					<MapView />
 					<OmniCard navigation={this.props.navigation} />
 					<Zooms />
-					<FeatureCard />
+					{this.props.pinFeatures && <FeatureCard />}
 				</View>
 			</View>
 			</Drawer>
@@ -48,7 +48,10 @@ class MapPage extends Component {
 }
 
 const mapStateToProps = state => {
-	return { openDrawer: state.openDrawer };
+	return {
+		openDrawer: state.openDrawer,
+		pinFeatures: state.pinFeatures,
+	};
 }
 const mapDispatchToProps = dispatch => {
 	return { closeDrawer: () => { dispatch(closeDrawer()) } };

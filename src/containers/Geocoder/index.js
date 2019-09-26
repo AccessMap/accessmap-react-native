@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-import { goToLocation } from '../../actions';
+import { goToLocation, placePin } from '../../actions';
 
 accessToken = 'pk.eyJ1IjoieWVocmljIiwiYSI6ImNqeWl6eG14YTAzOHgzbXBmMGE2eHM0amUifQ.QuULT47s_LKOyGcCYF6iIw';
 
@@ -50,6 +50,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		goToLocation: item => {
 			dispatch(goToLocation(item));
+			dispatch(placePin(item));
 		}
 	};
 };
