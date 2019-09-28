@@ -33,9 +33,12 @@ export default class SearchPage extends Component {
 	};
 
 	render() {
+	const { params } = this.props.navigation.state;
+
 		return (
 			<View>
 				<Geocoder
+					type={params.type}
 					navigation={this.props.navigation}
 					search={this.props.navigation.getParam('search', '')}
 				/>

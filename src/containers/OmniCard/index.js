@@ -11,13 +11,12 @@ import coordinatesToString from '../../utils/coordinates-to-string';
 
 import {
 	MOBILITY_MODE_CUSTOM,
-	MOBILITY_MODE_WHEELCHAIR,
-	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE,
 } from '../../constants';
 
 import { connect } from 'react-redux';
 import { setMobilityMode, openDrawer, reverseRoute } from '../../actions';
+
+import MobilityButtonGroup from './mobility-buttons';
 
 const IconButton = props => {
 	return (
@@ -35,21 +34,6 @@ const IconButton = props => {
 		/>);
 };
 
-const ModeButtonRender = props => {
-	const _onPress = () => {
-		props.setMobilityMode(props.mode);
-	}
-	const selected = props.mode == props.mobilityMode;
-	return (
-		<IconButton
-			style={selected ? {backgroundColor: '#0000AA'} : null }
-			label={selected ? props.label : null}
-			name={props.name}
-			onPress={_onPress}
-		/>
-	);
-}
-
 const mapStateToProps = state => {
 	return {
 		mobilityMode: state.mobilityMode,
@@ -61,9 +45,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		setMobilityMode: mode => {
-			dispatch(setMobilityMode(mode));
-		},
 		openDrawer: () => {
 			dispatch(openDrawer());
 		},
@@ -73,12 +54,10 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-const ModeButton = connect(mapStateToProps, mapDispatchToProps)(ModeButtonRender);
-
 const GeocodeBar = props => {
 	return (
 		<View style={{flex: 1}}><TouchableWithoutFeedback
-			onPress={() => props.navigation.push('Search')}
+			onPress={() => props.navigation.push('Search', {type: props.type})}
 		>
 			<View pointerEvents='box-only'>
 				<SearchBar
@@ -125,6 +104,7 @@ class OmniCard extends Component {
 					<View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 						<GeocodeBar
 							navigation={this.props.navigation}
+							type='origin'
 							value={origin ? coordinatesToString(origin) : ''}
 							placeholder='Enter start address'
 						/>
@@ -146,6 +126,7 @@ class OmniCard extends Component {
 						<GeocodeBar navigation={this.props.navigation}
 							value={pinFeatures && pinFeatures.text ?
 									pinFeatures.text : ''}
+							type='search'
 							placeholder='Enter address'
 						/>
 						<IconButton
@@ -156,6 +137,7 @@ class OmniCard extends Component {
 					<View  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 						<GeocodeBar navigation={this.props.navigation}
 							value={destination ? coordinatesToString(destination) : ''}
+							type='destination'
 							placeholder='Enter end address'
 						/>
 						<IconButton
@@ -168,24 +150,7 @@ class OmniCard extends Component {
 
 
 					<View style={{flex: 1, flexDirection: 'row', right: 0, left: 0, justifyContent: 'space-between'}}>
-						<View style={{flexDirection: 'row'}}>
-							<ModeButton name='user-circle'
-								label='Custom'
-								mode={MOBILITY_MODE_CUSTOM}
-							/>
-							<ModeButton name='accessible-icon'
-								label='Wheelchair'
-								mode={MOBILITY_MODE_WHEELCHAIR}
-							/>
-							<ModeButton name='plug'
-								label='Powered'
-								mode={MOBILITY_MODE_POWERED}
-							/>
-							<ModeButton name='candy-cane'
-								label='Cane'
-								mode={MOBILITY_MODE_CANE}
-							/>
-						</View>
+						<MobilityButtonGroup />
 
 						{this.props.mobilityMode == MOBILITY_MODE_CUSTOM  &&
 							<View>

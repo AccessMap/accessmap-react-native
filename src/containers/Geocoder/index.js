@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-import { goToLocation, placePin } from '../../actions';
+import { goToLocation, placePin, setOrigin, setDestination } from '../../actions';
 
 accessToken = 'pk.eyJ1IjoieWVocmljIiwiYSI6ImNqeWl6eG14YTAzOHgzbXBmMGE2eHM0amUifQ.QuULT47s_LKOyGcCYF6iIw';
 
@@ -28,7 +28,16 @@ class Geocoder extends Component {
 		return (
 			<ListItem
 				onPress={() => {
-					this.props.goToLocation(item);
+					switch (this.props.type) {
+						case 'search':
+							this.props.goToLocation(item);
+							break;
+						case 'origin':
+							this.props.setOrigin(item);
+							break;
+						case 'destination':
+							this.props.setDestination(item);
+					}
 					this.props.navigation.pop();
 				}}
 				title={item.place_name}
@@ -51,7 +60,17 @@ const mapDispatchToProps = dispatch => {
 		goToLocation: item => {
 			dispatch(goToLocation(item));
 			dispatch(placePin(item));
-		}
+		},
+		setOrigin: item => {
+			dispatch(goToLocation(item));
+			dispatch(placePin(item));
+			dispatch(setOrigin());
+		},
+		setDestination: item => {
+			dispatch(goToLocation(item));
+			dispatch(placePin(item));
+			dispatch(setDestination());
+		},
 	};
 };
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { placePin, setOrigin, setDestination } from '../../actions';
+import coordinatesToString from '../../utils/coordinates-to-string';
 
 const InfoText = props => {
 	return (
@@ -19,11 +20,6 @@ const InfoText = props => {
 	);
 }
 
-const coordsString = coords => {
-	return (Math.round(1000000 * coords[0]) / 1000000 + ', ' +
-			Math.round(1000000 * coords[1]) / 1000000);
-}
-
 const FeatureCard = props => {
 	const info = (props.features.features && props.features.features[0]) ?
 					props.features.features[0].properties : null;
@@ -36,7 +32,7 @@ const FeatureCard = props => {
 					<Text style={{flex: 1, fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
 						{info ? info.footway == 'sidewalk' ? 'Sidewalk' :
 							'Crossing' :
-							coordsString(props.features.center)
+							coordinatesToString(props.features.center)
 						}
 					</Text>
 					<Button
