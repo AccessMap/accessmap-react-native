@@ -3,6 +3,9 @@ import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import AboutOverlay from './about-overlay';
+import ContactOverlay from './contact-overlay';
+
 const OverlayButton = props => {
 		return (
 			<TouchableHighlight style={{alignItems: 'stretch'}}
@@ -24,7 +27,18 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={styles.overlay}>
-				<Text>accessmap</Text>
+				<View style={{flexDirection: 'row', alignItems: 'center'}}>
+					<Text style={{flex: 1}}>accessmap</Text>
+					<Button
+						buttonStyle={{backgroundColor: '#FFFFFF', margin: 5}}
+						icon={<Icon
+							name='times'
+							size={20}
+							color='#555555'
+						/>}
+						onPress={this.props.closeDrawer}
+					/>
+				</View>
 				<Text style={{fontSize: 13, padding: 20}}>More info</Text>
 				<OverlayButton text='About'
 					onPress={() => this.setState({showAbout: true})}
@@ -41,61 +55,7 @@ class LinkOverlay extends Component {
 					onBackdropPress={() => this.setState({ showAbout: false })}
 					overlayStyle={{margin: 20, padding: 20}}
 				>
-					<View style={{width: '100%'}}>
-						<Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>About</Text>
-
-						<View style={{flexDirection: 'row', alignItems: 'center'}}>
-							<Button
-								icon={
-									<Icon
-										name='github'
-										size={25}
-										color='black'
-									/>
-								}
-								type='clear'
-								containerStyle={{flex: 2}}
-							/>
-							<Text style={{flex: 5, flexWrap: 'wrap'}}>AccessMap is an open source project.</Text>
-						</View>
-
-						<View style={{flexDirection: 'row', alignItems: 'center'}}>
-							<Button
-								icon={
-									<Icon
-										name='graduation-cap'
-										size={25}
-										color='black'
-									/>
-								}
-								type='clear'
-								containerStyle={{flex: 2}}
-							/>
-							<Text style={{flex: 5, flexWrap: 'wrap'}}>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
-						</View>
-
-						<Text>AccessMap has received support from many organizations.</Text>
-						<View style={{flexDirection: 'row', alignItems: 'center'}}>
-							<Button
-								icon={
-									<Icon
-										name='heart'
-										size={25}
-										color='red'
-									/>
-								}
-								type='clear'
-								containerStyle={{flex: 2}}
-							/>
-							<Text style={{flex: 5, flexWrap: 'wrap'}}>Contribute to AccessMap development by donating to the Taskar Center. Mention AccessMap in the comment.</Text>
-						</View>
-						<Button
-							title='CLOSE'
-							type='clear'
-							onPress={() => this.setState({showAbout: false})}
-						/>
-
-					</View>
+					<AboutOverlay onClose={() => this.setState({showAbout: false})} />
 				</Overlay>
 
 				<Overlay
@@ -106,46 +66,7 @@ class LinkOverlay extends Component {
 					onBackdropPress={() => this.setState({ showContact: false })}
 					overlayStyle={{margin: 20, padding: 20}}
 				>
-					<View style={{width: '100%'}}>
-						<Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>Contact</Text>
-
-						<View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
-							<Button
-								icon={
-									<Icon
-										name='twitter'
-										size={25}
-										color='black'
-									/>
-								}
-								type='clear'
-								containerStyle={{flex: 2}}
-							/>
-							<Text style={{flex: 5}}>Follow us on social media.</Text>
-						</View>
-
-						<View style={{flexDirection: 'row', alignItems: 'center'}}>
-							<Button
-								icon={
-									<Icon
-										name='envelope'
-										size={25}
-										color='black'
-									/>
-								}
-								type='clear'
-								containerStyle={{flex: 2}}
-							/>
-							<Text style={{flex: 5, flexWrap: 'wrap'}}>Email us if you encounter issues or want to help out</Text>
-						</View>
-
-						<Button
-							title='CLOSE'
-							type='clear'
-							onPress={() => this.setState({showContact: false})}
-						/>
-
-					</View>
+					<ContactOverlay onClose={() => this.setState({showContact: false})} />
 				</Overlay>
 
 			</View>

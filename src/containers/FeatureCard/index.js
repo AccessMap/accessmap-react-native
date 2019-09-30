@@ -28,8 +28,8 @@ const FeatureCard = props => {
 			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, marginBottom: 10, margin: 10, position: 'absolute', zIndex: 50}}
 		>
 			<View style={{maxWidth: '100%'}}>
-				<View style={{flexDirection: 'row'}}>
-					<Text style={{flex: 1, fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
+				<View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 5}}>
+					<Text style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>
 						{info ? info.footway == 'sidewalk' ? 'Sidewalk' :
 							'Crossing' :
 							coordinatesToString(props.features.center)

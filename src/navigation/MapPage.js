@@ -32,7 +32,7 @@ class MapPage extends Component {
 	render() {
 		return (
 			<Drawer ref={ref => {this.drawer = ref;}}
-				content={<LinkOverlay />}
+				content={<LinkOverlay closeDrawer={() => this.closeDrawer()} />}
 				onClose={() => this.closeDrawer()}>
 			<View style={styles.page}>
 				<View style={styles.container}>
