@@ -111,9 +111,12 @@ class MapView extends Component {
 
 	render() {
 		const {
+			origin,
+			destination,
 			zoomLevel,
 			centerCoordinate,
 		} = this.props;
+
 		return (
 			<MapboxGL.MapView 
 				ref={component => this._map = component}
@@ -140,6 +143,8 @@ class MapView extends Component {
 
 				<LayerSidewalks />
 				<LayerCrossings />
+				{origin && destination && <LayerRoute />}
+
 			</MapboxGL.MapView>
 		);
 	}
