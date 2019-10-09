@@ -7,11 +7,16 @@ import LayerSidewalks from './layer-sidewalks';
 import LayerCrossings from './layer-crossings';
 import LayerRoute from './layer-route';
 import styles from '../../styles';
-import { placePin } from '../../actions';
+import { placePin, fetchRoute } from '../../actions';
 
 import pinIcon from '../../../assets/map-pin.png';
 import originIcon from '../../../assets/origin.png';
 import destinationIcon from '../../../assets/destination.png';
+import {
+	MOBILITY_MODE_CUSTOM,
+	MOBILITY_MODE_WHEELCHAIR,
+	MOBILITY_MODE_POWERED,
+	MOBILITY_MODE_CANE } from '../../constants';
 
 accessToken = 'pk.eyJ1IjoieWVocmljIiwiYSI6ImNqeWl6eG14YTAzOHgzbXBmMGE2eHM0amUifQ.QuULT47s_LKOyGcCYF6iIw';
 MapboxGL.setAccessToken(accessToken);
@@ -38,7 +43,7 @@ class MapView extends Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		const { zoomLevel, geocodeCoords } = this.props;
+		const { zoomLevel, geocodeCoords, origin, destination, fetchRoute } = this.props;
 		if (zoomLevel !== prevProps.zoomLevel) {
 			const currZoom = await this._map.getZoom();
 			if (zoomLevel > prevProps.zoomLevel) {
@@ -52,6 +57,11 @@ class MapView extends Component {
 				centerCoordinate: geocodeCoords,
 				animationDuration: 1000,
 			});
+		}
+		if (origin && destination && (origin != prevProps.origin || destination != prevProps.destination)) {
+			const { uphill, downhill, avoidCurbs } = this.props;
+			console.log('fetching new route');
+			fetchRoute(origin, destination, uphill, downhill, avoidCurbs);
 		}
 	}
 
@@ -115,7 +125,10 @@ class MapView extends Component {
 			destination,
 			zoomLevel,
 			centerCoordinate,
+			route,
 		} = this.props;
+
+		console.log(route);
 
 		return (
 			<MapboxGL.MapView 
@@ -143,14 +156,29 @@ class MapView extends Component {
 
 				<LayerSidewalks />
 				<LayerCrossings />
-				{origin && destination && <LayerRoute />}
+				{route && route.code == 'Ok' && <LayerRoute />}
 
 			</MapboxGL.MapView>
 		);
 	}
 }
 
+const getPreferences = (mode, state) => {
+	switch(mode) {
+		case MOBILITY_MODE_WHEELCHAIR:
+			return [8, 10, 1];
+		case MOBILITY_MODE_POWERED:
+			return [12, 12, 1];
+		case MOBILITY_MODE_CANE:
+			return [14, 14, 0];
+		default:
+			return [state.customUphill, state.customDownhill, state.avoidRaisedCurbs];
+	}
+}
+
 const mapStateToProps = state => {
+	var preferences = getPreferences(state.mobilityMode, state);
+
 	return {
 		centerCoordinate: state.centerCoordinate,
 		zoomLevel: state.zoomLevel,
@@ -158,6 +186,10 @@ const mapStateToProps = state => {
 		pinFeatures: state.pinFeatures,
 		origin: state.origin,
 		destination: state.destination,
+		uphill: preferences[0] / 100,
+		downhill: preferences[1] / 100,
+		avoidCurbs: preferences[2],
+		route: state.route,
 	};
 };
 
@@ -165,7 +197,10 @@ const mapDispatchToProps = dispatch => {
 	return {
 		placePin: item => {
 			dispatch(placePin(item));
-		}
+		},
+		fetchRoute: (origin, destination, uphill, downhill, avoidCurbs) => {
+			dispatch(fetchRoute(origin, destination, uphill, downhill, avoidCurbs));
+		},
 	};
 };
 

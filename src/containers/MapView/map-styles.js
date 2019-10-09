@@ -137,4 +137,16 @@ export default {
 
 		lineBlur: 0.5,
 	},
+	routeFill: {
+		lineColor: '#4BF',
+		lineCap: 'round',
+		lineWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			12, 5,
+			16, 12,
+			22, 92,
+		],
+	},
 };

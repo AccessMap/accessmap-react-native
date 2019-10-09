@@ -13,12 +13,10 @@ import {
 	REVERSE_ROUTE,
 	OPEN_DRAWER,
 	CLOSE_DRAWER,
+	RECEIVE_ROUTE,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
-	MOBILITY_MODE_WHEELCHAIR,
-	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE,
 } from '../constants';
 
 const defaultState = {
@@ -44,7 +42,6 @@ export default function mapApp(state = defaultState, action) {
 		case GO_TO_LOCATION:
 			return {...state, geocodeCoords: action.item.center};
 		case PLACE_PIN:
-			console.log(action.item);
 			return {...state, pinFeatures: action.item};
 		case SET_MOBILITY_MODE:
 			return {...state, mobilityMode: action.mode};
@@ -64,6 +61,9 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:
 			return {...state, openDrawer: false};
+		case RECEIVE_ROUTE:
+			console.log(action.route);
+			return {...state, route: action.route};
 		default:
 			return state;
 	}
