@@ -45,10 +45,7 @@ const LayerCrossings = props => {
 	];
 
 	return (
-		<MapboxGL.VectorSource
-			id='pedestrian'
-			url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
-		>
+		<React.Fragment>
 			<MapboxGL.LineLayer
 				id='crossing-press'
 				sourceID='pedestrian'
@@ -72,6 +69,7 @@ const LayerCrossings = props => {
 				layerIndex={81}
 				filter={markedExpression}
 				style={styles.crossingOutline}
+				minZoomLevel={10}
 			/>
 			<MapboxGL.LineLayer
 				id='crossing-unmarked'
@@ -89,7 +87,7 @@ const LayerCrossings = props => {
 				filter={inaccessibleExpression}
 				style={styles.inaccessible}
 			/>
-		</MapboxGL.VectorSource>
+		</React.Fragment>
 	);
 }
 

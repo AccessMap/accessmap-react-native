@@ -11,6 +11,7 @@ import Zooms from '../containers/MapButtons/Zooms';
 import OmniCard from '../containers/OmniCard';
 import LinkOverlay from '../containers/LinkOverlay';
 import FeatureCard from '../containers/FeatureCard';
+import RouteBottomCard from '../containers/RouteBottomCard';
 
 class MapPage extends Component {
 	static navigationOptions = {title: 'Map', header: null};
@@ -40,6 +41,7 @@ class MapPage extends Component {
 					<OmniCard navigation={this.props.navigation} />
 					<Zooms />
 					{this.props.pinFeatures && <FeatureCard />}
+					{this.props.route && <RouteBottomCard />}
 				</View>
 			</View>
 			</Drawer>
@@ -51,6 +53,7 @@ const mapStateToProps = state => {
 	return {
 		openDrawer: state.openDrawer,
 		pinFeatures: state.pinFeatures,
+		route: state.route,
 	};
 }
 const mapDispatchToProps = dispatch => {

@@ -62,7 +62,6 @@ export default function mapApp(state = defaultState, action) {
 		case CLOSE_DRAWER:
 			return {...state, openDrawer: false};
 		case RECEIVE_ROUTE:
-			console.log(action.route);
 			return {...state, route: action.route};
 		default:
 			return state;

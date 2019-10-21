@@ -7,6 +7,7 @@ import styles from './map-styles';
 
 const LayerRoute = props => {
 	const { route } = props;
+	console.log('Found a route!');
 
 	return (
 		<MapboxGL.ShapeSource
@@ -29,6 +30,13 @@ const LayerRoute = props => {
 				layerIndex={60}
 				style={styles.routeFill}
 			/>
+			<MapboxGL.LineLayer
+				id='route-outline'
+				sourceID='route'
+				layerIndex={61}
+				style={styles.routeOutline}
+			/>
+
 		</MapboxGL.ShapeSource>
 	);
 }

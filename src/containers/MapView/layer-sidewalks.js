@@ -35,10 +35,7 @@ const LayerSidewalks = props => {
  
 	
 	return (
-		<MapboxGL.VectorSource
-			id='pedestrian'
-			url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
-		>
+		<React.Fragment>
 			<MapboxGL.LineLayer
 				id='sidewalk-press'
 				sourceID='pedestrian'
@@ -62,6 +59,7 @@ const LayerSidewalks = props => {
 				filter={isAccessibleSidewalk}
 				layerIndex={80}
 				style={styles.sidewalkOutlines}
+				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
 				id='sidewalk-inaccessible'
@@ -71,7 +69,7 @@ const LayerSidewalks = props => {
 				layerIndex={80}
 				style={styles.inaccessible}
 			/>
-		</MapboxGL.VectorSource>
+		</React.Fragment>
 	);
 }
 

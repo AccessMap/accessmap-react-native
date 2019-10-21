@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import LayerSidewalks from './layer-sidewalks';
 import LayerCrossings from './layer-crossings';
+import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
 import styles from '../../styles';
 import { placePin, fetchRoute } from '../../actions';
@@ -16,10 +17,10 @@ import {
 	MOBILITY_MODE_CUSTOM,
 	MOBILITY_MODE_WHEELCHAIR,
 	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE } from '../../constants';
+	MOBILITY_MODE_CANE,
+	ACCESS_TOKEN } from '../../constants';
 
-accessToken = 'pk.eyJ1IjoieWVocmljIiwiYSI6ImNqeWl6eG14YTAzOHgzbXBmMGE2eHM0amUifQ.QuULT47s_LKOyGcCYF6iIw';
-MapboxGL.setAccessToken(accessToken);
+MapboxGL.setAccessToken(ACCESS_TOKEN);
 
 const iconStyle = {
 	iconImage: ['get', 'icon'],
@@ -39,11 +40,22 @@ class MapView extends Component {
 	}
 
 	componentDidMount() {
+		console.log('mounted');
 		MapboxGL.setTelemetryEnabled(false);
 	}
 
 	async componentDidUpdate(prevProps) {
-		const { zoomLevel, geocodeCoords, origin, destination, fetchRoute } = this.props;
+		const {
+			zoomLevel,
+			geocodeCoords,
+			origin,
+			destination,
+			uphill,
+			downhill,
+			avoidCurbs,
+			fetchRoute
+		} = this.props;
+
 		if (zoomLevel !== prevProps.zoomLevel) {
 			const currZoom = await this._map.getZoom();
 			if (zoomLevel > prevProps.zoomLevel) {
@@ -58,9 +70,13 @@ class MapView extends Component {
 				animationDuration: 1000,
 			});
 		}
-		if (origin && destination && (origin != prevProps.origin || destination != prevProps.destination)) {
-			const { uphill, downhill, avoidCurbs } = this.props;
-			console.log('fetching new route');
+		if (origin && destination && (
+				origin != prevProps.origin ||
+				destination != prevProps.destination ||
+				uphill != prevProps.uphill ||
+				downhill != prevProps.downhill ||
+				avoidCurbs != prevProps.avoidCurbs
+		)) {
 			fetchRoute(origin, destination, uphill, downhill, avoidCurbs);
 		}
 	}
@@ -128,13 +144,12 @@ class MapView extends Component {
 			route,
 		} = this.props;
 
-		console.log(route);
-
 		return (
 			<MapboxGL.MapView 
 				ref={component => this._map = component}
 				style={styles.map}
 				onPress={this._onPress}
+				onDidFinishLoadingStyle={() => console.log('map loaded')}
 			>
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
@@ -142,20 +157,27 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 				/>
 
-				<MapboxGL.Images images={{
+				{false &&<MapboxGL.Images images={{
 					pin: pinIcon,
 					origin: originIcon,
 					destination: destinationIcon,
-				}}/>
-				<MapboxGL.ShapeSource
+				}}/>}
+				{false && <MapboxGL.ShapeSource
 					id='annotations'
 					shape={this.featureCollection()}
 				>
 					<MapboxGL.SymbolLayer id='location' style={iconStyle} />
-				</MapboxGL.ShapeSource>
+				</MapboxGL.ShapeSource>}
+				<LayerAnnotations />
 
-				<LayerSidewalks />
-				<LayerCrossings />
+				<MapboxGL.VectorSource
+					id='pedestrian'
+					url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
+				>
+					<LayerSidewalks />
+					<LayerCrossings />
+				</MapboxGL.VectorSource>
+
 				{route && route.code == 'Ok' && <LayerRoute />}
 
 			</MapboxGL.MapView>

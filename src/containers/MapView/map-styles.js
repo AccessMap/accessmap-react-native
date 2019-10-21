@@ -134,12 +134,12 @@ export default {
 			16, OUTLINE_WIDTH / 5,
 			20, OUTLINE_WIDTH,
 		],
-
 		lineBlur: 0.5,
 	},
 	routeFill: {
 		lineColor: '#4BF',
 		lineCap: 'round',
+		lineJoin: 'round',
 		lineWidth: [
 			'interpolate',
 			['exponential', 1.5],
@@ -148,5 +148,27 @@ export default {
 			16, 12,
 			22, 92,
 		],
+	},
+	routeOutline: {
+		lineColor: 'black',
+		lineCap: 'round',
+		lineJoin: 'round',
+		lineGapWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			12, 4.7,
+			16, 9.7,
+			22, 92,
+		],
+		lineWidth: [
+			'interpolate',
+			['exponential', 1.5],
+			['zoom'],
+			12, 0.5,
+			16, 1,
+			22, 1,
+		],
+		lineBlur: 0.5,
 	},
 };
