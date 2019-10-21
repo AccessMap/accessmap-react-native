@@ -10,9 +10,6 @@ import LayerRoute from './layer-route';
 import styles from '../../styles';
 import { placePin, fetchRoute } from '../../actions';
 
-import pinIcon from '../../../assets/map-pin.png';
-import originIcon from '../../../assets/origin.png';
-import destinationIcon from '../../../assets/destination.png';
 import {
 	MOBILITY_MODE_CUSTOM,
 	MOBILITY_MODE_WHEELCHAIR,
@@ -21,18 +18,6 @@ import {
 	ACCESS_TOKEN } from '../../constants';
 
 MapboxGL.setAccessToken(ACCESS_TOKEN);
-
-const iconStyle = {
-	iconImage: ['get', 'icon'],
-
-	iconSize: [
-		'match',
-		['get', 'icon'],
-		'pin',
-		0.75,
-		/* default */ 0.75,
-	],
-};
 
 class MapView extends Component {
 	constructor(props) {
@@ -81,51 +66,6 @@ class MapView extends Component {
 		}
 	}
 
-	featureCollection() {
-		const { pinFeatures, origin, destination } = this.props;
-		const features = [];
-		if (pinFeatures) {
-			features.push({
-				type: 'Feature',
-				id: 'map-pin',
-				properties: {
-					icon: 'pin',
-				},
-				geometry: {
-					type: 'Point',
-					coordinates: pinFeatures.center,
-				},
-			});
-		}
-		if (origin) {
-			features.push({
-				type: 'Feature',
-				id: 'origin',
-				properties: {
-					icon: 'origin',
-				},
-				geometry: {
-					type: 'Point',
-					coordinates: origin,
-				},
-			});
-		}
-		if (destination) {
-			features.push({
-				type: 'Feature',
-				id: 'destination',
-				properties: {
-					icon: 'destination',
-				},
-				geometry: {
-					type: 'Point',
-					coordinates: destination,
-				},
-			});
-		}
-		return {type: 'FeatureCollection', features};
-	}
-
 	_onPress = async e => {
 		const center = e.geometry.coordinates;
 		const {screenPointX, screenPointY} = e.properties;
@@ -137,8 +77,6 @@ class MapView extends Component {
 
 	render() {
 		const {
-			origin,
-			destination,
 			zoomLevel,
 			centerCoordinate,
 			route,
@@ -157,17 +95,6 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 				/>
 
-				{false &&<MapboxGL.Images images={{
-					pin: pinIcon,
-					origin: originIcon,
-					destination: destinationIcon,
-				}}/>}
-				{false && <MapboxGL.ShapeSource
-					id='annotations'
-					shape={this.featureCollection()}
-				>
-					<MapboxGL.SymbolLayer id='location' style={iconStyle} />
-				</MapboxGL.ShapeSource>}
 				<LayerAnnotations />
 
 				<MapboxGL.VectorSource
@@ -205,7 +132,6 @@ const mapStateToProps = state => {
 		centerCoordinate: state.centerCoordinate,
 		zoomLevel: state.zoomLevel,
 		geocodeCoords: state.geocodeCoords,
-		pinFeatures: state.pinFeatures,
 		origin: state.origin,
 		destination: state.destination,
 		uphill: preferences[0] / 100,
