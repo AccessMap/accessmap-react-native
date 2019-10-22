@@ -5,7 +5,6 @@ import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 const RouteBottomCard = props => {
-	console.log('the card');
 	return (
 		<Card containerStyle={styles.routeBottomCard}>
 			<View>
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
 		maxWidth: 380,
 		bottom: 0,
 		margin: 10,
+		marginBottom: 10,
 		padding: 5,
 		zIndex: 20,
 	},
