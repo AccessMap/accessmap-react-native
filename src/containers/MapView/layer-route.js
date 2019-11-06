@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import { connect } from 'react-redux';
 
@@ -7,7 +8,9 @@ import styles from './map-styles';
 
 const LayerRoute = props => {
 	const { route } = props;
-	console.log('Found a route!');
+	if (!route || route.code != 'Ok') {
+		return (<View></View>);
+	}
 
 	return (
 		<MapboxGL.ShapeSource

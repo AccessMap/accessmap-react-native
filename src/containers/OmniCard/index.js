@@ -14,7 +14,13 @@ import {
 } from '../../constants';
 
 import { connect } from 'react-redux';
-import { setMobilityMode, openDrawer, reverseRoute } from '../../actions';
+import {
+	openDrawer,
+	reverseRoute,
+	placePin,
+	setOrigin,
+	setDestination
+} from '../../actions';
 
 import MobilityButtonGroup from './mobility-buttons';
 
@@ -33,26 +39,6 @@ const IconButton = props => {
 			onPress={props.onPress}
 		/>);
 };
-
-const mapStateToProps = state => {
-	return {
-		mobilityMode: state.mobilityMode,
-		pinFeatures: state.pinFeatures,
-		origin: state.origin,
-		destination: state.destination,
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		openDrawer: () => {
-			dispatch(openDrawer());
-		},
-		reverseRoute: () => {
-			dispatch(reverseRoute());
-		}
-	};
-}
 
 const GeocodeBar = props => {
 	return (
@@ -94,13 +80,13 @@ class OmniCard extends Component {
 
 	render() {
 		const customButtons = ['UPHILL', 'DOWNHILL', 'BARRIERS'];
-		const { pinFeatures, origin, destination } = this.props;
+		const { pinFeatures, origin, destination, cancelRoute } = this.props;
 
 		return (
 			<Card containerStyle={styles.omniCardStyle}>
 				{!this.state.customMode ? <View>
 
-					{this.state.findDirections ?
+					{(origin || destination || this.state.findDirections) ?
 					<View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 						<GeocodeBar
 							navigation={this.props.navigation}
@@ -110,7 +96,10 @@ class OmniCard extends Component {
 						/>
 						<IconButton
 							name='times'
-							onPress={() => this.setState({findDirections: false})}
+							onPress={() => {
+								cancelRoute();
+								this.setState({findDirections: false});
+							}}
 						/>
 					</View>
 					:
@@ -121,7 +110,7 @@ class OmniCard extends Component {
 						<Text>accessmap</Text>
 					</View>}
 
-					{!this.state.findDirections ?
+					{(!origin && !destination && !this.state.findDirections) ?
 					<View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 						<GeocodeBar navigation={this.props.navigation}
 							value={pinFeatures && pinFeatures.text ?
@@ -182,6 +171,32 @@ class OmniCard extends Component {
 			</Card>
 		);
 	}
+}
+
+const mapStateToProps = state => {
+	return {
+		mobilityMode: state.mobilityMode,
+		pinFeatures: state.pinFeatures,
+		origin: state.origin,
+		destination: state.destination,
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		openDrawer: () => {
+			dispatch(openDrawer());
+		},
+		reverseRoute: () => {
+			dispatch(reverseRoute());
+		},
+		cancelRoute: () => {
+			dispatch(placePin({ center: null }));
+			dispatch(setOrigin());
+			dispatch(placePin({ center: null }));
+			dispatch(setDestination());
+		},
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OmniCard);

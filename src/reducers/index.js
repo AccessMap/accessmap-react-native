@@ -31,6 +31,7 @@ const defaultState = {
 	customDownhill: 10,
 	avoidRaisedCurbs: true,
 	drawerOpen: false,
+	route: null,
 }
 
 export default function mapApp(state = defaultState, action) {

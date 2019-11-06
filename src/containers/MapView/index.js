@@ -55,7 +55,8 @@ class MapView extends Component {
 				animationDuration: 1000,
 			});
 		}
-		if (origin && destination && (
+
+		if ((//origin && destination && (
 				origin != prevProps.origin ||
 				destination != prevProps.destination ||
 				uphill != prevProps.uphill ||
@@ -74,6 +75,7 @@ class MapView extends Component {
 
 		this.props.placePin({...featureCollection, center});
 	}
+
 
 	render() {
 		const {

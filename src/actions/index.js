@@ -73,21 +73,24 @@ function receiveRoute(json) {
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 	return function(dispatch) {
-		const data = {
-			lon1: origin[0],
-			lat1: origin[1],
-			lon2: destination[0],
-			lat2: destination[1],
-			uphill, downhill, avoidCurbs,
-		};
-		const queryString = Object.keys(data)
-			.map(key => key + '=' + encodeURIComponent(data[key]))
-			.join('&');
+		if (origin && destination) {
+			const data = {
+				lon1: origin[0],
+				lat1: origin[1],
+				lon2: destination[0],
+				lat2: destination[1],
+				uphill, downhill, avoidCurbs,
+			};
+			const queryString = Object.keys(data)
+				.map(key => key + '=' + encodeURIComponent(data[key]))
+				.join('&');
 
-		const url = 'https://www.accessmap.io/api/v1/routing/directions/wheelchair.json?' + queryString;
-		return fetch(url)
-			.then(response => response.json(),
-				error => console.log('An error occured.', error))
-			.then(json => dispatch(receiveRoute(json)))
+			const url = 'https://www.accessmap.io/api/v1/routing/directions/wheelchair.json?' + queryString;
+			return fetch(url)
+				.then(response => response.json(),
+					error => console.log('An error occured.', error))
+				.then(json => dispatch(receiveRoute(json)))
+		}
+		return dispatch(receiveRoute(null));
 	}
 }
