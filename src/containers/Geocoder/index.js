@@ -4,8 +4,9 @@ import { ListItem } from 'react-native-elements';
 
 import { connect } from 'react-redux';
 import { goToLocation, placePin, setOrigin, setDestination } from '../../actions';
+import { ACCESS_TOKEN } from '../../constants';
 
-accessToken = 'pk.eyJ1IjoieWVocmljIiwiYSI6ImNqeWl6eG14YTAzOHgzbXBmMGE2eHM0amUifQ.QuULT47s_LKOyGcCYF6iIw';
+accessToken = ACCESS_TOKEN;
 
 class Geocoder extends Component {
 	constructor(props) {
@@ -15,12 +16,12 @@ class Geocoder extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.search !== prevProps.search) {
-			const query = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + this.props.search +'.json?access_token=' + accessToken;
+			const query = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + this.props.search +".json?access_token=" + accessToken;
 		
 			fetch(query)
 				.then(response => response.json())
 				.then(json => this.setState({ searchList: json.features }))
-				.catch(error => console.log('Ran into a problem'));
+				.catch(error => console.log("Ran into a problem"));
 		}
 	}
 
@@ -29,13 +30,13 @@ class Geocoder extends Component {
 			<ListItem
 				onPress={() => {
 					switch (this.props.type) {
-						case 'search':
+						case "search":
 							this.props.goToLocation(item);
 							break;
-						case 'origin':
+						case "origin":
 							this.props.setOrigin(item);
 							break;
-						case 'destination':
+						case "destination":
 							this.props.setDestination(item);
 					}
 					this.props.navigation.pop();

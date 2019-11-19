@@ -8,34 +8,34 @@ import styles from './map-styles';
 
 const LayerRoute = props => {
 	const { route } = props;
-	if (!route || route.code != 'Ok') {
-		return (<View></View>);
+	if (!route || route.code != "Ok") {
+		return null;
 	}
 
 	return (
 		<MapboxGL.ShapeSource
-			id='route'
+			id="route"
 			shape={{
-				type: 'FeatureCollection',
+				type: "FeatureCollection",
 				features: [{
-					type: 'Feature',
+					type: "Feature",
 					geometry: {
 						coordinates: route.routes[0].geometry.coordinates,
-						type: 'LineString'
+						type: "LineString"
 					},
 					properties: {}
 				}]
 			}}
 		>
 			<MapboxGL.LineLayer
-				id='route-fill'
-				sourceID='route'
+				id="route-fill"
+				sourceID="route"
 				layerIndex={60}
 				style={styles.routeFill}
 			/>
 			<MapboxGL.LineLayer
-				id='route-outline'
-				sourceID='route'
+				id="route-outline"
+				sourceID="route"
 				layerIndex={61}
 				style={styles.routeOutline}
 			/>

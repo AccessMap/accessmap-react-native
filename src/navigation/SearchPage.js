@@ -9,21 +9,21 @@ export default class SearchPage extends Component {
 	static navigationOptions = ({navigation}) => {
 		return {
 			headerLeftContainerStyle: {
-				width: '100%',
+				width: "100%",
 			},
 			headerLeft: (
-				<View style={{flexDirection: 'row', width: '100%', alignItems: 'center'}}>
+				<View style={{flexDirection: "row", width: "100%", alignItems: "center"}}>
 					<Button
 						icon={<Icon
-							name='arrow-left'
+							name="arrow-left"
 							size={20}
 						/>}
-						buttonStyle={{backgroundColor: 'transparent', margin: 5}}
+						buttonStyle={{backgroundColor: "transparent", margin: 5}}
 						onPress={() => navigation.goBack()}
 					/>
 					<TextInput
 						style={{flex: 1}}
-						placeholder='Search address'
+						placeholder="Search address"
 						autoFocus={true}
 						onChangeText={search => navigation.setParams({search})}
 					/>
@@ -40,7 +40,7 @@ export default class SearchPage extends Component {
 				<Geocoder
 					type={params.type}
 					navigation={this.props.navigation}
-					search={this.props.navigation.getParam('search', '')}
+					search={this.props.navigation.getParam("search", "")}
 				/>
 			</View>
 		);

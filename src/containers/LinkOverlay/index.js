@@ -8,9 +8,9 @@ import ContactOverlay from './contact-overlay';
 
 const OverlayButton = props => {
 		return (
-			<TouchableHighlight style={{alignItems: 'stretch'}}
+			<TouchableHighlight style={{alignItems: "stretch"}}
 				onPress={props.onPress}>
-				<Text style={{fontSize: 15, padding: 20, color: 'black'}}>{props.text}</Text>
+				<Text style={{fontSize: 15, padding: 20, color: "black"}}>{props.text}</Text>
 			</TouchableHighlight>
 		);
 	}
@@ -27,31 +27,31 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={styles.overlay}>
-				<View style={{flexDirection: 'row', alignItems: 'center'}}>
+				<View style={{flexDirection: "row", alignItems: "center"}}>
 					<Text style={{flex: 1}}>accessmap</Text>
 					<Button
-						buttonStyle={{backgroundColor: '#FFFFFF', margin: 5}}
+						buttonStyle={{backgroundColor: "#FFFFFF", margin: 5}}
 						icon={<Icon
-							name='times'
+							name="times"
 							size={20}
-							color='#555555'
+							color="#555555"
 						/>}
 						onPress={this.props.closeDrawer}
 					/>
 				</View>
 				<Text style={{fontSize: 13, padding: 20}}>More info</Text>
-				<OverlayButton text='About'
+				<OverlayButton text="About"
 					onPress={() => this.setState({showAbout: true})}
 				/>
-				<OverlayButton text='Contact'
+				<OverlayButton text="Contact"
 					onPress={() => this.setState({showContact: true})}
 				/>
 				<Text style={{fontSize: 13, padding: 20}}>Tracking settings</Text>
 				<Overlay
 					isVisible={this.state.showAbout}
-					windowBackgroundColor='rgba(0, 0, 0, 0.5)'
-					width='auto'
-					height='auto'
+					windowBackgroundColor="rgba(0, 0, 0, 0.5)"
+					width="auto"
+					height="auto"
 					onBackdropPress={() => this.setState({ showAbout: false })}
 					overlayStyle={{margin: 20, padding: 20}}
 				>
@@ -60,9 +60,9 @@ class LinkOverlay extends Component {
 
 				<Overlay
 					isVisible={this.state.showContact}
-					windowBackgroundColor='rgba(0, 0, 0, 0.5)'
-					width='auto'
-					height='auto'
+					windowBackgroundColor="rgba(0, 0, 0, 0.5)"
+					width="auto"
+					height="auto"
 					onBackdropPress={() => this.setState({ showContact: false })}
 					overlayStyle={{margin: 20, padding: 20}}
 				>
@@ -76,9 +76,9 @@ class LinkOverlay extends Component {
 
 const styles = StyleSheet.create({
 	overlay: {
-		backgroundColor: 'white',
-		width: '100%',
-		height: '100%',
+		backgroundColor: "white",
+		width: "100%",
+		height: "100%",
 	},
 });
 

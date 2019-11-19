@@ -17,7 +17,7 @@ const MainNavigator = createStackNavigator({
 				easing: Easing.step0,
 			},
 		}, {
-			initialRouteName: 'Map',
+			initialRouteName: "Map",
 		}),
 	});
 

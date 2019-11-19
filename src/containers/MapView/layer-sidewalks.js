@@ -25,47 +25,47 @@ const LayerSidewalks = props => {
 	}
 	var [maxUphill, maxDownhill] = incline;
 
-	const isSidewalkExpression = ['==', ['get', 'footway'], 'sidewalk'];
+	const isSidewalkExpression = ["==", ["get", "footway"], "sidewalk"];
 
-	const accessibleExpression = ['all',
-		['<', ['*', 100, ['get', 'incline']], maxUphill],
-		['>', ['*', 100, ['get', 'incline']], maxDownhill]];
+	const accessibleExpression = ["all",
+		["<", ["*", 100, ["get", "incline"]], maxUphill],
+		[">", ["*", 100, ["get", "incline"]], maxDownhill]];
 
-	const isAccessibleSidewalk = ['all', isSidewalkExpression, accessibleExpression];
+	const isAccessibleSidewalk = ["all", isSidewalkExpression, accessibleExpression];
  
 	
 	return (
 		<React.Fragment>
 			<MapboxGL.LineLayer
-				id='sidewalk-press'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="sidewalk-press"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				filter={isSidewalkExpression}
 				layerIndex={81}
 				style={styles.sidewalkPress}
 			/>
 			<MapboxGL.LineLayer
-				id='sidewalk'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="sidewalk"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				filter={isAccessibleSidewalk}
 				layerIndex={80}
 				style={styles.sidewalks(maxUphill, maxDownhill)}
 			/>
 			<MapboxGL.LineLayer
-				id='sidewalk-outline'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="sidewalk-outline"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				filter={isAccessibleSidewalk}
 				layerIndex={80}
 				style={styles.sidewalkOutlines}
 				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
-				id='sidewalk-inaccessible'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
-				filter={['!', accessibleExpression]}
+				id="sidewalk-inaccessible"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
+				filter={["!", accessibleExpression]}
 				layerIndex={80}
 				style={styles.inaccessible}
 			/>

@@ -7,12 +7,12 @@ import originIcon from '../../../assets/origin.png';
 import destinationIcon from '../../../assets/destination.png';
 
 const iconStyle = {
-	iconImage: ['get', 'icon'],
+	iconImage: ["get", "icon"],
 
 	iconSize: [
-		'match',
-		['get', 'icon'],
-		'pin',
+		"match",
+		["get", "icon"],
+		"pin",
 		0.75,
 		/* default */ 0.75,
 	],
@@ -25,44 +25,44 @@ const LayerAnnotations = props => {
 		const features = [];
 		if (pinFeatures) {
 			features.push({
-				type: 'Feature',
-				id: 'map-pin',
+				type: "Feature",
+				id: "map-pin",
 				properties: {
-					icon: 'pin',
+					icon: "pin",
 				},
 				geometry: {
-					type: 'Point',
+					type: "Point",
 					coordinates: pinFeatures.center,
 				},
 			});
 		}
 		if (origin) {
 			features.push({
-				type: 'Feature',
-				id: 'origin',
+				type: "Feature",
+				id: "origin",
 				properties: {
-					icon: 'origin',
+					icon: "origin",
 				},
 				geometry: {
-					type: 'Point',
+					type: "Point",
 					coordinates: origin,
 				},
 			});
 		}
 		if (destination) {
 			features.push({
-				type: 'Feature',
-				id: 'destination',
+				type: "Feature",
+				id: "destination",
 				properties: {
-					icon: 'destination',
+					icon: "destination",
 				},
 				geometry: {
-					type: 'Point',
+					type: "Point",
 					coordinates: destination,
 				},
 			});
 		}
-		return {type: 'FeatureCollection', features};
+		return {type: "FeatureCollection", features};
 	}
 
 	return (
@@ -73,10 +73,10 @@ const LayerAnnotations = props => {
 				destination: destinationIcon,
 			}}/>
 			<MapboxGL.ShapeSource
-				id='annotations'
+				id="annotations"
 				shape={featureCollection()}
 			>
-				<MapboxGL.SymbolLayer id='location' style={iconStyle} />
+				<MapboxGL.SymbolLayer id="location" style={iconStyle} />
 			</MapboxGL.ShapeSource>
 		</React.Fragment>
 	);

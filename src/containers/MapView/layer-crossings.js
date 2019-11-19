@@ -21,68 +21,68 @@ const LayerCrossings = props => {
 			break;
 	}
 
-	const isCrossing = ['==', ['get', 'footway'], 'crossing'];
+	const isCrossing = ["==", ["get", "footway"], "crossing"];
 
 	const inaccessibleExpression = [
-		'all',
+		"all",
 		isCrossing,
 		avoidCurbs,
-		['!', ['to-boolean', ['get', 'curbramps']]],
+		["!", ["to-boolean", ["get", "curbramps"]]],
 	];
 
 	const markedExpression = [
-		'all',
+		"all",
 		isCrossing,
-		['!', inaccessibleExpression],
-		['==', ['get', 'crossing'], 'marked']
+		["!", inaccessibleExpression],
+		["==", ["get", "crossing"], "marked"]
 	];
 
 	const unmarkedExpression = [
-		'all',
+		"all",
 		isCrossing,
-		['!', inaccessibleExpression],
-		['any', ['==', ['get', 'crossing'], 'unmarked'], ['!', ['has', 'crossing']]]
+		["!", inaccessibleExpression],
+		["any", ["==", ["get", "crossing"], "unmarked"], ["!", ["has", "crossing"]]]
 	];
 
 	return (
 		<React.Fragment>
 			<MapboxGL.LineLayer
-				id='crossing-press'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="crossing-press"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				layerIndex={81}
 				filter={isCrossing}
 				style={styles.crossingPress}
 			/>
 			<MapboxGL.LineLayer
-				id='crossing-marked'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="crossing-marked"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={markedExpression}
 				style={styles.crossing}
 			/>
 			<MapboxGL.LineLayer
-				id='crossing-marked-outline'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="crossing-marked-outline"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				layerIndex={81}
 				filter={markedExpression}
 				style={styles.crossingOutline}
 				minZoomLevel={10}
 			/>
 			<MapboxGL.LineLayer
-				id='crossing-unmarked'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="crossing-unmarked"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={unmarkedExpression}
 				style={styles.crossingUnmarked}
 			/>
 			<MapboxGL.LineLayer
-				id='crossing-inaccessible'
-				sourceID='pedestrian'
-				sourceLayerID='transportation'
+				id="crossing-inaccessible"
+				sourceID="pedestrian"
+				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={inaccessibleExpression}
 				style={styles.inaccessible}

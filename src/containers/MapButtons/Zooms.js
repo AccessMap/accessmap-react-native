@@ -14,18 +14,18 @@ class Zooms extends Component {
 				<Button
 					buttonStyle={styles.button}
 					icon={<Icon
-						name='plus'
+						name="plus"
 						size={20}
-						color='blue'
+						color="blue"
 					/>}
 					onPress={this.props.onZoomInPressed}
 				/>
 				<Button
 					buttonStyle={styles.button}
 					icon={<Icon
-						name='minus'
+						name="minus"
 						size={20}
-						color='blue'
+						color="blue"
 					/>}
 					onPress={this.props.onZoomOutPressed}
 				/>

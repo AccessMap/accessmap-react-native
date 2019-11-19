@@ -8,7 +8,7 @@ import { setCustomUphill } from '../../actions';
 
 const UphillSlider = props => {
 	return (
-		<View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', margin: 10 }}>
+		<View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", margin: 10 }}>
 			<Text>Maximum uphill steepness: {props.incline}%</Text>
 			<Slider
 				value={props.incline}
@@ -18,7 +18,7 @@ const UphillSlider = props => {
 				minimumValue={4}
 				maximumValue={15}
 				step={0.5}
-				thumbTintColor='blue'
+				thumbTintColor="blue"
 			/>
 		</View>
 	);

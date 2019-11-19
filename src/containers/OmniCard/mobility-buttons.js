@@ -18,7 +18,7 @@ const MobilityButtonRender = props => {
 		props.setMobilityMode(props.mode);
 	}
 	const selected = props.mode == props.mobilityMode;
-	const buttonColor = selected ? '#0000AA' : '#FFFFFF';
+	const buttonColor = selected ? "#0000AA" : "#FFFFFF";
 
 	return (
 		<Button
@@ -26,7 +26,7 @@ const MobilityButtonRender = props => {
 			icon={<Icon
 				name={props.name}
 				size={20}
-				color={selected ? '#EEEEEE' : '#555555' }
+				color={selected ? "#EEEEEE" : "#555555" }
 			/>}
 			title={selected ? props.label : null}
 			titleStyle={{marginLeft: 3, fontSize: 15}}
@@ -53,25 +53,25 @@ const MobilityButton = connect(mapStateToProps, mapDispatchToProps)(MobilityButt
 
 const MobilityButtonGroup = props => {
 	return (
-		<View style={{flexDirection: 'row'}}>
+		<View style={{flexDirection: "row"}}>
 			<MobilityButton
-				name='user-circle'
-				label='Custom'
+				name="user-circle"
+				label="Custom"
 				mode={MOBILITY_MODE_CUSTOM}
 			/>
 			<MobilityButton
-				name='accessible-icon'
-				label='Wheelchair'
+				name="accessible-icon"
+				label="Wheelchair"
 				mode={MOBILITY_MODE_WHEELCHAIR}
 			/>
 			<MobilityButton
-				name='plug'
-				label='Powered'
+				name="plug"
+				label="Powered"
 				mode={MOBILITY_MODE_POWERED}
 			/>
 			<MobilityButton
-				name='candy-cane'
-				label='Cane'
+				name="candy-cane"
+				label="Cane"
 				mode={MOBILITY_MODE_CANE}
 			/>
 		</View>

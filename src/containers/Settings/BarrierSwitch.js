@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const BarrierSwitch = props => {
 	return (
-		<View style={{flex: 1, flexDirection: 'row', margin: 10}}>
+		<View style={{flex: 1, flexDirection: "row", margin: 10}}>
 			<Switch
 				onValueChange={props.toggleBarriers}
 				value={props.avoidRaisedCurbs}

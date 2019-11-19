@@ -14,7 +14,7 @@ import FeatureCard from '../containers/FeatureCard';
 import RouteBottomCard from '../containers/RouteBottomCard';
 
 class MapPage extends Component {
-	static navigationOptions = {title: 'Map', header: null};
+	static navigationOptions = {title: "Map", header: null};
 
 	componentDidUpdate(prevProps) {
 		if (!prevProps.openDrawer && this.props.openDrawer) {

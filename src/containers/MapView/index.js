@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import LayerSidewalks from './layer-sidewalks';
 import LayerCrossings from './layer-crossings';
+import LayerElevators from './layer-elevator-paths';
 import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
 import styles from '../../styles';
@@ -25,7 +26,7 @@ class MapView extends Component {
 	}
 
 	componentDidMount() {
-		console.log('mounted');
+		console.log("mounted");
 		MapboxGL.setTelemetryEnabled(false);
 	}
 
@@ -33,6 +34,7 @@ class MapView extends Component {
 		const {
 			zoomLevel,
 			geocodeCoords,
+			route,
 			origin,
 			destination,
 			uphill,
@@ -56,13 +58,35 @@ class MapView extends Component {
 			});
 		}
 
-		if ((//origin && destination && (
-				origin != prevProps.origin ||
+		if (route && route.code == "Ok" && route != prevProps.route) {
+		  var [maxLon, maxLat, minLon, minLat] = [-180, -90, 180, 90];
+			var path = route.routes[0].geometry.coordinates;
+			let distance = 0;
+			for (var i = 0; i < path.length; i++) {
+				if (path[i][0] > maxLon) {
+					maxLon = path[i][0];
+				}
+				if (path[i][0] < minLon) {
+					minLon = path[i][0];
+				}
+				if (path[i][1] > maxLat) {
+					maxLat = path[i][1];
+				}
+				if (path[i][1] < minLat) {
+					minLat = path[i][1];
+				}
+			}
+			var northEast = [maxLon, maxLat];
+			var southWest = [minLon, minLat];
+			this.camera.fitBounds(northEast, southWest, 100, 100);
+		}
+
+		if (origin != prevProps.origin ||
 				destination != prevProps.destination ||
 				uphill != prevProps.uphill ||
 				downhill != prevProps.downhill ||
 				avoidCurbs != prevProps.avoidCurbs
-		)) {
+		) {
 			fetchRoute(origin, destination, uphill, downhill, avoidCurbs);
 		}
 	}
@@ -71,7 +95,7 @@ class MapView extends Component {
 		const center = e.geometry.coordinates;
 		const {screenPointX, screenPointY} = e.properties;
 		const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
-				[screenPointX, screenPointY], null, ['sidewalk-press', 'crossing-press']);
+				[screenPointX, screenPointY], null, ["sidewalk-press", "crossing-press", "elevator-press"]);
 
 		this.props.placePin({...featureCollection, center});
 	}
@@ -89,7 +113,7 @@ class MapView extends Component {
 				ref={component => this._map = component}
 				style={styles.map}
 				onPress={this._onPress}
-				onDidFinishLoadingStyle={() => console.log('map loaded')}
+				onDidFinishLoadingStyle={() => console.log("map loaded")}
 			>
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
@@ -100,14 +124,15 @@ class MapView extends Component {
 				<LayerAnnotations />
 
 				<MapboxGL.VectorSource
-					id='pedestrian'
-					url='https://www.accessmap.io/tiles/tilejson/pedestrian.json'
+					id="pedestrian"
+					url="https://www.accessmap.io/tiles/tilejson/pedestrian.json"
 				>
 					<LayerSidewalks />
 					<LayerCrossings />
+					<LayerElevators />
 				</MapboxGL.VectorSource>
 
-				{route && route.code == 'Ok' && <LayerRoute />}
+				{route && route.code == "Ok" && <LayerRoute />}
 
 			</MapboxGL.MapView>
 		);
