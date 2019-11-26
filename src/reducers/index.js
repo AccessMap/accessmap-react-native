@@ -11,6 +11,11 @@ import {
 	SET_ORIGIN,
 	SET_DESTINATION,
 	REVERSE_ROUTE,
+	CANCEL_ROUTE,
+	VIEW_TRIP_INFO,
+	CLOSE_TRIP_INFO,
+	VIEW_DIRECTIONS,
+	CLOSE_DIRECTIONS,
 	OPEN_DRAWER,
 	CLOSE_DRAWER,
 	RECEIVE_ROUTE,
@@ -30,6 +35,8 @@ const defaultState = {
 	customUphill: 8,
 	customDownhill: 10,
 	avoidRaisedCurbs: true,
+	viewingTripInfo: false,
+	viewingDirections: false,
 	drawerOpen: false,
 	route: null,
 }
@@ -58,6 +65,16 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, destination: state.pinFeatures.center, pinFeatures: null};
 		case REVERSE_ROUTE:
 			return {...state, origin: state.destination, destination: state.origin};
+		case CANCEL_ROUTE:
+			return {...state, origin: null, destination: null, route: null};
+		case VIEW_TRIP_INFO:
+			return {...state, viewingTripInfo: true};
+		case CLOSE_TRIP_INFO:
+			return {...state, viewingTripInfo: false};
+		case VIEW_DIRECTIONS:
+			return {...state, viewingDirections: true};
+		case CLOSE_DIRECTIONS:
+			return {...state, viewingDirections: false};
 		case OPEN_DRAWER:
 			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:

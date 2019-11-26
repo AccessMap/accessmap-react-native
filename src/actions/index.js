@@ -48,10 +48,27 @@ export function setDestination() {
 	return { type: SET_DESTINATION };
 }
 
-export const REVERSE_ROUTE = "REVERSE_ROUTE";
-export function reverseRoute() {
-	return { type: REVERSE_ROUTE };
+export const VIEW_TRIP_INFO = "VIEW_TRIP_INFO";
+export function viewTripInfo() {
+	return { type: VIEW_TRIP_INFO };
 }
+
+export const CLOSE_TRIP_INFO = "CLOSE_TRIP_INFO";
+export function closeTripInfo() {
+	return { type: CLOSE_TRIP_INFO };
+}
+
+export const VIEW_DIRECTIONS = "VIEW_DIRECTIONS";
+export function viewDirections() {
+	return { type: VIEW_DIRECTIONS };
+}
+
+export const CLOSE_DIRECTIONS = "CLOSE_DIRECTIONS";
+export function closeDirections() {
+	return { type: CLOSE_DIRECTIONS };
+}
+
+// Drawer actions
 
 export const OPEN_DRAWER = "OPEN_DRAWER";
 export function openDrawer() {
@@ -62,6 +79,19 @@ export const CLOSE_DRAWER = "CLOSE_DRAWER";
 export function closeDrawer() {
 	return { type: CLOSE_DRAWER };
 }
+
+// Route-finding actions
+
+export const CANCEL_ROUTE = "CANCEL_ROUTE";
+export function cancelRoute() {
+	return { type: CANCEL_ROUTE };
+}
+
+export const REVERSE_ROUTE = "REVERSE_ROUTE";
+export function reverseRoute() {
+	return { type: REVERSE_ROUTE };
+}
+
 
 export const RECEIVE_ROUTE = "RECEIVE_ROUTE";
 function receiveRoute(json) {

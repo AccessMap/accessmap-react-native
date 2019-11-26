@@ -3,7 +3,7 @@ import { Drawer } from 'native-base';
 import {StyleSheet, View, Text, TouchableHighlight, FlatList, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 
-import { closeDrawer } from '../actions';
+import { closeDrawer, closeDirections, closeTripInfo } from '../actions';
 import styles from '../styles';
 
 import MapView from '../containers/MapView';
@@ -12,6 +12,9 @@ import OmniCard from '../containers/OmniCard';
 import LinkOverlay from '../containers/LinkOverlay';
 import FeatureCard from '../containers/FeatureCard';
 import RouteBottomCard from '../containers/RouteBottomCard';
+
+import Directions from '../components/Directions';
+import TripInfo from '../components/TripInfo';
 
 class MapPage extends Component {
 	static navigationOptions = {title: "Map", header: null};
@@ -42,6 +45,8 @@ class MapPage extends Component {
 					<Zooms />
 					{this.props.pinFeatures && <FeatureCard />}
 					{this.props.route && <RouteBottomCard />}
+					{this.props.viewingDirections && <Directions />}
+					{this.props.viewingTripInfo && <TripInfo />}
 				</View>
 			</View>
 			</Drawer>
@@ -54,10 +59,16 @@ const mapStateToProps = state => {
 		openDrawer: state.openDrawer,
 		pinFeatures: state.pinFeatures,
 		route: state.route,
+		viewingDirections: state.viewingDirections,
+		viewingTripInfo: state.viewingTripInfo,
 	};
 }
 const mapDispatchToProps = dispatch => {
-	return { closeDrawer: () => { dispatch(closeDrawer()) } };
+	return {
+		closeDrawer: () => { dispatch(closeDrawer()) },
+		closeDirections: () => { dispatch(closeDirections()) },
+		closeTripInfo: () => { dispatch(closeTripInfo()) },
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapPage);

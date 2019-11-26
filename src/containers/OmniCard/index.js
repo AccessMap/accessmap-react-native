@@ -17,9 +17,9 @@ import { connect } from 'react-redux';
 import {
 	openDrawer,
 	reverseRoute,
-	placePin,
-	setOrigin,
-	setDestination
+	cancelRoute,
+	closeDirections,
+	closeTripInfo
 } from '../../actions';
 
 import MobilityButtonGroup from './mobility-buttons';
@@ -191,10 +191,9 @@ const mapDispatchToProps = dispatch => {
 			dispatch(reverseRoute());
 		},
 		cancelRoute: () => {
-			dispatch(placePin({ center: null }));
-			dispatch(setOrigin());
-			dispatch(placePin({ center: null }));
-			dispatch(setDestination());
+			dispatch(cancelRoute());
+			dispatch(closeDirections());
+			dispatch(closeTripInfo());
 		},
 	};
 }
