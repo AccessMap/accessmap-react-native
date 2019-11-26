@@ -45,8 +45,14 @@ class MapPage extends Component {
 					<Zooms />
 					{this.props.pinFeatures && <FeatureCard />}
 					{this.props.route && <RouteBottomCard />}
-					{this.props.viewingDirections && <Directions />}
-					{this.props.viewingTripInfo && <TripInfo />}
+					{this.props.viewingDirections && <Directions
+						route={this.props.route}
+						close={() => this.props.closeDirections()}
+					/>}
+					{this.props.viewingTripInfo && <TripInfo
+						route={this.props.route}
+						close={() => this.props.closeTripInfo()}
+					/>}
 				</View>
 			</View>
 			</Drawer>

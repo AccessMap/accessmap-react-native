@@ -23,6 +23,8 @@ const InfoText = props => {
 const FeatureCard = props => {
 	const info = (props.features.features && props.features.features[0]) ?
 					props.features.features[0].properties : null;
+	console.log(info);
+
 	return (
 		<Card
 			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, marginBottom: 10, margin: 10, position: "absolute", zIndex: 50}}
@@ -50,7 +52,7 @@ const FeatureCard = props => {
 				</View>
 			</View>
 			{info && <View>
-				<InfoText label="Properties" info={info.description} />
+				<InfoText label="Description" info={info.description} />
 				{info.footway == "sidewalk" ? 
 					<InfoText
 						label="Incline"
@@ -60,10 +62,17 @@ const FeatureCard = props => {
 						label="Curbramps"
 						info={info.curbramps ? "Yes" : "No"}
 					/> :
-					<InfoText
-						label="Open Hours"
-						info="test"
-					/>}
+
+					<View style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
+						<Text style={{flex: 2, fontSize: 16, flexWrap: "wrap"}}>
+							Open Hours
+						</Text>
+						<Text style={{flex: 3, fontSize: 16, flexWrap: "wrap"}}>
+							test
+						</Text>
+					</View>
+				}
+
 				{info.footway == "sidewalk" ?
 					<InfoText label="Surface" info={info.surface} />
 					: info.footway == "crossing" ?
