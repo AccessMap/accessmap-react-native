@@ -34,15 +34,18 @@ class MapPage extends Component {
 		this.drawer._root.open();
 	}
 	render() {
+		//console.log(this.props.route);
 		return (
 			<Drawer ref={ref => {this.drawer = ref;}}
 				content={<LinkOverlay closeDrawer={() => this.closeDrawer()} />}
 				onClose={() => this.closeDrawer()}>
-			<View style={styles.page}>
-				<View style={styles.container}>
-					<MapView />
-					<OmniCard navigation={this.props.navigation} />
-					<Zooms />
+			<View accessible={false} style={styles.page}>
+				<View accessible={false} style={styles.container}>
+					<View style={{flex: 1}}>
+						<MapView />
+						{!this.props.viewingDirections && <OmniCard accessible={true} navigation={this.props.navigation} />}
+						<Zooms accessible={true} />
+					</View>
 					{this.props.pinFeatures && <FeatureCard />}
 					{this.props.route && <RouteBottomCard />}
 					{this.props.viewingDirections && <Directions

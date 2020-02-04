@@ -78,7 +78,13 @@ class MapView extends Component {
 			}
 			var northEast = [maxLon, maxLat];
 			var southWest = [minLon, minLat];
-			this.camera.fitBounds(northEast, southWest, 100, 100);
+			if (this.props.viewingDirections) {
+				console.log("yahoo");
+				this.camera.fitBounds(northEast, southWest, 20, 100);
+			} else {
+				console.log("boohoo");
+				this.camera.fitBounds(northEast, southWest, 100, 100);
+			}
 		}
 
 		if (origin != prevProps.origin ||
@@ -165,6 +171,7 @@ const mapStateToProps = state => {
 		downhill: preferences[1] / 100,
 		avoidCurbs: preferences[2],
 		route: state.route,
+		viewingDirections: state.viewingDirections
 	};
 };
 

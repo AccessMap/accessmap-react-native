@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Card, Button, ButtonGroup, SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -83,7 +83,13 @@ class OmniCard extends Component {
 		const { pinFeatures, origin, destination, cancelRoute } = this.props;
 
 		return (
-			<Card containerStyle={styles.omniCardStyle}>
+			<Card
+				accessible={true}
+				accessibilityState={{selected: true}}
+				importantForAccessibility="yes"
+				ref={component => this.omniCard = component}
+				containerStyle={styles.omniCardStyle}
+			>
 				{!this.state.customMode ? <View>
 
 					{(origin || destination || this.state.findDirections) ?
@@ -103,11 +109,16 @@ class OmniCard extends Component {
 						/>
 					</View>
 					:
-					<View style={{flex: 1, flexDirection: "row",}}>
+					<View style={{flex: 1, flexDirection: "row", alignItems: "center" }}>
 						<IconButton name="bars"
 							onPress={this.props.openDrawer}
 						/>
-						<Text>accessmap</Text>
+						<Image
+							style={{width: "30%", height: "40%"}}
+							source={require("../../../assets/accessmap-logo.png")}
+							resizeMode="cover"
+							resizeMethod="resize"
+						/>
 					</View>}
 
 					{(!origin && !destination && !this.state.findDirections) ?

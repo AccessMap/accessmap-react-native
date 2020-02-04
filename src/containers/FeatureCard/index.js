@@ -4,8 +4,10 @@ import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import Header from '../../components/Header';
 import { placePin, setOrigin, setDestination } from '../../actions';
 import coordinatesToString from '../../utils/coordinates-to-string';
+import parseOpenHours from '../../utils/parse-open-hours';
 
 const InfoText = props => {
 	return (
@@ -23,33 +25,24 @@ const InfoText = props => {
 const FeatureCard = props => {
 	const info = (props.features.features && props.features.features[0]) ?
 					props.features.features[0].properties : null;
-	console.log(info);
+	//console.log(info);
+	if (info && info.opening_hours) {
+		console.log(parseOpenHours(info.opening_hours));
+	}
 
 	return (
 		<Card
 			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, marginBottom: 10, margin: 10, position: "absolute", zIndex: 50}}
 		>
 			<View style={{maxWidth: "100%"}}>
-				<View style={{flexDirection: "row", alignItems: "center", marginBottom: 5}}>
-					<Text style={{flex: 1, fontSize: 20, fontWeight: "bold"}}>
-						{info ? info.footway == "sidewalk" ? "Sidewalk" :
-							info.footway == "crossing" ? "Crossing" :
-							coordinatesToString(props.features.center) :
-							coordinatesToString(props.features.center)
+				<Header
+					title={info ? info.footway == "sidewalk" ? "Sidewalk" :
+						info.footway == "crossing" ? "Crossing" :
+						coordinatesToString(props.features.center) :
+						coordinatesToString(props.features.center)
 						}
-					</Text>
-					<Button
-						buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
-						icon={<Icon
-							name="times"
-							size={20}
-							color="#555555"
-						/>}
-						onPress={() => {
-							props.placePin(null);
-						}}
-					/>
-				</View>
+					close={() => props.placePin(null)}
+				/>
 			</View>
 			{info && <View>
 				<InfoText label="Description" info={info.description} />

@@ -10,7 +10,7 @@ import styles from '../../styles.js';
 class Zooms extends Component {
 	render() {
 		return (
-			<View style={styles.zooms}>
+			<View accessible={true} style={styles.zooms}>
 				<Button
 					buttonStyle={styles.button}
 					icon={<Icon

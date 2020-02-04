@@ -24,7 +24,8 @@ const LayerElevators = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={elevatorPathFilter}
-				style={styles.elevatorPath}
+				style={{...styles.elevatorPath, ...styles.fadeOut}}
+				minZoomLevel={13}
 			/>
 		</React.Fragment>
 	);

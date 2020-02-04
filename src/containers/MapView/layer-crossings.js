@@ -60,7 +60,8 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={markedExpression}
-				style={styles.crossing}
+				style={{...styles.crossing, ...styles.fadeOut}}
+				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
 				id="crossing-marked-outline"
@@ -68,8 +69,8 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={81}
 				filter={markedExpression}
-				style={styles.crossingOutline}
-				minZoomLevel={10}
+				style={{...styles.crossingOutline, ...styles.fadeOut}}
+				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
 				id="crossing-unmarked"
@@ -77,7 +78,8 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={unmarkedExpression}
-				style={styles.crossingUnmarked}
+				style={{...styles.crossingUnmarked, ...styles.fadeOut}}
+				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
 				id="crossing-inaccessible"
@@ -85,7 +87,8 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={inaccessibleExpression}
-				style={styles.inaccessible}
+				style={{...styles.inaccessible, ...styles.fadeOut}}
+				minZoomLevel={13}
 			/>
 		</React.Fragment>
 	);

@@ -58,7 +58,7 @@ const LayerSidewalks = props => {
 				sourceLayerID="transportation"
 				filter={isAccessibleSidewalk}
 				layerIndex={80}
-				style={styles.sidewalkOutlines}
+				style={{...styles.sidewalkOutlines, ...styles.fadeOut}}
 				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer

@@ -201,4 +201,14 @@ export default {
 		],
 		lineOpacity: 0.000001,
 	},
+	fadeOut: {
+		lineOpacity: [
+			"interpolate",
+			["exponential", 1.5],
+			["zoom"],
+			13, 0.01,
+			14, 0.4,
+			16, 1.00
+		],
+	},
 };

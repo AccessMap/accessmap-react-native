@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, Image, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -27,10 +27,15 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={styles.overlay}>
-				<View style={{flexDirection: "row", alignItems: "center"}}>
-					<Text style={{flex: 1}}>accessmap</Text>
+				<View style={{flexDirection: "row", height: 50, justifyContent: "space-between"}}>
+					<Image
+						style={{flex: 1, marginLeft: 10, marginRight: 40, width: "40%", height: "50%"}}
+						source={require("../../../assets/accessmap-logo.png")}
+						resizeMode="cover"
+						resizeMethod="resize"
+					/>
 					<Button
-						buttonStyle={{backgroundColor: "#FFFFFF", margin: 5}}
+						buttonStyle={{flex: 1, backgroundColor: "#FFFFFF", margin: 5}}
 						icon={<Icon
 							name="times"
 							size={20}
