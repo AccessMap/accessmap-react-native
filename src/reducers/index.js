@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+	MAP_LOADED,
 	ZOOM_IN,
 	ZOOM_OUT,
 	GO_TO_LOCATION,
@@ -25,6 +26,7 @@ import {
 } from '../constants';
 
 const defaultState = {
+	isLoading: true,
 	zoomLevel: 14,
 	centerCoordinate: [-122.3321, 47.6062],
 	geocodeCoords: null,
@@ -43,6 +45,8 @@ const defaultState = {
 
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
+		case MAP_LOADED:
+			return {...state, isLoading: false};
 		case ZOOM_IN:
 			return {...state, zoomLevel: state.zoomLevel + 1};
 		case ZOOM_OUT:

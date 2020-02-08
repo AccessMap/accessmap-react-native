@@ -8,8 +8,9 @@ import LayerCrossings from './layer-crossings';
 import LayerElevators from './layer-elevator-paths';
 import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
+import LoadingScreen from '../../components/LoadingScreen';
 import styles from '../../styles';
-import { placePin, fetchRoute } from '../../actions';
+import { placePin, fetchRoute, mapLoaded } from '../../actions';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -79,10 +80,8 @@ class MapView extends Component {
 			var northEast = [maxLon, maxLat];
 			var southWest = [minLon, minLat];
 			if (this.props.viewingDirections) {
-				console.log("yahoo");
 				this.camera.fitBounds(northEast, southWest, 20, 100);
 			} else {
-				console.log("boohoo");
 				this.camera.fitBounds(northEast, southWest, 100, 100);
 			}
 		}
@@ -119,7 +118,11 @@ class MapView extends Component {
 				ref={component => this._map = component}
 				style={styles.map}
 				onPress={this._onPress}
-				onDidFinishLoadingStyle={() => console.log("map loaded")}
+				onLongPress={this._onPress}
+				onDidFinishLoadingStyle={() => {
+					console.log("map loaded");
+					this.props.mapLoaded();
+				}}
 			>
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
@@ -177,6 +180,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
+		mapLoaded: () => {
+			dispatch(mapLoaded());
+		},
 		placePin: item => {
 			dispatch(placePin(item));
 		},

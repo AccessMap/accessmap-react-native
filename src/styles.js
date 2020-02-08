@@ -7,7 +7,7 @@ export default StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: "tomato",
+		backgroundColor: "#F5FCFF",
 	},
 	map: {
 		flex: 1,

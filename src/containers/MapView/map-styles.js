@@ -211,4 +211,19 @@ export default {
 			16, 1.00
 		],
 	},
+	jogs: {
+		lineColor: "black",
+		lineOpacity: 0.6,
+		lineWidth: [
+			"interpolate",
+			["exponential", 1.5],
+			["zoom"],
+			12, 0.2,
+			16, 3,
+			22, 30,
+		],
+		lineCap: "round",
+		lineJoin: "round",
+		lineDasharray: [1, 2],
+	},
 };

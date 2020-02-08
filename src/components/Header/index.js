@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from '../Icon';
 
 const Header = props => {
 	// Props:
@@ -15,7 +15,7 @@ const Header = props => {
 			<Button
 				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
 				icon={<Icon
-					name="times"
+					name="close"
 					size={20}
 					color="#555555"
 				/>}

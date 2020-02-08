@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from '../../components/Icon';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -25,7 +25,7 @@ const MobilityButtonRender = props => {
 			buttonStyle={{...styles.mobilityButton, backgroundColor: buttonColor}}
 			icon={<Icon
 				name={props.name}
-				size={20}
+				size={25}
 				color={selected ? "#EEEEEE" : "#555555" }
 			/>}
 			title={selected ? props.label : null}
@@ -55,22 +55,22 @@ const MobilityButtonGroup = props => {
 	return (
 		<View style={{flexDirection: "row"}}>
 			<MobilityButton
-				name="user-circle"
+				name="person-pin"
 				label="Custom"
 				mode={MOBILITY_MODE_CUSTOM}
 			/>
 			<MobilityButton
-				name="accessible-icon"
+				name="wheelchair"
 				label="Wheelchair"
 				mode={MOBILITY_MODE_WHEELCHAIR}
 			/>
 			<MobilityButton
-				name="plug"
+				name="wheelchair-powered"
 				label="Powered"
 				mode={MOBILITY_MODE_POWERED}
 			/>
 			<MobilityButton
-				name="candy-cane"
+				name="cane-user"
 				label="Cane"
 				mode={MOBILITY_MODE_CANE}
 			/>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
 	mobilityButton: {
 		borderRadius: 20,
 		marginTop: 5,
-		marginRight: 5,
 		height: 40,
 	},
 });

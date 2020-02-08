@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Card, Button, ButtonGroup, SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from '../../components/Icon';
 
 import Geocoder from '../Geocoder';
 import UphillSlider from '../Settings/UphillSlider';
@@ -31,7 +31,7 @@ const IconButton = props => {
 			containerStyle={props.label ? null : {width : 45}}
 			icon={<Icon
 				name={props.name}
-				size={20}
+				size={25}
 				color={props.label ? "#EEEEEE" : "#555555" }
 			/>}
 			title={props.label}
@@ -101,7 +101,7 @@ class OmniCard extends Component {
 							placeholder="Enter start address"
 						/>
 						<IconButton
-							name="times"
+							name="close"
 							onPress={() => {
 								cancelRoute();
 								this.setState({findDirections: false});
@@ -110,7 +110,7 @@ class OmniCard extends Component {
 					</View>
 					:
 					<View style={{flex: 1, flexDirection: "row", alignItems: "center" }}>
-						<IconButton name="bars"
+						<IconButton name="menu"
 							onPress={this.props.openDrawer}
 						/>
 						<Image
@@ -141,7 +141,7 @@ class OmniCard extends Component {
 							placeholder="Enter end address"
 						/>
 						<IconButton
-							name="exchange-alt"
+							name="swap-vert"
 							onPress={() => {
 								this.props.reverseRoute();
 							}}
@@ -154,7 +154,7 @@ class OmniCard extends Component {
 
 						{this.props.mobilityMode == MOBILITY_MODE_CUSTOM  &&
 							<View>
-								<IconButton name="pen"
+								<IconButton name="pencil"
 									onPress={this.toggleCustomMode}
 								/>
 							</View>
@@ -168,7 +168,7 @@ class OmniCard extends Component {
 							buttons={customButtons}
 							containerStyle={{flex: 1}}
 						/>
-						<IconButton name="times"
+						<IconButton name="close"
 							onPress={this.toggleCustomMode}
 						/>
 					</View>

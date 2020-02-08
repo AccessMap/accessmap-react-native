@@ -1,3 +1,8 @@
+export const MAP_LOADED = "MAP_LOADED";
+export function mapLoaded() {
+	return { type: MAP_LOADED };
+}
+
 export const ZOOM_IN = "ZOOM_IN";
 export function zoomIn() {
 	return { type: ZOOM_IN };

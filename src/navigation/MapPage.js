@@ -7,6 +7,7 @@ import { closeDrawer, closeDirections, closeTripInfo } from '../actions';
 import styles from '../styles';
 
 import MapView from '../containers/MapView';
+import LoadingScreen from '../components/LoadingScreen';
 import Zooms from '../containers/MapButtons/Zooms';
 import OmniCard from '../containers/OmniCard';
 import LinkOverlay from '../containers/LinkOverlay';
@@ -46,6 +47,7 @@ class MapPage extends Component {
 						{!this.props.viewingDirections && <OmniCard accessible={true} navigation={this.props.navigation} />}
 						<Zooms accessible={true} />
 					</View>
+					{this.props.isLoading && <LoadingScreen />}
 					{this.props.pinFeatures && <FeatureCard />}
 					{this.props.route && <RouteBottomCard />}
 					{this.props.viewingDirections && <Directions
@@ -70,6 +72,7 @@ const mapStateToProps = state => {
 		route: state.route,
 		viewingDirections: state.viewingDirections,
 		viewingTripInfo: state.viewingTripInfo,
+		isLoading: state.isLoading,
 	};
 }
 const mapDispatchToProps = dispatch => {
