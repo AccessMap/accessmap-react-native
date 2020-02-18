@@ -1,19 +1,16 @@
 const OUTLINE_WIDTH = 2;
 
 export default {
-	sidewalks: (uphillIncline, downhillIncline) => {
+	sidewalks: incline => {
 		return {
 			lineCap: "round",
 			lineColor: [
 				"interpolate",
 				["exponential", 1.5],
-				["*", 100, ["get", "incline"]],
-				-1000, "red",
-				(downhillIncline), "red",
-				(downhillIncline * 5 / 8), "yellow",
+				["abs", ["*", 100, ["get", "incline"]]],
 				0, "lime",
-				(uphillIncline * 5 / 8), "yellow",
-				(uphillIncline), "red",
+				(incline * 5 / 8), "yellow",
+				incline, "red",
 				1000, "red",
 			],
 			lineWidth: [
@@ -32,9 +29,9 @@ export default {
 			"interpolate",
 			["exponential", 1.5],
 			["zoom"],
-			10, 0.1,
-			16, 5,
-			20, 24,
+			10, 2, //0.1,
+			16, 10, //5,
+			20, 30, //24,
 		],
 		lineOpacity: 0.000001,
 	},
@@ -88,9 +85,9 @@ export default {
 			"interpolate",
 			["exponential", 1.5],
 			["zoom"],
-			10, 0.07,
-			16, 3.5,
-			20, 20,
+			10, 1, //0.07,
+			16, 5, //3.5,
+			20, 25, //20,
 		],
 		lineOpacity: 0.000001,
 	},

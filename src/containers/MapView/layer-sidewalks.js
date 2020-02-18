@@ -27,9 +27,7 @@ const LayerSidewalks = props => {
 
 	const isSidewalkExpression = ["==", ["get", "footway"], "sidewalk"];
 
-	const accessibleExpression = ["all",
-		["<", ["*", 100, ["get", "incline"]], maxUphill],
-		[">", ["*", 100, ["get", "incline"]], maxDownhill]];
+	const accessibleExpression = ["<=", ["abs", ["*", 100, ["get", "incline"]]], maxUphill];
 
 	const isAccessibleSidewalk = ["all", isSidewalkExpression, accessibleExpression];
  
@@ -50,7 +48,7 @@ const LayerSidewalks = props => {
 				sourceLayerID="transportation"
 				filter={isAccessibleSidewalk}
 				layerIndex={80}
-				style={styles.sidewalks(maxUphill, maxDownhill)}
+				style={styles.sidewalks(maxUphill)}
 			/>
 			<MapboxGL.LineLayer
 				id="sidewalk-outline"

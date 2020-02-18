@@ -49,7 +49,7 @@ const FeatureCard = props => {
 				{info.footway == "sidewalk" ? 
 					<InfoText
 						label="Incline"
-						info={(Math.round(info.incline * 1000) / 10) + "%"}
+						info={Math.abs(Math.round(info.incline * 1000) / 10) + "%"}
 					/> : info.footway == "crossing" ?
 					<InfoText
 						label="Curbramps"
