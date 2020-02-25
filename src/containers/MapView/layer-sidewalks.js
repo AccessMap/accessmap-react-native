@@ -4,6 +4,7 @@ import MapboxGL from '@react-native-mapbox-gl/maps';
 import styles from './map-styles';
 import { connect }  from 'react-redux';
 
+import getInclineLimit from '../../utils/get-incline-limit';
 import {
 	MOBILITY_MODE_WHEELCHAIR,
 	MOBILITY_MODE_POWERED,
@@ -11,18 +12,7 @@ import {
 } from '../../constants';
 
 const LayerSidewalks = props => {
-	var incline = [props.customUphill, -1 * props.customDownhill];
-	switch (props.mobilityMode) {
-		case MOBILITY_MODE_WHEELCHAIR:
-			incline = [8, -10];
-			break;
-		case MOBILITY_MODE_POWERED:
-			incline = [12, -12];
-			break;
-		case MOBILITY_MODE_CANE:
-			incline = [14, -14];
-			break;
-	}
+	var incline = getInclineLimit(props.customUphill, props.customDownhill, props.mobilityMode);
 	var [maxUphill, maxDownhill] = incline;
 
 	const isSidewalkExpression = ["==", ["get", "footway"], "sidewalk"];

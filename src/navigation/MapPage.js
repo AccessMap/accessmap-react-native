@@ -3,11 +3,13 @@ import { Drawer } from 'native-base';
 import {StyleSheet, View, Text, TouchableHighlight, FlatList, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 
+import getInclineLimit from '../utils/get-incline-limit';
 import { closeDrawer, closeDirections, closeTripInfo } from '../actions';
 import styles from '../styles';
 
 import MapView from '../containers/MapView';
 import LoadingScreen from '../components/LoadingScreen';
+import SpeedLegend from '../components/SpeedLegend';
 import Zooms from '../containers/MapButtons/Zooms';
 import OmniCard from '../containers/OmniCard';
 import LinkOverlay from '../containers/LinkOverlay';
@@ -47,6 +49,7 @@ class MapPage extends Component {
 						{!this.props.viewingDirections && <OmniCard accessible={true} navigation={this.props.navigation} />}
 						<Zooms accessible={true} />
 					</View>
+					<SpeedLegend maxIncline={this.props.maxIncline} />
 					{this.props.isLoading && <LoadingScreen />}
 					{this.props.pinFeatures && <FeatureCard />}
 					{this.props.route && <RouteBottomCard />}
@@ -73,6 +76,7 @@ const mapStateToProps = state => {
 		viewingDirections: state.viewingDirections,
 		viewingTripInfo: state.viewingTripInfo,
 		isLoading: state.isLoading,
+		maxIncline: getInclineLimit(state.customUphill, state.customDownhill, state.mobilityMode)[0],
 	};
 }
 const mapDispatchToProps = dispatch => {
