@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
+import { uphillColorMap, downhillColorMap } from "../../colors";
+
 const SpeedLegend = props => {
 	// Props: Max uphill incline
 	const maxIncline = Math.round(props.maxIncline);
+	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
 
 	return (<View style={{height: 50, margin: 0, justifyContent: "center", alignItems: "stretch"}}>
 		<View style={{flex: 3, marginTop: 3, marginLeft: 3, marginRight: 3, flexDirection: "column"}}>
@@ -13,7 +16,7 @@ const SpeedLegend = props => {
 						// min of calculation and 255
 						var red = Math.min(d / (maxIncline - 1) * 255 * 2, 255);
 						var green = Math.min((maxIncline - 1 - d) / (maxIncline - 1) * 255 * 2, 255);
-						return (<View key={d} style={{flex: 1, backgroundColor: "rgb(" + red + "," + green + ",0)"}} />)
+						return (<View key={d} style={{flex: 1, backgroundColor: colorMap(d)}} />)
 					})}
 				</View>
 				<View style={{flex: 15 - maxIncline, justifyContent: "center", alignItems: "stretch", flexDirection: "column"}}>

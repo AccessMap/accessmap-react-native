@@ -22,12 +22,23 @@ const InfoText = props => {
 	);
 }
 
+const OpenHours = props => {
+	const { hours, day } = props;
+	const color = hours.open ? "green" : "red";
+	return (
+		<Text style={{flex: 1, fontSize: 12, color: hours.today == day ? color : null}}>
+			{day}: {hours[day]}
+		</Text>
+);
+}
+
 const FeatureCard = props => {
 	const info = (props.features.features && props.features.features[0]) ?
 					props.features.features[0].properties : null;
-	//console.log(info);
+	console.log(info);
+	var openHours;
 	if (info && info.opening_hours) {
-		console.log(parseOpenHours(info.opening_hours));
+		openHours =parseOpenHours(info.opening_hours);
 	}
 
 	return (
@@ -56,13 +67,19 @@ const FeatureCard = props => {
 						info={info.curbramps ? "Yes" : "No"}
 					/> :
 
-					<View style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
+					<View style={{height: 120, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
 						<Text style={{flex: 2, fontSize: 16, flexWrap: "wrap"}}>
 							Open Hours
 						</Text>
-						<Text style={{flex: 3, fontSize: 16, flexWrap: "wrap"}}>
-							test
-						</Text>
+						<View style={{flex: 3}}>
+							<OpenHours hours={openHours} day="Su" />
+							<OpenHours hours={openHours} day="Mo" />
+							<OpenHours hours={openHours} day="Tu" />
+							<OpenHours hours={openHours} day="We" />
+							<OpenHours hours={openHours} day="Th" />
+							<OpenHours hours={openHours} day="Fr" />
+							<OpenHours hours={openHours} day="Sa" />
+						</View>
 					</View>
 				}
 

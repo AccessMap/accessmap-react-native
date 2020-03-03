@@ -46,7 +46,8 @@ class MapPage extends Component {
 				<View accessible={false} style={styles.container}>
 					<View style={{flex: 1}}>
 						<MapView />
-						{!this.props.viewingDirections && <OmniCard accessible={true} navigation={this.props.navigation} />}
+						{!this.props.viewingDirections && !this.props.viewingTripInfo &&
+							<OmniCard accessible={true} navigation={this.props.navigation} />}
 						<Zooms accessible={true} />
 					</View>
 					<SpeedLegend maxIncline={this.props.maxIncline} />
