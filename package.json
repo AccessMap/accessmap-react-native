@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@react-native-mapbox-gl/maps": "^7.0.4",
+    "@react-navigation/drawer": "^5.1.0",
     "chroma-js": "^2.1.0",
     "native-base": "^2.13.7",
     "react": "16.8.3",
