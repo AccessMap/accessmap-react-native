@@ -16,7 +16,7 @@ class Geocoder extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.search !== prevProps.search) {
-			const query = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + this.props.search +".json?access_token=" + accessToken;
+			const query = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + this.props.search +".json?bbox=-122.483,47.461,-122.181,47.739&limit=10&access_token=" + accessToken;
 		
 			fetch(query)
 				.then(response => response.json())
