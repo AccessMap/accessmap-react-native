@@ -1,17 +1,38 @@
+import { uphillColorMap } from "../../colors";
 const OUTLINE_WIDTH = 2;
 
 export default {
 	sidewalks: incline => {
+		const nSamples = 15;
+		const nSide = parseInt(nSamples / 2);
+		const range = [...Array(nSamples).keys()].map(d => (d - nSide) / nSide);
+
+		const colorMap = uphillColorMap(incline, incline, incline);
+		const inclineSamples = range.map(d => d * incline);
+		const inclineStops = [];
+		inclineSamples.map(d => {
+			const color = colorMap(d);
+			inclineStops.push(d);
+			inclineStops.push(color.hex());
+		});
 		return {
 			lineCap: "round",
 			lineColor: [
+				"case",
+				[">", ["to-number", ["get", "incline"]], incline],
+				"#ff0000",
+				["<", ["to-number", ["get", "incline"]], -incline],
+				"#ff0000",
+				[
 				"interpolate",
 				["exponential", 1.5],
 				["abs", ["*", 100, ["get", "incline"]]],
-				0, "lime",
-				(incline * 5 / 8), "yellow",
+				...inclineStops
+				]
+				/*0, "lime",
+				(incline * 5 / 8),  "yellow",
 				incline, "red",
-				1000, "red",
+				1000, "red",*/
 			],
 			lineWidth: [
 				"interpolate",

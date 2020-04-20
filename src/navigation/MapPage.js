@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Drawer } from 'native-base';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import {StyleSheet, View, Text, TouchableHighlight, FlatList, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 
