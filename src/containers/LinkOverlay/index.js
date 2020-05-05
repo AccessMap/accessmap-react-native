@@ -27,13 +27,14 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={styles.overlay}>
-				<View style={{flexDirection: "row", height: 50, justifyContent: "space-between"}}>
+				<View style={{flexDirection: "row", height: 50, alignItems: "center"}}>
 					<Image
-						style={{flex: 1, marginLeft: 10, marginRight: 40, width: "40%", height: "50%"}}
+						style={{width: "60%", height: "60%", marginLeft: 3}}
 						source={require("../../../assets/accessmap-logo.png")}
 						resizeMode="cover"
 						resizeMethod="resize"
 					/>
+					<View style={{flex: 1}} />
 					<Button
 						buttonStyle={{flex: 1, backgroundColor: "#FFFFFF", margin: 5}}
 						icon={<Icon

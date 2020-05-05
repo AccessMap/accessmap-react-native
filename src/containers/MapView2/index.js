@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { PermissionsAndroid } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { connect } from 'react-redux';
 
+import LayerPaths from './layer-paths';
 import LayerSidewalks from './layer-sidewalks';
 import LayerCrossings from './layer-crossings';
 import LayerElevators from './layer-elevator-paths';
@@ -33,7 +33,6 @@ class MapView extends Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		//const granted = await PermissionsAndroid.request();
 		const {
 			zoomLevel,
 			geocodeCoords,
@@ -102,14 +101,11 @@ class MapView extends Component {
 		const center = e.geometry.coordinates;
 		const {screenPointX, screenPointY} = e.properties;
 		const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
-				[screenPointX, screenPointY], null, ["sidewalk-press", "crossing-press", "elevator-press"]);
+				[screenPointX, screenPointY], null, ["press"]);
 
 		this.props.placePin({...featureCollection, center});
 	}
 
-	onUserLocationUpdate(location) {
-		console.log("updated user location");
-	}
 
 	render() {
 		const {
@@ -117,7 +113,7 @@ class MapView extends Component {
 			centerCoordinate,
 			route,
 		} = this.props;
-		
+
 		return (
 			<MapboxGL.MapView 
 				ref={component => this._map = component}
@@ -129,10 +125,6 @@ class MapView extends Component {
 					this.props.mapLoaded();
 				}}
 			>
-				{false && <MapboxGL.UserLocation
-					visible={true}
-					onUpdate={this.onUserLocationUpdate}
-				/>}
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
 					animationDuration={200}
@@ -145,9 +137,7 @@ class MapView extends Component {
 					id="pedestrian"
 					url="https://www.accessmap.io/tiles/tilejson/pedestrian.json"
 				>
-					<LayerSidewalks />
-					<LayerCrossings />
-					<LayerElevators />
+					<LayerPaths />
 				</MapboxGL.VectorSource>
 
 				{route && route.code == "Ok" && <LayerRoute />}

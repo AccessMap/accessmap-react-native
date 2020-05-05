@@ -23,6 +23,11 @@ export function placePin(item) {
 	return { type: PLACE_PIN, item };
 }
 
+export const GO_TO_REGION = "GO_TO_REGION";
+export function goToRegion(region) {
+	return { type: GO_TO_REGION, region };
+}
+
 export const SET_MOBILITY_MODE = "SET _MOBILITY_MODE";
 export function setMobilityMode(mode) {
 	return { type: SET_MOBILITY_MODE, mode };

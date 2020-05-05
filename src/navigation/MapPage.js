@@ -22,6 +22,14 @@ import TripInfo from '../components/TripInfo';
 class MapPage extends Component {
 	static navigationOptions = {title: "Map", header: null};
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			screenWidth: Math.round(Dimensions.get("window").width)
+		};
+		this.onLayout = this.onLayout.bind(this);
+	}
+
 	componentDidUpdate(prevProps) {
 		if (!prevProps.openDrawer && this.props.openDrawer) {
 			this.openDrawer();
@@ -36,10 +44,22 @@ class MapPage extends Component {
 	openDrawer() {
 		this.drawer._root.open();
 	}
+	onLayout(e) {
+		console.log("screen flip");
+		this.setState({
+			screenWidth: Math.round(Dimensions.get("window").width)
+		});
+	}
 	render() {
-		//console.log(this.props.route);
+		const screenWidth = this.state.screenWidth;
+		console.log(screenWidth - 288);
 		return (
+			<View style={{flex: 1}} onLayout={this.onLayout}>
 			<Drawer ref={ref => {this.drawer = ref;}}
+				style={{
+					drawer: { shadowColor: "#000000", shadowOpacity: 0.8, shadowRadius: 3},
+					main: {paddingLeft: 3},
+				}}
 				content={<LinkOverlay closeDrawer={() => this.closeDrawer()} />}
 				onClose={() => this.closeDrawer()}>
 			<View accessible={false} style={styles.page}>
@@ -65,6 +85,7 @@ class MapPage extends Component {
 				</View>
 			</View>
 			</Drawer>
+			</View>
 		);
 	}
 }

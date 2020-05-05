@@ -23,6 +23,7 @@ import {
 } from '../../actions';
 
 import MobilityButtonGroup from './mobility-buttons';
+import RegionSwitcher from './region-switcher';
 
 const IconButton = props => {
 	return (
@@ -119,6 +120,8 @@ class OmniCard extends Component {
 							resizeMode="cover"
 							resizeMethod="resize"
 						/>
+						<View style={{flex: 1}}/>
+						<RegionSwitcher />
 					</View>}
 
 					{(!origin && !destination && !this.state.findDirections) ?

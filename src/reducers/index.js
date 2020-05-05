@@ -4,6 +4,7 @@ import {
 	ZOOM_IN,
 	ZOOM_OUT,
 	GO_TO_LOCATION,
+	GO_TO_REGION,
 	PLACE_PIN,
 	SET_MOBILITY_MODE,
 	SET_CUSTOM_UPHILL,
@@ -23,12 +24,18 @@ import {
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
+	SEATTLE
 } from '../constants';
+import regions from '../../regions';
+
+const seattleProps = regions.features[SEATTLE].properties;
+const seattleCoords = [seattleProps.lon, seattleProps.lat];
 
 const defaultState = {
 	isLoading: true,
 	zoomLevel: 14,
-	centerCoordinate: [-122.3321, 47.6062],
+	bbox: seattleProps.bounds,
+	centerCoordinate: seattleCoords,
 	geocodeCoords: null,
 	pinFeatures: null,
 	origin: null,
@@ -53,6 +60,10 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, zoomLevel: state.zoomLevel - 1};
 		case GO_TO_LOCATION:
 			return {...state, geocodeCoords: action.item.center};
+		case GO_TO_REGION:
+			// centerCoordinate, bbox
+			console.log(action.region);
+			return {...state, geocodeCoords: [action.region.properties.lon, action.region.properties.lat], bbox: action.region.properties.bounds};
 		case PLACE_PIN:
 			return {...state, pinFeatures: action.item};
 		case SET_MOBILITY_MODE:

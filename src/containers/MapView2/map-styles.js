@@ -1,7 +1,107 @@
 import { uphillColorMap } from "../../colors";
 const OUTLINE_WIDTH = 2;
 
+const isAccessible = prefs => ["any", isAccessibleSidewalk(prefs), ["!", inaccessibleCrossingExpr(prefs)], isElevator];
+
+// Sidewalk expressions
+const isSidewalk = ["==", ["get", "footway"], "sidewalk"];
+const accessibleSidewalkExpr = prefs => ["<=", ["abs", ["*", 100, ["get", "incline"]]], prefs.maxUphill];
+const isAccessibleSidewalk = prefs => ["all", isSidewalk, accessibleSidewalkExpr(prefs)];
+
+// Crossing expressions
+const isCrossing = ["==", ["get", "footway"], "crossing"];
+const inaccessibleCrossingExpr = prefs => [
+	"all",
+	isCrossing,
+	prefs.avoidCurbs,
+	["!", ["to-boolean", ["get", "curbramps"]]],
+];
+const markedExpression = prefs => [
+	"all",
+	isCrossing,
+	["!", inaccessibleCrossingExpr(prefs)],
+	["==", ["get", "crossing"], "marked"]
+];
+const unmarkedExpression = prefs => [
+	"all",
+	isCrossing,
+	["!", inaccessibleCrossingExpr(prefs)],
+	["any", ["==", ["get", "crossing"], "unmarked"], ["!", ["has", "crossing"]]]
+];
+
+// Elevator expressions
+const isElevator = ["all",
+	["==", ["get", "subclass"], "footway"],
+	["==", ["get", "elevator"], 1]];
+
 export default {
+	paths: prefs => {
+	  const incline = prefs.maxUphill;
+		const nSamples = 15;
+		const nSide = parseInt(nSamples / 2);
+		const range = [...Array(nSamples).keys()].map(d => (d - nSide) / nSide);
+
+		const colorMap = uphillColorMap(incline, incline, incline);
+		const inclineSamples = range.map(d => d * incline);
+		const inclineStops = [];
+		inclineSamples.map(d => {
+			const color = colorMap(d);
+			inclineStops.push(d);
+			inclineStops.push(color.hex());
+		});
+		return {
+			lineCap: "round",
+			lineColor: [
+				"case",
+				isCrossing,
+				"#444444",
+				isElevator,
+				"black",
+				["!", isAccessibleSidewalk(prefs)],
+				"red",
+				[">", ["to-number", ["get", "incline"]], incline],
+				"#ff0000",
+				["<", ["to-number", ["get", "incline"]], -incline],
+				"#ff0000",
+				[
+					"interpolate",
+					["exponential", 1.5],
+					["abs", ["*", 100, ["get", "incline"]]],
+					...inclineStops
+				]
+			],
+			lineWidth: [
+				// Was unable to nest interpolate within case for some reason
+				"interpolate",
+				["exponential", 1.5],
+				["zoom"],
+				10, ["case", isAccessibleSidewalk(prefs), 0.1,
+					markedExpression(prefs), 0.07, isElevator, 0, 0.05],
+				16, ["case", isAccessibleSidewalk(prefs), 5,
+					markedExpression(prefs), 3.5, isElevator, 0, 1],
+				20, ["case", isAccessibleSidewalk(prefs), 24,
+					markedExpression(prefs), 20, isElevator, 0, 6]
+			]
+		}
+	},
+	press: {
+		lineCap: "round",
+		lineOpacity: 0.000001,
+		lineWidth: [
+			"interpolate",
+			["exponential", 1.5],
+			["zoom"],
+			10, 2,
+			16, 10,
+			20, 30
+		]
+	},
+	outlines: prefs => {
+		return {
+			lineColor: "blue",
+			lineWidth: 3
+		}
+	},
 	sidewalks: incline => {
 		const nSamples = 15;
 		const nSide = parseInt(nSamples / 2);
@@ -34,9 +134,9 @@ export default {
 				"interpolate",
 				["exponential", 1.5],
 				["zoom"],
-				10, 0.1,
-				16, 5,
-				20, 24,
+				10, ["case", isSidewalk, 0.1, isCrossing, 0.07, 0],
+				16, ["case", isSidewalk, 5, isCrossing, 3.5, 0],
+				20, ["case", isSidewalk, 24, isCrossing, 20, 0],
 			],
 		}
 	},
