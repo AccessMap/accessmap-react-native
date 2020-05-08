@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, View} from 'react-native';
 import { Button, SearchBar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from '../../components/Icon';
 import { connect } from  'react-redux';
 
 import { zoomIn, zoomOut } from '../../actions';
@@ -11,6 +11,14 @@ class Zooms extends Component {
 	render() {
 		return (
 			<View accessible={true} style={styles.zooms}>
+				<Button
+					buttonStyle={styles.button}
+					icon={<Icon
+						name="crosshairs-gps"
+						size={20}
+						color="blue"
+					/>}
+				/>
 				<Button
 					buttonStyle={styles.button}
 					icon={<Icon

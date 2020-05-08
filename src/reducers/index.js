@@ -35,6 +35,7 @@ const defaultState = {
 	isLoading: true,
 	zoomLevel: 14,
 	bbox: seattleProps.bounds,
+	currRegion: seattleProps.name.toUpperCase(),
 	centerCoordinate: seattleCoords,
 	geocodeCoords: null,
 	pinFeatures: null,
@@ -63,7 +64,7 @@ export default function mapApp(state = defaultState, action) {
 		case GO_TO_REGION:
 			// centerCoordinate, bbox
 			console.log(action.region);
-			return {...state, geocodeCoords: [action.region.properties.lon, action.region.properties.lat], bbox: action.region.properties.bounds};
+			return {...state, geocodeCoords: [action.region.properties.lon, action.region.properties.lat], bbox: action.region.properties.bounds, currRegion: action.region.properties.name.toUpperCase()};
 		case PLACE_PIN:
 			return {...state, pinFeatures: action.item};
 		case SET_MOBILITY_MODE:

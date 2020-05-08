@@ -18,14 +18,6 @@ class RegionSwitcher extends Component {
 
 	render() {
 		const goToRegion = this.props.goToRegion;
-		console.log("below this is the region");
-		console.log(regions);
-
-		const toggleOverlay = () => {
-			this.setState({
-				viewOverlay: !this.state.viewOverlay
-			});
-		}
 
 		return (<View>
 			<Button
@@ -34,7 +26,7 @@ class RegionSwitcher extends Component {
 					borderColor: "#0000AA",
 					borderWidth: 2,
 					padding: 5}}
-				title="SEATTLE"
+				title={this.props.currRegion}
 				titleStyle={{color: "#0000AA"}}
 				onPress={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 			/>
@@ -70,6 +62,12 @@ class RegionSwitcher extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+	return {
+		currRegion: state.currRegion
+	}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		goToRegion: region => {
@@ -78,4 +76,4 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-export default connect(null, mapDispatchToProps)(RegionSwitcher);
+export default connect(mapStateToProps, mapDispatchToProps)(RegionSwitcher);

@@ -33,7 +33,21 @@ class MapView extends Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		//const granted = await PermissionsAndroid.request();
+		const granted = await PermissionsAndroid.request(
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+			{
+				title: "User Location",
+				message: "Can AccessMap access your current location?",
+				buttonNegative: "No",
+				buttonPositive: "Yes"
+			}
+		);
+		if (granted) {
+			console.log("You can use ACCESS_FINE_LOCATION");
+		} else {
+			console.log("ACCESS_FINE_LOCATION permission denied");
+		}
+		
 		const {
 			zoomLevel,
 			geocodeCoords,
@@ -108,7 +122,13 @@ class MapView extends Component {
 	}
 
 	onUserLocationUpdate(location) {
-		console.log("updated user location");
+		const timestamp = location.timestamp;
+		const latitude = location.coords.latitude;
+		const longitude = location.coords.longitude;
+		const altitude = location.coords.altitude;
+		const heading = location.coords.heading;
+		const accuracy = location.coords.accuracy;
+		const speed = location.coords.speed;
 	}
 
 	render() {
@@ -129,10 +149,10 @@ class MapView extends Component {
 					this.props.mapLoaded();
 				}}
 			>
-				{false && <MapboxGL.UserLocation
+				<MapboxGL.UserLocation
 					visible={true}
 					onUpdate={this.onUserLocationUpdate}
-				/>}
+				/>
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
 					animationDuration={200}
