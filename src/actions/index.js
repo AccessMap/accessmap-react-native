@@ -78,6 +78,11 @@ export function closeDirections() {
 	return { type: CLOSE_DIRECTIONS };
 }
 
+export const LOCATE_USER = "LOCATE_USER";
+export function locateUser() {
+	return { type: LOCATE_USER };
+}
+
 // Drawer actions
 
 export const OPEN_DRAWER = "OPEN_DRAWER";

@@ -20,6 +20,7 @@ import {
 	CLOSE_DIRECTIONS,
 	OPEN_DRAWER,
 	CLOSE_DRAWER,
+	LOCATE_USER,
 	RECEIVE_ROUTE,
 } from '../actions';
 import {
@@ -37,6 +38,7 @@ const defaultState = {
 	bbox: seattleProps.bounds,
 	currRegion: seattleProps.name.toUpperCase(),
 	centerCoordinate: seattleCoords,
+	locateUserSwitch: false,
 	geocodeCoords: null,
 	pinFeatures: null,
 	origin: null,
@@ -63,7 +65,6 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, geocodeCoords: action.item.center};
 		case GO_TO_REGION:
 			// centerCoordinate, bbox
-			console.log(action.region);
 			return {...state, geocodeCoords: [action.region.properties.lon, action.region.properties.lat], bbox: action.region.properties.bounds, currRegion: action.region.properties.name.toUpperCase()};
 		case PLACE_PIN:
 			return {...state, pinFeatures: action.item};
@@ -91,6 +92,8 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, viewingDirections: true};
 		case CLOSE_DIRECTIONS:
 			return {...state, viewingDirections: false};
+		case LOCATE_USER:
+			return {...state, locateUserSwitch: !state.locateUserSwitch };
 		case OPEN_DRAWER:
 			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:

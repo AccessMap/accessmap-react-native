@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { PermissionsAndroid } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { connect } from 'react-redux';
@@ -11,7 +10,11 @@ import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
 import LoadingScreen from '../../components/LoadingScreen';
 import styles from '../../styles';
-import { placePin, fetchRoute, mapLoaded } from '../../actions';
+import {
+	goToLocation,
+	placePin,
+	fetchRoute,
+	mapLoaded } from '../../actions';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -25,6 +28,9 @@ MapboxGL.setAccessToken(ACCESS_TOKEN);
 class MapView extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			userLoc: null,
+		};
 	}
 
 	componentDidMount() {
@@ -33,21 +39,6 @@ class MapView extends Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		const granted = await PermissionsAndroid.request(
-			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-			{
-				title: "User Location",
-				message: "Can AccessMap access your current location?",
-				buttonNegative: "No",
-				buttonPositive: "Yes"
-			}
-		);
-		if (granted) {
-			console.log("You can use ACCESS_FINE_LOCATION");
-		} else {
-			console.log("ACCESS_FINE_LOCATION permission denied");
-		}
-		
 		const {
 			zoomLevel,
 			geocodeCoords,
@@ -57,7 +48,10 @@ class MapView extends Component {
 			uphill,
 			downhill,
 			avoidCurbs,
-			fetchRoute
+			locateUser,
+			fetchRoute,
+			goToLocation,
+			placePin
 		} = this.props;
 
 		if (zoomLevel !== prevProps.zoomLevel) {
@@ -68,11 +62,25 @@ class MapView extends Component {
 				this.camera.zoomTo(currZoom - 1, 200);
 			}
 		}
+
 		if (geocodeCoords !== prevProps.geocodeCoords) {
 			this.camera.setCamera({
 				centerCoordinate: geocodeCoords,
 				animationDuration: 1000,
 			});
+		}
+
+		if (locateUser !== prevProps.locateUser && this.state.userLoc != null) {
+			const userLoc = this.state.userLoc.coords;
+			const center = [userLoc.longitude, userLoc.latitude];
+
+			goToLocation({...featureCollection, center});
+
+			const pointInView = await this._map.getPointInView(center);
+			const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
+				pointInView, null,
+				["sidewalk-press", "crossing-press", "elevator-press"]);
+			placePin({...featureCollection, center});
 		}
 
 		if (route && route.code == "Ok" && route != prevProps.route) {
@@ -121,14 +129,17 @@ class MapView extends Component {
 		this.props.placePin({...featureCollection, center});
 	}
 
-	onUserLocationUpdate(location) {
-		const timestamp = location.timestamp;
-		const latitude = location.coords.latitude;
-		const longitude = location.coords.longitude;
-		const altitude = location.coords.altitude;
-		const heading = location.coords.heading;
-		const accuracy = location.coords.accuracy;
-		const speed = location.coords.speed;
+	onUserLocationUpdate = (location) => {
+		// const timestamp = location.timestamp;
+		// const latitude = location.coords.latitude;
+		// const longitude = location.coords.longitude;
+		// const altitude = location.coords.altitude;
+		// const heading = location.coords.heading;
+		// const accuracy = location.coords.accuracy;
+		// const speed = location.coords.speed;
+		this.setState({
+			userLoc: location
+		});
 	}
 
 	render() {
@@ -203,12 +214,16 @@ const mapStateToProps = state => {
 		downhill: preferences[1] / 100,
 		avoidCurbs: preferences[2],
 		route: state.route,
-		viewingDirections: state.viewingDirections
+		viewingDirections: state.viewingDirections,
+		locateUser: state.locateUserSwitch
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
+		goToLocation: features => {
+			dispatch(goToLocation(features));
+		},
 		mapLoaded: () => {
 			dispatch(mapLoaded());
 		},
