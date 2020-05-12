@@ -12,6 +12,17 @@ const Header = props => {
 			<Text style={{flex: 1, fontSize: 20, fontWeight: "bold"}}>
 				{props.title}
 			</Text>
+			{props.cs && <Button
+				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
+				icon={<Icon
+					name="information"
+					size={20}
+					color="#0000AA"
+				/>}
+				onPress={() => {
+					props.navigation.push("Crowdsourcing", {info: props.info});
+				}}
+			/>}
 			<Button
 				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
 				icon={<Icon
@@ -20,6 +31,7 @@ const Header = props => {
 					color="#555555"
 				/>}
 				onPress={() => {
+					console.log("closing");
 					props.close();
 				}}
 			/>

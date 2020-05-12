@@ -53,6 +53,10 @@ const FeatureCard = props => {
 						coordinatesToString(props.features.center)
 						}
 					close={() => props.placePin(null)}
+					cs={info &&
+						(info.footway == "sidewalk" || info.footway == "crossing")}
+					navigation={props.navigation}
+					info={info}
 				/>
 			</View>
 			{info && <View>

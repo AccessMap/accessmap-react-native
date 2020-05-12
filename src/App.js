@@ -5,9 +5,11 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import MapPage from './navigation/MapPage';
 import SearchPage from './navigation/SearchPage';
+import Crowdsourcing from './navigation/Crowdsourcing';
 
 const MainNavigator = createStackNavigator({
 	Map: {screen: MapPage},
+	Crowdsourcing: {screen: Crowdsourcing},
 	Search: {screen: SearchPage},
 	}, {
 		transitionConfig : () => ({
@@ -17,7 +19,8 @@ const MainNavigator = createStackNavigator({
 				easing: Easing.step0,
 			},
 		}, {
-			initialRouteName: "Map",
+			// initialRouteName: "Map",
+			initialRouteName: "Crowdsourcing",
 		}),
 	});
 

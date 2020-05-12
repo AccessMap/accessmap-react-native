@@ -52,7 +52,7 @@ class MapPage extends Component {
 	}
 	render() {
 		const screenWidth = this.state.screenWidth;
-		console.log(screenWidth - 288);
+		// console.log(screenWidth - 288);
 		return (
 			<View style={{flex: 1}} onLayout={this.onLayout}>
 			<Drawer ref={ref => {this.drawer = ref;}}
@@ -72,7 +72,8 @@ class MapPage extends Component {
 					</View>
 					<SpeedLegend maxIncline={this.props.maxIncline} />
 					{this.props.isLoading && <LoadingScreen />}
-					{this.props.pinFeatures && <FeatureCard />}
+					{this.props.pinFeatures && <FeatureCard
+						navigation={this.props.navigation} />}
 					{this.props.route && <RouteBottomCard />}
 					{this.props.viewingDirections && <Directions
 						route={this.props.route}
