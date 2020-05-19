@@ -38,6 +38,32 @@ class MapView extends Component {
 		MapboxGL.setTelemetryEnabled(false);
 	}
 
+	async zoomPress(zoom, prevZoom) {
+		const currZoom = await this._map.getZoom();
+		if (zoom > prevZoom) {
+			this.camera.zoomTo(currZoom + 1, 200);
+		} else if (zoom < prevZoom) {
+			this.camera.zoomTo(currZoom - 1, 200);
+		}
+	}
+
+	async userLocationPress() {
+		const { placePin } = this.props;
+		const userLoc = this.state.userLoc.coords;
+		const center = [userLoc.longitude, userLoc.latitude];
+		//goToLocation({...featureCollection, center});
+		await this.camera.setCamera({
+			centerCoordinate: center,
+			animationDuration: 1000,
+		});
+
+		const pointInView = await this._map.getPointInView(center);
+		const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
+			pointInView, null,
+			["sidewalk-press", "crossing-press", "elevator-press"]);
+		placePin({...featureCollection, center});
+	}
+
 	async componentDidUpdate(prevProps) {
 		const {
 			zoomLevel,
@@ -55,12 +81,7 @@ class MapView extends Component {
 		} = this.props;
 
 		if (zoomLevel !== prevProps.zoomLevel) {
-			const currZoom = await this._map.getZoom();
-			if (zoomLevel > prevProps.zoomLevel) {
-				this.camera.zoomTo(currZoom + 1, 200);
-			} else if (zoomLevel < prevProps.zoomLevel) {
-				this.camera.zoomTo(currZoom - 1, 200);
-			}
+			this.zoomPress(zoomLevel, prevProps.zoomLevel);
 		}
 
 		if (geocodeCoords !== prevProps.geocodeCoords) {
@@ -71,16 +92,7 @@ class MapView extends Component {
 		}
 
 		if (locateUser !== prevProps.locateUser && this.state.userLoc != null) {
-			const userLoc = this.state.userLoc.coords;
-			const center = [userLoc.longitude, userLoc.latitude];
-
-			goToLocation({...featureCollection, center});
-
-			const pointInView = await this._map.getPointInView(center);
-			const featureCollection = await this._map.queryRenderedFeaturesAtPoint(
-				pointInView, null,
-				["sidewalk-press", "crossing-press", "elevator-press"]);
-			placePin({...featureCollection, center});
+			this.userLocationPress();
 		}
 
 		if (route && route.code == "Ok" && route != prevProps.route) {

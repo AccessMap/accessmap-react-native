@@ -7,16 +7,20 @@ import FeedbackForm from '../containers/FeedbackForm';
 
 export default class Crowdsourcing extends Component {
 	static navigationOptions = ({navigation}) => {
+		const info = navigation.state.params.info;
 		var footway = navigation.state.params.info.footway;
 		footway = footway.charAt(0).toUpperCase() + footway.slice(1)
 		return {
-			title: footway,
+			title: info.description != null ? info.description : footway,
 		}
 	}
 
 	render() {
+		const { params } = this.props.navigation.state;
 		return (
-			<FeedbackForm />
+			<FeedbackForm
+				info={params.info}
+			/>
 		);
 	}
 }
