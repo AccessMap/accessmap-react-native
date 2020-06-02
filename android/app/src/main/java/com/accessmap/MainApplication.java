@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNGestureHandlerPackage(),
 						//new ReanimatedPackage(),
             new VectorIconsPackage(),
-            new RCTMGLPackage()
+            new RCTMGLPackage(),
+						new CustomPackage()
       );
     }
 

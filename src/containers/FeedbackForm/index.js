@@ -3,6 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, CheckBox } from 'react-native-elements';
 
 import { sendEmail } from '../../utils/send-email';
+import { NativeModules } from 'react-native';
+
+import {
+	spreadsheetId,
+	accountId,
+	accountName,
+	keyId,
+	key } from './secrets';
+const { SheetsManager } = NativeModules;
 
 const ZERO_CR = 0;
 const ONE_CR = 2;
@@ -164,10 +173,11 @@ body = "The following issues/features has been reported for " + this.props.info.
 					title="Submit"
 					containerStyle={{width: 250}}
 					onPress={() => {
-						sendEmail("yehe@uw.edu",
-							"Report for " + this.props.info.description,
-							this.constructBody())
-						.then(() => {console.log("Your message was sent!")})
+						SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Test");
+						//sendEmail("yehe@uw.edu",
+						//	"Report for " + this.props.info.description,
+						//	this.constructBody())
+						//.then(() => {console.log("Your message was sent!")})
 					}}
 				/>
 			</View>
