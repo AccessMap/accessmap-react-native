@@ -11,7 +11,7 @@ import {
 	accountName,
 	keyId,
 	key } from './secrets';
-const { SheetsManager } = NativeModules;
+const { Rakam, SheetsManager } = NativeModules;
 
 const ZERO_CR = 0;
 const ONE_CR = 2;
@@ -32,7 +32,12 @@ class FeedbackForm extends Component {
 			cxPedSignal: false,
 			cxAuditorySignal: false,
 			cxTactileSignal: false,
+			canPress: true,
 		};
+	}
+
+	exit = () => {
+		this.props.navigation.goBack();
 	}
 
 	constructBody = () => {
@@ -170,14 +175,32 @@ body = "The following issues/features has been reported for " + this.props.info.
 					/>
 				</View>}
 				<Button
-					title="Submit"
+					title={this.state.canPress ? "Submit" : "Sending..."}
+					disabled={!this.state.canPress}
 					containerStyle={{width: 250}}
 					onPress={() => {
-						SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Test");
-						//sendEmail("yehe@uw.edu",
-						//	"Report for " + this.props.info.description,
-						//	this.constructBody())
-						//.then(() => {console.log("Your message was sent!")})
+						if (!this.state.canPress) {
+							return;
+						}
+						this.setState({canPress: false});
+						data = "";
+						data += new Date().toLocaleString() + "\t";
+						data += this.props.info.description + "\t";
+						if (this.props.info.footway == "sidewalk") {
+							data += !swNotPresent + "\t";
+							data += !swNotPaved + "\t";
+							data += !swSub3Ft;
+							SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Sidewalks", data);
+						} else if (this.props.info.footway == "crossing") {
+							data += !cxUnsafe + "\t";
+							data += !(cxMarkedWrong ^ (this.props.info.crossing == "marked")) + "\t";
+							data += (cxCurbramps == 0 ? 0 : cxCurbramps == 1 ? 2 : 1) + "\t";
+							data += cxPedSignal + "\t";
+							data += cxAuditorySignal + "\t";
+							data += cxTactileSignal;
+							SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Crossings", data);
+						}
+						this.exit();
 					}}
 				/>
 			</View>

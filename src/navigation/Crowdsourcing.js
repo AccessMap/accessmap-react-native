@@ -20,6 +20,7 @@ export default class Crowdsourcing extends Component {
 		return (
 			<FeedbackForm
 				info={params.info}
+				navigation={this.props.navigation}
 			/>
 		);
 	}

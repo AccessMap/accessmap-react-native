@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { PermissionsAndroid, StyleSheet, View} from 'react-native';
+import { PermissionsAndroid, StyleSheet, View } from 'react-native';
 import { Button, SearchBar } from 'react-native-elements';
 import Icon from '../../components/Icon';
 import { connect } from  'react-redux';

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { NativeModules } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { connect } from 'react-redux';
@@ -15,6 +16,8 @@ import {
 	placePin,
 	fetchRoute,
 	mapLoaded } from '../../actions';
+
+const { Rakam } = NativeModules;
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -42,8 +45,10 @@ class MapView extends Component {
 		const currZoom = await this._map.getZoom();
 		if (zoom > prevZoom) {
 			this.camera.zoomTo(currZoom + 1, 200);
+			Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
 		} else if (zoom < prevZoom) {
 			this.camera.zoomTo(currZoom - 1, 200);
+			Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
 		}
 	}
 
@@ -141,6 +146,11 @@ class MapView extends Component {
 		this.props.placePin({...featureCollection, center});
 	}
 
+	_panMap = async e => {
+		const center = e.geometry.coordinates;
+		Rakam.trackEvent("MOVE_MAP", ["lat", `${center[0]}`, "lon", `${center[1]}`]);
+	}
+
 	onUserLocationUpdate = (location) => {
 		// const timestamp = location.timestamp;
 		// const latitude = location.coords.latitude;
@@ -167,6 +177,7 @@ class MapView extends Component {
 				style={styles.map}
 				onPress={this._onPress}
 				onLongPress={this._onPress}
+				onRegionDidChange={this._panMap}
 				onDidFinishLoadingStyle={() => {
 					console.log("map loaded");
 					this.props.mapLoaded();
