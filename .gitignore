@@ -57,3 +57,5 @@ buck-out/
 
 # src
 src/containers/FeedbackForm/secrets.js
+
+android/app/src/main/java/com/accessmap/MainActivity.java
