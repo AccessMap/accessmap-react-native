@@ -27,7 +27,7 @@ public class MainActivity extends ReactActivity {
 			try {
 				Log.v("ReactNative", "hello");
 				RakamClient instance = Rakam.getInstance();
-				instance.initialize(this, new URL("https://www.accessmap.io/analytics"), INSERT_WRITE_KEY_HERE).enableForegroundTracking(getApplication());
+				instance.initialize(this, new URL("https://www.accessmap.io/analytics"), "t1o7d8qvroq71g7se1qb25hr0fn2n3cmo4h3fh1l0ncgain5slo3jgk92ej1aiec").enableForegroundTracking(getApplication());
 				// instance.enableForegroundTracking(getApplication()).trackSessionEvents(true);
 				instance.setLogLevel(Log.VERBOSE);
 				instance.setEventUploadPeriodMillis(1);

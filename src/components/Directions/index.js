@@ -11,7 +11,7 @@ const DirectionCard = props => {
 	// c) distance
 	const action = props.footway == "sidewalk" ? "Use the sidewalk" : "Cross the street";
 	return (
-		<Card>
+		<Card accessible={true}>
 			<Text style={{fontSize: 20}}>{action}</Text>
 			<Text style={{fontSize: 15}}>{props.name}</Text>
 			<Text>{Math.round(props.distance)} meters</Text>

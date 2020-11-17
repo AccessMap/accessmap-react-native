@@ -13,6 +13,7 @@ const Header = props => {
 				{props.title}
 			</Text>
 			{props.cs && <Button
+				accessibilityLabel="Select to report an issue with this segment"
 				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
 				icon={<Icon
 					name="information"
@@ -24,6 +25,7 @@ const Header = props => {
 				}}
 			/>}
 			<Button
+				accessibilityLabel="Select to close those view"
 				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
 				icon={<Icon
 					name="close"

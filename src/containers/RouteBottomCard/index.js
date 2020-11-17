@@ -23,7 +23,7 @@ const RouteBottomCard = props => {
 	return (
 		<Card containerStyle={styles.routeBottomCard}>
 			<View style={{margin: 5, width: "100%"}}>
-				<View style={{flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
+				<View accessible={true} style={{flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
 					<Text style={{fontSize: 20, marginRight: 20}}>Route</Text>
 					<Text style={{marginRight: 20}}>{Math.round(route.distance)} meters</Text>
 					<Text>{Math.round(route.duration / 60)} minutes</Text>

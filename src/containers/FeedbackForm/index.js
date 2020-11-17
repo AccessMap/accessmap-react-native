@@ -190,6 +190,7 @@ body = "The following issues/features has been reported for " + this.props.info.
 							data += !swNotPresent + "\t";
 							data += !swNotPaved + "\t";
 							data += !swSub3Ft;
+							Rakam.trackEvent("SUBMIT_FORM", ["footway", "sidewalk", "description", this.props.info.description]);
 							SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Sidewalks", data);
 						} else if (this.props.info.footway == "crossing") {
 							data += !cxUnsafe + "\t";
@@ -198,6 +199,7 @@ body = "The following issues/features has been reported for " + this.props.info.
 							data += cxPedSignal + "\t";
 							data += cxAuditorySignal + "\t";
 							data += cxTactileSignal;
+							Rakam.trackEvent("SUBMIT_FORM", ["footway", "crossing", "description", this.props.info.description]);
 							SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Crossings", data);
 						}
 						this.exit();

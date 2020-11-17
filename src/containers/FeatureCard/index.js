@@ -11,7 +11,7 @@ import parseOpenHours from '../../utils/parse-open-hours';
 
 const InfoText = props => {
 	return (
-		<View style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
+		<View accessible={true} style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
 			<Text style={{flex: 2, fontSize: 16, flexWrap: "wrap"}}>
 				{props.label}
 			</Text>

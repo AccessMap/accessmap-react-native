@@ -5,9 +5,9 @@ import { AreaChart, LineChart, Grid, XAxis, YAxis } from 'react-native-svg-chart
 import Header from '../Header';
 
 const InfoText = props => {
-	return (<View style={{marginBottom: 20}}>
-		<Text style={{color: "black"}}>{props.value}</Text>
+	return (<View accessible={true} style={{marginBottom: 20}}>
 		<Text>{props.info}</Text>
+		<Text style={{color: "black"}}>{props.value}</Text>
 	</View>);
 }
 

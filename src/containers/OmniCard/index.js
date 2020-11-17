@@ -38,26 +38,30 @@ const IconButton = props => {
 			title={props.label}
 			titleStyle={{marginLeft: 3, fontSize: 15}}
 			onPress={props.onPress}
+			accessibilityLabel={props.accessibilityLabel}
 		/>);
 };
 
 const GeocodeBar = props => {
 	return (
-		<View style={{flex: 1}}><TouchableWithoutFeedback
-			onPress={() => props.navigation.push("Search", {type: props.type})}
-		>
-			<View pointerEvents="box-only">
-				<SearchBar
-					placeholder={props.placeholder}
-					value={props.value}
-					lightTheme={true}
-					containerStyle={{backgroundColor: "#EEEEEE", padding: 0}}
-					inputContainerStyle={{backgroundColor: "#DDDDDD"}}
-					inputStyle={{color: "black", margin: 0, padding: 0, fontSize: 14,}}
-					editable={false}
-				/>
-			</View>
-		</TouchableWithoutFeedback></View>
+		<View style={{flex: 1}}>
+			<TouchableWithoutFeedback
+				accessibilityLabel="Enter address"
+				onPress={() => props.navigation.push("Search", {type: props.type})}
+			>
+				<View pointerEvents="box-only">
+					<SearchBar
+						placeholder={props.placeholder}
+						value={props.value}
+						lightTheme={true}
+						containerStyle={{backgroundColor: "#EEEEEE", padding: 0}}
+						inputContainerStyle={{backgroundColor: "#DDDDDD"}}
+						inputStyle={{color: "black", margin: 0, padding: 0, fontSize: 14,}}
+						editable={false}
+					/>
+				</View>
+			</TouchableWithoutFeedback>
+		</View>
 	);
 }
 
@@ -85,9 +89,6 @@ class OmniCard extends Component {
 
 		return (
 			<Card
-				accessible={true}
-				accessibilityState={{selected: true}}
-				importantForAccessibility="yes"
 				ref={component => this.omniCard = component}
 				containerStyle={styles.omniCardStyle}
 			>
@@ -103,6 +104,7 @@ class OmniCard extends Component {
 						/>
 						<IconButton
 							name="close"
+							accessibilityLabel="Select to exit route finding"
 							onPress={() => {
 								cancelRoute();
 								this.setState({findDirections: false});
@@ -112,6 +114,7 @@ class OmniCard extends Component {
 					:
 					<View style={{flex: 1, flexDirection: "row", alignItems: "center" }}>
 						<IconButton name="menu"
+							accessibilityLabel="Select to open drawer menu"
 							onPress={this.props.openDrawer}
 						/>
 						<Image
@@ -134,6 +137,7 @@ class OmniCard extends Component {
 						/>
 						<IconButton
 							name="directions"
+							accessibilityLabel="Select to look up routes"
 							onPress={() => this.setState({findDirections: true})}
 						/>
 					</View> :
@@ -144,6 +148,7 @@ class OmniCard extends Component {
 							placeholder="Enter end address"
 						/>
 						<IconButton
+							accessibilityLabel="Select to reverse route."
 							name="swap-vert"
 							onPress={() => {
 								this.props.reverseRoute();
@@ -158,6 +163,7 @@ class OmniCard extends Component {
 						{this.props.mobilityMode == MOBILITY_MODE_CUSTOM  &&
 							<View>
 								<IconButton name="pencil"
+									accessibilityLabel="Select to modify custom mobility preferences"
 									onPress={this.toggleCustomMode}
 								/>
 							</View>

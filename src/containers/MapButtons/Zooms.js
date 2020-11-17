@@ -28,6 +28,7 @@ class Zooms extends Component {
 		return (
 			<View accessible={true} style={styles.zooms}>
 				<Button
+					accessibilityLabel="Find my location"
 					buttonStyle={styles.button}
 					icon={<Icon
 						name="crosshairs-gps"
@@ -37,6 +38,7 @@ class Zooms extends Component {
 					onPress={this.locateUserPressed}
 				/>
 				<Button
+					accessibilityLabel="Select to zoom in"
 					buttonStyle={styles.button}
 					icon={<Icon
 						name="plus"
@@ -46,6 +48,7 @@ class Zooms extends Component {
 					onPress={this.props.onZoomInPressed}
 				/>
 				<Button
+					accessibilityLabel="Select to zoom out"
 					buttonStyle={styles.button}
 					icon={<Icon
 						name="minus"

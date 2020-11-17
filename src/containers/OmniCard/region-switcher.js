@@ -21,6 +21,8 @@ class RegionSwitcher extends Component {
 
 		return (<View>
 			<Button
+				accessibilityLabel={"Current region: " + this.props.currRegion +
+					". Select to change region."}
 				buttonStyle={{
 					backgroundColor: "#FFFFFF",
 					borderColor: "#0000AA",

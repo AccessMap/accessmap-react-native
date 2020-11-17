@@ -8,8 +8,13 @@ const SpeedLegend = props => {
 	const maxIncline = Math.round(props.maxIncline);
 	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
 
-	return (<View style={{height: 50, margin: 0, justifyContent: "center", alignItems: "stretch"}}>
-		<View style={{flex: 3, marginTop: 3, marginLeft: 3, marginRight: 3, flexDirection: "column"}}>
+	return (<View
+				accessible={true}
+				accessibilityLabel={"Max incline at " + maxIncline + " percent"}
+				style={{height: 50, margin: 0, justifyContent: "center", alignItems: "stretch"}}>
+		<View
+			importantForAccessibility="no-hide-descendants"
+			style={{flex: 3, marginTop: 3, marginLeft: 3, marginRight: 3, flexDirection: "column"}}>
 			<View style={{flex: 1, flexDirection: "row"}}>
 				<View style={{flex: maxIncline, flexDirection: "row", borderWidth: 1}}>
 					{[...Array(maxIncline).keys()].map(d => {
@@ -29,7 +34,9 @@ const SpeedLegend = props => {
 				</View>))}
 			</View>
 		</View>
-		<View style={{flex: 2, flexDirection: "row", justifyContent: "center"}}>
+		<View
+			importantForAccessibility="no-hide-descendants"
+			style={{flex: 2, flexDirection: "row", justifyContent: "center"}}>
 			<Text style={{fontSize: 13}}>Speed at incline %</Text>
 		</View>
 	</View>);

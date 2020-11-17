@@ -62,13 +62,17 @@ class MapPage extends Component {
 				}}
 				content={<LinkOverlay closeDrawer={() => this.closeDrawer()} />}
 				onClose={() => this.closeDrawer()}>
-			<View accessible={false} style={styles.page}>
-				<View accessible={false} style={styles.container}>
+			<View style={styles.page}>
+				<View importantForAccessibility={this.props.openDrawer ? "no-hide-descendants" : "yes"}
+						style={styles.container}>
 					<View style={{flex: 1}}>
-						<MapView />
+						<View importantForAccessibility={this.props.route ? "no-hide-descendants" : "yes"}
+								style={{flex: 1}}>
+							<MapView />
+						</View>
 						{!this.props.viewingDirections && !this.props.viewingTripInfo &&
-							<OmniCard accessible={true} navigation={this.props.navigation} />}
-						<Zooms accessible={true} />
+							<OmniCard navigation={this.props.navigation} />}
+						<Zooms />
 					</View>
 					<SpeedLegend maxIncline={this.props.maxIncline} />
 					{this.props.isLoading && <LoadingScreen />}
