@@ -45,14 +45,12 @@ class MapPage extends Component {
 		this.drawer._root.open();
 	}
 	onLayout(e) {
-		console.log("screen flip");
 		this.setState({
 			screenWidth: Math.round(Dimensions.get("window").width)
 		});
 	}
 	render() {
 		const screenWidth = this.state.screenWidth;
-		// console.log(screenWidth - 288);
 		return (
 			<View style={{flex: 1}} onLayout={this.onLayout}>
 			<Drawer ref={ref => {this.drawer = ref;}}

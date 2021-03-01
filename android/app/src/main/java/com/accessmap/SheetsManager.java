@@ -2,7 +2,6 @@ package com.accessmap;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import android.util.Log;
 
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -36,11 +35,6 @@ public class SheetsManager extends ReactContextBaseJavaModule {
 		return "SheetsManager";
 	}
 
-	@ReactMethod
-	public void sayHello() {
-		Log.v("ReactNative", "Sheets says hello!");
-	}
-
 	private HttpRequestInitializer initRequest(String accountId,
 		String accountName, String key, String keyId) throws IOException {
 		ServiceAccountCredentials sac = ServiceAccountCredentials.fromPkcs8(
@@ -68,17 +62,5 @@ public class SheetsManager extends ReactContextBaseJavaModule {
 		AppendValuesResponse result =
 				service.spreadsheets().values().append(spreadsheetId, range, body)
 						.setValueInputOption("USER_ENTERED").execute();
-		Log.v("ReactNative", "Cells appended");
-		/*ValueRange response = service.spreadsheets().values()
-				.get(spreadsheetId, range).execute();
-		List<List<Object>> values = response.getValues();
-		if (values == null || values.isEmpty()) {
-			Log.v("ReactNative", "No data found.");
-		} else {
-			for (List row : values) {
-				//Print columns A and B, corresponding to indices 0 and 1
-				Log.v("ReactNative", row.get(0) + ", " + row.get(1));
-			}
-		}*/
 	}
 }

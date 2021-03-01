@@ -32,10 +32,7 @@ const Header = props => {
 					size={20}
 					color="#555555"
 				/>}
-				onPress={() => {
-					console.log("closing");
-					props.close();
-				}}
+				onPress={props.close}
 			/>
 		</View>
 	);

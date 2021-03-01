@@ -1,9 +1,19 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useCallback } from 'react';
+import { Linking, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const AboutOverlay = props => {
+	const openLink = async (url) => {
+		const supported = await Linking.canOpenURL(url);
+
+		if (supported) {
+			await Linking.openURL(url);
+		} else {
+			console.log("cannot open url");
+		}
+	};
+
 	return (
 		<View style={{width: "100%"}}>
 			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>About</Text>
@@ -19,6 +29,9 @@ const AboutOverlay = props => {
 					}
 					type="clear"
 					containerStyle={{flex: 2}}
+					onPress={() => {
+						openLink("https://github.com/AccessMap/accessmap-react-native");
+					}}
 				/>
 				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is an open source project.</Text>
 			</View>

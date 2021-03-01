@@ -49,6 +49,7 @@ const defaultState = {
 	currRegion: seattleProps.name.toUpperCase(),
 	centerCoordinate: seattleCoords,
 	locateUserSwitch: false,
+	canAccessLocation: false,
 	geocodeCoords: null,
 	pinFeatures: null,
 	origin: null,
@@ -118,14 +119,12 @@ export default function mapApp(state = defaultState, action) {
 			logEvent(action.type, []);
 			return {...state, viewingDirections: false};
 		case LOCATE_USER:
-			return {...state, locateUserSwitch: !state.locateUserSwitch };
+			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
 		case OPEN_DRAWER:
 			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:
 			return {...state, openDrawer: false};
 		case RECEIVE_ROUTE:
-			//console.log(action.route, ["orgLat", `${state.origin[0]}`, "orgLon", `${state.origin[1]}`,
-			//				"dstLat", `${state.destination[0]}`, "dstLon", `${state.destination[1]}`]);
 			return {...state, route: action.route};
 		default:
 			return state;

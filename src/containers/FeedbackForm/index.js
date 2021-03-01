@@ -6,6 +6,20 @@ import { sendEmail } from '../../utils/send-email';
 import { NativeModules } from 'react-native';
 
 import {
+	CROWDSOURCING_INFO_TEXT,
+	SIDEWALK_PRESENT_TEXT,
+	SIDEWALK_PAVED_TEXT,
+	SIDEWALK_WIDTH_TEXT,
+	CROSSING_SAFE_TEXT,
+	CROSSING_MARKED_TEXT,
+	CROSSING_CURBRAMPS_TEXT,
+	CROSSING_PEDESTRIAN_SIGNAL_TEXT,
+	CROSSING_AUDITORY_SIGNAL_TEXT,
+	CROSSING_TACTILE_SIGNAL_TEXT,
+	SUBMIT_TEXT
+} from '../../utils/translations';
+
+import {
 	spreadsheetId,
 	accountId,
 	accountName,
@@ -19,7 +33,6 @@ const TWO_CR = 1;
 
 class FeedbackForm extends Component {
 	constructor(props) {
-		console.log(props);
 		super(props);
 
 		this.state = {
@@ -52,7 +65,7 @@ class FeedbackForm extends Component {
 			cxAuditorySignal,
 			cxTactileSignal
 		} = this.state;
-body = "The following issues/features has been reported for " + this.props.info.description + ":\n";
+		body = "The following issues/features has been reported for " + this.props.info.description + ":\n";
 		if (this.props.info.footway == "sidewalk") {
 			if (swNotPresent) {
 				body += "- Sidewalk is not present\n";
@@ -109,16 +122,16 @@ body = "The following issues/features has been reported for " + this.props.info.
 		} = this.state;
 		return (
 			<View style={{flex: 1, alignItems: "center"}}>
-				<Text style={{fontSize: 16, margin: 10}}>Help AccessMap by reporting issues/features in our dataset. Please note that submitting feedback will not update the map immediately.</Text>
+				<Text style={{fontSize: 16, margin: 10}}>{ CROWDSOURCING_INFO_TEXT }</Text>
 				{this.props.info.footway == "sidewalk" ?
 				<View style={{width: "100%"}}>
 					<CheckBox
-						title={swNotPresent ? "Sidewalk is not present" : "Sidewalk is present"}
+						title={SIDEWALK_PRESENT_TEXT}
 						checked={swNotPresent}
 						onPress={() => this.setState({swNotPresent: !swNotPresent})}
 					/>
 					<CheckBox
-						title={swNotPaved ? "Sidewalk is not paved" : "Sidewalk is paved"}
+						title={SIDEWALK_PAVED_TEXT}
 						checked={!swNotPresent && swNotPaved}
 						textStyle={swNotPresent ? styles.disabled : {}}
 						onPress={() =>{
@@ -128,7 +141,7 @@ body = "The following issues/features has been reported for " + this.props.info.
 						}}
 					/>
 					<CheckBox
-						title={!swNotPresent && swSub3Ft ? "Width below 3ft at some points" : "Width at least 3ft at all points"}
+						title={SIDEWALK_WIDTH_TEXT}
 						checked={swSub3Ft}
 						textStyle={swNotPresent ? styles.disabled : {}}
 						onPress={() => {
@@ -140,42 +153,38 @@ body = "The following issues/features has been reported for " + this.props.info.
 				</View> :
 				<View style={{width: "100%"}}>
 					<CheckBox
-						title={cxUnsafe ? "Not safe to cross" : "Safe to cross"}
+						title={CROSSING_SAFE_TEXT}
 						checked={cxUnsafe}
 						onPress={() => this.setState({cxUnsafe: !cxUnsafe})}
 					/>
 					<CheckBox
-						title={!(cxMarkedWrong ^ (this.props.info.crossing == "marked")) ?
-							"Crosswalk is unmarked" : "Crossing is marked"}
+						title={CROSSING_MARKED_TEXT}
 						checked={cxMarkedWrong}
 						onPress={() => this.setState({cxMarkedWrong: !cxMarkedWrong})}
 					/>
 					<CheckBox
-						title={cxCurbramps != ZERO_CR ? cxCurbramps == ONE_CR ?
-							"Only one curbramp present" :
-							"Both curbramps present" :
-							"No curbramps present"}
+						title={CROSSING_CURBRAMPS_TEXT}
 						checked={cxCurbramps != this.props.info.curbramps}
 						onPress={() => this.setState({cxCurbramps: (cxCurbramps + 1) % 3})}
 					/>
 					<CheckBox
-						title="Has pedestrian signal"
+						title={CROSSING_PEDESTRIAN_SIGNAL_TEXT}
 						checked={cxPedSignal}
 						onPress={() => this.setState({cxPedSignal: !cxPedSignal})}
 					/>
 					<CheckBox
-						title="Has auditory signal"
+						title={CROSSING_AUDITORY_SIGNAL_TEXT}
 						checked={cxAuditorySignal}
 						onPress={() => this.setState({cxAuditorySignal: !cxAuditorySignal})}
 					/>
 					<CheckBox
-						title="Has tactile signal"
+						title={CROSSING_TACTILE_SIGNAL_TEXT}
 						checked={cxTactileSignal}
 						onPress={() => this.setState({cxTactileSignal: !cxTactileSignal})}
 					/>
 				</View>}
 				<Button
-					title={this.state.canPress ? "Submit" : "Sending..."}
+					title={ SUBMIT_TEXT }
 					disabled={!this.state.canPress}
 					containerStyle={{width: 250}}
 					onPress={() => {

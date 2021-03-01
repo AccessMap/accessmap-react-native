@@ -24,8 +24,6 @@ const pathExpr = prefs => {
 	expr.isInaccessible = ["!", ["any", expr.accessibleSidewalk,
 		["!", inaccessibleCrossingExpr], expr.isElevator]];
 
-	console.log(expr);
-
 	return expr;
 };
 

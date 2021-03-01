@@ -3,7 +3,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
-import android.util.Log;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -29,7 +28,6 @@ public class RakamAnalytics extends ReactContextBaseJavaModule {
 				eventProperties.put(props.getString(i), props.getString(i + 1));
 			}
 		} catch (JSONException exception) {
-			Log.v("ReactNative", "JSON exception occured");
 		}
 
 		Rakam.getInstance().logEvent(event, eventProperties);

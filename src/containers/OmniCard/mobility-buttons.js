@@ -9,6 +9,12 @@ import {
 	MOBILITY_MODE_POWERED,
 	MOBILITY_MODE_CANE,
 } from '../../constants';
+import {
+	CUSTOM_MODE_TEXT,
+	WHEELCHAIR_MODE_TEXT,
+	POWERED_MODE_TEXT,
+	CANE_MODE_TEXT
+} from '../../utils/translations';
 
 import { setMobilityMode } from '../../actions';
 import { connect } from 'react-redux';
@@ -58,22 +64,22 @@ const MobilityButtonGroup = props => {
 		<View style={{flexDirection: "row"}}>
 			<MobilityButton
 				name="person-pin"
-				label="Custom"
+				label={CUSTOM_MODE_TEXT}
 				mode={MOBILITY_MODE_CUSTOM}
 			/>
 			<MobilityButton
 				name="wheelchair"
-				label="Wheelchair"
+				label={WHEELCHAIR_MODE_TEXT}
 				mode={MOBILITY_MODE_WHEELCHAIR}
 			/>
 			<MobilityButton
 				name="wheelchair-powered"
-				label="Powered"
+				label={POWERED_MODE_TEXT}
 				mode={MOBILITY_MODE_POWERED}
 			/>
 			<MobilityButton
 				name="cane-user"
-				label="Cane"
+				label={CANE_MODE_TEXT}
 				mode={MOBILITY_MODE_CANE}
 			/>
 		</View>

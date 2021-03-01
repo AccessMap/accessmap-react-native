@@ -8,8 +8,6 @@ import styles from './map-styles';
 
 const LayerRoute = props => {
 	const { route, origin, destination } = props;
-	console.log(origin);
-	console.log(destination);
 	if (!route || route.code != "Ok") {
 		return null;
 	}

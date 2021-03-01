@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { Slider } from 'react-native-elements';
 
 import { setCustomDownhill } from '../../actions';
+import { MAX_DOWNHILL_STEEPNESS_TEXT } from '../../utils/translations';
 
 const DownhillSlider = props => {
 	return (
 		<View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", margin: 10 }}>
-			<Text>Maximum downhill steepness: {props.incline}%</Text>
+			<Text>{MAX_DOWNHILL_STEEPNESS_TEXT}: {props.incline}%</Text>
 			<Slider
 				value={props.incline}
 				onValueChange={value => {

@@ -2,6 +2,16 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { AreaChart, LineChart, Grid, XAxis, YAxis } from 'react-native-svg-charts';
 
+import {
+	ROUTE_INFO_TEXT,
+	GRAPH_X_AXIS,
+	GRAPH_Y_AXIS,
+	TOTAL_DISTANCE_TEXT,
+	ESTIMATED_TIME_TEXT,
+	STEEPEST_UPHILL_INCLINE_TEXT,
+	STEEPEST_DOWNHILL_INCLINE_TEXT
+} from '../../utils/translations';
+
 import Header from '../Header';
 
 const InfoText = props => {
@@ -14,7 +24,6 @@ const InfoText = props => {
 const TripInfo = props => {
 	const route = props.route.routes[0];
 	const data = route.legs[0];
-	console.log(data);
 	const nRoutes = [...Array(data.length + 1).keys()];
 	const totalDist = nRoutes.map(i => {
 		if (i == 0) {
@@ -36,19 +45,17 @@ const TripInfo = props => {
 		}
 		return 0;
 	});
-	console.log(elevChange);
 	const xInc = [...Array(10).keys()];
 	const xAxis = xInc.map(i => i * totalDist[totalDist.length - 1] / 9);
 	for (var i = 1; i < totalDist.length; i++) {
 		totalDist[i] += totalDist[i - 1];
 		elevChange[i] += elevChange[i - 1];
 	}
-	console.log(elevChange);
 	return (
 		<View style={{height: "50%"}}>
 			<View>
 				<Header
-					title="Route Information"
+					title={ROUTE_INFO_TEXT}
 					close={props.close}
 				/>
 			</View>
@@ -56,7 +63,7 @@ const TripInfo = props => {
 				<Text>Experienced elevation gain</Text>
 				<View style={{height: 200, flexDirection: "row", alignItems: "center"}}>
 					<View style={{left: -50, position: "absolute", transform: [{rotate: "270deg"}]}}>
-						<Text>Height (meters)</Text>
+						<Text>{GRAPH_Y_AXIS}</Text>
 					</View>
 					<YAxis
 						style={{marginLeft: 20}}
@@ -88,12 +95,12 @@ const TripInfo = props => {
 					svg={{fontSize: 10, fill: "black"}}
 				/>
 				<View style={{alignItems: "center", flex: 1}}>
-					<Text>Distance (meters)</Text>
+					<Text>{GRAPH_X_AXIS}</Text>
 				</View>
-				<InfoText value={`${route.distance.toFixed(1)} meters`} info="Total distance" />
-				<InfoText value={`${(route.duration / 60).toFixed(1)} minutes`} info="Estimated time" />
-				<InfoText value={`${Math.round(100*maxUphill)} %`} info="Steepest uphill incline" />
-				<InfoText value={`${Math.round(100*maxDownhill)} %`} info="Steepest downhill incline" />
+				<InfoText value={`${route.distance.toFixed(1)} meters`} info={TOTAL_DISTANCE_TEXT} />
+				<InfoText value={`${(route.duration / 60).toFixed(1)} minutes`} info={ESTIMATED_TIME_TEXT} />
+				<InfoText value={`${Math.round(100*maxUphill)} %`} info={STEEPEST_UPHILL_INCLINE_TEXT} />
+				<InfoText value={`${Math.round(100*maxDownhill)} %`} info={STEEPEST_DOWNHILL_INCLINE_TEXT} />
 			</ScrollView>
 		</View>
 	);

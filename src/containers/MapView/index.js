@@ -13,6 +13,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 import styles from '../../styles';
 import {
 	goToLocation,
+	locateUser,
 	placePin,
 	fetchRoute,
 	mapLoaded } from '../../actions';
@@ -37,7 +38,6 @@ class MapView extends Component {
 	}
 
 	componentDidMount() {
-		console.log("mounted");
 		MapboxGL.setTelemetryEnabled(false);
 	}
 
@@ -53,9 +53,11 @@ class MapView extends Component {
 	}
 
 	async userLocationPress() {
-		const { placePin } = this.props;
+		const { placePin, locateUser } = this.props;
 		const userLoc = this.state.userLoc.coords;
 		const center = [userLoc.longitude, userLoc.latitude];
+
+		locateUser();
 		//goToLocation({...featureCollection, center});
 		await this.camera.setCamera({
 			centerCoordinate: center,
@@ -79,7 +81,7 @@ class MapView extends Component {
 			uphill,
 			downhill,
 			avoidCurbs,
-			locateUser,
+			locateUserSwitch,
 			fetchRoute,
 			goToLocation,
 			placePin
@@ -96,7 +98,7 @@ class MapView extends Component {
 			});
 		}
 
-		if (locateUser !== prevProps.locateUser && this.state.userLoc != null) {
+		if (locateUserSwitch && this.state.userLoc != null) {
 			this.userLocationPress();
 		}
 
@@ -169,6 +171,7 @@ class MapView extends Component {
 			zoomLevel,
 			centerCoordinate,
 			route,
+			canAccessLocation
 		} = this.props;
 		
 		return (
@@ -179,18 +182,19 @@ class MapView extends Component {
 				onLongPress={this._onPress}
 				onRegionDidChange={this._panMap}
 				onDidFinishLoadingStyle={() => {
-					console.log("map loaded");
 					this.props.mapLoaded();
 				}}
 			>
-				<MapboxGL.UserLocation
+				{canAccessLocation && <MapboxGL.UserLocation
 					visible={true}
 					onUpdate={this.onUserLocationUpdate}
-				/>
+				/>}
 				<MapboxGL.Camera
 					ref={component => this.camera = component}
 					animationDuration={200}
 					defaultSettings={{ centerCoordinate, zoomLevel }}
+					minZoomLevel={10}
+					maxZoomLevel={20}
 				/>
 
 				<LayerAnnotations />
@@ -238,7 +242,8 @@ const mapStateToProps = state => {
 		avoidCurbs: preferences[2],
 		route: state.route,
 		viewingDirections: state.viewingDirections,
-		locateUser: state.locateUserSwitch
+		canAccessLocation: state.canAccessLocation,
+		locateUserSwitch: state.locateUserSwitch
 	};
 };
 
@@ -252,6 +257,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		placePin: item => {
 			dispatch(placePin(item));
+		},
+		locateUser: () => {
+			dispatch(locateUser(false));
 		},
 		fetchRoute: (origin, destination, uphill, downhill, avoidCurbs) => {
 			dispatch(fetchRoute(origin, destination, uphill, downhill, avoidCurbs));

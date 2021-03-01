@@ -4,6 +4,14 @@ import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { viewDirections, viewTripInfo } from '../../actions';
+import {
+	ROUTE_TEXT,
+	METERS_TEXT,
+	MINUTES_TEXT,
+	NO_ROUTE_TEXT,
+	TRIP_INFO_TEXT,
+	DIRECTIONS_TEXT
+} from '../../utils/translations';
 
 const RouteBottomCard = props => {
 	if (props.viewingDirections || props.viewingTripInfo) {
@@ -12,7 +20,7 @@ const RouteBottomCard = props => {
 		return (
 			<Card containerStyle={styles.routeBottomCard}>
 				<View style={{margin: 5}}>
-					<Text style={{fontSize: 20, marginRight: 20}}>No route found</Text>
+					<Text style={{fontSize: 20, marginRight: 20}}>{NO_ROUTE_TEXT}</Text>
 				</View>
 			</Card>
 		);
@@ -24,18 +32,18 @@ const RouteBottomCard = props => {
 		<Card containerStyle={styles.routeBottomCard}>
 			<View style={{margin: 5, width: "100%"}}>
 				<View accessible={true} style={{flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
-					<Text style={{fontSize: 20, marginRight: 20}}>Route</Text>
-					<Text style={{marginRight: 20}}>{Math.round(route.distance)} meters</Text>
-					<Text>{Math.round(route.duration / 60)} minutes</Text>
+					<Text style={{fontSize: 20, marginRight: 20}}>{ROUTE_TEXT}</Text>
+					<Text style={{marginRight: 20}}>{Math.round(route.distance)} {METERS_TEXT}</Text>
+					<Text>{Math.round(route.duration / 60)} {MINUTES_TEXT}</Text>
 				</View>
 				<View style={{flex: 1, flexDirection: "row", width: "100%", marginBottom: 5}}>
 					<Button
-						title="TRIP INFO"
+						title={TRIP_INFO_TEXT}
 						onPress={() => props.viewTripInfo()}
 						containerStyle={{flex: 1, marginRight: 10, width: "40%"}}
 					/>
 					<Button
-						title="DIRECTIONS"
+						title={DIRECTIONS_TEXT}
 						onPress={() => props.viewDirections()}
 						containerStyle={{flex: 1, marginRight: 10, width: "40%"}}
 					/>

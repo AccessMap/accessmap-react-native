@@ -5,6 +5,7 @@ import { Button, Overlay } from 'react-native-elements';
 import regions from '../../constants/regions';
 import Header from '../../components/Header';
 import { goToRegion } from '../../actions';
+import { REGIONS_TEXT } from '../../utils/translations';
 
 import { connect } from 'react-redux';
 
@@ -40,7 +41,7 @@ class RegionSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title="Regions"
+						title={REGIONS_TEXT}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList

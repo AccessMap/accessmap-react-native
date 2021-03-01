@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { uphillColorMap, downhillColorMap } from "../../colors";
+import { INCLINE_PERCENT_TEXT } from '../../utils/translations';
 
 const SpeedLegend = props => {
 	// Props: Max uphill incline
@@ -37,7 +38,7 @@ const SpeedLegend = props => {
 		<View
 			importantForAccessibility="no-hide-descendants"
 			style={{flex: 2, flexDirection: "row", justifyContent: "center"}}>
-			<Text style={{fontSize: 13}}>Speed at incline %</Text>
+			<Text style={{fontSize: 13}}>{ INCLINE_PERCENT_TEXT }</Text>
 		</View>
 	</View>);
 }

@@ -79,8 +79,8 @@ export function closeDirections() {
 }
 
 export const LOCATE_USER = "LOCATE_USER";
-export function locateUser() {
-	return { type: LOCATE_USER };
+export function locateUser(enable) {
+	return { type: LOCATE_USER, enable };
 }
 
 // Drawer actions
@@ -132,8 +132,7 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 
 			const url = "https://www.accessmap.io/api/v1/routing/directions/wheelchair.json?" + queryString;
 			return fetch(url)
-				.then(response => response.json(),
-					error => console.log("An error occured.", error))
+				.then(response => response.json())
 				.then(json => dispatch(receiveRoute(json)))
 		}
 		return dispatch(receiveRoute(null));

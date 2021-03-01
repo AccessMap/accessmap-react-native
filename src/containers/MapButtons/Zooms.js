@@ -13,14 +13,13 @@ class Zooms extends Component {
 			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
 			{
 				title: "User Location",
-				message: "Can AccessMap track you current location?",
+				message: "Can AccessMap track your current location?",
 				buttonNegative: "No",
-				buttonPostive: "Yes"
+				buttonPositive: "Yes"
 			}
 		);
-		if (granted) {
-			console.log("You can use ACCESS_FINE_LOCATION");
-			this.props.locateUser();
+		if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+			this.props.locateUser(true);
 		}
 	}
 
@@ -65,7 +64,7 @@ class Zooms extends Component {
 const mapDispatchToProps = dispatch => {
 	return {
 		locateUser: () => {
-			dispatch(locateUser());
+			dispatch(locateUser(true));
 		},
 		onZoomInPressed: () => {
 			dispatch(zoomIn());

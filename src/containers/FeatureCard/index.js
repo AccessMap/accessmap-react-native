@@ -9,6 +9,20 @@ import { placePin, setOrigin, setDestination } from '../../actions';
 import coordinatesToString from '../../utils/coordinates-to-string';
 import parseOpenHours from '../../utils/parse-open-hours';
 
+import {
+	SIDEWALK_TEXT,
+	CROSSING_TEXT,
+	DESCRIPTION_TEXT,
+	INCLINE_TEXT,
+	SURFACE_TEXT,
+	CURBRAMPS_TEXT,
+	MARKED_CROSSWALK_TEXT,
+	OPEN_HOURS_TEXT,
+	INDOORS_TEXT,
+	ROUTE_FROM_HERE_TEXT,
+	ROUTE_TO_HERE_TEXT
+} from '../../utils/translations';
+
 const InfoText = props => {
 	return (
 		<View accessible={true} style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
@@ -35,10 +49,9 @@ const OpenHours = props => {
 const FeatureCard = props => {
 	const info = (props.features.features && props.features.features[0]) ?
 					props.features.features[0].properties : null;
-	console.log(info);
 	var openHours;
 	if (info && info.opening_hours) {
-		openHours =parseOpenHours(info.opening_hours);
+		openHours = parseOpenHours(info.opening_hours);
 	}
 
 	return (
@@ -47,8 +60,8 @@ const FeatureCard = props => {
 		>
 			<View style={{maxWidth: "100%"}}>
 				<Header
-					title={info ? info.footway == "sidewalk" ? "Sidewalk" :
-						info.footway == "crossing" ? "Crossing" :
+					title={info ? info.footway == "sidewalk" ? SIDEWALK_TEXT :
+						info.footway == "crossing" ? CROSSING_TEXT :
 						coordinatesToString(props.features.center) :
 						coordinatesToString(props.features.center)
 						}
@@ -60,20 +73,20 @@ const FeatureCard = props => {
 				/>
 			</View>
 			{info && <View>
-				<InfoText label="Description" info={info.description} />
+				<InfoText label={DESCRIPTION_TEXT} info={info.description} />
 				{info.footway == "sidewalk" ? 
 					<InfoText
-						label="Incline"
+						label={INCLINE_TEXT}
 						info={Math.abs(Math.round(info.incline * 1000) / 10) + "%"}
 					/> : info.footway == "crossing" ?
 					<InfoText
-						label="Curbramps"
-						info={info.curbramps ? "Yes" : "No"}
+						label={CURBRAMPS_TEXT}
+						info={info.curbramps ? YES_TEXT : NO_TEXT}
 					/> :
 
 					<View style={{height: 120, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
 						<Text style={{flex: 2, fontSize: 16, flexWrap: "wrap"}}>
-							Open Hours
+							{OPEN_HOURS_TEXT}
 						</Text>
 						<View style={{flex: 3}}>
 							<OpenHours hours={openHours} day="Su" />
@@ -88,26 +101,26 @@ const FeatureCard = props => {
 				}
 
 				{info.footway == "sidewalk" ?
-					<InfoText label="Surface" info={info.surface} />
+					<InfoText label={SURFACE_TEXT} info={info.surface} />
 					: info.footway == "crossing" ?
 					<InfoText
-						label="Marked crosswalk"
-						info={info.crossing == "marked" ? "Yes" : "No"}
+						label={MARKED_CROSSWALK_TEXT}
+						info={info.crossing == "marked" ? YES_TEXT : NO_TEXT}
 					/> :
-					<InfoText label="Indoor" info={info.indoor ? "Yes" : "No"} />}
+					<InfoText label={INDOOR_TEXT} info={info.indoor ? YES_TEXT : NO_TEXT} />}
 			</View>}
 			<View style={{flexDirection: "row", justifyContent: "space-between"}}>
 				<Button
 					buttonStyle={{flex: 1, padding: 0}}
 					titleStyle={{fontSize: 15}}
-					title="ROUTE FROM HERE"
+					title={ROUTE_FROM_HERE_TEXT}
 					type="clear"
 					onPress={() => props.setOrigin()}
 				/>
 				<Button
 					buttonStyle={{flex: 1}}
 					titleStyle={{fontSize: 15}}
-					title="ROUTE TO HERE"
+					title={ROUTE_TO_HERE_TEXT}
 					type="clear"
 					onPress={() => props.setDestination()}
 				/>

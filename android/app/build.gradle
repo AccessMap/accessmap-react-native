@@ -109,6 +109,17 @@ android {
         versionName "1.0"
 				multiDexEnabled true // To fix dex file error
     }
+		signingConfigs {
+			release {
+				if (project.hasProperty('ACCESSMAP_UPLOAD_STORE_FILE')) {
+					storeFile file(ACCESSMAP_UPLOAD_STORE_FILE)
+					storePassword ACCESSMAP_UPLOAD_STORE_PASSWORD
+					keyAlias ACCESSMAP_UPLOAD_KEY_ALIAS
+					keyPassword ACCESSMAP_UPLOAD_KEY_PASSWORD
+				}
+			}
+		}
+
     splits {
         abi {
             reset()
@@ -121,6 +132,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+						signingConfig signingConfigs.release
         }
     }
 

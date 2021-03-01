@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Slider } from 'react-native-elements';
 
 import { setCustomUphill } from '../../actions';
+import { MAX_UPHILL_STEEPNESS_TEXT } from '../../utils/translations';
 
 const UphillSlider = props => {
 	const minValue = 4;
@@ -14,7 +15,7 @@ const UphillSlider = props => {
 	return (
 		<View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", margin: 10 }}>
 			<TouchableWithoutFeedback onPress={() => props.setIncline(nextIncline)}>
-				<Text>Maximum uphill steepness: {props.incline}%</Text>
+				<Text>{MAX_UPHILL_STEEPNESS_TEXT}: {props.incline}%</Text>
 			</TouchableWithoutFeedback>
 			<Slider
 				value={props.incline}

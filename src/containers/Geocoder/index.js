@@ -23,7 +23,6 @@ class Geocoder extends Component {
 			fetch(query)
 				.then(response => response.json())
 				.then(json => this.setState({ searchList: json.features }))
-				.catch(error => console.log("Ran into a problem"));
 		}
 	}
 

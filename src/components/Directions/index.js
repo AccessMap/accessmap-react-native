@@ -2,6 +2,12 @@ import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
+import {
+	DIRECTIONS_TEXT,
+	USE_SIDEWALK_TEXT,
+	USE_CROSSING_TEXT
+} from '../../utils/translations';
+
 import Header from '../Header';
 
 const DirectionCard = props => {
@@ -9,7 +15,7 @@ const DirectionCard = props => {
 	// a) footing
 	// b) name of segment
 	// c) distance
-	const action = props.footway == "sidewalk" ? "Use the sidewalk" : "Cross the street";
+	const action = props.footway == "sidewalk" ? USE_SIDEWALK_TEXT : USE_CROSSING_TEXT;
 	return (
 		<Card accessible={true}>
 			<Text style={{fontSize: 20}}>{action}</Text>
@@ -24,7 +30,7 @@ const Directions = props => {
 		<View style={{width: "100%", backgroundColor: "white", flex: 1}}>
 			<View style={{width: "100%", margin: 5}}>
 				<Header
-					title="Directions"
+					title={DIRECTIONS_TEXT}
 					close={props.close}
 				/>
 			</View>
