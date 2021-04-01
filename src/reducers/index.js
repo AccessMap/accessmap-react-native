@@ -6,6 +6,7 @@ import {
 	ZOOM_OUT,
 	GO_TO_LOCATION,
 	GO_TO_REGION,
+	GO_TO_LANGUAGE,
 	PLACE_PIN,
 	SET_MOBILITY_MODE,
 	SET_CUSTOM_UPHILL,
@@ -32,11 +33,13 @@ import {
 	SEATTLE
 } from '../constants';
 import regions from '../../regions';
+import languages from '../../languages';
 
 const { Rakam } = NativeModules;
 
 const seattleProps = regions.features[SEATTLE].properties;
 const seattleCoords = [seattleProps.lon, seattleProps.lat];
+const englishLanguageProps = languages[0];
 
 const logEvent = async (type, props) => {
 	Rakam.trackEvent(type, props);
@@ -47,6 +50,7 @@ const defaultState = {
 	zoomLevel: 14,
 	bbox: seattleProps.bounds,
 	currRegion: seattleProps.name.toUpperCase(),
+	currLanguage: englishLanguageProps.name.toUpperCase(),
 	centerCoordinate: seattleCoords,
 	locateUserSwitch: false,
 	canAccessLocation: false,
@@ -79,6 +83,10 @@ export default function mapApp(state = defaultState, action) {
 			logEvent(action.type, ["region", action.region.properties.name]);
 			// centerCoordinate, bbox
 			return {...state, geocodeCoords: [action.region.properties.lon, action.region.properties.lat], bbox: action.region.properties.bounds, currRegion: action.region.properties.name.toUpperCase()};
+		case GO_TO_LANGUAGE:
+			logEvent(action.type, ["language", action.language.name]);
+			// centerCoordinate, bbox
+			return {...state, language: action.language, currLanguage: action.language.name.toUpperCase()};
 		case PLACE_PIN:
 			logEvent(action.type, action.item == null ? ["segment", "null"] : ["segment", action.item.description]);
 			return {...state, pinFeatures: action.item};

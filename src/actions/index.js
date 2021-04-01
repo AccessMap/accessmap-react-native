@@ -28,6 +28,11 @@ export function goToRegion(region) {
 	return { type: GO_TO_REGION, region };
 }
 
+export const GO_TO_LANGUAGE = "GO_TO_LANGUAGE";
+export function goToLanguage(language) {
+	return { type: GO_TO_LANGUAGE, language };
+}
+
 export const SET_MOBILITY_MODE = "SET _MOBILITY_MODE";
 export function setMobilityMode(mode) {
 	return { type: SET_MOBILITY_MODE, mode };

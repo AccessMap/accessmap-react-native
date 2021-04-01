@@ -31,6 +31,7 @@ import {
 } from '../../utils/translations';
 
 import MobilityButtonGroup from './mobility-buttons';
+import LanguageSwitcher from './language-switcher';
 import RegionSwitcher from './region-switcher';
 
 const IconButton = props => {
@@ -133,6 +134,7 @@ class OmniCard extends Component {
 							resizeMethod="resize"
 						/>
 						<View style={{flex: 1}}/>
+						<LanguageSwitcher />
 						<RegionSwitcher />
 					</View>}
 

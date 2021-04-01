@@ -9,6 +9,7 @@ export const CLOSE_TEXT = 'CLOSE';
 
 export const INCLINE_PERCENT_TEXT = 'Speed at incline %';
 export const REGIONS_TEXT = 'Regions';
+export const LANGUAGES_TEXT = 'Languages';
 
 // Settings
 export const UPHILL_TEXT = 'Uphill';
