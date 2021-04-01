@@ -6,6 +6,7 @@ import languages from '../../constants/languages';
 import Header from '../../components/Header';
 import { goToLanguage } from '../../actions';
 import { LANGUAGES_TEXT } from '../../utils/translations';
+import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
 
@@ -41,7 +42,7 @@ class LanguageSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={LANGUAGES_TEXT}
+						title={this.props.t('Languages')}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList
@@ -51,6 +52,7 @@ class LanguageSwitcher extends Component {
 								style={{padding: 5, width: 200}}
 								onPress={() => {
 									this.setState({viewOverlay: !this.state.viewOverlay});
+									this.props.i18n.changeLanguage(item.item.key);
 									goToLanguage(item.item);
 								}}
 							>
@@ -66,8 +68,10 @@ class LanguageSwitcher extends Component {
 }
 
 const mapStateToProps = state => {
+	
 	return {
-		currLanguage: state.currLanguage
+		currLanguage: state.currLanguage,
+		t: state.t
 	}
 }
 
@@ -79,4 +83,4 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageSwitcher);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(LanguageSwitcher));
