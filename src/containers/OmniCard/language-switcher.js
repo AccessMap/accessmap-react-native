@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text, TouchableHighlight } from 'react-native';
-import { Button, Overlay } from 'react-native-elements';
+import { Button, Icon, Overlay } from 'react-native-elements';
 
 import languages from '../../constants/languages';
 import Header from '../../components/Header';
 import { goToLanguage } from '../../actions';
-import { LANGUAGES_TEXT } from '../../utils/translations';
 import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
@@ -29,9 +28,16 @@ class LanguageSwitcher extends Component {
 					backgroundColor: "#FFFFFF",
 					borderColor: "#0000AA",
 					borderWidth: 2,
+					marginLeft: 8,
 					padding: 5}}
+				icon={
+					<Icon name="globe" type="feather" size={18} color="#0000AA" />
+				}
 				title={this.props.currLanguage}
-				titleStyle={{color: "#0000AA"}}
+				titleStyle={{
+					color: "#0000AA",
+					marginLeft: 5
+				}}
 				onPress={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 			/>
 			<Overlay
@@ -42,7 +48,7 @@ class LanguageSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={this.props.t('Languages')}
+						title={this.props.t('utils-translations-LANGUAGES_TEXT')}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text, TouchableHighlight } from 'react-native';
-import { Button, Overlay } from 'react-native-elements';
+import { Button, Icon, Overlay } from 'react-native-elements';
 
 import regions from '../../constants/regions';
 import Header from '../../components/Header';
 import { goToRegion } from '../../actions';
-import { REGIONS_TEXT } from '../../utils/translations';
+import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
 
@@ -28,9 +28,16 @@ class RegionSwitcher extends Component {
 					backgroundColor: "#FFFFFF",
 					borderColor: "#0000AA",
 					borderWidth: 2,
+					marginLeft: 8,
 					padding: 5}}
-				title={this.props.currRegion}
-				titleStyle={{color: "#0000AA"}}
+				icon={
+					<Icon name="globe" type="entypo" size={18} color="#0000AA" />
+				}
+				title={this.props.currRegion.substring(0,3)}
+				titleStyle={{
+					color: "#0000AA",
+					marginLeft: 5
+				}}
 				onPress={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 			/>
 			<Overlay
@@ -41,7 +48,7 @@ class RegionSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={REGIONS_TEXT}
+						title={this.props.t("utils-translations-REGIONS_TEXT")}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList
@@ -79,4 +86,4 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegionSwitcher);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(RegionSwitcher));

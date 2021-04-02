@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Card, Button, ButtonGroup, SearchBar } from 'react-native-elements';
 import Icon from '../../components/Icon';
+import { withTranslation } from 'react-i18next';
 
 import Geocoder from '../Geocoder';
 import UphillSlider from '../Settings/UphillSlider';
@@ -110,7 +111,7 @@ class OmniCard extends Component {
 							navigation={this.props.navigation}
 							type="origin"
 							value={origin ? coordinatesToString(origin) : ""}
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_START}
+							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_START")}
 						/>
 						<IconButton
 							name="close"
@@ -144,7 +145,7 @@ class OmniCard extends Component {
 							value={pinFeatures && pinFeatures.text ?
 									pinFeatures.text : ""}
 							type="search"
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_DEFAULT}
+							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
 						/>
 						<IconButton
 							name="directions"
@@ -156,7 +157,7 @@ class OmniCard extends Component {
 						<GeocodeBar navigation={this.props.navigation}
 							value={destination ? coordinatesToString(destination) : ""}
 							type="destination"
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_END}
+							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_END")}
 						/>
 						<IconButton
 							accessibilityLabel="Select to reverse route."
@@ -229,7 +230,7 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OmniCard);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(OmniCard));
 
 const styles = StyleSheet.create({
 	omniCardStyle: {

@@ -50,7 +50,7 @@ const defaultState = {
 	zoomLevel: 14,
 	bbox: seattleProps.bounds,
 	currRegion: seattleProps.name.toUpperCase(),
-	currLanguage: englishLanguageProps.name.toUpperCase(),
+	currLanguage: englishLanguageProps.key.toUpperCase(),
 	centerCoordinate: seattleCoords,
 	locateUserSwitch: false,
 	canAccessLocation: false,
@@ -86,7 +86,7 @@ export default function mapApp(state = defaultState, action) {
 		case GO_TO_LANGUAGE:
 			logEvent(action.type, ["language", action.language.name]);
 			// centerCoordinate, bbox
-			return {...state, language: action.language, currLanguage: action.language.name.toUpperCase()};
+			return {...state, language: action.language, currLanguage: action.language.key.toUpperCase()};
 		case PLACE_PIN:
 			logEvent(action.type, action.item == null ? ["segment", "null"] : ["segment", action.item.description]);
 			return {...state, pinFeatures: action.item};
