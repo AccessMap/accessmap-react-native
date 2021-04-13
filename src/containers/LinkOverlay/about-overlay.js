@@ -2,8 +2,11 @@ import React, { useCallback } from 'react';
 import { Linking, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useTranslation } from 'react-i18next';
 
 const AboutOverlay = props => {
+	const { t, i18n } = useTranslation();
+
 	const openLink = async (url) => {
 		const supported = await Linking.canOpenURL(url);
 
@@ -16,7 +19,7 @@ const AboutOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>About</Text>
+			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>{t("ABOUT_TEXT")}</Text>
 
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
@@ -33,7 +36,7 @@ const AboutOverlay = props => {
 						openLink("https://github.com/AccessMap/accessmap-react-native");
 					}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is an open source project.</Text>
+				<Text style={{flex: 5, flexWrap: "wrap"}}>{t("GITHUB_TEXT")}</Text>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
@@ -47,9 +50,9 @@ const AboutOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
+				<Text style={{flex: 5, flexWrap: "wrap"}}>{t("UW_TEXT")}</Text>
 			</View>
-				<Text>AccessMap has received support from many organizations.</Text>
+				<Text>{t("ORGANIZATIONS_TEXT")}</Text>
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={
@@ -62,7 +65,7 @@ const AboutOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>Contribute to AccessMap development by donating to the Taskar Center. Mention AccessMap in the comment.</Text>
+				<Text style={{flex: 5, flexWrap: "wrap"}}>{t("DONATE_TEXT")}</Text>
 			</View>
 			<Button
 				title="CLOSE"

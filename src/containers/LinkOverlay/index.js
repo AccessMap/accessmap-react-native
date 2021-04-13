@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { withTranslation } from 'react-i18next';
 
 import AboutOverlay from './about-overlay';
 import ContactOverlay from './contact-overlay';
@@ -45,14 +46,14 @@ class LinkOverlay extends Component {
 						onPress={this.props.closeDrawer}
 					/>
 				</View>
-				<Text style={{fontSize: 13, padding: 20}}>More info</Text>
+				<Text style={{fontSize: 13, padding: 20}}>{this.props.t("MORE_INFO_TEXT")}</Text>
 				<OverlayButton text="About"
 					onPress={() => this.setState({showAbout: true})}
 				/>
 				<OverlayButton text="Contact"
 					onPress={() => this.setState({showContact: true})}
 				/>
-				<Text style={{fontSize: 13, padding: 20}}>Tracking settings</Text>
+				<Text style={{fontSize: 13, padding: 20}}>{this.props.t("TRACKING_SETTINGS_TEXT")}</Text>
 				<Overlay
 					isVisible={this.state.showAbout}
 					windowBackgroundColor="rgba(0, 0, 0, 0.5)"
@@ -88,4 +89,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default LinkOverlay;
+export default withTranslation()(LinkOverlay);
