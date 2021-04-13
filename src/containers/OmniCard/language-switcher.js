@@ -48,7 +48,7 @@ class LanguageSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={this.props.t('utils-translations-LANGUAGES_TEXT')}
+						title={this.props.t('LANGUAGES_TEXT')}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList

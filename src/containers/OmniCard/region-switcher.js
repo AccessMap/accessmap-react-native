@@ -48,7 +48,7 @@ class RegionSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={this.props.t("utils-translations-REGIONS_TEXT")}
+						title={this.props.t("REGIONS_TEXT")}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList

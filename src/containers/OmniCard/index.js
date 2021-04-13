@@ -22,14 +22,6 @@ import {
 	closeDirections,
 	closeTripInfo
 } from '../../actions';
-import {
-	GEOCODER_PLACEHOLDER_TEXT_DEFAULT,
-	GEOCODER_PLACEHOLDER_TEXT_START,
-	GEOCODER_PLACEHOLDER_TEXT_END,
-	UPHILL_TEXT,
-	DOWNHILL_TEXT,
-	BARRIERS_TEXT,
-} from '../../utils/translations';
 
 import MobilityButtonGroup from './mobility-buttons';
 import LanguageSwitcher from './language-switcher';
@@ -95,7 +87,10 @@ class OmniCard extends Component {
 	}
 
 	render() {
-		const customButtons = [UPHILL_TEXT, DOWNHILL_TEXT, BARRIERS_TEXT];
+  		const customButtons = [
+			this.props.t("UPHILL_TEXT"), 
+			this.props.t("DOWNHILL_TEXT"), 
+			this.props.t("BARRIERS_TEXT")];
 		const { pinFeatures, origin, destination, cancelRoute } = this.props;
 
 		return (
@@ -111,7 +106,7 @@ class OmniCard extends Component {
 							navigation={this.props.navigation}
 							type="origin"
 							value={origin ? coordinatesToString(origin) : ""}
-							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_START")}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_START")}
 						/>
 						<IconButton
 							name="close"
@@ -145,7 +140,7 @@ class OmniCard extends Component {
 							value={pinFeatures && pinFeatures.text ?
 									pinFeatures.text : ""}
 							type="search"
-							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
 						/>
 						<IconButton
 							name="directions"
@@ -157,7 +152,7 @@ class OmniCard extends Component {
 						<GeocodeBar navigation={this.props.navigation}
 							value={destination ? coordinatesToString(destination) : ""}
 							type="destination"
-							placeholder={this.props.t("utils-translations-GEOCODER_PLACEHOLDER_TEXT_END")}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_END")}
 						/>
 						<IconButton
 							accessibilityLabel="Select to reverse route."

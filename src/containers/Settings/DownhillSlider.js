@@ -3,14 +3,16 @@ import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Slider } from 'react-native-elements';
+import { useTranslation } from 'react-i18next';
 
 import { setCustomDownhill } from '../../actions';
-import { MAX_DOWNHILL_STEEPNESS_TEXT } from '../../utils/translations';
 
 const DownhillSlider = props => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<View style={{ flex: 1, alignItems: "stretch", justifyContent: "center", margin: 10 }}>
-			<Text>{MAX_DOWNHILL_STEEPNESS_TEXT}: {props.incline}%</Text>
+			<Text>{t("MAX_DOWNHILL_STEEPNESS_TEXT")}: {props.incline}%</Text>
 			<Slider
 				value={props.incline}
 				onValueChange={value => {

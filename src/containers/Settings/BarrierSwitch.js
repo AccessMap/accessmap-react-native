@@ -2,17 +2,18 @@ import React from 'react';
 import { Switch, Text, View } from 'react-native';
 import { toggleBarriers } from '../../actions';
 import { connect } from 'react-redux';
-
-import { AVOID_BARRIERS_TEXT } from '../../utils/translations';
+import { useTranslation } from 'react-i18next';
 
 const BarrierSwitch = props => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<View style={{flex: 1, flexDirection: "row", margin: 10}}>
 			<Switch
 				onValueChange={props.toggleBarriers}
 				value={props.avoidRaisedCurbs}
 			/>
-			<Text style={{marginLeft: 5}}>{AVOID_BARRIERS_TEXT}</Text>
+			<Text style={{marginLeft: 5}}>{t("AVOID_BARRIERS_TEXT")}</Text>
 		</View>
 	);
 };

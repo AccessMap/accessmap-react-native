@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { uphillColorMap, downhillColorMap } from "../../colors";
-import { INCLINE_PERCENT_TEXT } from '../../utils/translations';
+import { useTranslation } from 'react-i18next';
 
 const SpeedLegend = props => {
 	// Props: Max uphill incline
 	const maxIncline = Math.round(props.maxIncline);
 	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
+	const { t, i18n } = useTranslation();
 
 	return (<View
 				accessible={true}
@@ -38,7 +39,7 @@ const SpeedLegend = props => {
 		<View
 			importantForAccessibility="no-hide-descendants"
 			style={{flex: 2, flexDirection: "row", justifyContent: "center"}}>
-			<Text style={{fontSize: 13}}>{ INCLINE_PERCENT_TEXT }</Text>
+			<Text style={{fontSize: 13}}>{t('INCLINE_PERCENT_TEXT')}</Text>
 		</View>
 	</View>);
 }
