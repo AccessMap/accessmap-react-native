@@ -10,9 +10,12 @@ import org.json.JSONException;
 import io.rakam.api.Rakam;
 
 public class RakamAnalytics extends ReactContextBaseJavaModule {
+	private boolean trackEvents;
+
 	// constructor
 	public RakamAnalytics(ReactApplicationContext reactContext) {
 		super(reactContext);
+		this.trackEvents = false;
 	}
 
 	@Override
@@ -21,7 +24,16 @@ public class RakamAnalytics extends ReactContextBaseJavaModule {
 	}
 
 	@ReactMethod
+	public void toggleTracking() {
+		this.trackEvents = !this.trackEvents;
+	}
+
+	@ReactMethod
 	public void trackEvent(String event, ReadableArray props) {
+		if (!this.trackEvents) {
+			return;
+		}
+
 		JSONObject eventProperties = new JSONObject();
 		try {
 			for (int i = 0; i < props.size(); i += 2) {

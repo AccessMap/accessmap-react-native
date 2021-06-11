@@ -19,8 +19,11 @@ import {
 	MARKED_CROSSWALK_TEXT,
 	OPEN_HOURS_TEXT,
 	INDOORS_TEXT,
+	REPORT_ISSUE_TEXT,
 	ROUTE_FROM_HERE_TEXT,
-	ROUTE_TO_HERE_TEXT
+	ROUTE_TO_HERE_TEXT,
+	YES_TEXT,
+	NO_TEXT
 } from '../../utils/translations';
 
 const InfoText = props => {
@@ -60,10 +63,11 @@ const FeatureCard = props => {
 		>
 			<View style={{maxWidth: "100%"}}>
 				<Header
-					title={info ? info.footway == "sidewalk" ? SIDEWALK_TEXT :
-						info.footway == "crossing" ? CROSSING_TEXT :
-						coordinatesToString(props.features.center) :
-						coordinatesToString(props.features.center)
+					title={props.features.text ? props.features.text :
+						info ? info.footway == "sidewalk" ? SIDEWALK_TEXT :
+							info.footway == "crossing" ? CROSSING_TEXT :
+								coordinatesToString(props.features.center) :
+							coordinatesToString(props.features.center)
 						}
 					close={() => props.placePin(null)}
 					cs={info &&
@@ -72,6 +76,15 @@ const FeatureCard = props => {
 					info={info}
 				/>
 			</View>
+			{info && <Button
+				buttonStyle={{flex: 1, padding: 10}}
+				titleStyle={{fontSize: 15}}
+				title={REPORT_ISSUE_TEXT}
+				type="clear"
+				onPress={()  => {
+					props.navigation.push("Crowdsourcing", { info });
+				}}
+			/>}
 			{info && <View>
 				<InfoText label={DESCRIPTION_TEXT} info={info.description} />
 				{info.footway == "sidewalk" ? 

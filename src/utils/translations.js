@@ -39,8 +39,9 @@ export const MARKED_CROSSWALK_TEXT = 'Marked crosswalk';
 export const OPEN_HOURS_TEXT = 'Open Hours';
 export const INDOOR_TEXT = 'Indoor';
 
-export const ROUTE_FROM_HERE_TEXT = 'Route from here';
-export const ROUTE_TO_HERE_TEXT = 'Route to here';
+export const REPORT_ISSUE_TEXT = 'Report Issue';
+export const ROUTE_FROM_HERE_TEXT = 'Route from Here';
+export const ROUTE_TO_HERE_TEXT = 'Route to Here';
 
 //  Routing
 export const ROUTE_TEXT = 'Route';

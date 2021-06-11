@@ -46,6 +46,9 @@ const AboutOverlay = props => {
 					}
 					type="clear"
 					containerStyle={{flex: 2}}
+					onPress={() => {
+						openLink("https://tcat.cs.washington.edu");
+					}}
 				/>
 				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
 			</View>
@@ -61,6 +64,9 @@ const AboutOverlay = props => {
 					}
 					type="clear"
 					containerStyle={{flex: 2}}
+					onPress={() => {
+						openLink("https://www.washington.edu/giving/make-a-gift/?page=funds&source_typ=3&source=TASKAR");
+					}}
 				/>
 				<Text style={{flex: 5, flexWrap: "wrap"}}>Contribute to AccessMap development by donating to the Taskar Center. Mention AccessMap in the comment.</Text>
 			</View>

@@ -170,9 +170,15 @@ class MapView extends Component {
 		const {
 			zoomLevel,
 			centerCoordinate,
+			bbox,
 			route,
 			canAccessLocation
 		} = this.props;
+
+		const bounds = {
+			sw: [bbox[1], bbox[0]],
+			ne: [bbox[3], bbox[2]]
+		};
 		
 		return (
 			<MapboxGL.MapView 
@@ -195,6 +201,7 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 					minZoomLevel={10}
 					maxZoomLevel={20}
+					maxBounds={bounds}
 				/>
 
 				<LayerAnnotations />
@@ -233,6 +240,7 @@ const mapStateToProps = state => {
 
 	return {
 		centerCoordinate: state.centerCoordinate,
+		bbox: state.bbox,
 		zoomLevel: state.zoomLevel,
 		geocodeCoords: state.geocodeCoords,
 		origin: state.origin,

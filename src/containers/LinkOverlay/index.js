@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, Image, NativeModules, StyleSheet, Switch, Text, TouchableHighlight } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import AboutOverlay from './about-overlay';
 import ContactOverlay from './contact-overlay';
+
+const { Rakam } = NativeModules;
 
 const OverlayButton = props => {
 		return (
@@ -21,6 +23,7 @@ class LinkOverlay extends Component {
 		this.state = {
 			showAbout: false,
 			showContact: false,
+			trackSettings: false
 		}
 	}
 	
@@ -53,6 +56,7 @@ class LinkOverlay extends Component {
 					onPress={() => this.setState({showContact: true})}
 				/>
 				<Text style={{fontSize: 13, padding: 20}}>Tracking settings</Text>
+
 				<Overlay
 					isVisible={this.state.showAbout}
 					windowBackgroundColor="rgba(0, 0, 0, 0.5)"
@@ -63,6 +67,14 @@ class LinkOverlay extends Component {
 				>
 					<AboutOverlay onClose={() => this.setState({showAbout: false})} />
 				</Overlay>
+
+				<Switch
+					onValueChange={() => {
+						Rakam.toggleTracking();
+						this.setState({ trackSettings: !this.state.trackSettings });
+					}}
+					value={this.state.trackSettings}
+				/>
 
 				<Overlay
 					isVisible={this.state.showContact}

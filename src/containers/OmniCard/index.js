@@ -94,7 +94,14 @@ class OmniCard extends Component {
 
 	render() {
 		const customButtons = [UPHILL_TEXT, DOWNHILL_TEXT, BARRIERS_TEXT];
-		const { pinFeatures, origin, destination, cancelRoute } = this.props;
+		const {
+			pinFeatures,
+			origin,
+			destination,
+			originText,
+			destinationText,
+			cancelRoute
+		} = this.props;
 
 		return (
 			<Card
@@ -108,7 +115,7 @@ class OmniCard extends Component {
 						<GeocodeBar
 							navigation={this.props.navigation}
 							type="origin"
-							value={origin ? coordinatesToString(origin) : ""}
+							value={originText ? originText : origin ? coordinatesToString(origin) : ""}
 							placeholder={GEOCODER_PLACEHOLDER_TEXT_START}
 						/>
 						<IconButton
@@ -152,7 +159,7 @@ class OmniCard extends Component {
 					</View> :
 					<View  style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
 						<GeocodeBar navigation={this.props.navigation}
-							value={destination ? coordinatesToString(destination) : ""}
+							value={destinationText ? destinationText : destination ? coordinatesToString(destination) : ""}
 							type="destination"
 							placeholder={GEOCODER_PLACEHOLDER_TEXT_END}
 						/>
@@ -208,6 +215,8 @@ const mapStateToProps = state => {
 		pinFeatures: state.pinFeatures,
 		origin: state.origin,
 		destination: state.destination,
+		originText: state.originText,
+		destinationText: state.destinationText
 	};
 };
 

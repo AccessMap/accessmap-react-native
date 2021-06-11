@@ -54,6 +54,8 @@ const defaultState = {
 	pinFeatures: null,
 	origin: null,
 	destination: null,
+	originText: null,
+	destinationText: null,
 	mobilityMode: MOBILITY_MODE_CUSTOM,
 	customUphill: 8,
 	customDownhill: 10,
@@ -74,7 +76,7 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, zoomLevel: state.zoomLevel - 1};
 		case GO_TO_LOCATION:
 			logEvent(action.type, ["lat", `${action.item.center[0]}`, "lon", `${action.item.center[1]}`]);
-			return {...state, geocodeCoords: action.item.center};
+			return {...state, geocodeCoords: action.item.center };
 		case GO_TO_REGION:
 			logEvent(action.type, ["region", action.region.properties.name]);
 			// centerCoordinate, bbox
@@ -95,17 +97,25 @@ export default function mapApp(state = defaultState, action) {
 			logEvent(action.type, ["avoidRaisedCurbs", `${!state.avoidRaisedCurbs}`]);
 			return {...state, avoidRaisedCurbs: !state.avoidRaisedCurbs};
 		case SET_ORIGIN:
+			const originText = state.pinFeatures && state.pinFeatures.text ? state.pinFeatures.text : null;
 			logEvent(action.type, ["lat", `${state.pinFeatures.center[0]}`, "lon", `${state.pinFeatures.center[1]}`]);
-			return {...state, origin: state.pinFeatures.center, pinFeatures: null};
+			return {...state, origin: state.pinFeatures.center, pinFeatures: null, originText };
 		case SET_DESTINATION:
+			const destinationText = state.pinFeatures && state.pinFeatures.text ? state.pinFeatures.text : null;
 			logEvent(action.type, ["lat", `${state.pinFeatures.center[0]}`, "lon", `${state.pinFeatures.center[1]}`]);
-			return {...state, destination: state.pinFeatures.center, pinFeatures: null};
+			return {...state, destination: state.pinFeatures.center, pinFeatures: null, destinationText};
 		case REVERSE_ROUTE:
 			logEvent(action.type, []);
-			return {...state, origin: state.destination, destination: state.origin};
+			return {
+				...state,
+				origin: state.destination,
+				destination: state.origin,
+				originText: state.destinationText,
+				destinationText: state.originText
+			};
 		case CANCEL_ROUTE:
 			logEvent(action.type, []);
-			return {...state, origin: null, destination: null, route: null};
+			return {...state, origin: null, destination: null, originText: null, destinationText: null, route: null};
 		case VIEW_TRIP_INFO:
 			logEvent(action.type, []);
 			return {...state, viewingTripInfo: true};
