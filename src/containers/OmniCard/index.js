@@ -128,18 +128,17 @@ class OmniCard extends Component {
 						/>
 					</View>
 					:
-					<View style={{flex: 1, flexDirection: "row", alignItems: "center" }}>
+					<View style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
 						<IconButton name="menu"
 							accessibilityLabel="Select to open drawer menu"
 							onPress={this.props.openDrawer}
 						/>
 						<Image
-							style={{width: "30%", height: "40%"}}
-							source={require("../../../assets/accessmap-logo.png")}
-							resizeMode="cover"
-							resizeMethod="resize"
+							style={{flex: 1, height: "70%"}}
+							source={require("../../../assets/accessmap-logo.png")} 
+							resizeMode="center"
+							resizeMethod="scale"
 						/>
-						<View style={{flex: 1}}/>
 						<RegionSwitcher />
 					</View>}
 

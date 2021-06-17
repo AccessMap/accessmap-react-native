@@ -1,12 +1,15 @@
-import React, { useCallback } from 'react';
-import { Linking, Text, View } from 'react-native';
+import React from 'react';
+import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const AboutOverlay = props => {
+	const githubURL = "https://github.com/AccessMap/accessmap-react-native";
+	const taskarURL = "https://tcat.cs.washington.edu";
+	const donateURL = "https://www.washington.edu/giving/make-a-gift/?page=funds&source_typ=3&source=TASKAR";
+	
 	const openLink = async (url) => {
 		const supported = await Linking.canOpenURL(url);
-
 		if (supported) {
 			await Linking.openURL(url);
 		} else {
@@ -17,7 +20,6 @@ const AboutOverlay = props => {
 	return (
 		<View style={{width: "100%"}}>
 			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>About</Text>
-
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={
@@ -30,10 +32,12 @@ const AboutOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 					onPress={() => {
-						openLink("https://github.com/AccessMap/accessmap-react-native");
+						openLink(githubURL);
 					}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is an open source project.</Text>
+				<TouchableOpacity onPress={() => {openLink(githubURL)}} style={{flex: 5, flexWrap: "wrap"}}>
+					<Text>AccessMap is an open source project.</Text>
+				</TouchableOpacity>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
@@ -47,12 +51,16 @@ const AboutOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 					onPress={() => {
-						openLink("https://tcat.cs.washington.edu");
+						openLink(taskarURL);
 					}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
+				<TouchableOpacity onPress={() => {openLink(taskarURL)}} style={{flex: 5, flexWrap: "wrap"}}>
+					<Text>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
+				</TouchableOpacity>
 			</View>
-				<Text>AccessMap has received support from many organizations.</Text>
+
+			<Text>AccessMap has received support from many organizations.</Text>
+
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={
@@ -65,11 +73,16 @@ const AboutOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 					onPress={() => {
-						openLink("https://www.washington.edu/giving/make-a-gift/?page=funds&source_typ=3&source=TASKAR");
+						openLink(donateURL);
 					}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>Contribute to AccessMap development by donating to the Taskar Center. Mention AccessMap in the comment.</Text>
+				<TouchableOpacity onPress={() => {openLink(donateURL)}} style={{flex: 5, flexWrap: "wrap"}}>
+					<Text>Contribute to AccessMap development by donating to the Taskar Center. 
+						Mention AccessMap in the comment.
+					</Text>
+				</TouchableOpacity>
 			</View>
+
 			<Button
 				title="CLOSE"
 				type="clear"
