@@ -30,16 +30,15 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={styles.overlay}>
-				<View style={{flexDirection: "row", height: 50, alignItems: "center"}}>
+				<View style={{flexDirection: "row", margin: 20, height: 50, alignItems: "center"}}>
 					<Image
-						style={{width: "60%", height: "60%", marginLeft: 3}}
+						style={{flex: 1, width: "70%", marginRight: 40}}
 						source={require("../../../assets/accessmap-logo.png")}
-						resizeMode="cover"
-						resizeMethod="resize"
+						resizeMode="center"
+						resizeMethod="scale"
 					/>
-					<View style={{flex: 1}} />
 					<Button
-						buttonStyle={{flex: 1, backgroundColor: "#FFFFFF", margin: 5}}
+						buttonStyle={{flex: 1, backgroundColor: "#FFFFFF"}}
 						icon={<Icon
 							name="times"
 							size={20}
@@ -48,14 +47,21 @@ class LinkOverlay extends Component {
 						onPress={this.props.closeDrawer}
 					/>
 				</View>
+
 				<Text style={{fontSize: 13, padding: 20}}>More info</Text>
-				<OverlayButton text="About"
-					onPress={() => this.setState({showAbout: true})}
-				/>
-				<OverlayButton text="Contact"
-					onPress={() => this.setState({showContact: true})}
-				/>
-				<Text style={{fontSize: 13, padding: 20}}>Tracking settings</Text>
+				<OverlayButton text="About" onPress={() => this.setState({showAbout: true})}/>
+				<OverlayButton text="Contact" onPress={() => this.setState({showContact: true})}/>
+
+				<View style={{flexDirection: "row", margin: 20, alignItems: "center"}}>
+					<Text style={{fontSize: 13, marginRight: 40}}>Tracking settings</Text>
+					<Switch
+						onValueChange={() => {
+							Rakam.toggleTracking();
+							this.setState({ trackSettings: !this.state.trackSettings });
+						}}
+						value={this.state.trackSettings}
+					/>
+				</View>
 
 				<Overlay
 					isVisible={this.state.showAbout}
@@ -67,14 +73,6 @@ class LinkOverlay extends Component {
 				>
 					<AboutOverlay onClose={() => this.setState({showAbout: false})} />
 				</Overlay>
-
-				<Switch
-					onValueChange={() => {
-						Rakam.toggleTracking();
-						this.setState({ trackSettings: !this.state.trackSettings });
-					}}
-					value={this.state.trackSettings}
-				/>
 
 				<Overlay
 					isVisible={this.state.showContact}

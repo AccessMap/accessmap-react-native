@@ -1,12 +1,14 @@
 import React from 'react';
-import { Linking, Text, View } from 'react-native';
+import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const ContactOverlay = props => {
+	const twitterURL = "https://twitter.com/accessmapsea";
+	const mailURL = "mailto:accessmap.info@gmail.com";
+
 	const openLink = async (url) => {
 		const supported = await Linking.canOpenURL(url);
-
 		if (supported) {
 			await Linking.openURL(url);
 		} else {
@@ -29,10 +31,12 @@ const ContactOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 					onPress={() => {
-						openLink("https://twitter.com/accessmapsea");
+						openLink(twitterURL);
 					}}
 				/>
-				<Text style={{flex: 5}}>Follow us on social media.</Text>
+				<TouchableOpacity onPress={() => {openLink(twitterURL)}} style={{flex: 5, flexWrap: "wrap"}}>
+					<Text style={{flex: 5}}>Follow us on social media.</Text>
+				</TouchableOpacity>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
@@ -46,10 +50,12 @@ const ContactOverlay = props => {
 					type="clear"
 					containerStyle={{flex: 2}}
 					onPress={() => {
-						openLink("mailto:accessmap.info@gmail.com");
+						openLink(mailURL);
 					}}
 				/>
-				<Text style={{flex: 5, flexWrap: "wrap"}}>Email us if you encounter issues or want to help out</Text>
+				<TouchableOpacity onPress={() => {openLink(mailURL)}} style={{flex: 5, flexWrap: "wrap"}}>
+					<Text style={{flex: 5, flexWrap: "wrap"}}>Email us if you encounter issues or want to help out</Text>
+				</TouchableOpacity>
 			</View>
 
 			<Button

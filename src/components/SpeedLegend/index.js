@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import { uphillColorMap, downhillColorMap } from "../../colors";
 import { INCLINE_PERCENT_TEXT } from '../../utils/translations';
@@ -9,6 +9,22 @@ const SpeedLegend = props => {
 	const maxIncline = Math.round(props.maxIncline);
 	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
 
+	// Represents an incline percentage beyond the maximum on Speed Legend bottom bar
+	function renderRedDashedLine() {
+		return (
+		<View 
+		style={{ 
+			height: 0, borderRadius: 1, borderWidth: 1, borderColor: 'red', 
+			borderStyle: 'dashed', zIndex: 0, 
+			}}>
+				<View 
+				style={{ 
+					position: 'absolute', left: -1, bottom: 0, width: '101%',
+					height: 1, backgroundColor: 'white', zIndex: 1 
+					}} />
+		</View>);
+	}
+
 	return (<View
 				accessible={true}
 				accessibilityLabel={"Max incline at " + maxIncline + " percent"}
@@ -16,6 +32,7 @@ const SpeedLegend = props => {
 		<View
 			importantForAccessibility="no-hide-descendants"
 			style={{flex: 3, marginTop: 3, marginLeft: 3, marginRight: 3, flexDirection: "column"}}>
+
 			<View style={{flex: 1, flexDirection: "row"}}>
 				<View style={{flex: maxIncline, flexDirection: "row", borderWidth: 1}}>
 					{[...Array(maxIncline).keys()].map(d => {
@@ -25,12 +42,12 @@ const SpeedLegend = props => {
 						return (<View key={d} style={{flex: 1, backgroundColor: colorMap(d)}} />)
 					})}
 				</View>
-				<View style={{flex: 15 - maxIncline, justifyContent: "center", alignItems: "stretch", flexDirection: "column"}}>
-					<View style={{borderColor: "red", height: 0, borderWidth: 1, borderStyle: "dashed", borderRadius: 1}} />
-				</View>
+				
+				<View style={{flex: 15 - maxIncline, justifyContent:"center"}}>{renderRedDashedLine()}</View>
 			</View>
 			<View style={{flex: 2, flexDirection: "row"}}>
-				{[...Array(15).keys()].map(d => (<View key={d} style={{flex: 1, flexDirection: "row", justifyContent: "center"}}>
+				{[...Array(15).keys()].map(d => (
+				<View key={d} style={{flex: 1, flexDirection: "row", justifyContent: "center"}}>
 					<Text style={{fontSize: 12}}>{d}</Text>
 				</View>))}
 			</View>
