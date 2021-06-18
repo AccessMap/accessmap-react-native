@@ -1,7 +1,9 @@
+// Headers include a title text and an "X" button to close the window.
 import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from '../Icon';
+import { Fonts } from '../../styles';
 
 const Header = props => {
 	// Props:
@@ -9,12 +11,12 @@ const Header = props => {
 	// 2) close function
 	return (
 		<View style={{flexDirection: "row", alignItems: "center", margin: 5}}>
-			<Text style={{flex: 1, fontSize: 20, fontWeight: "bold"}}>
+			<Text style={ Fonts.h1 }>
 				{props.title}
 			</Text>
 			<Button
 				accessibilityLabel="Select to close those view"
-				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
+				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, height: 40}}
 				icon={<Icon
 					name="close"
 					size={20}

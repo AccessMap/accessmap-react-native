@@ -4,7 +4,7 @@ import MapboxGL from '@react-native-mapbox-gl/maps';
 import { connect } from 'react-redux';
 
 import { fetchRoute } from '../../actions';
-import styles from './map-styles';
+import { MapStyles } from '../../styles';
 
 const LayerRoute = props => {
 	const { route, origin, destination } = props;
@@ -54,7 +54,7 @@ const LayerRoute = props => {
 					id="route-jogs"
 					sourceID="route-jogs"
 					layerIndex={59}
-					style={styles.jogs}
+					style={MapStyles.jogs}
 				/>
 			</MapboxGL.ShapeSource>
 			<MapboxGL.ShapeSource
@@ -75,13 +75,13 @@ const LayerRoute = props => {
 					id="route-fill"
 					sourceID="route"
 					layerIndex={60}
-					style={styles.routeFill}
+					style={MapStyles.routeFill}
 				/>
 				<MapboxGL.LineLayer
 					id="route-outline"
 					sourceID="route"
 					layerIndex={61}
-					style={styles.routeOutline}
+					style={MapStyles.routeOutline}
 				/>
 			</MapboxGL.ShapeSource>
 		</React.Fragment>

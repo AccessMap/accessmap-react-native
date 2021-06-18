@@ -10,7 +10,7 @@ import LayerElevators from './layer-elevator-paths';
 import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
 import LoadingScreen from '../../components/LoadingScreen';
-import styles from '../../styles';
+import { Views } from '../../styles';
 import {
 	goToLocation,
 	locateUser,
@@ -183,7 +183,7 @@ class MapView extends Component {
 		return (
 			<MapboxGL.MapView 
 				ref={component => this._map = component}
-				style={styles.map}
+				style={ Views.map}
 				onPress={this._onPress}
 				onLongPress={this._onPress}
 				onRegionDidChange={this._panMap}

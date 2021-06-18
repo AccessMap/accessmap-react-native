@@ -1,3 +1,5 @@
+// Card details that show on the bottom of the screen when clicking on a sidewalk
+// or coordinate. Includes the option to "Route from/to here".
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
@@ -28,7 +30,7 @@ import {
 
 const InfoText = props => {
 	return (
-		<View accessible={true} style={{height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
+		<View accessible={true} style={{color: "black", height: 40, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
 			<Text style={{flex: 2, fontSize: 16, flexWrap: "wrap"}}>
 				{props.label}
 			</Text>
@@ -59,7 +61,7 @@ const FeatureCard = props => {
 
 	return (
 		<Card
-			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, marginBottom: 10, margin: 10, position: "absolute", zIndex: 50}}
+			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, margin: 10, position: "absolute", zIndex: 50}}
 		>
 			<View style={{maxWidth: "100%"}}>
 				<Header

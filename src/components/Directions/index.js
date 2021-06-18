@@ -1,6 +1,8 @@
+// Index for Directions and Direction Cards
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
+import { Fonts } from '../../styles'
 
 import {
 	DIRECTIONS_TEXT,
@@ -18,9 +20,9 @@ const DirectionCard = props => {
 	const action = props.footway == "sidewalk" ? USE_SIDEWALK_TEXT : USE_CROSSING_TEXT;
 	return (
 		<Card accessible={true}>
-			<Text style={{fontSize: 20}}>{action}</Text>
-			<Text style={{fontSize: 15}}>{props.name}</Text>
-			<Text>{Math.round(props.distance)} meters</Text>
+			<Text style={Fonts.h2}>{action}</Text>
+			<Text style={Fonts.p}>{props.name}</Text>
+			<Text style={Fonts.p}>{Math.round(props.distance)} meters</Text>
 		</Card>
 	);
 }
@@ -28,7 +30,7 @@ const DirectionCard = props => {
 const Directions = props => {
 	return (
 		<View style={{width: "100%", backgroundColor: "white", flex: 1}}>
-			<View style={{width: "100%", margin: 5}}>
+			<View style={{ marginLeft: 10 }}>
 				<Header
 					title={DIRECTIONS_TEXT}
 					close={props.close}
