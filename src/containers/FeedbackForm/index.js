@@ -34,14 +34,15 @@ const TWO_CR = 1;
 class FeedbackForm extends Component {
 	constructor(props) {
 		super(props);
+		console.log(props.info);
 
 		this.state = {
 			swNotPresent: false,
 			swNotPaved: false,
 			swSub3Ft: false,
 			cxUnsafe: false,
-			cxMarkedWrong: false,
-			cxCurbramps: props.info.curbramps,
+			cxUnmarked: props.info.crossing !== "marked",
+			cxCurbramps: props.info.curbramps != 1,
 			cxPedSignal: false,
 			cxAuditorySignal: false,
 			cxTactileSignal: false,
@@ -59,7 +60,7 @@ class FeedbackForm extends Component {
 			swNotPaved,
 			swSub3Ft,
 			cxUnsafe,
-			cxMarkedWrong,
+			cxUnmarked,
 			cxCurbramps,
 			cxPedSignal,
 			cxAuditorySignal,
@@ -81,9 +82,9 @@ class FeedbackForm extends Component {
 			if (cxUnsafe) {
 				body += "- This crossing is unsafe\n";
 			}
-			if (cxMarkedWrong && this.props.info.crossing == "marked") {
+			if (cxUnmarked && this.props.info.crossing == "marked") {
 				body += "- This crossing is unmarked\n";
-			} else if (cxMarkedWrong && this.props.info.crossing == "unmarked") {
+			} else if (cxUnmarked && this.props.info.crossing == "unmarked") {
 				body += "- This crossing is marked\n";
 			}
 			if (cxCurbramps != this.props.info.curbramps) {
@@ -114,7 +115,7 @@ class FeedbackForm extends Component {
 			swNotPaved,
 			swSub3Ft,
 			cxUnsafe,
-			cxMarkedWrong,
+			cxUnmarked,
 			cxCurbramps,
 			cxPedSignal,
 			cxAuditorySignal,
@@ -159,13 +160,13 @@ class FeedbackForm extends Component {
 					/>
 					<CheckBox
 						title={CROSSING_MARKED_TEXT}
-						checked={cxMarkedWrong}
-						onPress={() => this.setState({cxMarkedWrong: !cxMarkedWrong})}
+						checked={cxUnmarked}
+						onPress={() => this.setState({cxUnmarked: !cxUnmarked})}
 					/>
 					<CheckBox
 						title={CROSSING_CURBRAMPS_TEXT}
-						checked={cxCurbramps != this.props.info.curbramps}
-						onPress={() => this.setState({cxCurbramps: (cxCurbramps + 1) % 3})}
+						checked={cxCurbramps}
+						onPress={() => this.setState({cxCurbramps: !cxCurbramps})}
 					/>
 					<CheckBox
 						title={CROSSING_PEDESTRIAN_SIGNAL_TEXT}
@@ -203,7 +204,7 @@ class FeedbackForm extends Component {
 							SheetsManager.sendData(accountId, accountName, key, keyId, spreadsheetId, "Sidewalks", data);
 						} else if (this.props.info.footway == "crossing") {
 							data += !cxUnsafe + "\t";
-							data += !(cxMarkedWrong ^ (this.props.info.crossing == "marked")) + "\t";
+							data += !(cxUnmarked ^ (this.props.info.crossing == "marked")) + "\t";
 							data += (cxCurbramps == 0 ? 0 : cxCurbramps == 1 ? 2 : 1) + "\t";
 							data += cxPedSignal + "\t";
 							data += cxAuditorySignal + "\t";
