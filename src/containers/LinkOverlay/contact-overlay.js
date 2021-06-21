@@ -2,6 +2,7 @@ import React from 'react';
 import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Fonts } from '../../styles';
 
 const ContactOverlay = props => {
 	const twitterURL = "https://twitter.com/accessmapsea";
@@ -18,7 +19,7 @@ const ContactOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>Contact</Text>
+			<Text style={Fonts.h2}>Contact</Text>
 				<View style={{flexDirection: "row", alignItems: "center", width: "100%"}}>
 				<Button
 					icon={

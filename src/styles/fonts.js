@@ -10,12 +10,22 @@ export const h1 = {
 
 // For section headings
 export const h2 = {
-    fontSize: 20,
-    color: "black",
+  fontSize: 20,
+  color: "black",
 };
 
 // For small informational text
 export const p = {
-    fontSize: 15,
-    fontFamily: 'serif',
+  fontSize: 15,
+  fontFamily: "serif",
+};
+
+// Items in the menu drawer
+export const menuItems = {
+  fontSize: 20,
+  color: "black",
+  paddingTop: 20,
+  paddingBottom: 20, 
+  borderBottomColor: '#DFDFDF',
+  borderBottomWidth: 1,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Fonts } from '../../styles';
 
 const AboutOverlay = props => {
 	const githubURL = "https://github.com/AccessMap/accessmap-react-native";
@@ -19,7 +20,7 @@ const AboutOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>About</Text>
+			<Text style={Fonts.h2}>About</Text>
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={

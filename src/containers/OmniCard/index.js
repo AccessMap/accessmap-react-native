@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Buttons, Views, Positioning } from "../../styles";
+import { Buttons, Views, Position } from "../../styles";
 import {
   View,
   Image,
@@ -141,7 +141,7 @@ class OmniCard extends Component {
     } else {
       // unselected route state
       geocodeBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Positioning.center]}>
+        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <IconButton
             name="menu"
             accessibilityLabel="Select to open drawer menu"
@@ -161,7 +161,7 @@ class OmniCard extends Component {
     // UI elements for the middle row of the Omnicard
     if (!origin && !destination && !this.state.findDirections) {
       middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Positioning.center]}>
+        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
             navigation={this.props.navigation}
             value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
@@ -177,7 +177,7 @@ class OmniCard extends Component {
       );
     } else {
       middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Positioning.center]}>
+        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
             navigation={this.props.navigation}
             value={
@@ -205,7 +205,7 @@ class OmniCard extends Component {
     if (this.state.customMode) {
       containerToRender = (
         <View>
-          <View style={[{ flex: 1, flexDirection: "row" }, Positioning.center]}>
+          <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
             <ButtonGroup
               onPress={this.updateCustomIndex}
               selectedIndex={this.state.customIndex}
