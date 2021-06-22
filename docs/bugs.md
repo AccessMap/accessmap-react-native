@@ -14,3 +14,4 @@
 - Change the route from meters to feet/miles
 - Higher contrast on all text (darker coloring)
 - Fix the crowdsourcing of crossing to be reflective of actual features
+- Sometimes the map pins show up as black rather than red
