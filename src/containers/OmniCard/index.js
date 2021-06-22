@@ -99,6 +99,7 @@ class OmniCard extends Component {
   };
 
   render() {
+    console.log("DEBUG: RENDER OMNICARD");
     const customButtons = [UPHILL_TEXT, DOWNHILL_TEXT, BARRIERS_TEXT];
     const {
       pinFeatures,
@@ -113,9 +114,11 @@ class OmniCard extends Component {
     var middleRowContents = <View></View>;
 
     // if the user is in the middle of choosing a route start and end
-    if (this.state.findDirections) {
+    // TODO: X button and directions mode
+    if (origin || destination || this.state.findDirections) {
+      console.log("\nDEBUG: DIRECTIONS MODE");
       geocodeBarContents = (
-        <View>
+        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
             navigation={this.props.navigation}
             type="origin"
@@ -140,6 +143,7 @@ class OmniCard extends Component {
       );
     } else {
       // unselected route state
+      console.log("\nDEBUG: UNSELECTED MODE");
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <IconButton
@@ -160,6 +164,7 @@ class OmniCard extends Component {
 
     // UI elements for the middle row of the Omnicard
     if (!origin && !destination && !this.state.findDirections) {
+      console.log("DEBUG: search bar");
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
@@ -176,6 +181,7 @@ class OmniCard extends Component {
         </View>
       );
     } else {
+      console.log("DEBUG: DESTINATION MIDDLE TEXT");
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
@@ -203,6 +209,7 @@ class OmniCard extends Component {
 
     // Rendering the entire card and bottom row
     if (this.state.customMode) {
+      console.log("DEBUG: custom mode");
       containerToRender = (
         <View>
           <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
@@ -225,6 +232,7 @@ class OmniCard extends Component {
         </View>
       );
     } else {
+      console.log("DEBUG: NOT custom");
       containerToRender = (
         <View>
           {geocodeBarContents}

@@ -7,11 +7,15 @@
 - Tracking settings
     - Almost finished, but need to verify that this works with console.log
 - Need to add images for the AccessMap sponsors, which can be found on the webapp
-- Omnibar is not centered on some phone screens
+- ~~Omnibar is not centered on some phone screens~~
 - Make the "Report Issue" button look nicer
 - Hide the transition of changing route midway
     - The dashed line from the current location to the first sidewalk in the route changes before the route is set
+    - Should not resize the whole map, just have the overlay go ontop of it
 - Change the route from meters to feet/miles
-- Higher contrast on all text (darker coloring)
+- ~~Higher contrast on all text (darker coloring)~~
 - Fix the crowdsourcing of crossing to be reflective of actual features
 - Sometimes the map pins show up as black rather than red
+- ~~**X button on the top omnicard**~~
+- Content of Directions page on bottom bar gets completely replaced by the new sidewalk tap 
+- Instead of having floating card on bottom, having universal bottom bar is better
