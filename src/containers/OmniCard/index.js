@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Card, Button, ButtonGroup, SearchBar } from 'react-native-elements';
 import Icon from '../../components/Icon';
+import { withTranslation } from 'react-i18next';
 
 import Geocoder from '../Geocoder';
 import UphillSlider from '../Settings/UphillSlider';
@@ -21,16 +22,9 @@ import {
 	closeDirections,
 	closeTripInfo
 } from '../../actions';
-import {
-	GEOCODER_PLACEHOLDER_TEXT_DEFAULT,
-	GEOCODER_PLACEHOLDER_TEXT_START,
-	GEOCODER_PLACEHOLDER_TEXT_END,
-	UPHILL_TEXT,
-	DOWNHILL_TEXT,
-	BARRIERS_TEXT,
-} from '../../utils/translations';
 
 import MobilityButtonGroup from './mobility-buttons';
+import LanguageSwitcher from './language-switcher';
 import RegionSwitcher from './region-switcher';
 
 const IconButton = props => {
@@ -93,7 +87,10 @@ class OmniCard extends Component {
 	}
 
 	render() {
-		const customButtons = [UPHILL_TEXT, DOWNHILL_TEXT, BARRIERS_TEXT];
+		const customButtons = [
+			this.props.t("UPHILL_TEXT"), 
+			this.props.t("DOWNHILL_TEXT"), 
+			this.props.t("BARRIERS_TEXT")];
 		const {
 			pinFeatures,
 			origin,
@@ -116,7 +113,7 @@ class OmniCard extends Component {
 							navigation={this.props.navigation}
 							type="origin"
 							value={originText ? originText : origin ? coordinatesToString(origin) : ""}
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_START}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_START")}
 						/>
 						<IconButton
 							name="close"
@@ -139,6 +136,8 @@ class OmniCard extends Component {
 							resizeMode="center"
 							resizeMethod="scale"
 						/>
+						<View style={{flex: 1}}/>
+						<LanguageSwitcher />
 						<RegionSwitcher />
 					</View>}
 
@@ -148,7 +147,7 @@ class OmniCard extends Component {
 							value={pinFeatures && pinFeatures.text ?
 									pinFeatures.text : ""}
 							type="search"
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_DEFAULT}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
 						/>
 						<IconButton
 							name="directions"
@@ -160,7 +159,7 @@ class OmniCard extends Component {
 						<GeocodeBar navigation={this.props.navigation}
 							value={destinationText ? destinationText : destination ? coordinatesToString(destination) : ""}
 							type="destination"
-							placeholder={GEOCODER_PLACEHOLDER_TEXT_END}
+							placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_END")}
 						/>
 						<IconButton
 							accessibilityLabel="Select to reverse route."
@@ -235,7 +234,7 @@ const mapDispatchToProps = dispatch => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OmniCard);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(OmniCard));
 
 const styles = StyleSheet.create({
 	omniCardStyle: {

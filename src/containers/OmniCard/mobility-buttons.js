@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from '../../components/Icon';
+import { useTranslation } from 'react-i18next';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -9,12 +10,6 @@ import {
 	MOBILITY_MODE_POWERED,
 	MOBILITY_MODE_CANE,
 } from '../../constants';
-import {
-	CUSTOM_MODE_TEXT,
-	WHEELCHAIR_MODE_TEXT,
-	POWERED_MODE_TEXT,
-	CANE_MODE_TEXT
-} from '../../utils/translations';
 
 import { setMobilityMode } from '../../actions';
 import { connect } from 'react-redux';
@@ -60,26 +55,28 @@ const mapDispatchToProps = dispatch => {
 const MobilityButton = connect(mapStateToProps, mapDispatchToProps)(MobilityButtonRender);
 
 const MobilityButtonGroup = props => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<View style={{flexDirection: "row"}}>
 			<MobilityButton
 				name="person-pin"
-				label={CUSTOM_MODE_TEXT}
+				label={t("CUSTOM_MODE_TEXT")}
 				mode={MOBILITY_MODE_CUSTOM}
 			/>
 			<MobilityButton
 				name="wheelchair"
-				label={WHEELCHAIR_MODE_TEXT}
+				label={t("WHEELCHAIR_MODE_TEXT")}
 				mode={MOBILITY_MODE_WHEELCHAIR}
 			/>
 			<MobilityButton
 				name="wheelchair-powered"
-				label={POWERED_MODE_TEXT}
+				label={t("POWERED_MODE_TEXT")}
 				mode={MOBILITY_MODE_POWERED}
 			/>
 			<MobilityButton
 				name="cane-user"
-				label={CANE_MODE_TEXT}
+				label={t("CANE_MODE_TEXT")}
 				mode={MOBILITY_MODE_CANE}
 			/>
 		</View>

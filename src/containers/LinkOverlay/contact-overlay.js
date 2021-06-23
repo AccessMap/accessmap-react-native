@@ -2,6 +2,7 @@ import React from 'react';
 import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useTranslation } from 'react-i18next';
 
 const ContactOverlay = props => {
 	const twitterURL = "https://twitter.com/accessmapsea";
@@ -15,10 +16,11 @@ const ContactOverlay = props => {
 			console.log("cannot open url");
 		}
 	};
+	const { t, i18n } = useTranslation();
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>Contact</Text>
+			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>{t("CONTACT_TEXT")}</Text>
 				<View style={{flexDirection: "row", alignItems: "center", width: "100%"}}>
 				<Button
 					icon={
@@ -35,7 +37,7 @@ const ContactOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(twitterURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={{flex: 5}}>Follow us on social media.</Text>
+					<Text style={{flex: 5}}>{t("TWITTER_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
@@ -54,12 +56,12 @@ const ContactOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(mailURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={{flex: 5, flexWrap: "wrap"}}>Email us if you encounter issues or want to help out</Text>
+					<Text style={{flex: 5, flexWrap: "wrap"}}>{t("EMAIL_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 
 			<Button
-				title="CLOSE"
+				title={t("CLOSE_TEXT")}
 				type="clear"
 				onPress={props.onClose}
 			/>

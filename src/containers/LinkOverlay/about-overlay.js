@@ -2,12 +2,15 @@ import React from 'react';
 import { Linking, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useTranslation } from 'react-i18next';
 
 const AboutOverlay = props => {
 	const githubURL = "https://github.com/AccessMap/accessmap-react-native";
 	const taskarURL = "https://tcat.cs.washington.edu";
 	const donateURL = "https://www.washington.edu/giving/make-a-gift/?page=funds&source_typ=3&source=TASKAR";
 	
+	const { t, i18n } = useTranslation();
+
 	const openLink = async (url) => {
 		const supported = await Linking.canOpenURL(url);
 		if (supported) {
@@ -19,7 +22,8 @@ const AboutOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>About</Text>
+			<Text style={{fontSize: 20, fontWeight: "bold", marginBottom: 10}}>{t("ABOUT_TEXT")}</Text>
+
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={
@@ -36,7 +40,7 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(githubURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>AccessMap is an open source project.</Text>
+					<Text>{t("GITHUB_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
@@ -55,11 +59,11 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(taskarURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>AccessMap is developed via the Taskar Center at the University of Washington.</Text>
+					<Text>{t("UW_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 
-			<Text>AccessMap has received support from many organizations.</Text>
+			<Text>{t("ORGANIZATIONS_TEXT")}</Text>
 
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
@@ -77,9 +81,7 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(donateURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>Contribute to AccessMap development by donating to the Taskar Center. 
-						Mention AccessMap in the comment.
-					</Text>
+					<Text>{t("DONATE_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 

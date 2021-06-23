@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import {AppRegistry} from 'react-native';
 
 import thunkMiddleware from 'redux-thunk';
-
+import './i18n';
 import App from './src/App';
 
 import mapApp from './src/reducers';

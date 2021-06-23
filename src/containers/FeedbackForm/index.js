@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, NativeModules } from 'react-native';
 import { Button, CheckBox } from 'react-native-elements';
+import { withTranslation } from 'react-i18next';
 
 import { sendEmail } from '../../utils/send-email';
-import { NativeModules } from 'react-native';
-
-import {
-	CROWDSOURCING_INFO_TEXT,
-	SIDEWALK_PRESENT_TEXT,
-	SIDEWALK_PAVED_TEXT,
-	SIDEWALK_WIDTH_TEXT,
-	CROSSING_SAFE_TEXT,
-	CROSSING_MARKED_TEXT,
-	CROSSING_CURBRAMPS_TEXT,
-	CROSSING_PEDESTRIAN_SIGNAL_TEXT,
-	CROSSING_AUDITORY_SIGNAL_TEXT,
-	CROSSING_TACTILE_SIGNAL_TEXT,
-	SUBMIT_TEXT
-} from '../../utils/translations';
 
 import {
 	spreadsheetId,
@@ -123,16 +109,16 @@ class FeedbackForm extends Component {
 		} = this.state;
 		return (
 			<View style={{flex: 1, alignItems: "center"}}>
-				<Text style={{fontSize: 16, margin: 10}}>{ CROWDSOURCING_INFO_TEXT }</Text>
+				<Text style={{fontSize: 16, margin: 10}}>{ this.props.t("CROWDSOURCING_INFO_TEXT") }</Text>
 				{this.props.info.footway == "sidewalk" ?
 				<View style={{width: "100%"}}>
 					<CheckBox
-						title={SIDEWALK_PRESENT_TEXT}
+						title={this.props.t("SIDEWALK_PRESENT_TEXT")}
 						checked={swNotPresent}
 						onPress={() => this.setState({swNotPresent: !swNotPresent})}
 					/>
 					<CheckBox
-						title={SIDEWALK_PAVED_TEXT}
+						title={this.props.t("SIDEWALK_PAVED_TEXT")}
 						checked={!swNotPresent && swNotPaved}
 						textStyle={swNotPresent ? styles.disabled : {}}
 						onPress={() =>{
@@ -142,7 +128,7 @@ class FeedbackForm extends Component {
 						}}
 					/>
 					<CheckBox
-						title={SIDEWALK_WIDTH_TEXT}
+						title={this.props.t("SIDEWALK_WIDTH_TEXT")}
 						checked={swSub3Ft}
 						textStyle={swNotPresent ? styles.disabled : {}}
 						onPress={() => {
@@ -154,38 +140,38 @@ class FeedbackForm extends Component {
 				</View> :
 				<View style={{width: "100%"}}>
 					<CheckBox
-						title={CROSSING_SAFE_TEXT}
+						title={this.props.t("CROSSING_SAFE_TEXT")}
 						checked={cxUnsafe}
 						onPress={() => this.setState({cxUnsafe: !cxUnsafe})}
 					/>
 					<CheckBox
-						title={CROSSING_MARKED_TEXT}
+						title={this.props.t("CROSSING_MARKED_TEXT")}
 						checked={cxUnmarked}
 						onPress={() => this.setState({cxUnmarked: !cxUnmarked})}
 					/>
 					<CheckBox
-						title={CROSSING_CURBRAMPS_TEXT}
+						title={this.props.t("CROSSING_CURBRAMPS_TEXT")}
 						checked={cxCurbramps}
 						onPress={() => this.setState({cxCurbramps: !cxCurbramps})}
 					/>
 					<CheckBox
-						title={CROSSING_PEDESTRIAN_SIGNAL_TEXT}
+						title={this.props.t("CROSSING_PEDESTRIAN_SIGNAL_TEXT")}
 						checked={cxPedSignal}
 						onPress={() => this.setState({cxPedSignal: !cxPedSignal})}
 					/>
 					<CheckBox
-						title={CROSSING_AUDITORY_SIGNAL_TEXT}
+						title={this.props.t("CROSSING_AUDITORY_SIGNAL_TEXT")}
 						checked={cxAuditorySignal}
 						onPress={() => this.setState({cxAuditorySignal: !cxAuditorySignal})}
 					/>
 					<CheckBox
-						title={CROSSING_TACTILE_SIGNAL_TEXT}
+						title={this.props.t("CROSSING_TACTILE_SIGNAL_TEXT")}
 						checked={cxTactileSignal}
 						onPress={() => this.setState({cxTactileSignal: !cxTactileSignal})}
 					/>
 				</View>}
 				<Button
-					title={ SUBMIT_TEXT }
+					title={ this.props.t("SUBMIT_TEXT") }
 					disabled={!this.state.canPress}
 					containerStyle={{width: 250}}
 					onPress={() => {
@@ -226,4 +212,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default FeedbackForm;
+export default withTranslation()(FeedbackForm);
