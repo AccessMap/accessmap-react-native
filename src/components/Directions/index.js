@@ -3,12 +3,7 @@ import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Fonts } from '../../styles'
-
-import {
-	DIRECTIONS_TEXT,
-	USE_SIDEWALK_TEXT,
-	USE_CROSSING_TEXT
-} from '../../utils/translations';
+import { useTranslation } from 'react-i18next';
 
 import Header from '../Header';
 
@@ -17,7 +12,8 @@ const DirectionCard = props => {
 	// a) footing
 	// b) name of segment
 	// c) distance
-	const action = props.footway == "sidewalk" ? USE_SIDEWALK_TEXT : USE_CROSSING_TEXT;
+	const { t, i18n } = useTranslation();
+	const action = props.footway == "sidewalk" ? t("USE_SIDEWALK_TEXT") : t("USE_CROSSING_TEXT");
 	return (
 		<Card accessible={true}>
 			<Text style={Fonts.h2}>{action}</Text>
@@ -28,11 +24,13 @@ const DirectionCard = props => {
 }
 
 const Directions = props => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<View style={{width: "100%", backgroundColor: "white", flex: 1}}>
 			<View style={{ marginLeft: 10 }}>
 				<Header
-					title={DIRECTIONS_TEXT}
+					title={t("DIRECTIONS_TEXT")}
 					close={props.close}
 				/>
 			</View>

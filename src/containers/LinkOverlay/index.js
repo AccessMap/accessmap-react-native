@@ -3,6 +3,7 @@ import { View, Image, NativeModules, StyleSheet, Switch, Text, TouchableHighligh
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Fonts, Views, Position } from '../../styles';
+import { withTranslation } from 'react-i18next';
 
 import AboutOverlay from './about-overlay';
 import ContactOverlay from './contact-overlay';
@@ -49,12 +50,12 @@ class LinkOverlay extends Component {
 					/>
 				</View>
 
-				<Text style={Fonts.menuItems}>More info</Text>
+				<Text style={Fonts.menuItems}>this.props.t("MORE_INFO_TEXT")</Text>
 				<OverlayButton text="About" onPress={() => this.setState({showAbout: true})}/>
 				<OverlayButton text="Contact" onPress={() => this.setState({showContact: true})}/>
 
 				<View style={[{flexDirection: "row", alignItems: "center", marginTop: 30}]}>
-					<Text style={[{marginRight: 40}]}>Tracking settings</Text>
+					<Text style={[{marginRight: 40}]}>this.props.t("TRACKING_SETTINGS_TEXT")</Text>
 					<Switch
 						onValueChange={() => {
 							Rakam.toggleTracking();
@@ -91,4 +92,4 @@ class LinkOverlay extends Component {
 	}
 }
 
-export default LinkOverlay;
+export default withTranslation()(LinkOverlay);

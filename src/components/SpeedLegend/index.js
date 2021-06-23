@@ -1,13 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
-
-import { Colors } from "../../styles";
 import { INCLINE_PERCENT_TEXT } from "../../utils/translations";
+import { uphillColorMap, downhillColorMap } from "../../colors";
+import { useTranslation } from 'react-i18next';
 
-const SpeedLegend = (props) => {
-  // Props: Max uphill incline
-  const maxIncline = Math.round(props.maxIncline);
-  const colorMap = Colors.uphillColorMap(maxIncline, maxIncline, maxIncline);
+const SpeedLegend = props => {
+	// Props: Max uphill incline
+	const maxIncline = Math.round(props.maxIncline);
+	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
+	const { t, i18n } = useTranslation();
 
   // Represents an incline percentage beyond the maximum on Speed Legend bottom bar
   function renderRedDashedLine() {
@@ -77,35 +78,36 @@ const SpeedLegend = (props) => {
               );
             })}
           </View>
+      </View>
 
-          <View style={{ flex: 15 - maxIncline, justifyContent: "center" }}>
-            {renderRedDashedLine()}
-          </View>
-        </View>
-		
-        <View style={{ flex: 2, flexDirection: "row" }}>
-          {[...Array(15).keys()].map((d) => (
-            <View
-              key={d}
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontSize: 12 }}>{d}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-      <View
-        importantForAccessibility="no-hide-descendants"
-        style={{ flex: 2, flexDirection: "row", justifyContent: "center" }}
-      >
-        <Text style={{ fontSize: 13 }}>{INCLINE_PERCENT_TEXT}</Text>
-      </View>
-    </View>
-  );
-};
+			<View style={{flex: 1, flexDirection: "row"}}>
+				<View style={{flex: maxIncline, flexDirection: "row", borderWidth: 1}}>
+					{[...Array(maxIncline).keys()].map(d => {
+						// min of calculation and 255
+						var red = Math.min(d / (maxIncline - 1) * 255 * 2, 255);
+						var green = Math.min((maxIncline - 1 - d) / (maxIncline - 1) * 255 * 2, 255);
+						return (<View key={d} style={{flex: 1, backgroundColor: colorMap(d)}} />)
+					})}
+				</View>
+				
+				<View style={{flex: 15 - maxIncline, justifyContent:"center"}}>{renderRedDashedLine()}</View>
+			</View>
+
+			<View style={{flex: 2, flexDirection: "row"}}>
+				{[...Array(15).keys()].map(d => (
+				<View key={d} style={{flex: 1, flexDirection: "row", justifyContent: "center"}}>
+					<Text style={{fontSize: 12}}>{d}</Text>
+				</View>))}
+			</View>
+		</View>
+
+		<View
+			importantForAccessibility="no-hide-descendants"
+			style={{flex: 2, flexDirection: "row", justifyContent: "center"}}>
+			<Text style={{fontSize: 13}}>{t('INCLINE_PERCENT_TEXT')}</Text>
+		</View>
+
+	</View>);
+}
 
 export default SpeedLegend;

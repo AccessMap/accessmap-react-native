@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { FlatList, View, Text, TouchableHighlight } from 'react-native';
 import { Button, Icon, Overlay } from 'react-native-elements';
 
-import regions from '../../constants/regions';
+import languages from '../../constants/languages';
 import Header from '../../components/Header';
-import { goToRegion } from '../../actions';
+import { goToLanguage } from '../../actions';
 import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
 
-class RegionSwitcher extends Component {
+class LanguageSwitcher extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,12 +18,12 @@ class RegionSwitcher extends Component {
 	}
 
 	render() {
-		const goToRegion = this.props.goToRegion;
+		const goToLanguage = this.props.goToLanguage;
 
 		return (<View>
 			<Button
-				accessibilityLabel={"Current region: " + this.props.currRegion +
-					". Select to change region."}
+				accessibilityLabel={"Current Language: " + this.props.currLanguage +
+					". Select to change language."}
 				buttonStyle={{
 					backgroundColor: "#FFFFFF",
 					borderColor: "#0000AA",
@@ -31,9 +31,9 @@ class RegionSwitcher extends Component {
 					marginLeft: 8,
 					padding: 5}}
 				icon={
-					<Icon name="globe" type="entypo" size={18} color="#0000AA" />
+					<Icon name="globe" type="feather" size={18} color="#0000AA" />
 				}
-				title={this.props.currRegion.substring(0,3)}
+				title={this.props.currLanguage}
 				titleStyle={{
 					color: "#0000AA",
 					marginLeft: 5
@@ -48,20 +48,21 @@ class RegionSwitcher extends Component {
 			>
 				<View style={{width: "100%"}}>
 					<Header
-						title={this.props.t("REGIONS_TEXT")}
+						title={this.props.t('LANGUAGES_TEXT')}
 						close={() => this.setState({viewOverlay: !this.state.viewOverlay})}
 					/>
 					<FlatList
-						data={regions}
+						data={languages}
 						renderItem={(item) =>
 							<TouchableHighlight
 								style={{padding: 5, width: 200}}
 								onPress={() => {
 									this.setState({viewOverlay: !this.state.viewOverlay});
-									goToRegion(item.item);
+									this.props.i18n.changeLanguage(item.item.key);
+									goToLanguage(item.item);
 								}}
 							>
-								<Text style={{fontSize: 18}}>{item.item.properties.name}</Text>
+								<Text style={{fontSize: 18}}>{item.item.name}</Text>
 							</TouchableHighlight>
 						}
 						keyExtractor={(item, index) => index.toString()}
@@ -73,17 +74,19 @@ class RegionSwitcher extends Component {
 }
 
 const mapStateToProps = state => {
+	
 	return {
-		currRegion: state.currRegion
+		currLanguage: state.currLanguage,
+		t: state.t
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		goToRegion: region => {
-			dispatch(goToRegion(region));
+		goToLanguage: language => {
+			dispatch(goToLanguage(language));
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(RegionSwitcher));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(LanguageSwitcher));
