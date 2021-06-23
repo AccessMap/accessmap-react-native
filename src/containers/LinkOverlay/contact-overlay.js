@@ -21,7 +21,7 @@ const ContactOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={Fonts.h2}>t("CONTACT_TEXT")</Text>
+			<Text style={Fonts.h2}>{t("CONTACT_TEXT")}</Text>
 				<View style={{flexDirection: "row", alignItems: "center", width: "100%"}}>
 				<Button
 					icon={

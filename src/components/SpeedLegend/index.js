@@ -1,13 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { INCLINE_PERCENT_TEXT } from "../../utils/translations";
-import { uphillColorMap, downhillColorMap } from "../../colors";
+import { Colors } from "../../styles";
 import { useTranslation } from 'react-i18next';
 
 const SpeedLegend = props => {
 	// Props: Max uphill incline
 	const maxIncline = Math.round(props.maxIncline);
-	const colorMap = uphillColorMap(maxIncline, maxIncline, maxIncline);
+	const colorMap = Colors.uphillColorMap(maxIncline, maxIncline, maxIncline);
 	const { t, i18n } = useTranslation();
 
   // Represents an incline percentage beyond the maximum on Speed Legend bottom bar

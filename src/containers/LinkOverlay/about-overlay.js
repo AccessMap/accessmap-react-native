@@ -23,7 +23,7 @@ const AboutOverlay = props => {
 
 	return (
 		<View style={{width: "100%"}}>
-			<Text style={Fonts.h2}>t("ABOUT_TEXT")</Text>
+			<Text style={Fonts.h2}>{t("ABOUT_TEXT")}</Text>
 			<View style={{flexDirection: "row", alignItems: "center"}}>
 				<Button
 					icon={

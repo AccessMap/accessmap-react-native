@@ -50,12 +50,12 @@ class LinkOverlay extends Component {
 					/>
 				</View>
 
-				<Text style={Fonts.menuItems}>this.props.t("MORE_INFO_TEXT")</Text>
+				<Text style={Fonts.menuItems}>{this.props.t("MORE_INFO_TEXT")}</Text>
 				<OverlayButton text="About" onPress={() => this.setState({showAbout: true})}/>
 				<OverlayButton text="Contact" onPress={() => this.setState({showContact: true})}/>
 
 				<View style={[{flexDirection: "row", alignItems: "center", marginTop: 30}]}>
-					<Text style={[{marginRight: 40}]}>this.props.t("TRACKING_SETTINGS_TEXT")</Text>
+					<Text style={[{marginRight: 40}]}>{this.props.t("TRACKING_SETTINGS_TEXT")}</Text>
 					<Switch
 						onValueChange={() => {
 							Rakam.toggleTracking();

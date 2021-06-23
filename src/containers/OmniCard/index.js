@@ -7,11 +7,7 @@ import {
 } from "react-native";
 import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
 import Icon from "../../components/Icon";
-import React, { Component } from 'react';
-import Icon from '../../components/Icon';
 import { withTranslation } from 'react-i18next';
-
-import Geocoder from "../Geocoder";
 import UphillSlider from "../Settings/UphillSlider";
 import DownhillSlider from "../Settings/DownhillSlider";
 import BarrierSwitch from "../Settings/BarrierSwitch";
