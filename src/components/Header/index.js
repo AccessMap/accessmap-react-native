@@ -1,7 +1,9 @@
+// Headers include a title text and an "X" button to close the window.
 import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from '../Icon';
+import { Fonts } from '../../styles';
 import { useTranslation } from 'react-i18next';
 
 const Header = props => {
@@ -12,7 +14,7 @@ const Header = props => {
 
 	return (
 		<View style={{flexDirection: "row", alignItems: "center", margin: 5}}>
-			<Text style={{flex: 1, fontSize: 20, fontWeight: "bold"}}>
+			<Text style={ Fonts.h1 }>
 				{props.title}
 			</Text>
 			<Button

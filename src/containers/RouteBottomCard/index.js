@@ -1,3 +1,6 @@
+// A RouteBottomCard appears at the bottom of the screen after a user selects a start and end
+// location for their route. The Card contains information about distance, time, and buttons 
+// to view the Trip Info and Directions.
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-elements';
@@ -5,6 +8,7 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { viewDirections, viewTripInfo } from '../../actions';
+import { Fonts } from '../../styles';
 
 const RouteBottomCard = props => {
 	const { t, i18n } = useTranslation();
@@ -27,9 +31,9 @@ const RouteBottomCard = props => {
 		<Card containerStyle={styles.routeBottomCard}>
 			<View style={{margin: 5, width: "100%"}}>
 				<View accessible={true} style={{flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 5}}>
-					<Text style={{fontSize: 20, marginRight: 20}}>{t("ROUTE_TEXT")}</Text>
-					<Text style={{marginRight: 20}}>{Math.round(route.distance)} {t("METERS_TEXT")}</Text>
-					<Text>{Math.round(route.duration / 60)} {t("MINUTES_TEXT")}</Text>
+					<Text style={[Fonts.h2, {marginRight: 20}]}>{t("ROUTE_TEXT")}</Text>
+					<Text style={[Fonts.p, {marginRight: 20}]}>{Math.round(route.distance)} {t("METERS_TEXT")}</Text>
+					<Text style={[Fonts.p, {marginRight: 20}]}>{Math.round(route.duration / 60)} {t("MINUTES_TEXT")}</Text>
 				</View>
 				<View style={{flex: 1, flexDirection: "row", width: "100%", marginBottom: 5}}>
 					<Button

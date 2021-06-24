@@ -1,3 +1,4 @@
+// Shows trip information with elevation changes graph
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { AreaChart, LineChart, Grid, XAxis, YAxis } from 'react-native-svg-charts';
@@ -51,14 +52,14 @@ const TripInfo = props => {
 					close={props.close}
 				/>
 			</View>
-			<ScrollView style={{padding: 10}}>
+			<ScrollView style={{ width: "100%", padding: 10}}>
 				<Text>Experienced elevation gain</Text>
-				<View style={{height: 200, flexDirection: "row", alignItems: "center"}}>
+				<View style={{marginLeft: 5, width: "100%", height: 200, flexDirection: "row", alignItems: "center"}}>
 					<View style={{left: -50, position: "absolute", transform: [{rotate: "270deg"}]}}>
 						<Text>{t("GRAPH_Y_AXIS")}</Text>
 					</View>
 					<YAxis
-						style={{marginLeft: 20}}
+						style={{marginLeft: 10}}
 						data={ elevChange }
 						contentInset={{top: 20, bottom: 20}}
 						svg={{
@@ -69,7 +70,7 @@ const TripInfo = props => {
 						formatLabel={value => `${value}`}
 					/>
 					<AreaChart
-						style={{flex: 1, marginLeft: 16}}
+						style={{flex: 1, marginLeft: 10}}
 						data={ elevChange }
 						yAccessor={({item}) => item}
 						xAccessor={({index}) => totalDist[index]}

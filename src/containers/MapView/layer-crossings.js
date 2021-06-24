@@ -1,7 +1,7 @@
 import React from 'react';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import { connect } from 'react-redux';
-import styles from './map-styles';
+import { MapStyles } from '../../styles';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -52,7 +52,7 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={81}
 				filter={isCrossing}
-				style={styles.crossingPress}
+				style={MapStyles.crossingPress}
 			/>
 			<MapboxGL.LineLayer
 				id="crossing-marked"
@@ -60,7 +60,7 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={markedExpression}
-				style={{...styles.crossing, ...styles.fadeOut}}
+				style={{...MapStyles.crossing, ...MapStyles.fadeOut}}
 				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
@@ -69,7 +69,7 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={81}
 				filter={markedExpression}
-				style={{...styles.crossingOutline, ...styles.fadeOut}}
+				style={{...MapStyles.crossingOutline, ...MapStyles.fadeOut}}
 				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
@@ -78,7 +78,7 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={unmarkedExpression}
-				style={{...styles.crossingUnmarked, ...styles.fadeOut}}
+				style={{...MapStyles.crossingUnmarked, ...MapStyles.fadeOut}}
 				minZoomLevel={13}
 			/>
 			<MapboxGL.LineLayer
@@ -87,7 +87,7 @@ const LayerCrossings = props => {
 				sourceLayerID="transportation"
 				layerIndex={80}
 				filter={inaccessibleExpression}
-				style={{...styles.inaccessible, ...styles.fadeOut}}
+				style={{...MapStyles.inaccessible, ...MapStyles.fadeOut}}
 				minZoomLevel={13}
 			/>
 		</React.Fragment>

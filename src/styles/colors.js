@@ -1,11 +1,14 @@
-import chroma from 'chroma-js';
+// Represents the colors used on the map
+import chroma from "chroma-js";
 
-import { uphillSpeed, downhillSpeed } from "./profiles/cost-function";
-import { DIVISOR } from "./constants";
+import { uphillSpeed, downhillSpeed } from "../profiles/cost-function";
+import { DIVISOR } from "../constants";
 
 const inclineColorScale = chroma
   .scale(
-    [chroma("red"), chroma("yellow"), chroma("lime")].map(c => c.brighten(1.5))
+    [chroma("red"), chroma("yellow"), chroma("lime")].map((c) =>
+      c.brighten(1.5)
+    )
   )
   .mode("lab");
 
@@ -21,7 +24,7 @@ const colorFromSpeed = (speed, maxSpeed) => {
 };
 
 const uphillColorMap = (uphillMax, downhillMax, speedMax) => {
-  const colorMap = incline => {
+  const colorMap = (incline) => {
     const speed = uphillSpeed(incline, uphillMax, downhillMax, speedMax);
     return colorFromSpeed(speed, speedMax);
   };
@@ -29,7 +32,7 @@ const uphillColorMap = (uphillMax, downhillMax, speedMax) => {
 };
 
 const downhillColorMap = (uphillMax, downhillMax, speedMax) => {
-  const colorMap = incline => {
+  const colorMap = (incline) => {
     const speed = downhillSpeed(incline, uphillMax, downhillMax, speedMax);
     return colorFromSpeed(speed, speedMax);
   };
@@ -43,5 +46,5 @@ export {
   inclineColorScale,
   colorFromSpeed,
   uphillColorMap,
-  downhillColorMap
+  downhillColorMap,
 };
