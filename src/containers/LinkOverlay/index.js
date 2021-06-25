@@ -12,9 +12,11 @@ const { Rakam } = NativeModules;
 
 const OverlayButton = props => {
 		return (
-			<TouchableHighlight style={{alignItems: "stretch"}}
-				onPress={props.onPress}>
-				<Text style={Fonts.menuItems}>{props.text}</Text>
+			<TouchableHighlight 
+				style={{alignItems: "stretch"}}
+				disabled={false}
+				onPress={ props.onPress }>
+				<Text accessibilityRole="button" style={Fonts.menuItems}>{props.text}</Text>
 			</TouchableHighlight>
 		);
 	}
@@ -45,6 +47,7 @@ class LinkOverlay extends Component {
 							name="times"
 							size={20}
 							color="#555555"
+							accessibilityLabel={this.props.t("CLOSE_ALT_TEXT")}
 						/>}
 						onPress={this.props.closeDrawer}
 					/>

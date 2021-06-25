@@ -3,8 +3,7 @@
 ## High Priority (1 = highest)
 1. Run npm audit, find out which one is the "1 critical" dependency
 2. Create a user-facing documentation for how to use the app itself
-3. Need to add images for the AccessMap sponsors (about page) --> "Click here to view a quick tutorial on how to use the app"
-4. Add translation for the Report button
+3. Currently, the About and Contact menu buttons in the main drawer are not screen-reader clickable.
 
 ## Low Priority
 1. Change the route from meters to feet/miles

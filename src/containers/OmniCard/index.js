@@ -136,7 +136,6 @@ class OmniCard extends Component {
       );
     } else {
       // unselected route state
-      console.log("\n UNSELECTED MODE");
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <IconButton
