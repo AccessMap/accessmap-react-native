@@ -32,7 +32,7 @@ class LinkOverlay extends Component {
 	render() {
 		return (
 			<View style={Views.overlay}>
-				<View style={{marginTop: 20, flexDirection: "row", height: 50, alignContent: "space-between"}}>
+				<View style={{marginVertical: 20, flexDirection: "row", height: 50, alignContent: "space-between"}}>
 					<Image
 						style={[Position.fullWidthandHeight, {marginRight: 20, flex: 1}, ]}
 						source={require("../../../assets/accessmap-logo.png")}
@@ -50,7 +50,6 @@ class LinkOverlay extends Component {
 					/>
 				</View>
 
-				<Text style={Fonts.menuItems}>{this.props.t("MORE_INFO_TEXT")}</Text>
 				<OverlayButton text="About" onPress={() => this.setState({showAbout: true})}/>
 				<OverlayButton text="Contact" onPress={() => this.setState({showContact: true})}/>
 
@@ -58,6 +57,7 @@ class LinkOverlay extends Component {
 					<Text style={[{marginRight: 40}]}>{this.props.t("TRACKING_SETTINGS_TEXT")}</Text>
 					<Switch
 						onValueChange={() => {
+							console.log(!this.state.trackSettings ? "Now tracking user actions." : "Tracking turned off.");
 							Rakam.toggleTracking();
 							this.setState({ trackSettings: !this.state.trackSettings });
 						}}

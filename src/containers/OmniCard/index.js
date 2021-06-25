@@ -91,7 +91,6 @@ class OmniCard extends Component {
   };
 
   render() {
-    console.log("DEBUG: RENDER OMNICARD");
     const customButtons = [
 			this.props.t("UPHILL_TEXT"), 
 			this.props.t("DOWNHILL_TEXT"), 
@@ -111,7 +110,6 @@ class OmniCard extends Component {
     // if the user is in the middle of choosing a route start and end
     // TODO: X button and directions mode
     if (origin || destination || this.state.findDirections) {
-      console.log("\nDEBUG: DIRECTIONS MODE");
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
@@ -138,7 +136,7 @@ class OmniCard extends Component {
       );
     } else {
       // unselected route state
-      console.log("\nDEBUG: UNSELECTED MODE");
+      console.log("\n UNSELECTED MODE");
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <IconButton
@@ -159,7 +157,6 @@ class OmniCard extends Component {
 
     // UI elements for the middle row of the Omnicard
     if (!origin && !destination && !this.state.findDirections) {
-      console.log("DEBUG: search bar");
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
@@ -176,7 +173,6 @@ class OmniCard extends Component {
         </View>
       );
     } else {
-      console.log("DEBUG: DESTINATION MIDDLE TEXT");
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
@@ -204,7 +200,6 @@ class OmniCard extends Component {
 
     // Rendering the entire card and bottom row
     if (this.state.customMode) {
-      console.log("DEBUG: custom mode");
       containerToRender = (
         <View>
           <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
@@ -227,7 +222,6 @@ class OmniCard extends Component {
         </View>
       );
     } else {
-      console.log("DEBUG: NOT custom");
       containerToRender = (
         <View>
           {geocodeBarContents}

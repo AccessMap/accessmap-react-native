@@ -31,5 +31,12 @@ export const zooms = {
   zIndex: 20,
 };
 
+// For small image icons that link to an external website
+export const iconButtons = {
+  flex: 1, 
+  width: "50%", 
+  marginHorizontal: 0,
+};
+
 // To add more button styles, just add:
 // export const ___ = { ... };

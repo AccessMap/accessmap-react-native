@@ -70,6 +70,7 @@ const defaultState = {
 	route: null,
 }
 
+// Define the states 
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
 		case MAP_LOADED:

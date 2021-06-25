@@ -67,7 +67,6 @@ export const REPORT_ISSUE_TEXT = 'Report Issue';
 //export const USE_CROSSING_TEXT = 'Cross the street';
 
 // Link Overlay
-//export const MORE_INFO_TEXT = 'More info';
 //export const ABOUT_TEXT = 'About';
 //export const CONTACT_TEXT = 'Contact';
 //export const TRACKING_SETTINGS_TEXT = 'Tracking settings';
