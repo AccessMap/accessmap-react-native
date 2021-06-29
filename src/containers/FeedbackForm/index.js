@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, NativeModules } from 'react-native';
 import { Button, CheckBox } from 'react-native-elements';
 import { withTranslation } from 'react-i18next';
 
-import { sendEmail } from '../../utils/send-email';
-
 import {
 	spreadsheetId,
 	accountId,

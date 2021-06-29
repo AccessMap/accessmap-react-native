@@ -2,6 +2,7 @@
 
 ## High Priority (1 = highest)
 1. Run npm audit, find out which one is the "1 critical" dependency
+   - Note: This critical vulnerability is from the handlebars package, which is a dependency of jest (dev)
 2. Currently, the About and Contact menu buttons in the main drawer are not screen-reader clickable.
 
 ## Low Priority
