@@ -38,7 +38,7 @@ const ContactOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(twitterURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={{flex: 5}}>{t("TWITTER_TEXT")}</Text>
+					<Text style={[{flex: 5}, Fonts.p]}>{t("TWITTER_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 				<View style={{flexDirection: "row", alignItems: "center"}}>
@@ -57,7 +57,7 @@ const ContactOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(mailURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={{flex: 5, flexWrap: "wrap"}}>{t("EMAIL_TEXT")}</Text>
+					<Text style={[{flex: 5, flexWrap: "wrap"}], Fonts.p}>{t("EMAIL_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 
