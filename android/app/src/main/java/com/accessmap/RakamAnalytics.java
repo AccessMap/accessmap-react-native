@@ -1,3 +1,5 @@
+// RakamAnalytics is the tool we are using to track "events", or user activity within the app.
+// This data allows us to analyze how users choose their routes, interact with the map... etc
 package com.accessmap;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;

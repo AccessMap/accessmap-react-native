@@ -1,14 +1,16 @@
 import React from 'react';
-import { Linking, Text, View, TouchableOpacity } from 'react-native';
+import { Linking, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Fonts } from '../../styles';
+import { Fonts, Buttons } from '../../styles';
 import { useTranslation } from 'react-i18next';
 
 const AboutOverlay = props => {
 	const githubURL = "https://github.com/AccessMap/accessmap-react-native";
 	const taskarURL = "https://tcat.cs.washington.edu";
 	const donateURL = "https://www.washington.edu/giving/make-a-gift/?page=funds&source_typ=3&source=TASKAR";
+	const escienceURL = "https://escience.washington.edu/";
+	const wsdotURL = "https://wsdot.wa.gov/";
 	
 	const { t, i18n } = useTranslation();
 
@@ -24,12 +26,13 @@ const AboutOverlay = props => {
 	return (
 		<View style={{width: "100%"}}>
 			<Text style={Fonts.h2}>{t("ABOUT_TEXT")}</Text>
-			<View style={{flexDirection: "row", alignItems: "center"}}>
+			<View style={{flexDirection: "row", alignItems: "center", marginVertical: 10}}>
 				<Button
 					icon={
 						<Icon
+							accessibilityLabel={t("GITHUB_LOGO_ALT_TEXT")}
 							name="github"
-							size={25}
+							size={30}
 							color="black"
 						/>
 					}
@@ -40,15 +43,17 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(githubURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>{t("GITHUB_TEXT")}</Text>
+					<Text style={Fonts.p}>{t("GITHUB_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
-				<View style={{flexDirection: "row", alignItems: "center"}}>
+
+			<View style={{flexDirection: "row", alignItems: "center", marginVertical: 10}}>
 				<Button
 					icon={
 						<Icon
 							name="graduation-cap"
-							size={25}
+							accessibilityLabel={t("TCAT_LINK_ALT_TEXT")}
+							size={30}
 							color="black"
 						/>
 					}
@@ -59,18 +64,39 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(taskarURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>{t("UW_TEXT")}</Text>
+					<Text style={Fonts.p}>{t("UW_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
+			
+			<View style={{flexDirection: "row", alignItems: "center", width: "100%", marginVertical: 10}}>
+				<TouchableOpacity onPress={() => {openLink(escienceURL)}} style={Buttons.iconButtons}>
+					<Image
+						accessibilityLabel={t("ESCIENCE_ALT_TEXT")}
+						style={{flex: 1, width: "70%", height: "50%"}}
+						source={require("../../../assets/uwescience.jpg")}
+						resizeMode="contain"
+						resizeMethod="scale"
+					/>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => {openLink(wsdotURL)}} style={Buttons.iconButtons}>
+					<Image
+						accessibilityLabel={t("WSDOT_ALT_TEXT")}
+						style={{flex: 1, width: "70%", height: "50%"}}
+						source={require("../../../assets/wsdot.png")}
+						resizeMode="contain"
+						resizeMethod="scale"
+					/>
+				</TouchableOpacity>
+				<Text style={[Fonts.p, {flex: 4, flexWrap: "wrap"}]}>{t("ORGANIZATIONS_TEXT")}</Text>
+			</View>
 
-			<Text>{t("ORGANIZATIONS_TEXT")}</Text>
-
-			<View style={{flexDirection: "row", alignItems: "center"}}>
+			<View style={{flexDirection: "row", alignItems: "center", marginVertical: 10}}>
 				<Button
 					icon={
 						<Icon
 							name="heart"
-							size={25}
+							accessibilityLabel={t("DONATE_ALT_TEXT")}
+							size={30}
 							color="red"
 						/>
 					}
@@ -81,7 +107,7 @@ const AboutOverlay = props => {
 					}}
 				/>
 				<TouchableOpacity onPress={() => {openLink(donateURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text>{t("DONATE_TEXT")}</Text>
+					<Text style={Fonts.p}>{t("DONATE_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 

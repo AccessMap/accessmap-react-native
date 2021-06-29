@@ -4,6 +4,9 @@ This is the official repository for AccessMap React Native, currently only avail
 
 We have plans to add iOS compatibility in the future. We also plan to switch from Mapbox to MapLibre.
 
+## Using the mobile app
+Please see [this](docs/quickstart.md) document for quickstart instructions.
+
 ## Project Setup (Android)
 
 First, make sure you have React Native installed. If you have not yet set it up, please refer to the following: https://reactnative.dev/docs/environment-setup
