@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, NativeModules, StyleSheet, Switch, Text, TouchableHighlight } from 'react-native';
+import { View, Image, NativeModules, Switch, Text, TouchableHighlight, AccessibilityInfo } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Fonts, Views, Position } from '../../styles';
@@ -53,12 +53,13 @@ class LinkOverlay extends Component {
 					/>
 				</View>
 
-				<OverlayButton text="About" onPress={() => this.setState({showAbout: true})}/>
-				<OverlayButton text="Contact" onPress={() => this.setState({showContact: true})}/>
+				<OverlayButton text={this.props.t("ABOUT_TEXT")} onPress={() => this.setState({showAbout: true})}/>
+				<OverlayButton text={this.props.t("CONTACT_TEXT")} onPress={() => this.setState({showContact: true})}/>
 
 				<View style={[{flexDirection: "row", alignItems: "center", marginTop: 30}]}>
 					<Text style={[{marginRight: 40}]}>{this.props.t("TRACKING_SETTINGS_TEXT")}</Text>
 					<Switch
+						accessibilityLabel={this.props.t("TRACKING_SWITCH_TEXT")}
 						onValueChange={() => {
 							console.log(!this.state.trackSettings ? "Now tracking user actions." : "Tracking turned off.");
 							Rakam.toggleTracking();
