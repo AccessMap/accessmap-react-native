@@ -28,3 +28,5 @@ First, make sure you have React Native installed. If you have not yet set it up,
     - You may need to first open and run your emulator. 
     - Tools > AVD Manager > Press the green button next to your installed emulated device.
 9.  To run the app, run the following command in the root directory: `npx react-native run-android`
+10. If at any point you run into a message mentioning ./gradlew debug error or a server 500 error on the app relating to a dependency,
+    follow the above steps again.
