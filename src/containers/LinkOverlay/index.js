@@ -47,9 +47,13 @@ class LinkOverlay extends Component {
 							name="times"
 							size={20}
 							color="#555555"
-							accessibilityLabel={this.props.t("CLOSE_ALT_TEXT")}
+							accessibilityLabel={this.props.t("Header-close-accessibilityLabel")}
 						/>}
-						onPress={this.props.closeDrawer}
+						onPress={() => {
+								this.props.closeDrawer;
+								// AccessibilityInfo.announceForAccessibility("");
+							}
+						}
 					/>
 				</View>
 
@@ -59,9 +63,9 @@ class LinkOverlay extends Component {
 				<View style={[{flexDirection: "row", alignItems: "center", marginTop: 30}]}>
 					<Text style={[{marginRight: 40}]}>{this.props.t("TRACKING_SETTINGS_TEXT")}</Text>
 					<Switch
-						accessibilityLabel={this.props.t("TRACKING_SWITCH_TEXT")}
+						accessibilityLabel={this.props.t("TRACKING_SETTINGS_TEXT")}
 						onValueChange={() => {
-							console.log(!this.state.trackSettings ? "Now tracking user actions." : "Tracking turned off.");
+							// AccessibilityInfo.announceForAccessibility(""); // is only for iOS
 							Rakam.toggleTracking();
 							this.setState({ trackSettings: !this.state.trackSettings });
 						}}

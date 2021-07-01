@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking, Text, View, TouchableOpacity } from 'react-native';
+import { Linking, Text, View, TouchableOpacity, AccessibilityInfo } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Fonts } from '../../styles';
@@ -62,9 +62,12 @@ const ContactOverlay = props => {
 			</View>
 
 			<Button
-				title={t("CLOSE_TEXT")}
+				title={t("Header-close-accessibilityLabel")}
 				type="clear"
-				onPress={props.onClose}
+				onPress={() => {
+					props.onClose;
+					// AccessibilityInfo.announceForAccessibility("");
+				}}
 			/>
 
 		</View>
