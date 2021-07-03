@@ -112,7 +112,7 @@ const AboutOverlay = props => {
 			</View>
 
 			<Button
-				title="CLOSE"
+				title={t("CLOSE_TEXT")}
 				type="clear"
 				onPress={props.onClose}
 			/>

@@ -34,6 +34,7 @@
   "ROUTE_TO_HERE_TEXT": "Route to here",
   "ROUTE_TEXT": "Route",
   "METERS_TEXT": "meters",
+  "MILES_TEXT": "miles",
   "MINUTES_TEXT": "minutes",
   "NO_ROUTE_TEXT": "No route found",
   "TRIP_INFO_TEXT": "Trip info",
