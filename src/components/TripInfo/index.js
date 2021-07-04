@@ -74,7 +74,7 @@ const TripInfo = (props) => {
       <View>
         <Header title={t("ROUTE_INFO_TEXT")} close={props.close} />
       </View>
-      <ScrollView style={{ width: "100%", marginLeft: 10}}>
+      <ScrollView style={{ width: "100%", paddingHorizontal: 10}}>
         <Text>Experienced elevation gain</Text>
         <View
           style={{
@@ -82,6 +82,7 @@ const TripInfo = (props) => {
             height: 200,
             flexDirection: "row",
             alignItems: "center",
+            paddingHorizontal: 5,
           }}
         >
           <View
@@ -110,7 +111,7 @@ const TripInfo = (props) => {
             formatLabel={(value) => `${value}`}
           />
           <AreaChart
-            style={{ flex: 1, marginLeft: 10, width: "60%" }}
+            style={{ flex: 1, marginLeft: 10}}
             data={elevChange}
             yAccessor={({ item }) => item}
             xAccessor={({ index }) => totalDist[index]}
@@ -125,7 +126,7 @@ const TripInfo = (props) => {
           </AreaChart>
         </View>
         <XAxis
-          style={{ marginLeft: 26, width: "80%" }}
+          style={{ marginLeft: 36, width: "80%" }}
           data={xAxis}
           formatLabel={(index) => `${xAxis[index].toFixed(1)}`}
           contentInset={{ left: 10, right: 10 }}
