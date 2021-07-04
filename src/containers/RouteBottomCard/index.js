@@ -43,7 +43,7 @@ const RouteBottomCard = (props) => {
         >
           <Text style={[Fonts.h2, { marginRight: 20 }]}>{t("ROUTE_TEXT")}</Text>
           <Text style={[Fonts.p, { marginRight: 20 }]}>
-            { (props.usingMetricSystem ? Math.round(route.distance) : Math.round(route.distance*0.000621371192*1000) / 1000 ) } 
+            { (props.usingMetricSystem ? Math.round(route.distance) : Math.round(route.distance*0.000621371192*100) / 100 ) } 
             {" "}
 			      { (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) }
           </Text>

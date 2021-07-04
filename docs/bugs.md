@@ -6,7 +6,7 @@
 ## Low Priority
 1. Update React Native and React Navigation to the latest version
    1. Move the AccessMapRN stuff to the old repo
-2. Change the route from meters to feet/miles
+2. **Change the route from meters to feet/miles**
 3. Make the "Report Issue" button look nicer
 4. Can pan outside of coverage area
 5. Sometimes the map pins show up as black rather than red
