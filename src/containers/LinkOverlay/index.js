@@ -5,7 +5,7 @@ import {
   NativeModules,
   Switch,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   AccessibilityInfo,
 } from "react-native";
 import { Button, Overlay } from "react-native-elements";
@@ -22,7 +22,7 @@ const { Rakam } = NativeModules;
 
 const OverlayButton = (props) => {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       style={{ alignItems: "stretch" }}
       disabled={false}
       onPress={props.onPress}
@@ -30,7 +30,7 @@ const OverlayButton = (props) => {
       <Text accessibilityRole="button" style={Fonts.menuItems}>
         {props.text}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

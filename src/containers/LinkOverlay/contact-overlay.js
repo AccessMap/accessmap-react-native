@@ -1,8 +1,8 @@
 import React from 'react';
-import { Linking, Text, View, TouchableOpacity, AccessibilityInfo } from 'react-native';
+import { Linking, Text, View, TouchableOpacity, AccessibilityInfo, Touchable } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Fonts } from '../../styles';
+import { Fonts, Views } from '../../styles';
 import { useTranslation } from 'react-i18next';
 
 const ContactOverlay = props => {
@@ -22,7 +22,7 @@ const ContactOverlay = props => {
 	return (
 		<View style={{width: "100%"}}>
 			<Text style={Fonts.h2}>{t("CONTACT_TEXT")}</Text>
-				<View style={{flexDirection: "row", alignItems: "center", width: "100%"}}>
+				<View style={Views.overlayIconandText}>
 				<Button
 					icon={
 						<Icon
@@ -37,11 +37,11 @@ const ContactOverlay = props => {
 						openLink(twitterURL);
 					}}
 				/>
-				<TouchableOpacity onPress={() => {openLink(twitterURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={[{flex: 5}, Fonts.p]}>{t("TWITTER_TEXT")}</Text>
+				<TouchableOpacity style={Views.overlayText} onPress={() => {openLink(twitterURL)}} >
+					<Text style={Fonts.p}>{t("TWITTER_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
-				<View style={{flexDirection: "row", alignItems: "center"}}>
+				<View style={Views.overlayIconandText}>
 				<Button
 					icon={
 						<Icon
@@ -56,8 +56,8 @@ const ContactOverlay = props => {
 						openLink(mailURL);
 					}}
 				/>
-				<TouchableOpacity onPress={() => {openLink(mailURL)}} style={{flex: 5, flexWrap: "wrap"}}>
-					<Text style={[{flex: 5, flexWrap: "wrap"}], Fonts.p}>{t("EMAIL_TEXT")}</Text>
+				<TouchableOpacity style={Views.overlayText} onPress={() => {openLink(mailURL)}}>
+					<Text style={Fonts.p}>{t("EMAIL_TEXT")}</Text>
 				</TouchableOpacity>
 			</View>
 

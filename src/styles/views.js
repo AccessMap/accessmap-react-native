@@ -41,6 +41,22 @@ export const overlay = {
   padding: 20,
 };
 
+// Container for the container that holds an icon and text description
+// in the About and Contact overlays.
+export const overlayIconandText = {
+  flexDirection: "row",
+  alignItems: "center",
+  width: "100%",
+  marginVertical: 10,
+};
+
+// For the text that appears in the About and Contact cards
+export const overlayText = {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  flex: 5,
+};
+
 export const page = {
   flex: 1,
   backgroundColor: "#F5FCFF",
