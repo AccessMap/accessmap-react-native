@@ -1,7 +1,5 @@
+
 apply plugin: "com.android.application"
-
-import com.android.build.OutputFile
-
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -169,6 +167,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
 		// Google sheets addons:
+        implementation "com.facebook.react:react-native:+"
 		implementation "com.android.support:appcompat-v7:25.0.1"
 		implementation "com.google.android.gms:play-services-auth:15.0.1"
 		implementation "pub.devrel:easypermissions:0.3.0"

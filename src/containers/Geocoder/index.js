@@ -1,3 +1,5 @@
+// A Geocoder consists of a list of items reflecting geographic locations
+// based on user input.
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
@@ -6,7 +8,7 @@ import { connect } from 'react-redux';
 import { goToLocation, placePin, setOrigin, setDestination } from '../../actions';
 import { ACCESS_TOKEN } from '../../constants';
 
-accessToken = ACCESS_TOKEN;
+const accessToken = ACCESS_TOKEN;
 
 class Geocoder extends Component {
 	constructor(props) {
@@ -22,14 +24,15 @@ class Geocoder extends Component {
 		
 			fetch(query)
 				.then(response => response.json())
-				.then(json => this.setState({ searchList: json.features }))
+				.then(json => {
+					this.setState({ searchList: json.features });
+				})
 		}
 	}
 
 	_renderItem = ({item, index}) => {
 		return (
-			<ListItem
-				onPress={() => {
+			<ListItem onPress={() => {
 					switch (this.props.type) {
 						case "search":
 							this.props.goToLocation(item);
@@ -41,11 +44,14 @@ class Geocoder extends Component {
 							this.props.setDestination(item);
 					}
 					this.props.navigation.pop();
-				}}
-				title={item.place_name}
-			/>
+				}}>
+				<ListItem.Content>
+					<ListItem.Title>{item.place_name}</ListItem.Title>
+				</ListItem.Content>
+			</ListItem>
 		);
 	}
+
 	render() {
 		return (
 			<FlatList
