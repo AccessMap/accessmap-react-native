@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Drawer } from "native-base";
-import {
-  View,
-  Dimensions,
-} from "react-native";
+import { View, Dimensions } from "react-native";
 import { connect } from "react-redux";
 
 import getInclineLimit from "../utils/get-incline-limit";
@@ -92,7 +89,9 @@ class MapPage extends Component {
                   )}
                 <Zooms />
               </View>
+
               <SpeedLegend maxIncline={this.props.maxIncline} />
+
               {this.props.isLoading && <LoadingScreen />}
               {this.props.pinFeatures && (
                 <FeatureCard navigation={this.props.navigation} />

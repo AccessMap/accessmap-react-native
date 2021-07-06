@@ -5,7 +5,7 @@ import { Slider } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 
 import { setCustomUphill } from '../../actions';
-
+import { Colors } from '../../styles';
 
 const UphillSlider = props => {
 	const minValue = 4;
@@ -26,7 +26,8 @@ const UphillSlider = props => {
 				minimumValue={minValue}
 				maximumValue={maxValue}
 				step={0.5}
-				thumbTintColor="blue"
+				thumbStyle={{ height: 25, width: 25}}
+				thumbTintColor={Colors.primaryColor}
 			/>
 		</View>
 	);

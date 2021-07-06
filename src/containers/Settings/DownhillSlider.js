@@ -6,6 +6,7 @@ import { Slider } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 
 import { setCustomDownhill } from '../../actions';
+import { Colors } from '../../styles';
 
 const DownhillSlider = props => {
 	const { t, i18n } = useTranslation();
@@ -21,7 +22,8 @@ const DownhillSlider = props => {
 				minimumValue={4}
 				maximumValue={15}
 				step={0.5}
-				thumbTintColor="blue"
+				thumbStyle={{ height: 25, width: 25}}
+				thumbTintColor={Colors.primaryColor}
 			/>
 		</View>
 	);

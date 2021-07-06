@@ -48,3 +48,5 @@ export {
   uphillColorMap,
   downhillColorMap,
 };
+
+export const primaryColor = "#0F47A2";
