@@ -42,7 +42,51 @@ function App() {
 						headerShown: false,
 					}}
 				/>
+				<Stack.Screen
+					name="Search"
+					component={SearchPage}
+					options={({ navigation }) => ({
+						headerLeftContainerStyle: {
+							width: '100%',
+						},
+						headerLeft: () => (
+							<Button
+								icon={<Icon name="arrow-left" size={20} />}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								onPress={() => navigation.goBack()}
+							/>
+						),
+						headerTitle: (
+							<View
+								style={{
+									flexDirection: 'row',
+									width: '100%',
+									alignItems: 'center',
+								}}>
+								<TextInput
+									style={{ flex: 1 }}
+									placeholder="Search address"
+									autoFocus={true}
+									onChangeText={search => navigation.setParams({ search })}
+								/>
+							</View>
+						),
+					})}
+				/>
+				<Stack.Screen
+					name="Crowdsourcing"
+					component={Crowdsourcing}
+					options={({ route, navigation }) => {
+						const { info } = route.params;
+						var footway = info.footway;
+						footway = footway.charAt(0).toUpperCase() + footway.slice(1)
+						return {
+							title: info.description != null ? info.description : footway,
+						}
+					}}
+				/>
 			</Stack.Navigator>
+
 		</NavigationContainer>
 	);
 }

@@ -9,6 +9,7 @@ import com.facebook.react.bridge.ReadableArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import android.util.Log;
 import io.rakam.api.Rakam;
 
 public class RakamAnalytics extends ReactContextBaseJavaModule {
@@ -33,6 +34,7 @@ public class RakamAnalytics extends ReactContextBaseJavaModule {
 	@ReactMethod
 	public void trackEvent(String event, ReadableArray props) {
 		if (!this.trackEvents) {
+			Log.v("ReactNative", "Not logging!");
 			return;
 		}
 
@@ -44,6 +46,7 @@ public class RakamAnalytics extends ReactContextBaseJavaModule {
 		} catch (JSONException exception) {
 		}
 
+		Log.v("ReactNative", "Logging event!");
 		Rakam.getInstance().logEvent(event, eventProperties);
 		Rakam.getInstance().uploadEvents();
 	}

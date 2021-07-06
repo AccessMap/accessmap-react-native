@@ -201,7 +201,6 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 					minZoomLevel={10}
 					maxZoomLevel={20}
-					maxBounds={bounds}
 				/>
 
 				<LayerAnnotations />

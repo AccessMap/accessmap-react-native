@@ -15,7 +15,7 @@ public class CustomPackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     return Arrays.<NativeModule>asList(
-	    new SheetsManager(reactContext),
+	    	new SheetsManager(reactContext),
 			new RakamAnalytics(reactContext)
 	  );
 	}
