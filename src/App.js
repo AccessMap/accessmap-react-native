@@ -35,7 +35,6 @@ function App() {
 						close: transitionConfig,
 					},
 				}}>
-
 				<Stack.Screen
 					name="Map"
 					component={MapPage}
@@ -43,7 +42,6 @@ function App() {
 						headerShown: false,
 					}}
 				/>
-
 				<Stack.Screen
 					name="Search"
 					component={SearchPage}
@@ -75,7 +73,6 @@ function App() {
 						),
 					})}
 				/>
-        
 				<Stack.Screen
 					name="Crowdsourcing"
 					component={Crowdsourcing}
@@ -89,6 +86,7 @@ function App() {
 					}}
 				/>
 			</Stack.Navigator>
+
 		</NavigationContainer>
 	);
 }
