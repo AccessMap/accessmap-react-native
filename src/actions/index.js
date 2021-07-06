@@ -143,3 +143,14 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 		return dispatch(receiveRoute(null));
 	}
 }
+
+// App Setting Actions
+export const USE_METRIC_SYSTEM = "USE_METRIC_SYSTEM";
+export function useMetricSystem() { // changes units to meters
+	return { type: USE_METRIC_SYSTEM };
+}
+
+export const USE_IMPERIAL_SYSTEM = "USE_IMPERIAL_SYSTEM";
+export function useImperialSystem() { // changes units to miles
+	return { type: USE_IMPERIAL_SYSTEM };
+}

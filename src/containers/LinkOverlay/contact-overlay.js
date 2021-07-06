@@ -62,12 +62,9 @@ const ContactOverlay = props => {
 			</View>
 
 			<Button
-				title={t("Header-close-accessibilityLabel")}
+				title={t("CLOSE_TEXT")}
 				type="clear"
-				onPress={() => {
-					props.onClose;
-					// AccessibilityInfo.announceForAccessibility("");
-				}}
+				onPress={props.onClose}
 			/>
 
 		</View>
