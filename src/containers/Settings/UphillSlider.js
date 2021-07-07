@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Text, View, StyleSheet } from 'react-native';
+import { TouchableWithoutFeedback, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Slider } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';

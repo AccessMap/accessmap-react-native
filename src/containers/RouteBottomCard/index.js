@@ -2,13 +2,13 @@
 // location for their route. The Card contains information about distance, time, and buttons
 // to view the Trip Info and Directions.
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { viewDirections, viewTripInfo } from "../../actions";
-import { Fonts } from "../../styles";
+import { Fonts, Views } from "../../styles";
 
 const RouteBottomCard = (props) => {
   const { t, i18n } = useTranslation();
@@ -17,7 +17,7 @@ const RouteBottomCard = (props) => {
     return null;
   } else if (!props.route || props.route.code != "Ok") {
     return (
-      <Card containerStyle={styles.routeBottomCard}>
+      <Card containerStyle={Views.routeBottomCard}>
         <View style={{ margin: 5 }}>
           <Text style={{ fontSize: 20, marginRight: 20 }}>
             {t("NO_ROUTE_TEXT")}
@@ -30,7 +30,7 @@ const RouteBottomCard = (props) => {
   const route = props.route.routes[0];
 
   return (
-    <Card containerStyle={styles.routeBottomCard}>
+    <Card containerStyle={Views.routeBottomCard}>
       <View style={{ margin: 5, width: "100%" }}>
         <View
           accessible={true}
@@ -99,18 +99,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouteBottomCard);
-
-const styles = StyleSheet.create({
-  routeBottomCard: {
-    backgroundColor: "#FFFFFF",
-    position: "absolute",
-    left: 0,
-    right: 0,
-    maxWidth: 380,
-    bottom: 0,
-    margin: 10,
-    marginBottom: 10,
-    padding: 5,
-    zIndex: 20,
-  },
-});

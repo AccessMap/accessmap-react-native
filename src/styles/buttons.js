@@ -38,5 +38,11 @@ export const iconButtons = {
   marginHorizontal: 0,
 };
 
+export const mobilityButton = {
+  borderRadius: 20,
+  marginTop: 5,
+  height: 40,
+};
+
 // To add more button styles, just add:
 // export const ___ = { ... };

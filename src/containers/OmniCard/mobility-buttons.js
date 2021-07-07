@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from '../../components/Icon';
 import { useTranslation } from 'react-i18next';
+import { Colors } from '../../styles';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -25,7 +26,7 @@ const MobilityButtonRender = props => {
 		<Button
 			accessibilityLabel={"Mobility Mode: " + props.label + ". " +
 				(selected ? "Currently selected" : "Select to set mode")}
-			buttonStyle={{...styles.mobilityButton, backgroundColor: buttonColor}}
+			buttonStyle={{...Colors.mobilityButton, backgroundColor: buttonColor}}
 			icon={<Icon
 				name={props.name}
 				size={25}
@@ -84,11 +85,3 @@ const MobilityButtonGroup = props => {
 }
 
 export default MobilityButtonGroup;
-
-const styles = StyleSheet.create({
-	mobilityButton: {
-		borderRadius: 20,
-		marginTop: 5,
-		height: 40,
-	},
-});

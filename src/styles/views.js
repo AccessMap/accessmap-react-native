@@ -20,6 +20,19 @@ export const omnicard = {
   zIndex: 10,
 };
 
+export const routeBottomCard = {
+  backgroundColor: "#FFFFFF",
+  position: "absolute",
+  left: 0,
+  right: 0,
+  maxWidth: 380,
+  bottom: 0,
+  margin: 10,
+  marginBottom: 10,
+  padding: 5,
+  zIndex: 20,
+};
+
 export const geocoder = {
   flex: 1,
   position: "absolute",
