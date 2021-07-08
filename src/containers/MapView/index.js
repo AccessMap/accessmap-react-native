@@ -28,6 +28,7 @@ import {
 	ACCESS_TOKEN } from '../../constants';
 
 MapboxGL.setAccessToken(ACCESS_TOKEN);
+MapboxGL.setConnected(true); // sets connectivity state of app for Android only
 
 class MapView extends Component {
 	constructor(props) {
