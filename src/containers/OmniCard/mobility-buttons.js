@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { AccessibilityInfo, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from '../../components/Icon';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 
 const MobilityButtonRender = props => {
 	const _onPress = () => {
+		AccessibilityInfo.announceForAccessibility("Currently in " + props.label + " mobility mode");
 		props.setMobilityMode(props.mode);
 	}
 	const selected = props.mode == props.mobilityMode;

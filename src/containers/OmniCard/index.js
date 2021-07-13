@@ -3,7 +3,8 @@ import { Buttons, Views, Position } from "../../styles";
 import {
   View,
   Image,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback, 
+  AccessibilityInfo
 } from "react-native";
 import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
 import Icon from "../../components/Icon";
@@ -192,6 +193,7 @@ class OmniCard extends Component {
             name="swap-vert"
             onPress={() => {
               this.props.reverseRoute();
+              AccessibilityInfo.announceForAccessibility("Start and end locations reversed.");
             }}
           />
         </View>

@@ -97,7 +97,11 @@ class LinkOverlay extends Component {
           <Switch
             accessibilityLabel={this.props.t("TRACKING_SETTINGS_TEXT")}
             onValueChange={() => {
-              // AccessibilityInfo.announceForAccessibility(""); // must upgrade React/React Native to use this
+              AccessibilityInfo.announceForAccessibility(
+                this.props.trackSettings ? 
+                this.props.t("CURRENTLY_TRACKING") : 
+                this.props.t("NOT_TRACKING")
+                );
               Rakam.toggleTracking();
               this.setState({ trackSettings: !this.state.trackSettings });
             }}
@@ -111,13 +115,11 @@ class LinkOverlay extends Component {
           ]}
         >
           <Text style={[{ marginRight: 40 }]}>
-            {this.props.usingMetricSystem ? "Showing metric units": "Showing imperial units"}
+            {this.props.usingMetricSystem ? this.props.t("METRIC_TOGGLE_TEXT"): this.props.t("IMPERIAL_TOGGLE_TEXT")}
           </Text>
           <Switch
-            accessibilityLabel={this.props.t("METERS_TEXT")}
+            accessibilityLabel={this.props.usingMetricSystem ? this.props.t("METRIC_TOGGLE_TEXT"): this.props.t("IMPERIAL_TOGGLE_TEXT")}
             onValueChange={() => {
-              // AccessibilityInfo.announceForAccessibility(""); // must upgrade React/React Native to use this
-              // this.setState({ usingMetricSystem: !this.state.usingMetricSystem });
               if (this.props.usingMetricSystem) {
                 this.props.useImperialSystem();
               } else {
