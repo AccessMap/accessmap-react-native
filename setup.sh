@@ -11,8 +11,8 @@ npx jetify;
 chmod 755 ./android/gradlew;
 alias changeToAndroidFolder='cd ./android'
 changeToAndroidFolder;
-./gradlew clean build;
+./gradlew clean;
 
 # Run the project on an Android device or emulator
 # If this task fails, try uninstalling the app if it already exists on the phone.
-npx react-native run-android;
+npm run android;
