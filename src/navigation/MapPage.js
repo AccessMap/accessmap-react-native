@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Drawer } from "native-base";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Alert } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import { connect } from "react-redux";
 
 import getInclineLimit from "../utils/get-incline-limit";
@@ -28,7 +29,27 @@ class MapPage extends Component {
       screenWidth: Math.round(Dimensions.get("window").width),
     };
     this.onLayout = this.onLayout.bind(this);
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        Alert.alert(
+          "No Internet Connection",
+          "Please check your connection to the internet to use AccessMap.",
+          [
+            { text: "OK" }
+          ]
+        );
+      }
+    });
   }
+
+  handleFirstConnectivityChange = isConnected => {
+    NetInfo.isConnected.removeEventListener(
+      "connectionChange",
+      this.handleFirstConnectivityChange
+    );
+
+    if (isConnected === false) { Alert.alert("You are offline!");}
+  };
 
   componentDidUpdate(prevProps) {
     if (!prevProps.openDrawer && this.props.openDrawer) {

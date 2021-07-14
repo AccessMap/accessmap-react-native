@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/netinfo": "^6.0.0",
     "@react-native-mapbox-gl/maps": "^8.1.0",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
@@ -21,7 +22,7 @@
     "native-base": "^2.15.2",
     "react": "17.0.2",
     "react-i18next": "^11.11.0",
-    "react-native": "0.64.0",
+    "react-native": "^0.64.0",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-ionicons": "^4.6.5",

@@ -1,7 +1,7 @@
 // A Geocoder consists of a list of items reflecting geographic locations
 // based on user input.
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 import { connect } from 'react-redux';
@@ -27,6 +27,16 @@ class Geocoder extends Component {
 				.then(json => {
 					this.setState({ searchList: json.features });
 				})
+				.catch((error) => {
+					console.log(error);
+					Alert.alert(
+						"Failed to retrieve location data",
+						"Please check your connection to the internet.",
+						[
+						  { text: "OK" }
+						]
+					);
+				});
 		}
 	}
 

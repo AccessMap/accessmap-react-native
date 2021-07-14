@@ -1,3 +1,5 @@
+import { Alert } from "react-native";
+
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
 	return { type: MAP_LOADED };
@@ -122,6 +124,7 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
+	// TODO: show no internet connection if can't
 	return function(dispatch) {
 		if (origin && destination) {
 			const data = {
@@ -139,6 +142,16 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 			return fetch(url)
 				.then(response => response.json())
 				.then(json => dispatch(receiveRoute(json)))
+				.catch((error) => {
+					console.log(error);
+					Alert.alert(
+						"Failed to retrieve route data",
+						"Please check your connection to the internet.",
+						[
+						  { text: "OK" }
+						]
+					);
+				});
 		}
 		return dispatch(receiveRoute(null));
 	}

@@ -1,7 +1,8 @@
 # Bug Fixes
 
 ## High Priority (1 = highest)
-1. Add announceForAccessibility throughout the app whenever needed for screenreader accessibility 
+1. Double check the parameters we are passing to Mapbox (not null) to avoid the sidewalk data error
+2. Add announceForAccessibility throughout the app whenever needed for screenreader accessibility 
 
 ## Low Priority
 2. Make the "Report Issue" button look nicer
