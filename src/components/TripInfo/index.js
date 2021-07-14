@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "react-native-svg-charts";
 import { useTranslation } from "react-i18next";
+import { metersToFeet, metersToMiles } from "../../utils/metric-imperial-conversion";
 
 import Header from "../Header";
 
@@ -28,21 +29,16 @@ const TripInfo = (props) => {
   const data = route.legs[0];
   const nRoutes = [...Array(data.length + 1).keys()];
 
-  var routeDistance = props.usingMetricSystem
-    ? route.distance.toFixed(1)
-    : Math.round(route.distance * 0.000621371192 * 100) / 100; // total distance in miles
+  var routeDistance = props.usingMetricSystem ? 
+    route.distance.toFixed(1) : metersToMiles(route.distance); // total distance in miles
   var units = props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT");
 
-  // convert from meters to feet if needed for the elevation graph
-  const totalDist = nRoutes.map((i) => {
+  const dist = nRoutes.map((i) => {
     if (i == 0) {
       return 0;
     }
     var metersDistance = data[i - 1].properties.length;
-    if (props.usingMetricSystem) {
-      return metersDistance;
-    }
-    return Math.round(metersDistance * 3.28084 * 10) / 10; // feet
+    return (props.usingMetricSystem ? metersDistance : metersToFeet(metersDistance));
   });
 
   var maxUphill = -200;
@@ -56,17 +52,14 @@ const TripInfo = (props) => {
       maxDownhill = Math.min(data[i - 1].properties.incline, maxDownhill);
       var metersHigh =
         data[i - 1].properties.incline * data[i - 1].properties.length;
-      if (props.usingMetricSystem) {
-        return metersHigh;
-      }
-      return Math.round(metersHigh * 3.28084 * 10) / 10; // feet
+        return (props.usingMetricSystem ? metersHigh : metersToFeet(metersHigh));
     }
     return 0;
   });
   const xInc = [...Array(10).keys()];
-  const xAxis = xInc.map((i) => (i * totalDist[totalDist.length - 1]) / 9);
-  for (var i = 1; i < totalDist.length; i++) {
-    totalDist[i] += totalDist[i - 1];
+  const xAxis = xInc.map((i) => (i * dist[dist.length - 1]) / 9);
+  for (var i = 1; i < dist.length; i++) {
+    dist[i] += dist[i - 1];
     elevChange[i] += elevChange[i - 1];
   }
   return (
@@ -114,7 +107,7 @@ const TripInfo = (props) => {
             style={{ flex: 1, marginLeft: 10}}
             data={elevChange}
             yAccessor={({ item }) => item}
-            xAccessor={({ index }) => totalDist[index]}
+            xAccessor={({ index }) => dist[index]}
             svg={{
               fill: "rgb(240, 150, 20, 0.5)",
               stroke: "black",

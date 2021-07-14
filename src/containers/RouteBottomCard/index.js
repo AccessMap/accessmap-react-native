@@ -78,7 +78,6 @@ const RouteBottomCard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     route: state.route,
     viewingTripInfo: state.viewingTripInfo,

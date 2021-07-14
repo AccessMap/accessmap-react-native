@@ -1,27 +1,10 @@
 // Index for Directions and Direction Cards
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { Card } from 'react-native-elements';
-import { Fonts } from '../../styles'
+import { FlatList, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import DirectionCard from "./DirectionCard";
 
 import Header from '../Header';
-
-const DirectionCard = props => {
-	// Props:
-	// a) footing
-	// b) name of segment
-	// c) distance
-	const { t, i18n } = useTranslation();
-	const action = props.footway == "sidewalk" ? t("USE_SIDEWALK_TEXT") : t("USE_CROSSING_TEXT");
-	return (
-		<Card accessible={true}>
-			<Text style={Fonts.h2}>{action}</Text>
-			<Text style={Fonts.p}>{props.name}</Text>
-			<Text style={Fonts.p}>{Math.round(props.distance)} meters</Text>
-		</Card>
-	);
-}
 
 const Directions = props => {
 	const { t, i18n } = useTranslation();
