@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import { useTranslation } from 'react-i18next';
 
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
@@ -124,7 +125,6 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
-	// TODO: show no internet connection if can't
 	return function(dispatch) {
 		if (origin && destination) {
 			const data = {

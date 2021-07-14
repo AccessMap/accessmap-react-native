@@ -1,5 +1,3 @@
-import { Position } from "../styles";
-
 // Stylesheet for all general containers and views in the app.
 export const container = {
   flex: 1,
@@ -50,7 +48,8 @@ export const map = {
 // any white card that appears over other content
 export const overlay = {
   backgroundColor: "white",
-  ...Position.fullWidthandHeight,
+  width: "100%",
+  height: "100%",
   padding: 20,
 };
 

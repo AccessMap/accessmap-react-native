@@ -20,6 +20,8 @@ import RouteBottomCard from "../containers/RouteBottomCard";
 import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
+import { useTranslation } from 'react-i18next';
+
 class MapPage extends Component {
   static navigationOptions = { title: "Map", header: null };
 

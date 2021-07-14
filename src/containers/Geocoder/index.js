@@ -7,6 +7,7 @@ import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { goToLocation, placePin, setOrigin, setDestination } from '../../actions';
 import { ACCESS_TOKEN } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
 const accessToken = ACCESS_TOKEN;
 

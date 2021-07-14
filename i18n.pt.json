@@ -99,5 +99,9 @@
     "OmniCard-index-accessibilityLabel": "Selecione para modificar as preferências de mobilidade personalizada",
     "OmniCard-mobility-buttons-accessibilityLabel": "* Atualmente selecionado / Select para o modo de jogo",
     "OmniCard-region-switcher-accessibilityLabel": "Região atual: *****. Selecione a região mudança.",
-    "OmniCard-region-switcher-button title": "** currRegion"
+    "OmniCard-region-switcher-button title": "** currRegion",
+    "OFFLINE_TEXT": "Sem ligação à Internet",
+    "NO_INTERNET": "Por favor, verifique a sua ligação à internet.",
+    "NO_ROUTE": "Falhou em recuperar os dados da rota.",
+    "NO_LOCATION": "Falhou na recuperação de dados de localização"
 }

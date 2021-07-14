@@ -1,5 +1,4 @@
 {
-  "YES_TEXT": "Yes",
   "NO_TEXT": "No",
   "SUBMIT_TEXT": "Submit",
   "SIDEWALK_TEXT": "Sidewalk",
@@ -104,5 +103,9 @@
   "OmniCard-index-accessibilityLabel": "Select to modify custom mobility preferences",
   "OmniCard-mobility-buttons-accessibilityLabel": "* Currently selected / Select to set mode",
   "OmniCard-region-switcher-accessibilityLabel": "Current Region: *****. Select to change region.",
-  "OmniCard-region-switcher-button title": "** currRegion"
+  "OmniCard-region-switcher-button title": "** currRegion",
+  "OFFLINE_TEXT": "No Internet Connection",
+  "NO_INTERNET": "Please check your connection to the internet.",
+  "NO_ROUTE": "Failed to retrieve route data.",
+  "NO_LOCATION": "Failed to retrieve location data"
 }

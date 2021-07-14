@@ -100,5 +100,9 @@
     "OmniCard-index-accessibilityLabel": "Seleccione para modificar las preferencias de movilidad personalizada",
     "OmniCard-mobility-buttons-accessibilityLabel": "* En la actualidad seleccionada / Select para el modo de ajuste",
     "OmniCard-region-switcher-accessibilityLabel": "Región actual: *****. Seleccione para cambiar región.",
-    "OmniCard-region-switcher-button title": "** currRegion"
+    "OmniCard-region-switcher-button title": "** currRegion",
+    "OFFLINE_TEXT": "Sin conexión a Internet",
+    "NO_INTERNET": "Por favor, compruebe su conexión a Internet.",
+    "NO_ROUTE": "No se pudieron recuperar los datos de ruta.",
+    "NO_LOCATION": "No se pudieron recuperar los datos de ubicación"
 }
