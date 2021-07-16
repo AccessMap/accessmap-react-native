@@ -3,7 +3,8 @@ import { Buttons, Views, Position } from "../../styles";
 import {
   View,
   Image,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback, 
+  AccessibilityInfo
 } from "react-native";
 import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
 import Icon from "../../components/Icon";
@@ -137,18 +138,19 @@ class OmniCard extends Component {
     } else {
       // unselected route state
       geocodeBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
+        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', justifyContent: 'space-between'}]}>
           <IconButton
             name="menu"
             accessibilityLabel="Select to open drawer menu"
             onPress={this.props.openDrawer}
           />
           <Image
-            style={{ flex: 1, height: "70%" }}
+            style={{ flex: 1, height: "50%" }}
             source={require("../../../assets/accessmap-logo.png")}
             resizeMode="center"
             resizeMethod="scale"
           />
+          <LanguageSwitcher />
           <RegionSwitcher />
         </View>
       );
@@ -191,6 +193,7 @@ class OmniCard extends Component {
             name="swap-vert"
             onPress={() => {
               this.props.reverseRoute();
+              AccessibilityInfo.announceForAccessibility("Start and end locations reversed.");
             }}
           />
         </View>

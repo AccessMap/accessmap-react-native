@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Drawer } from "native-base";
-import {
-  View,
-  Dimensions,
-} from "react-native";
+import { View, Dimensions, Alert } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import { connect } from "react-redux";
 
 import getInclineLimit from "../utils/get-incline-limit";
@@ -22,6 +20,8 @@ import RouteBottomCard from "../containers/RouteBottomCard";
 import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
+import { useTranslation } from 'react-i18next';
+
 class MapPage extends Component {
   static navigationOptions = { title: "Map", header: null };
 
@@ -31,7 +31,27 @@ class MapPage extends Component {
       screenWidth: Math.round(Dimensions.get("window").width),
     };
     this.onLayout = this.onLayout.bind(this);
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        Alert.alert(
+          "No Internet Connection",
+          "Please check your connection to the internet to use AccessMap.",
+          [
+            { text: "OK" }
+          ]
+        );
+      }
+    });
   }
+
+  handleFirstConnectivityChange = isConnected => {
+    NetInfo.isConnected.removeEventListener(
+      "connectionChange",
+      this.handleFirstConnectivityChange
+    );
+
+    if (isConnected === false) { Alert.alert("You are offline!");}
+  };
 
   componentDidUpdate(prevProps) {
     if (!prevProps.openDrawer && this.props.openDrawer) {
@@ -92,7 +112,9 @@ class MapPage extends Component {
                   )}
                 <Zooms />
               </View>
+
               <SpeedLegend maxIncline={this.props.maxIncline} />
+
               {this.props.isLoading && <LoadingScreen />}
               {this.props.pinFeatures && (
                 <FeatureCard navigation={this.props.navigation} />

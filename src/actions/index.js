@@ -1,3 +1,6 @@
+import { Alert } from "react-native";
+import { useTranslation } from 'react-i18next';
+
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
 	return { type: MAP_LOADED };
@@ -139,7 +142,28 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 			return fetch(url)
 				.then(response => response.json())
 				.then(json => dispatch(receiveRoute(json)))
+				.catch((error) => {
+					console.log(error);
+					Alert.alert(
+						"Failed to retrieve route data",
+						"Please check your connection to the internet.",
+						[
+						  { text: "OK" }
+						]
+					);
+				});
 		}
 		return dispatch(receiveRoute(null));
 	}
+}
+
+// App Setting Actions
+export const USE_METRIC_SYSTEM = "USE_METRIC_SYSTEM";
+export function useMetricSystem() { // changes units to meters
+	return { type: USE_METRIC_SYSTEM };
+}
+
+export const USE_IMPERIAL_SYSTEM = "USE_IMPERIAL_SYSTEM";
+export function useImperialSystem() { // changes units to miles
+	return { type: USE_IMPERIAL_SYSTEM };
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, NativeModules } from 'react-native';
+import { Text, View, NativeModules } from 'react-native';
 import { Button, CheckBox } from 'react-native-elements';
 import { withTranslation } from 'react-i18next';
+import { Colors } from '../../styles';
 
 import {
 	spreadsheetId,
@@ -118,7 +119,7 @@ class FeedbackForm extends Component {
 					<CheckBox
 						title={this.props.t("SIDEWALK_PAVED_TEXT")}
 						checked={!swNotPresent && swNotPaved}
-						textStyle={swNotPresent ? styles.disabled : {}}
+						textStyle={swNotPresent ? Colors.disabled : {}}
 						onPress={() =>{
 							if (!swNotPresent) {
 								this.setState({swNotPaved: !swNotPaved})
@@ -128,7 +129,7 @@ class FeedbackForm extends Component {
 					<CheckBox
 						title={this.props.t("SIDEWALK_WIDTH_TEXT")}
 						checked={swSub3Ft}
-						textStyle={swNotPresent ? styles.disabled : {}}
+						textStyle={swNotPresent ? Colors.disabled : {}}
 						onPress={() => {
 							if (!swNotPresent) {
 								this.setState({swSub3Ft: !swSub3Ft})
@@ -203,11 +204,5 @@ class FeedbackForm extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	disabled: {
-		color: "#AAAAAA"
-	},
-});
 
 export default withTranslation()(FeedbackForm);

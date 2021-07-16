@@ -24,6 +24,8 @@ import {
 	CLOSE_DRAWER,
 	LOCATE_USER,
 	RECEIVE_ROUTE,
+	USE_METRIC_SYSTEM,
+	USE_IMPERIAL_SYSTEM,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -68,6 +70,7 @@ const defaultState = {
 	viewingDirections: false,
 	drawerOpen: false,
 	route: null,
+	usingMetricSystem: false, // meters vs miles
 }
 
 // Define the states 
@@ -145,6 +148,12 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, openDrawer: false};
 		case RECEIVE_ROUTE:
 			return {...state, route: action.route};
+		case USE_METRIC_SYSTEM:
+			logEvent(action.type, []);
+			return {...state, usingMetricSystem: true};
+		case USE_IMPERIAL_SYSTEM:
+			logEvent(action.type, []);
+			return {...state, usingMetricSystem: false};
 		default:
 			return state;
 	}

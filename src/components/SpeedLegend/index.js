@@ -72,7 +72,10 @@ const SpeedLegend = (props) => {
               return (
                 <View
                   key={d}
-                  style={{ flex: 1, backgroundColor: colorMap(d) }}
+                  style={{ 
+                    flex: 1, 
+                    backgroundColor: `${colorMap(d)}`,
+                  }}
                 />
               );
             })}

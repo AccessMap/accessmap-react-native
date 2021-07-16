@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { NativeModules } from 'react-native';
+import { AccessibilityInfo, NativeModules } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { connect } from 'react-redux';
@@ -28,6 +28,7 @@ import {
 	ACCESS_TOKEN } from '../../constants';
 
 MapboxGL.setAccessToken(ACCESS_TOKEN);
+MapboxGL.setConnected(true); // sets connectivity state of app for Android only
 
 class MapView extends Component {
 	constructor(props) {
@@ -46,9 +47,15 @@ class MapView extends Component {
 		if (zoom > prevZoom) {
 			this.camera.zoomTo(currZoom + 1, 200);
 			Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
+			AccessibilityInfo.announceForAccessibility(currZoom >= 20 ? 
+				"Zoom level unchanged. Maximum reached." : 
+				"Zoom level increased to " + Math.round(currZoom + 1));
 		} else if (zoom < prevZoom) {
 			this.camera.zoomTo(currZoom - 1, 200);
 			Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
+			AccessibilityInfo.announceForAccessibility(currZoom <= 10 ? 
+				"Zoom level unchanged. Minimum reached." : 
+				"Zoom level decreased to " + Math.round(currZoom - 1));
 		}
 	}
 
@@ -201,7 +208,6 @@ class MapView extends Component {
 					defaultSettings={{ centerCoordinate, zoomLevel }}
 					minZoomLevel={10}
 					maxZoomLevel={20}
-					maxBounds={bounds}
 				/>
 
 				<LayerAnnotations />

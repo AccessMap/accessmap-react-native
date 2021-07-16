@@ -31,7 +31,7 @@ class LanguageSwitcher extends Component {
 					marginLeft: 8,
 					padding: 5}}
 				icon={
-					<Icon name="globe" type="feather" size={18} color="#0000AA" />
+					<Icon name="language" size={18} color="#0000AA" />
 				}
 				title={this.props.currLanguage}
 				titleStyle={{

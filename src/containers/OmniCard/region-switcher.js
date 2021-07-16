@@ -31,7 +31,7 @@ class RegionSwitcher extends Component {
 					marginLeft: 8,
 					padding: 5}}
 				icon={
-					<Icon name="globe" type="entypo" size={18} color="#0000AA" />
+					<Icon name="place" size={18} color="#0000AA" />
 				}
 				title={this.props.currRegion.substring(0,3)}
 				titleStyle={{

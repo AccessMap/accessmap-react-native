@@ -1,11 +1,17 @@
+/**
+ * @format
+ */
+
 import React, { Component } from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
 import {AppRegistry} from 'react-native';
 
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import './i18n';
+
 import App from './src/App';
+import {name as appName} from './app.json';
 
 import mapApp from './src/reducers';
 
@@ -25,4 +31,4 @@ class Index extends Component<Props> {
 	}
 }
 
-AppRegistry.registerComponent('AccessMap', () => Index);
+AppRegistry.registerComponent(appName, () => Index);

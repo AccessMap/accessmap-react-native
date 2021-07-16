@@ -1,5 +1,3 @@
-import { Position } from "../styles";
-
 // Stylesheet for all general containers and views in the app.
 export const container = {
   flex: 1,
@@ -20,6 +18,19 @@ export const omnicard = {
   zIndex: 10,
 };
 
+export const routeBottomCard = {
+  backgroundColor: "#FFFFFF",
+  position: "absolute",
+  left: 0,
+  right: 0,
+  maxWidth: 380,
+  bottom: 0,
+  margin: 10,
+  marginBottom: 10,
+  padding: 5,
+  zIndex: 20,
+};
+
 export const geocoder = {
   flex: 1,
   position: "absolute",
@@ -37,8 +48,25 @@ export const map = {
 // any white card that appears over other content
 export const overlay = {
   backgroundColor: "white",
-  ...Position.fullWidthandHeight,
+  width: "100%",
+  height: "100%",
   padding: 20,
+};
+
+// Container for the container that holds an icon and text description
+// in the About and Contact overlays.
+export const overlayIconandText = {
+  flexDirection: "row",
+  alignItems: "center",
+  width: "100%",
+  marginVertical: 10,
+};
+
+// For the text that appears in the About and Contact cards
+export const overlayText = {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  flex: 5,
 };
 
 export const page = {
