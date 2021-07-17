@@ -85,6 +85,10 @@ class LinkOverlay extends Component {
           text={this.props.t("CONTACT_TEXT")}
           onPress={() => this.setState({ showContact: true })}
         />
+        <OverlayButton
+          text={this.props.t("TUTORIAL")}
+          onPress={() => this.props.navigation.push("Tutorial")}
+        />
 
         <View
           style={[

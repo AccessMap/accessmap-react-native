@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import MapPage from './navigation/MapPage';
 import SearchPage from './navigation/SearchPage';
+import TutorialPage from './navigation/TutorialPage';
 import Crowdsourcing from './navigation/Crowdsourcing';
 
 const Stack = createStackNavigator();
@@ -74,6 +75,23 @@ function App() {
 									onChangeText={search => navigation.setParams({ search })}
 								/>
 							</View>
+						),
+					})}
+				/>
+				<Stack.Screen
+					name="Tutorial"
+					component={TutorialPage}
+					options={({ navigation }) => ({
+						headerLeft: () => (
+							<Button
+								accessibilityLabel={"Select to go back to map screen"}
+								icon={<Icon name="arrow-left" size={20} />}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								onPress={() => {
+									navigation.goBack();
+									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+								}}
+							/>
 						),
 					})}
 				/>

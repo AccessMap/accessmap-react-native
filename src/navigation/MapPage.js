@@ -89,7 +89,12 @@ class MapPage extends Component {
             },
             main: { paddingLeft: 3 },
           }}
-          content={<LinkOverlay closeDrawer={() => this.closeDrawer()} />}
+          content={
+            <LinkOverlay 
+              closeDrawer={() => this.closeDrawer()} 
+              navigation={this.props.navigation}
+            />
+          }
           onClose={() => this.closeDrawer()}
         >
           <View style={Views.page}>
