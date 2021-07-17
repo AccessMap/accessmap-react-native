@@ -11,6 +11,7 @@ const DirectionCard = (props) => {
 	// a) footing
 	// b) name of segment
 	// c) distance
+	// d) index (numbered step of direction)
 	const { t, i18n } = useTranslation();
 	const action = props.footway == "sidewalk" ? t("USE_SIDEWALK_TEXT") : t("USE_CROSSING_TEXT");
 	return (

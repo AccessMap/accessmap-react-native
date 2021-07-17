@@ -114,6 +114,7 @@ class OmniCard extends Component {
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
+            accessibilityLabel={"Enter address"}
             navigation={this.props.navigation}
             type="origin"
             value={
@@ -130,6 +131,7 @@ class OmniCard extends Component {
             accessibilityLabel="Select to exit route finding"
             onPress={() => {
               cancelRoute();
+              AccessibilityInfo.announceForAccessibility("Cancelled route. Showing home screen with Map View.");
               this.setState({ findDirections: false });
             }}
           />
@@ -161,6 +163,7 @@ class OmniCard extends Component {
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
+            accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}
             value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
             type="search"
@@ -169,7 +172,10 @@ class OmniCard extends Component {
           <IconButton
             name="directions"
             accessibilityLabel="Select to look up routes"
-            onPress={() => this.setState({ findDirections: true })}
+            onPress={() => {
+              this.setState({ findDirections: true }); 
+              AccessibilityInfo.announceForAccessibility("Showing route start and end address selection window.");
+            }}
           />
         </View>
       );
@@ -177,6 +183,7 @@ class OmniCard extends Component {
       middleRowContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
+            accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}
             value={
               destinationText

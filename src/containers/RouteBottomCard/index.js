@@ -2,7 +2,7 @@
 // location for their route. The Card contains information about distance, time, and buttons
 // to view the Trip Info and Directions.
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, AccessibilityInfo } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ const RouteBottomCard = (props) => {
   if (props.viewingDirections || props.viewingTripInfo) {
     return null;
   } else if (!props.route || props.route.code != "Ok") {
+    AccessibilityInfo.announceForAccessibility("No possible route found with given start and end locations.");
     return (
       <Card containerStyle={Views.routeBottomCard}>
         <View style={{ margin: 5 }}>
@@ -29,6 +30,8 @@ const RouteBottomCard = (props) => {
 
   const route = props.route.routes[0];
 
+  AccessibilityInfo.announceForAccessibility("Route has been found. " + 
+    "Select Trip info or Directions button for more details");
   return (
     <Card containerStyle={Views.routeBottomCard}>
       <View style={{ margin: 5, width: "100%" }}>
@@ -63,7 +66,10 @@ const RouteBottomCard = (props) => {
         >
           <Button
             title={t("TRIP_INFO_TEXT")}
-            onPress={() => props.viewTripInfo()}
+            onPress={() => { 
+              props.viewTripInfo();
+              AccessibilityInfo.announceForAccessibility("Showing Trip details screen.");
+            }}
             containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
           />
           <Button

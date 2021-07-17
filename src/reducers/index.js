@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { NativeModules } from 'react-native';
+import { AccessibilityInfo, NativeModules } from 'react-native';
 import {
 	MAP_LOADED,
 	ZOOM_IN,
@@ -77,6 +77,7 @@ const defaultState = {
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
 		case MAP_LOADED:
+			AccessibilityInfo.announceForAccessibility("Map successfully loaded.");
 			return {...state, isLoading: false};
 		case ZOOM_IN:
 			return {...state, zoomLevel: state.zoomLevel + 1};
@@ -143,6 +144,7 @@ export default function mapApp(state = defaultState, action) {
 		case LOCATE_USER:
 			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
 		case OPEN_DRAWER:
+			AccessibilityInfo.announceForAccessibility("Drawer menu opened.");
 			return {...state, openDrawer: true};
 		case CLOSE_DRAWER:
 			return {...state, openDrawer: false};

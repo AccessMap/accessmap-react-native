@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Drawer } from "native-base";
-import { View, Dimensions, Alert } from "react-native";
+import { View, Dimensions, Alert, AccessibilityInfo } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { connect } from "react-redux";
 
@@ -60,6 +60,7 @@ class MapPage extends Component {
   }
 
   closeDrawer() {
+    AccessibilityInfo.announceForAccessibility("Drawer menu is closed");
     this.drawer._root.close();
     this.props.closeDrawer();
   }
@@ -73,6 +74,7 @@ class MapPage extends Component {
   }
   render() {
     const screenWidth = this.state.screenWidth;
+    AccessibilityInfo.announceForAccessibility("Showing Map View.");
     return (
       <View style={{ flex: 1 }} onLayout={this.onLayout}>
         <Drawer

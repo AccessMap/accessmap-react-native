@@ -1,4 +1,4 @@
-import { Animated, Easing, TextInput, View } from 'react-native';
+import { AccessibilityInfo, Animated, Easing, TextInput, View } from 'react-native';
 import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -51,9 +51,13 @@ function App() {
 						},
 						headerLeft: () => (
 							<Button
+								accessibilityLabel={"Select to go back to map screen"}
 								icon={<Icon name="arrow-left" size={20} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
-								onPress={() => navigation.goBack()}
+								onPress={() => {
+									navigation.goBack();
+									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+								}}
 							/>
 						),
 						headerTitle: (

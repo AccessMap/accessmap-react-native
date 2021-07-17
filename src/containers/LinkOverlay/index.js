@@ -98,9 +98,9 @@ class LinkOverlay extends Component {
             accessibilityLabel={this.props.t("TRACKING_SETTINGS_TEXT")}
             onValueChange={() => {
               AccessibilityInfo.announceForAccessibility(
-                this.props.trackSettings ? 
-                this.props.t("CURRENTLY_TRACKING") : 
-                this.props.t("NOT_TRACKING")
+                this.state.trackSettings ? 
+                this.props.t("NOT_TRACKING") : 
+                this.props.t("CURRENTLY_TRACKING")
                 );
               Rakam.toggleTracking();
               this.setState({ trackSettings: !this.state.trackSettings });
