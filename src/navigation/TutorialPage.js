@@ -1,87 +1,72 @@
 // A TutorialPage shows a series of still images of the app, guiding the user through
 // main functionalities. Includes a custom tooltip shape.
-import React, { useState } from "react";
+import React from "react";
 import { View, Image, AccessibilityInfo, Text, Button } from "react-native";
+import ToolTip from "../components/Tutorials/ToolTip";
 
 export default function TutorialPage({ route, navigation }) {
-  // states
-  // pageNum: represents the page to show corresponding to the step in the walkthrough
-  const [pageNum, setCount] = useState(0);
+  const maxSteps = 5;
+  const textColor = "white";
+  const cardDescription = "Route Planning";
+  const backgroundColor ="#0F47A1";
+  const nextButtonColor = "#0164FF";
 
-  if (pageNum === 0) {
-  }
+  const toolTipVariables = [
+    { // First Card: Choose a destination with Search Bar
+      "captions": 
+      "Search bar located at the top of the app. Gray text inside the bar reads: Enter Address", 
+      "toolTipPositionLeft":"15%", "toolTipPositionTop":"18%",
+      "arrowPositionLeft":"50%", "arrowPositionTop":"-20%",
+      "heading": "Find Directions",
+      "paragraph":
+      "Choose the start or destination of your route by tapping on the map or entering a location via the Search Bar.",
+      "showBack": false,
+      "nextButtonText":"Next",
+    },
+    { // Mobility Buttons
+      "captions": 
+      "Mobility buttons located under the search bar in order: Custom, Wheelchair, Powered, and Cane.", 
+      "toolTipPositionLeft":"15%", "toolTipPositionTop":"18%",
+      "arrowPositionLeft":"50%", "arrowPositionTop":"-10%%",
+      "heading": "Choose Mobility Setting",
+      "paragraph":
+      "Choose the mobility setting that best fits your transportation needs. This adjusts the routing by looking at the steepness level of sidewalks.",
+      "showBack": true,
+      "nextButtonText":"Next",
+    },
+    { // Mobility Buttons
+      "captions": 
+      "3", 
+      "toolTipPositionLeft":"15%", "toolTipPositionTop":"18%",
+      "arrowPositionLeft":"50%", "arrowPositionTop":"-10%%",
+      "heading": "Choose Mobility Setting",
+      "paragraph":
+      "he steepness level of sidewalks.",
+      "showBack": true,
+      "nextButtonText":"Next",
+    },
+  ];
+
   return (
     <View style={{ width: "100%" }}>
       <Image
         accessibilityLabel={
-          "Search bar located at the top of the app. Gray text inside the bar reads: Enter Address"
+          "Search bar located at the top of the app, highlighted. Gray text inside the bar reads: Enter Address"
         }
-        style={{ height: "100%", width: "100%", margin: 0, padding: 0, opacity: 0.5 }}
+        style={{ height: "100%", width: "100%", margin: 0, padding: 0, opacity: 0.75 }}
         source={require("../../assets/tutorial_background.png")}
         resizeMode="contain"
         resizeMethod="scale"
       />
 
-      <View
-        style={{
-          position: "absolute",
-          left: "25%",
-          top: "16%",
-          width: 30,
-          height: 30,
-          backgroundColor: "#0F47A1",
-          zIndex: 98,
-          transform: [{ rotate: "45deg" }],
-        }}
-      ></View>
-
-      <View
-        style={{ position: "absolute", left: "15%", top: "18%", zIndex: 99 }}
-      >
-        <View
-          style={{
-            width: 250,
-            padding: 15,
-            backgroundColor: "#0F47A1",
-            borderRadius: 5,
-          }}
-        >
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text style={{ color: "#E6E6E6", fontSize: 12, marginBottom: 10 }}>
-              Route Planning
-            </Text>
-            <Text style={{ color: "#E6E6E6", fontSize: 12, marginBottom: 10 }}>
-              1/5
-            </Text>
-          </View>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "white",
-              fontSize: 20,
-              marginBottom: 10,
-            }}
-          >
-            Find Directions{" "}
-          </Text>
-          <Text style={{ marginBottom: 20, color: "white" }}>
-            Choose a destination by tapping on the map or entering a location via
-            the Search Bar.
-          </Text>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <View style={{ width: 100 }}>
-              <Button title="Skip Tour" color="#0F47A1" />
-            </View>
-            <View style={{ width: 100 }}>
-              <Button title="Next" color="#0164FF" />
-            </View>
-          </View>
-        </View>
-      </View>
+      <ToolTip 
+        backgroundColor={backgroundColor}
+        textColor={textColor}
+        cardDescription={cardDescription}
+        maxStep={maxSteps}
+        nextButtonColor={nextButtonColor}
+        toolTipVariables={toolTipVariables}
+      />
     </View>
   );
 }
