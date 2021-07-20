@@ -20,7 +20,7 @@ import { useImperialSystem, useMetricSystem } from "../../actions";
 
 const { Rakam } = NativeModules;
 
-const OverlayButton = (props) => {
+export const OverlayButton = (props) => {
   return (
     <TouchableOpacity
       style={{ alignItems: "stretch" }}
@@ -87,7 +87,7 @@ class LinkOverlay extends Component {
         />
         <OverlayButton
           text={this.props.t("TUTORIAL")}
-          onPress={() => this.props.navigation.push("Tutorial")}
+          onPress={() => this.props.navigation.push("Tutorials")}
         />
 
         <View

@@ -85,6 +85,7 @@ export default function ToolTip({
           >
             <View style={{ width: 100, opacity: showBack ? 1.0 : 0.0 }}>
               <Button
+                disabled={!showBack}
                 title="Back"
                 color={backgroundColor}
                 onPress={() => goToNextStep(numStep - 1)}

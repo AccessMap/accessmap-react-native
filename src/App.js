@@ -9,8 +9,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import MapPage from './navigation/MapPage';
 import SearchPage from './navigation/SearchPage';
-import TutorialPage from './navigation/TutorialPage';
+import MapInterfaceTutorialPage from './navigation/Tutorials/MapInterfaceTutorialPage';
 import Crowdsourcing from './navigation/Crowdsourcing';
+import TutorialPage from './navigation/Tutorials/TutorialPage';
+import RoutePlanningTutorialPage from './navigation/Tutorials/RoutePlanningTutorialPage';
+import SettingsTutorialPage from './navigation/Tutorials/SettingsTutorialPage';
 
 const Stack = createStackNavigator();
 
@@ -78,13 +81,14 @@ function App() {
 						),
 					})}
 				/>
+
 				<Stack.Screen
-					name="Tutorial"
+					name="Tutorials"
 					component={TutorialPage}
 					options={({ navigation }) => ({
 						headerLeft: () => (
 							<Button
-								accessibilityLabel={"Select to go back to map screen"}
+								accessibilityLabel={"Select to go back to Map Screen"}
 								icon={<Icon name="arrow-left" size={20} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
@@ -95,6 +99,58 @@ function App() {
 						),
 					})}
 				/>
+				<Stack.Screen
+					name="Map Interface"
+					component={MapInterfaceTutorialPage}
+					options={({ navigation }) => ({
+						headerLeft: () => (
+							<Button
+								accessibilityLabel={"Select to go back to Tutorial Page"}
+								icon={<Icon name="arrow-left" size={20} />}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								onPress={() => {
+									navigation.goBack();
+									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+								}}
+							/>
+						),
+					})}
+				/>
+				<Stack.Screen
+					name="Route Planning"
+					component={RoutePlanningTutorialPage}
+					options={({ navigation }) => ({
+						headerLeft: () => (
+							<Button
+								accessibilityLabel={"Select to go back to Tutorial Page"}
+								icon={<Icon name="arrow-left" size={20} />}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								onPress={() => {
+									navigation.goBack();
+									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+								}}
+							/>
+						),
+					})}
+				/>
+				<Stack.Screen
+					name="Settings Menu"
+					component={SettingsTutorialPage}
+					options={({ navigation }) => ({
+						headerLeft: () => (
+							<Button
+								accessibilityLabel={"Select to go back to Tutorial Page"}
+								icon={<Icon name="arrow-left" size={20} />}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								onPress={() => {
+									navigation.goBack();
+									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+								}}
+							/>
+						),
+					})}
+				/>
+
 				<Stack.Screen
 					name="Crowdsourcing"
 					component={Crowdsourcing}

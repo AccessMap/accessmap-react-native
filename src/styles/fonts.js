@@ -26,6 +26,4 @@ export const menuItems = {
   color: "black",
   paddingTop: 20,
   paddingBottom: 20, 
-  borderBottomColor: '#DFDFDF',
-  borderBottomWidth: 1,
 };
