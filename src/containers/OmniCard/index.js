@@ -131,7 +131,7 @@ class OmniCard extends Component {
             accessibilityLabel="Select to exit route finding"
             onPress={() => {
               cancelRoute();
-              AccessibilityInfo.announceForAccessibility("Cancelled route. Showing home screen with Map View.");
+              AccessibilityInfo.announceForAccessibility("Cancelled route. Showing home screen with drawer menu open.");
               this.setState({ findDirections: false });
             }}
           />

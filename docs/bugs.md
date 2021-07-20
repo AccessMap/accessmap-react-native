@@ -1,17 +1,15 @@
 # Bug Fixes
 
 ## High Priority (1 = highest)
-1. Double check the parameters we are passing to Mapbox (not null) to avoid the sidewalk data error
-2. Add announceForAccessibility throughout the app whenever needed for screenreader accessibility 
+1. Find a replacement for native-base Drawer (it relies on deprecated React stuff)
 
 ## Low Priority
-2. Make the "Report Issue" button look nicer
-3. Sometimes the map pins show up as black rather than red (on the emulator)
-4. Mapbox does not provide a way to limit the coverage area, so we will likely need to brute force it
+1. Design: Update app with Chris's refactored design
+   1. Instead of having floating card on bottom, having universal bottom bar is better
+   2. Content of Directions page on bottom bar gets completely replaced by the new sidewalk tap  
+   3. Needs an animation for "finding route" indicator
+2. Mapbox: brute force limiting the map coverage area
    1. Add a message in the interface to clarify when the user exits the bounds
-   2. Color the covered area
-5. Needs an animation for "finding route" indicator
-6. Hide the transition of changing route midway
+   2. Color the covered area w/ grey
+3. Animations: Hide the transition of changing route midway
    1. The dashed line from the current location to the first sidewalk in the route changes before the route is set
-7.  Content of Directions page on bottom bar gets completely replaced by the new sidewalk tap 
-8.  Instead of having floating card on bottom, having universal bottom bar is better

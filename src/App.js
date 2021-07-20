@@ -1,4 +1,4 @@
-import { AccessibilityInfo, Animated, Easing, TextInput, View } from 'react-native';
+import { AccessibilityInfo, Animated, Easing, LogBox, TextInput, View } from 'react-native';
 import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,6 +15,7 @@ import TutorialPage from './navigation/Tutorials/TutorialPage';
 import RoutePlanningTutorialPage from './navigation/Tutorials/RoutePlanningTutorialPage';
 import SettingsTutorialPage from './navigation/Tutorials/SettingsTutorialPage';
 
+LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
 const Stack = createStackNavigator();
 
 // Transition in and out screen animations

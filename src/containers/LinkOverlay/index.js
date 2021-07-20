@@ -87,7 +87,10 @@ class LinkOverlay extends Component {
         />
         <OverlayButton
           text={this.props.t("TUTORIAL")}
-          onPress={() => this.props.navigation.push("Tutorials")}
+          onPress={() => {
+            this.props.navigation.push("Tutorials");
+            AccessibilityInfo.announceForAccessibility("Showing tutorials page.");
+        }}
         />
 
         <View

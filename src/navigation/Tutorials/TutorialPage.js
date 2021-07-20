@@ -1,5 +1,5 @@
 import React from "react";
-import {View, FlatList} from "react-native";
+import {View, FlatList, AccessibilityInfo} from "react-native";
 import {OverlayButton} from "../../containers/LinkOverlay/index";
 
 export default function TutorialPage({ route, navigation }) {
@@ -13,7 +13,10 @@ export default function TutorialPage({ route, navigation }) {
                 renderItem={({item}) => 
                     <OverlayButton
                         text={item.key}
-                        onPress={() => navigation.push(item.key)}
+                        onPress={() => { 
+                            navigation.push(item.key);
+                            AccessibilityInfo.announceForAccessibility("Showing " + item.key + " Page.");
+                        }}
                     />
                 }
                 style={{marginLeft: 20}}

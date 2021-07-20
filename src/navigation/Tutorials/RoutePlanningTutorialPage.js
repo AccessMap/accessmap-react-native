@@ -6,13 +6,25 @@ import ToolTip from "../../components/TutorialComponents/ToolTip";
 
 export default function RoutePlanningTutorialPage({ route, navigation }) {
   const [numStep, goToNextStep] = useState(0);
-  const maxSteps = 5;
+  const maxSteps = 6;
   const textColor = "white";
   const cardDescription = "Route Planning";
   const backgroundColor ="#0F47A1";
   const nextButtonColor = "#0164FF";
 
   const toolTipVariables = [
+    { // choose start and destination
+      "background_image": require("../../../assets/tutorial_background.png"),
+      "captions": 
+      "Home screen with the grey enter button on the top right highlighted. The Map view of Seattle is shown as an example below.", 
+      "toolTipPositionLeft":"35%", "toolTipPositionTop":"20%",
+      "arrowPositionLeft":"580%", "arrowPositionTop":"-50%",
+      "heading": "Select Locations",
+      "paragraph":
+      "Tap on this grey Enter button or the map to enter a start and destination for your route.",
+      "showBack": false,
+      "nextButtonText":"Next",
+    },
     { // choose start and destination
       "background_image": require("../../../assets/example_route.png"),
       "captions": 
@@ -22,7 +34,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
       "heading": "Select Locations",
       "paragraph":
       "In this example, Pike Place Market is set as the route start and Gum Wall is set as the destination. ",
-      "showBack": false,
+      "showBack": true,
       "nextButtonText":"Next",
     },
     { // Reverse and Cancel
