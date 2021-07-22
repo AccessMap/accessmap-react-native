@@ -22,7 +22,7 @@ export default function SettingsTutorialPage({ route, navigation }) {
       "heading": "Open Menu",
       "paragraph":
       "Tap on this button to open the settings menu.",
-      "showBack": true,
+      "showBack": false,
       "nextButtonText":"Next",
     },
     { // Tracking

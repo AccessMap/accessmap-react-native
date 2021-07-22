@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------
 // Custom tooltip used in tutorial onboarding screens
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, Text, Button, AccessibilityInfo, findNodeHandle, UIManager } from "react-native";
 
 export default function ToolTip({
     backgroundColor, // [string] background color of the entire tooltip
@@ -21,6 +21,25 @@ export default function ToolTip({
     goToNextStep, // [function] executed when pressing the 'Next'/'End' Button
     navigation, // [navigation] ability to close the current screen
   }) {
+
+  // TODO: see accesssibility.md
+  // const viewRef = useRef();
+  // useEffect(() => {
+  //   setFocus();
+  // }, [viewRef]);
+
+  // const setFocus = () => {
+  //   AccessibilityInfo.announceForAccessibility("Currently on tutorial step " + (numStep+1) + " titled " + heading);
+  //   if (viewRef.current) {
+  //     const handle = findNodeHandle(viewRef.current);
+  //     if (handle) { 
+  //       AccessibilityInfo.setAccessibilityFocus(handle); 
+  //       AccessibilityInfo.setAccessibilityFocus(handle); 
+  //       console.log("set focus");
+  //     }
+  //   }
+  // }
+  // setFocus();
 
   return (
     <View style={{
@@ -68,6 +87,7 @@ export default function ToolTip({
             </Text>
           </View>
           <Text
+            // ref={viewRef}
             style={{
               fontWeight: "bold",
               color: textColor,
@@ -101,7 +121,7 @@ export default function ToolTip({
                     console.log("closing nav");
                     navigation.goBack();
                   } else {
-                    goToNextStep(numStep + 1) 
+                    goToNextStep(numStep + 1);
                   }
                 }}
               />

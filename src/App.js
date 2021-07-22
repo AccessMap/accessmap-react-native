@@ -111,7 +111,7 @@ function App() {
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
-									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+									AccessibilityInfo.announceForAccessibility("Showing tutorials screen");
 								}}
 							/>
 						),
@@ -128,7 +128,7 @@ function App() {
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
-									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+									AccessibilityInfo.announceForAccessibility("Showing tutorials screen");
 								}}
 							/>
 						),
@@ -145,7 +145,7 @@ function App() {
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
-									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
+									AccessibilityInfo.announceForAccessibility("Showing tutorials screen");
 								}}
 							/>
 						),
