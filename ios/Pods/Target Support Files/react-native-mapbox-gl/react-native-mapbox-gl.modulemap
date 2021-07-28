@@ -1,0 +1,6 @@
+framework module react_native_mapbox_gl {
+  umbrella header "react-native-mapbox-gl-umbrella.h"
+
+  export *
+  module * { export * }
+}

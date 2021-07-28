@@ -1,0 +1,6 @@
+framework module Pods_AccessMap {
+  umbrella header "Pods-AccessMap-umbrella.h"
+
+  export *
+  module * { export * }
+}
