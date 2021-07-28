@@ -1,7 +1,7 @@
 // Card details that show on the bottom of the screen when clicking on a sidewalk
 // or coordinate. Includes the option to "Route from/to here".
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, AccessibilityInfo } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -117,14 +117,20 @@ const FeatureCard = props => {
 					titleStyle={{fontSize: 15}}
 					title={t('ROUTE_FROM_HERE_TEXT')}
 					type="clear"
-					onPress={() => props.setOrigin()}
+					onPress={() => {
+						props.setOrigin();
+						AccessibilityInfo.announceForAccessibility("Set " + props.features.text + " as route start.");
+					}}
 				/>
 				<Button
 					buttonStyle={{flex: 1}}
 					titleStyle={{fontSize: 15}}
 					title={t('ROUTE_TO_HERE_TEXT')}
 					type="clear"
-					onPress={() => props.setDestination()}
+					onPress={() => {
+						props.setDestination();
+						AccessibilityInfo.announceForAccessibility("Set " + props.features.text + " as route destination.");
+					}}
 				/>
 			</View>
 		</Card>

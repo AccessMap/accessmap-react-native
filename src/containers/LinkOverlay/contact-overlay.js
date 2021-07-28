@@ -24,6 +24,7 @@ const ContactOverlay = props => {
 			<Text style={Fonts.h2}>{t("CONTACT_TEXT")}</Text>
 				<View style={Views.overlayIconandText}>
 				<Button
+					accessibilityLabel={t("TWITTER")}
 					icon={
 						<Icon
 							name="twitter"
@@ -43,6 +44,7 @@ const ContactOverlay = props => {
 			</View>
 				<View style={Views.overlayIconandText}>
 				<Button
+					accessibilityLabel={t("EMAIL")}
 					icon={
 						<Icon
 							name="envelope"

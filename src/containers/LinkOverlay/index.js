@@ -20,7 +20,7 @@ import { useImperialSystem, useMetricSystem } from "../../actions";
 
 const { Rakam } = NativeModules;
 
-const OverlayButton = (props) => {
+export const OverlayButton = (props) => {
   return (
     <TouchableOpacity
       style={{ alignItems: "stretch" }}
@@ -85,6 +85,13 @@ class LinkOverlay extends Component {
           text={this.props.t("CONTACT_TEXT")}
           onPress={() => this.setState({ showContact: true })}
         />
+        <OverlayButton
+          text={this.props.t("TUTORIAL")}
+          onPress={() => {
+            this.props.navigation.push("Tutorials");
+            AccessibilityInfo.announceForAccessibility("Showing tutorials page.");
+        }}
+        />
 
         <View
           style={[
@@ -98,9 +105,9 @@ class LinkOverlay extends Component {
             accessibilityLabel={this.props.t("TRACKING_SETTINGS_TEXT")}
             onValueChange={() => {
               AccessibilityInfo.announceForAccessibility(
-                this.props.trackSettings ? 
-                this.props.t("CURRENTLY_TRACKING") : 
-                this.props.t("NOT_TRACKING")
+                this.state.trackSettings ? 
+                this.props.t("NOT_TRACKING") : 
+                this.props.t("CURRENTLY_TRACKING")
                 );
               Rakam.toggleTracking();
               this.setState({ trackSettings: !this.state.trackSettings });

@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { AccessibilityInfo, Alert } from "react-native";
 import { useTranslation } from 'react-i18next';
 
 export const MAP_LOADED = "MAP_LOADED";
@@ -141,7 +141,9 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 			const url = "https://www.accessmap.io/api/v1/routing/directions/wheelchair.json?" + queryString;
 			return fetch(url)
 				.then(response => response.json())
-				.then(json => dispatch(receiveRoute(json)))
+				.then(json => {
+					dispatch(receiveRoute(json));
+				})
 				.catch((error) => {
 					console.log(error);
 					Alert.alert(

@@ -1,7 +1,7 @@
 // A Geocoder consists of a list of items reflecting geographic locations
 // based on user input.
 import React, { Component } from 'react';
-import { Alert, FlatList } from 'react-native';
+import { AccessibilityInfo, Alert, FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 import { connect } from 'react-redux';
@@ -46,12 +46,19 @@ class Geocoder extends Component {
 			<ListItem onPress={() => {
 					switch (this.props.type) {
 						case "search":
+							AccessibilityInfo.announceForAccessibility("Showing location of " + 
+								item.place_name + ". Select Route from here to set location as route start. Or," +
+								"Select Route to here to set location as route end.");
 							this.props.goToLocation(item);
 							break;
 						case "origin":
+							AccessibilityInfo.announceForAccessibility("Route start set to " + 
+								item.place_name);
 							this.props.setOrigin(item);
 							break;
 						case "destination":
+							AccessibilityInfo.announceForAccessibility("Route destination set to " + 
+								item.place_name);
 							this.props.setDestination(item);
 					}
 					this.props.navigation.pop();

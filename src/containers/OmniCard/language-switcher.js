@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, TouchableHighlight } from 'react-native';
+import { FlatList, View, Text, TouchableHighlight, AccessibilityInfo } from 'react-native';
 import { Button, Icon, Overlay } from 'react-native-elements';
 
 import languages from '../../constants/languages';
@@ -22,8 +22,10 @@ class LanguageSwitcher extends Component {
 
 		return (<View>
 			<Button
-				accessibilityLabel={"Current Language: " + this.props.currLanguage +
-					". Select to change language."}
+				accessibilityLabel={"Current Language: " + 
+					languages.find(lang => 
+						lang.key == this.props.currLanguage.toLowerCase()).name +
+						". Select to change language."}
 				buttonStyle={{
 					backgroundColor: "#FFFFFF",
 					borderColor: "#0000AA",
@@ -38,7 +40,9 @@ class LanguageSwitcher extends Component {
 					color: "#0000AA",
 					marginLeft: 5
 				}}
-				onPress={() => this.setState({viewOverlay: !this.state.viewOverlay})}
+				onPress={() => { 
+					this.setState({viewOverlay: !this.state.viewOverlay});
+				}}
 			/>
 			<Overlay
 				isVisible={this.state.viewOverlay}
@@ -60,6 +64,7 @@ class LanguageSwitcher extends Component {
 									this.setState({viewOverlay: !this.state.viewOverlay});
 									this.props.i18n.changeLanguage(item.item.key);
 									goToLanguage(item.item);
+									AccessibilityInfo.announceForAccessibility("Changed language to " + item.item.name);
 								}}
 							>
 								<Text style={{fontSize: 18}}>{item.item.name}</Text>

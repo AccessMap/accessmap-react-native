@@ -1,4 +1,6 @@
 apply plugin: "com.android.application"
+apply plugin: 'org.owasp.dependencycheck'
+// open build/reports for the results of the security dependency check
 
 import com.android.build.OutputFile
 
@@ -121,6 +123,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    compileSdkVersion 27
     ndkVersion rootProject.ext.ndkVersion
 
     dexOptions {
@@ -138,8 +141,8 @@ android {
         applicationId "com.accessmap"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0.0"
     }
     splits {
         abi {
