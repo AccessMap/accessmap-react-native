@@ -73,7 +73,6 @@ class MapPage extends Component {
     });
   }
   render() {
-    const screenWidth = this.state.screenWidth;
     AccessibilityInfo.announceForAccessibility("Showing Map View.");
     return (
       <View style={{ flex: 1 }} onLayout={this.onLayout}>

@@ -71,7 +71,7 @@ const FeatureCard = props => {
 				title="Report Issue"
 				type="clear"
 				onPress={()  => {
-					props.navigation.push("Crowdsourcing", { info });
+					props.navigation.push(t("CROWDSOURCING"), { info });
 				}}
 			/>}
 			{info && <View>
