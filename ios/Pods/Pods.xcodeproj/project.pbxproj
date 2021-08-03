@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -10928,9 +10928,6 @@
 				254FFE7EF5C08A165BC61B2D83B05800 /* PBXTargetDependency */,
 			);
 			name = "react-native-mapbox-gl";
-			packageProductDependencies = (
-				46EB2E00011D90 /* Mapbox */,
-			);
 			productName = "react-native-mapbox-gl";
 			productReference = 88EBFB04A6CF1FF1F539EEBA66766ACD /* react_native_mapbox_gl.framework */;
 			productType = "com.apple.product-type.framework";
@@ -11333,7 +11330,7 @@
 				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -11341,9 +11338,6 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			packageReferences = (
-				46EB2E00011D80 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
-			);
 			productRefGroup = 493F7CCE93342A9886EA8341058DBC01 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -13639,7 +13633,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNSVG/RNSVG-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNSVG/RNSVG.modulemap";
 				PRODUCT_MODULE_NAME = RNSVG;
 				PRODUCT_NAME = RNSVG;
@@ -13669,7 +13667,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTBlob/React-RCTBlob-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTBlob/React-RCTBlob.modulemap";
 				PRODUCT_MODULE_NAME = RCTBlob;
 				PRODUCT_NAME = RCTBlob;
@@ -13699,7 +13701,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap-tvOS/Pods-AccessMap-tvOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap-tvOS/Pods-AccessMap-tvOS.modulemap";
 				OTHER_LDFLAGS = "";
@@ -13732,7 +13738,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap-tvOSTests/Pods-AccessMap-tvOSTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap-tvOSTests/Pods-AccessMap-tvOSTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -13781,7 +13791,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-netinfo/react-native-netinfo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-netinfo/react-native-netinfo.modulemap";
 				PRODUCT_MODULE_NAME = react_native_netinfo;
 				PRODUCT_NAME = react_native_netinfo;
@@ -13803,7 +13817,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -13827,7 +13844,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTImage/React-RCTImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTImage/React-RCTImage.modulemap";
 				PRODUCT_MODULE_NAME = RCTImage;
 				PRODUCT_NAME = RCTImage;
@@ -13848,7 +13869,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -13871,7 +13895,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-Core/React-Core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-Core/React-Core.modulemap";
 				PRODUCT_MODULE_NAME = React;
 				PRODUCT_NAME = React;
@@ -13900,7 +13928,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNGestureHandler/RNGestureHandler-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNGestureHandler/RNGestureHandler.modulemap";
 				PRODUCT_MODULE_NAME = RNGestureHandler;
 				PRODUCT_NAME = RNGestureHandler;
@@ -13930,7 +13962,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-CoreModules/React-CoreModules-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-CoreModules/React-CoreModules.modulemap";
 				PRODUCT_MODULE_NAME = CoreModules;
 				PRODUCT_NAME = CoreModules;
@@ -13961,7 +13997,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTText/React-RCTText-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTText/React-RCTText.modulemap";
 				PRODUCT_MODULE_NAME = RCTText;
 				PRODUCT_NAME = RCTText;
@@ -13992,7 +14032,11 @@
 				INFOPLIST_FILE = "Target Support Files/RCTTypeSafety/RCTTypeSafety-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RCTTypeSafety/RCTTypeSafety.modulemap";
 				PRODUCT_MODULE_NAME = RCTTypeSafety;
 				PRODUCT_NAME = RCTTypeSafety;
@@ -14022,7 +14066,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTSettings/React-RCTSettings-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTSettings/React-RCTSettings.modulemap";
 				PRODUCT_MODULE_NAME = RCTSettings;
 				PRODUCT_NAME = RCTSettings;
@@ -14052,7 +14100,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap/Pods-AccessMap-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap/Pods-AccessMap.modulemap";
 				OTHER_LDFLAGS = "";
@@ -14086,7 +14138,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTAnimation/React-RCTAnimation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTAnimation/React-RCTAnimation.modulemap";
 				PRODUCT_MODULE_NAME = RCTAnimation;
 				PRODUCT_NAME = RCTAnimation;
@@ -14107,7 +14163,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -14121,7 +14180,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -14144,7 +14206,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-safe-area-context/react-native-safe-area-context-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-safe-area-context/react-native-safe-area-context.modulemap";
 				PRODUCT_MODULE_NAME = react_native_safe_area_context;
 				PRODUCT_NAME = react_native_safe_area_context;
@@ -14174,7 +14240,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNScreens/RNScreens-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNScreens/RNScreens.modulemap";
 				PRODUCT_MODULE_NAME = RNScreens;
 				PRODUCT_NAME = RNScreens;
@@ -14205,7 +14275,11 @@
 				INFOPLIST_FILE = "Target Support Files/glog/glog-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/glog/glog.modulemap";
 				PRODUCT_MODULE_NAME = glog;
 				PRODUCT_NAME = glog;
@@ -14227,7 +14301,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -14267,7 +14344,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsinspector/React-jsinspector-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsinspector/React-jsinspector.modulemap";
 				PRODUCT_MODULE_NAME = jsinspector;
 				PRODUCT_NAME = jsinspector;
@@ -14297,7 +14378,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsiexecutor/React-jsiexecutor-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsiexecutor/React-jsiexecutor.modulemap";
 				PRODUCT_MODULE_NAME = jsireact;
 				PRODUCT_NAME = jsireact;
@@ -14327,7 +14412,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTText/React-RCTText-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTText/React-RCTText.modulemap";
 				PRODUCT_MODULE_NAME = RCTText;
 				PRODUCT_NAME = RCTText;
@@ -14348,7 +14437,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -14370,7 +14462,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNReanimated/RNReanimated-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNReanimated/RNReanimated.modulemap";
 				PRODUCT_MODULE_NAME = RNReanimated;
 				PRODUCT_NAME = RNReanimated;
@@ -14400,7 +14496,11 @@
 				INFOPLIST_FILE = "Target Support Files/FBReactNativeSpec/FBReactNativeSpec-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/FBReactNativeSpec/FBReactNativeSpec.modulemap";
 				PRODUCT_MODULE_NAME = FBReactNativeSpec;
 				PRODUCT_NAME = FBReactNativeSpec;
@@ -14422,7 +14522,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -14446,7 +14549,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-cxxreact/React-cxxreact-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-cxxreact/React-cxxreact.modulemap";
 				PRODUCT_MODULE_NAME = cxxreact;
 				PRODUCT_NAME = cxxreact;
@@ -14475,7 +14582,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNScreens/RNScreens-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNScreens/RNScreens.modulemap";
 				PRODUCT_MODULE_NAME = RNScreens;
 				PRODUCT_NAME = RNScreens;
@@ -14505,7 +14616,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-perflogger/React-perflogger-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-perflogger/React-perflogger.modulemap";
 				PRODUCT_MODULE_NAME = reactperflogger;
 				PRODUCT_NAME = reactperflogger;
@@ -14534,7 +14649,11 @@
 				INFOPLIST_FILE = "Target Support Files/Yoga/Yoga-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/Yoga/Yoga.modulemap";
 				PRODUCT_MODULE_NAME = yoga;
 				PRODUCT_NAME = yoga;
@@ -14564,7 +14683,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTVibration/React-RCTVibration-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTVibration/React-RCTVibration.modulemap";
 				PRODUCT_MODULE_NAME = RCTVibration;
 				PRODUCT_NAME = RCTVibration;
@@ -14594,7 +14717,11 @@
 				INFOPLIST_FILE = "Target Support Files/FBReactNativeSpec/FBReactNativeSpec-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/FBReactNativeSpec/FBReactNativeSpec.modulemap";
 				PRODUCT_MODULE_NAME = FBReactNativeSpec;
 				PRODUCT_NAME = FBReactNativeSpec;
@@ -14624,7 +14751,11 @@
 				INFOPLIST_FILE = "Target Support Files/ReactCommon/ReactCommon-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/ReactCommon/ReactCommon.modulemap";
 				PRODUCT_MODULE_NAME = ReactCommon;
 				PRODUCT_NAME = ReactCommon;
@@ -14655,7 +14786,11 @@
 				INFOPLIST_FILE = "Target Support Files/RCTTypeSafety/RCTTypeSafety-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RCTTypeSafety/RCTTypeSafety.modulemap";
 				PRODUCT_MODULE_NAME = RCTTypeSafety;
 				PRODUCT_NAME = RCTTypeSafety;
@@ -14676,7 +14811,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -14699,7 +14837,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap/Pods-AccessMap-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap/Pods-AccessMap.modulemap";
 				OTHER_LDFLAGS = "";
@@ -14794,7 +14936,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTLinking/React-RCTLinking-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTLinking/React-RCTLinking.modulemap";
 				PRODUCT_MODULE_NAME = RCTLinking;
 				PRODUCT_NAME = RCTLinking;
@@ -14824,7 +14970,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNGestureHandler/RNGestureHandler-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNGestureHandler/RNGestureHandler.modulemap";
 				PRODUCT_MODULE_NAME = RNGestureHandler;
 				PRODUCT_NAME = RNGestureHandler;
@@ -14854,7 +15004,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-mapbox-gl/react-native-mapbox-gl-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-mapbox-gl/react-native-mapbox-gl.modulemap";
 				PRODUCT_MODULE_NAME = react_native_mapbox_gl;
 				PRODUCT_NAME = react_native_mapbox_gl;
@@ -14883,7 +15037,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-safe-area-context/react-native-safe-area-context-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-safe-area-context/react-native-safe-area-context.modulemap";
 				PRODUCT_MODULE_NAME = react_native_safe_area_context;
 				PRODUCT_NAME = react_native_safe_area_context;
@@ -14913,7 +15071,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-cxxreact/React-cxxreact-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-cxxreact/React-cxxreact.modulemap";
 				PRODUCT_MODULE_NAME = cxxreact;
 				PRODUCT_NAME = cxxreact;
@@ -14943,7 +15105,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNCMaskedView/RNCMaskedView-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNCMaskedView/RNCMaskedView.modulemap";
 				PRODUCT_MODULE_NAME = RNCMaskedView;
 				PRODUCT_NAME = RNCMaskedView;
@@ -14974,7 +15140,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTBlob/React-RCTBlob-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTBlob/React-RCTBlob.modulemap";
 				PRODUCT_MODULE_NAME = RCTBlob;
 				PRODUCT_NAME = RCTBlob;
@@ -15004,7 +15174,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNVectorIcons/RNVectorIcons-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNVectorIcons/RNVectorIcons.modulemap";
 				PRODUCT_MODULE_NAME = RNVectorIcons;
 				PRODUCT_NAME = RNVectorIcons;
@@ -15034,7 +15208,11 @@
 				INFOPLIST_FILE = "Target Support Files/Yoga/Yoga-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/Yoga/Yoga.modulemap";
 				PRODUCT_MODULE_NAME = yoga;
 				PRODUCT_NAME = yoga;
@@ -15056,7 +15234,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -15080,7 +15261,11 @@
 				INFOPLIST_FILE = "Target Support Files/ReactCommon/ReactCommon-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/ReactCommon/ReactCommon.modulemap";
 				PRODUCT_MODULE_NAME = ReactCommon;
 				PRODUCT_NAME = ReactCommon;
@@ -15109,7 +15294,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNReanimated/RNReanimated-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNReanimated/RNReanimated.modulemap";
 				PRODUCT_MODULE_NAME = RNReanimated;
 				PRODUCT_NAME = RNReanimated;
@@ -15140,7 +15329,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMapTests/Pods-AccessMapTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMapTests/Pods-AccessMapTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -15165,7 +15358,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -15188,7 +15384,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTImage/React-RCTImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTImage/React-RCTImage.modulemap";
 				PRODUCT_MODULE_NAME = RCTImage;
 				PRODUCT_NAME = RCTImage;
@@ -15218,7 +15418,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap-tvOSTests/Pods-AccessMap-tvOSTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap-tvOSTests/Pods-AccessMap-tvOSTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -15251,7 +15455,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsi/React-jsi-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsi/React-jsi.modulemap";
 				PRODUCT_MODULE_NAME = jsi;
 				PRODUCT_NAME = jsi;
@@ -15281,7 +15489,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsinspector/React-jsinspector-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsinspector/React-jsinspector.modulemap";
 				PRODUCT_MODULE_NAME = jsinspector;
 				PRODUCT_NAME = jsinspector;
@@ -15311,7 +15523,11 @@
 				INFOPLIST_FILE = "Target Support Files/RCT-Folly/RCT-Folly-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RCT-Folly/RCT-Folly.modulemap";
 				PRODUCT_MODULE_NAME = folly;
 				PRODUCT_NAME = folly;
@@ -15341,7 +15557,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-Core/React-Core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-Core/React-Core.modulemap";
 				PRODUCT_MODULE_NAME = React;
 				PRODUCT_NAME = React;
@@ -15372,7 +15592,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTNetwork/React-RCTNetwork-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTNetwork/React-RCTNetwork.modulemap";
 				PRODUCT_MODULE_NAME = RCTNetwork;
 				PRODUCT_NAME = RCTNetwork;
@@ -15402,7 +15626,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-perflogger/React-perflogger-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-perflogger/React-perflogger.modulemap";
 				PRODUCT_MODULE_NAME = reactperflogger;
 				PRODUCT_NAME = reactperflogger;
@@ -15433,7 +15661,11 @@
 				INFOPLIST_FILE = "Target Support Files/DoubleConversion/DoubleConversion-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/DoubleConversion/DoubleConversion.modulemap";
 				PRODUCT_MODULE_NAME = DoubleConversion;
 				PRODUCT_NAME = DoubleConversion;
@@ -15462,7 +15694,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-netinfo/react-native-netinfo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-netinfo/react-native-netinfo.modulemap";
 				PRODUCT_MODULE_NAME = react_native_netinfo;
 				PRODUCT_NAME = react_native_netinfo;
@@ -15483,7 +15719,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -15506,7 +15745,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsiexecutor/React-jsiexecutor-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsiexecutor/React-jsiexecutor.modulemap";
 				PRODUCT_MODULE_NAME = jsireact;
 				PRODUCT_NAME = jsireact;
@@ -15537,7 +15780,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTLinking/React-RCTLinking-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTLinking/React-RCTLinking.modulemap";
 				PRODUCT_MODULE_NAME = RCTLinking;
 				PRODUCT_NAME = RCTLinking;
@@ -15567,7 +15814,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-jsi/React-jsi-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-jsi/React-jsi.modulemap";
 				PRODUCT_MODULE_NAME = jsi;
 				PRODUCT_NAME = jsi;
@@ -15597,7 +15848,11 @@
 				INFOPLIST_FILE = "Target Support Files/RCT-Folly/RCT-Folly-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RCT-Folly/RCT-Folly.modulemap";
 				PRODUCT_MODULE_NAME = folly;
 				PRODUCT_NAME = folly;
@@ -15626,7 +15881,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNVectorIcons/RNVectorIcons-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNVectorIcons/RNVectorIcons.modulemap";
 				PRODUCT_MODULE_NAME = RNVectorIcons;
 				PRODUCT_NAME = RNVectorIcons;
@@ -15721,7 +15980,11 @@
 				INFOPLIST_FILE = "Target Support Files/react-native-mapbox-gl/react-native-mapbox-gl-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/react-native-mapbox-gl/react-native-mapbox-gl.modulemap";
 				PRODUCT_MODULE_NAME = react_native_mapbox_gl;
 				PRODUCT_NAME = react_native_mapbox_gl;
@@ -15743,7 +16006,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -15767,7 +16033,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMap-tvOS/Pods-AccessMap-tvOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMap-tvOS/Pods-AccessMap-tvOS.modulemap";
 				OTHER_LDFLAGS = "";
@@ -15800,7 +16070,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNCMaskedView/RNCMaskedView-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNCMaskedView/RNCMaskedView.modulemap";
 				PRODUCT_MODULE_NAME = RNCMaskedView;
 				PRODUCT_NAME = RNCMaskedView;
@@ -15830,7 +16104,11 @@
 				INFOPLIST_FILE = "Target Support Files/glog/glog-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/glog/glog.modulemap";
 				PRODUCT_MODULE_NAME = glog;
 				PRODUCT_NAME = glog;
@@ -15860,7 +16138,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTVibration/React-RCTVibration-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTVibration/React-RCTVibration.modulemap";
 				PRODUCT_MODULE_NAME = RCTVibration;
 				PRODUCT_NAME = RCTVibration;
@@ -15891,7 +16173,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTNetwork/React-RCTNetwork-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTNetwork/React-RCTNetwork.modulemap";
 				PRODUCT_MODULE_NAME = RCTNetwork;
 				PRODUCT_NAME = RCTNetwork;
@@ -15913,7 +16199,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -15936,7 +16225,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-CoreModules/React-CoreModules-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-CoreModules/React-CoreModules.modulemap";
 				PRODUCT_MODULE_NAME = CoreModules;
 				PRODUCT_NAME = CoreModules;
@@ -15966,7 +16259,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-AccessMapTests/Pods-AccessMapTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-AccessMapTests/Pods-AccessMapTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -15999,7 +16296,11 @@
 				INFOPLIST_FILE = "Target Support Files/DoubleConversion/DoubleConversion-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/DoubleConversion/DoubleConversion.modulemap";
 				PRODUCT_MODULE_NAME = DoubleConversion;
 				PRODUCT_NAME = DoubleConversion;
@@ -16030,7 +16331,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTSettings/React-RCTSettings-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTSettings/React-RCTSettings.modulemap";
 				PRODUCT_MODULE_NAME = RCTSettings;
 				PRODUCT_NAME = RCTSettings;
@@ -16061,7 +16366,11 @@
 				INFOPLIST_FILE = "Target Support Files/React-RCTAnimation/React-RCTAnimation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/React-RCTAnimation/React-RCTAnimation.modulemap";
 				PRODUCT_MODULE_NAME = RCTAnimation;
 				PRODUCT_NAME = RCTAnimation;
@@ -16091,7 +16400,11 @@
 				INFOPLIST_FILE = "Target Support Files/RNSVG/RNSVG-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MODULEMAP_FILE = "Target Support Files/RNSVG/RNSVG.modulemap";
 				PRODUCT_MODULE_NAME = RNSVG;
 				PRODUCT_NAME = RNSVG;
@@ -16113,7 +16426,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -16519,25 +16835,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		46EB2E00011D80 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.11.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		46EB2E00011D90 /* Mapbox */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 46EB2E00011D80 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
-			productName = Mapbox;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
