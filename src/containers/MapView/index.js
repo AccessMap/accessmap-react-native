@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import React, {Component} from 'react';
 import { AccessibilityInfo, NativeModules } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
@@ -28,7 +29,9 @@ import {
 	ACCESS_TOKEN } from '../../constants';
 
 MapboxGL.setAccessToken(ACCESS_TOKEN);
-MapboxGL.setConnected(true); // sets connectivity state of app for Android only
+if (Platform.OS === 'android') {
+	MapboxGL.setConnected(true); // sets connectivity state of app for Android only
+}
 
 class MapView extends Component {
 	constructor(props) {

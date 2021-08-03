@@ -8,17 +8,22 @@ platform :ios, '10.0'
 inhibit_all_warnings!
 
 # MapBox
-$RNMBGL_Use_SPM = true # MapLibre
+$RNMBGL_Use_SPM = { # MapLibre, set to true if no version specified
+  url: "https://github.com/maplibre/maplibre-gl-native-distribution",
+  requirement: {
+      kind: "exactVersion",
+      version: "5.11.0"
+  },
+  product_name: "Mapbox"
+}
+
 pre_install do |installer|
   $RNMBGL.pre_install(installer)
-end
-post_install do |installer|
-  $RNMBGL.post_install(installer)
 end
 
 target 'AccessMap' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
 
   # Pods for AccessMap
   config = use_native_modules!
@@ -44,3 +49,6 @@ target 'AccessMap-tvOS' do
 
 end
 
+post_install do |installer|
+  $RNMBGL.post_install(installer)
+end
