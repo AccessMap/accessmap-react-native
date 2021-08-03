@@ -22,7 +22,7 @@ export default function ToolTip({
     navigation, // [navigation] ability to close the current screen
   }) {
 
-  // TODO: see accesssibility.md
+  // TODO: see docs/accesssibility.md
   // const viewRef = useRef();
   // useEffect(() => {
   //   setFocus();
