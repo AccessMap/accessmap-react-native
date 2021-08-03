@@ -1,14 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {View, FlatList, AccessibilityInfo} from "react-native";
 import {OverlayButton} from "../../containers/LinkOverlay/index";
 
 export default function TutorialPage({ route, navigation }) {
+    const { t, i18n } = useTranslation();
     return (<View>
             <FlatList
                 data={[
-                {key: 'Map Interface'},
-                {key: 'Route Planning'},
-                {key: 'Settings Menu'},
+                {key: t("MAP_INTERFACE")},
+                {key: t("ROUTE_PLANNING")},
+                {key: t("SETTINGS_MENU")},
                 ]}
                 renderItem={({item}) => 
                     <OverlayButton

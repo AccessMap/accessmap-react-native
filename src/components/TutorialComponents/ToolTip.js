@@ -1,45 +1,25 @@
 //------------------------------------------------------------------------------------------
 // Custom tooltip used in tutorial onboarding screens
-import React, { useEffect, useRef } from "react";
-import { View, Text, Button, AccessibilityInfo, findNodeHandle, UIManager } from "react-native";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { View, Text, Button, } from "react-native";
 
 export default function ToolTip({
-    backgroundColor, // [string] background color of the entire tooltip
-    textColor, // [string] color of the text
     cardDescription, // [string] generally describes the card (ex: Route Planning)
-    numStep, // [int] current step 
+    numStep, // [int] current step from 0
     maxStep, // [int] how many total steps there are
-    nextButtonColor,
     toolTipPositionLeft, // [string] percentage from the left boundary of the screen
     toolTipPositionTop, // [string] percentage from the top boundary of the screen
     arrowPositionLeft,
     arrowPositionTop,
     heading, // [string] bold heading text
     paragraph, // [string] smaller detail text
-    showBack, // [boolean] show the back button
-    nextButtonText, // [string] (ex: 'Next' or 'End') text to be placed in the right button
     goToNextStep, // [function] executed when pressing the 'Next'/'End' Button
     navigation, // [navigation] ability to close the current screen
   }) {
 
-  // TODO: see docs/accesssibility.md
-  // const viewRef = useRef();
-  // useEffect(() => {
-  //   setFocus();
-  // }, [viewRef]);
-
-  // const setFocus = () => {
-  //   AccessibilityInfo.announceForAccessibility("Currently on tutorial step " + (numStep+1) + " titled " + heading);
-  //   if (viewRef.current) {
-  //     const handle = findNodeHandle(viewRef.current);
-  //     if (handle) { 
-  //       AccessibilityInfo.setAccessibilityFocus(handle); 
-  //       AccessibilityInfo.setAccessibilityFocus(handle); 
-  //       console.log("set focus");
-  //     }
-  //   }
-  // }
-  // setFocus();
+  // TODO: see accesssibility.md
+  const { t, i18n } = useTranslation();
 
   return (
     <View style={{
@@ -56,7 +36,7 @@ export default function ToolTip({
           top: arrowPositionTop,
           width: 30,
           height: 30,
-          backgroundColor: backgroundColor,
+          backgroundColor: '#0F47A1',
           zIndex: 98,
           transform: [{ rotate: "45deg" }],
         }}
@@ -72,7 +52,7 @@ export default function ToolTip({
           style={{
             width: 250,
             padding: 15,
-            backgroundColor: backgroundColor,
+            backgroundColor: '#0F47A1',
             borderRadius: 5,
           }}
         >
@@ -90,35 +70,33 @@ export default function ToolTip({
             // ref={viewRef}
             style={{
               fontWeight: "bold",
-              color: textColor,
+              color: "white",
               fontSize: 20,
               marginBottom: 10,
             }}
           >
             {heading}
           </Text>
-          <Text style={{ marginBottom: 20, color: textColor }}>
+          <Text style={{ marginBottom: 20, color: "white" }}>
             { paragraph }
           </Text>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={{ width: 100, opacity: showBack ? 1.0 : 0.0 }}>
+            <View style={{ width: 100, opacity: (numStep > 0) ? 1.0 : 0.0 }}>
               <Button
-                disabled={!showBack}
-                title="Back"
-                color={backgroundColor}
+                disabled={(numStep == 0)}
+                title={t("BACK")}
+                color='#0F47A1'
                 onPress={() => goToNextStep(numStep - 1)}
               />
             </View>
             <View style={{ width: 100}}>
               <Button
-                title={nextButtonText}
-                color={nextButtonColor}
+                title={(numStep < maxStep - 1) ? t("NEXT_TEXT") : t("END_TOUR") }
+                color='#0164FF'
                 onPress={() => { 
-                  console.log("nS=" + numStep);
                   if (numStep >= maxStep - 1) {
-                    console.log("closing nav");
                     navigation.goBack();
                   } else {
                     goToNextStep(numStep + 1);

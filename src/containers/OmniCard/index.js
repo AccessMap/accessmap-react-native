@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
 import Icon from "../../components/Icon";
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import UphillSlider from "../Settings/UphillSlider";
 import DownhillSlider from "../Settings/DownhillSlider";
 import BarrierSwitch from "../Settings/BarrierSwitch";
@@ -50,11 +50,12 @@ const IconButton = (props) => {
 };
 
 const GeocodeBar = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <View style={{ flex: 1 }}>
       <TouchableWithoutFeedback
         accessibilityLabel="Enter address"
-        onPress={() => props.navigation.push("Search", { type: props.type })}
+        onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
       >
         <View pointerEvents="box-only">
           <SearchBar
