@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import { Colors } from "./index";
 const OUTLINE_WIDTH = 2;
 
@@ -15,7 +16,11 @@ export const sidewalks = (incline) => {
     inclineStops.push(color.hex());
   });
 
-  return {
+  if (Platform.OS === 'ios') {
+    return {}; // has issues on iOS side
+  }
+
+  return { 
     lineCap: "round",
     lineColor: [
       "case",

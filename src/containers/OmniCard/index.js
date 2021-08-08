@@ -149,7 +149,7 @@ class OmniCard extends Component {
           />
           <Image
             style={{ flex: 1, height: "50%" }}
-            source={require("../../../assets/accessmap-logo.png")}
+            source={require("../../../res/images/accessmap-logo.png")}
             resizeMode="center"
             resizeMethod="scale"
           />
@@ -254,7 +254,7 @@ class OmniCard extends Component {
 
     return (
       <Card
-        ref={(component) => (this.omniCard = component)}
+        // ref={(component) => (this.omniCard = component)}
         containerStyle={Views.omnicard}
       >
         {containerToRender}

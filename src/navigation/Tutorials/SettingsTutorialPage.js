@@ -14,7 +14,7 @@ export default function SettingsTutorialPage({ route, navigation }) {
   const toolTipContent = [
     {
       // Hamburger menu button
-      background_image: require("../../../assets/tutorial_background.png"),
+      background_image: require("../../../res/images/tutorial_background.png"),
       captions: t("SETTINGS_CAPTION_1"),
       toolTipPositionLeft: "3%",
       toolTipPositionTop: "12%",
@@ -25,7 +25,7 @@ export default function SettingsTutorialPage({ route, navigation }) {
     },
     {
       // Tracking
-      background_image: require("../../../assets/drawer_menu.png"),
+      background_image: require("../../../res/images/drawer_menu.png"),
       captions: t("SETTINGS_CAPTION_2"),
       toolTipPositionLeft: "28%",
       toolTipPositionTop: "54%",
@@ -36,7 +36,7 @@ export default function SettingsTutorialPage({ route, navigation }) {
     },
     {
       // Units
-      background_image: require("../../../assets/drawer_menu.png"),
+      background_image: require("../../../res/images/drawer_menu.png"),
       captions: t("SETTINGS_CAPTION_3"),
       toolTipPositionLeft: "28%",
       toolTipPositionTop: "62%",

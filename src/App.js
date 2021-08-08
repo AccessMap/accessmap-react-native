@@ -15,8 +15,10 @@ import TutorialPage from './navigation/Tutorials/TutorialPage';
 import RoutePlanningTutorialPage from './navigation/Tutorials/RoutePlanningTutorialPage';
 import SettingsTutorialPage from './navigation/Tutorials/SettingsTutorialPage';
 import { useTranslation } from 'react-i18next';
+import { enableScreens } from 'react-native-screens';
 
 LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
+enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Stack = createStackNavigator();
 
 // Transition in and out screen animations

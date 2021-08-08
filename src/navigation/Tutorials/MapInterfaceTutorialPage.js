@@ -13,7 +13,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
 
   const toolTipVariables = [
     { // Choose a destination with Search Bar
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_1"), 
       "toolTipPositionLeft":"20%", "toolTipPositionTop":"18%",
       "arrowPositionLeft":"80%", "arrowPositionTop":"-50%",
@@ -21,7 +21,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_1"),
     },
     { // Grey enter icon to pick start and end
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_2"),
       "toolTipPositionLeft":"35%", "toolTipPositionTop":"19%",
       "arrowPositionLeft":"595%", "arrowPositionTop":"-50%",
@@ -29,7 +29,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_2"),
     },
     { // Mobility Buttons
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_3"),
       "toolTipPositionLeft":"13%", "toolTipPositionTop":"25%",
       "arrowPositionLeft":"50%", "arrowPositionTop":"-50%",
@@ -37,7 +37,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_3"),
     },
     { // Pencil icon to customize
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_4"),
       "toolTipPositionLeft":"20%", "toolTipPositionTop":"25%",
       "arrowPositionLeft":"550%", "arrowPositionTop":"-50%",
@@ -45,7 +45,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_4"),
     },
     { // Zoom in out, find my location button
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_5"),
       "toolTipPositionLeft":"10%", "toolTipPositionTop":"65%",
       "arrowPositionLeft":"785%", "arrowPositionTop":"250%",
@@ -53,7 +53,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_5"),
     },
     { // Rainbow legend
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_6"),
       "toolTipPositionLeft":"15%", "toolTipPositionTop":"52%",
       "arrowPositionLeft":"200%", "arrowPositionTop":"785%",
@@ -61,7 +61,7 @@ export default function MapInterfaceTutorialPage({ route, navigation }) {
       "paragraph": t("MAP_TUT_6"),
     },
     { // Language and region
-      "background_image": require("../../../assets/tutorial_background.png"),
+      "background_image": require("../../../res/images/tutorial_background.png"),
       "captions": t("MAP_CAPTION_7"),
       "toolTipPositionLeft":"27%", "toolTipPositionTop":"13%",
       "arrowPositionLeft":"550%", "arrowPositionTop":"-50%",

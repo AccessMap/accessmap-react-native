@@ -73,7 +73,7 @@ const AboutOverlay = props => {
 					<Image
 						accessibilityLabel={t("ESCIENCE_ALT_TEXT")}
 						style={{flex: 1, width: "70%", height: "50%"}}
-						source={require("../../../assets/uwescience.jpg")}
+						source={require("../../../res/images/uwescience.jpg")}
 						resizeMode="contain"
 						resizeMethod="scale"
 					/>
@@ -82,7 +82,7 @@ const AboutOverlay = props => {
 					<Image
 						accessibilityLabel={t("WSDOT_ALT_TEXT")}
 						style={{flex: 1, width: "70%", height: "50%"}}
-						source={require("../../../assets/wsdot.png")}
+						source={require("../../../res/images/wsdot.png")}
 						resizeMode="contain"
 						resizeMethod="scale"
 					/>

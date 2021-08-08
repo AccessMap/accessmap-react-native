@@ -15,7 +15,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
   const toolTipVariables = [
     {
       // choose start and destination
-      background_image: require("../../../assets/tutorial_background.png"),
+      background_image: require("../../../res/images/tutorial_background.png"),
       captions: t("ROUTE_CAPTION_1"),
       toolTipPositionLeft: "35%",
       toolTipPositionTop: "20%",
@@ -26,7 +26,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
     },
     {
       // choose start and destination
-      background_image: require("../../../assets/example_route.png"),
+      background_image: require("../../../res/images/example_route.png"),
       captions: t("ROUTE_CAPTION_2"),
       toolTipPositionLeft: "20%",
       toolTipPositionTop: "19%",
@@ -37,7 +37,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
     },
     {
       // Reverse and Cancel
-      background_image: require("../../../assets/example_route.png"),
+      background_image: require("../../../res/images/example_route.png"),
       captions: t("ROUTE_CAPTION_2"),
       toolTipPositionLeft: "35%",
       toolTipPositionTop: "20%",
@@ -48,7 +48,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
     },
     {
       // Trip information general card
-      background_image: require("../../../assets/example_route.png"),
+      background_image: require("../../../res/images/example_route.png"),
       captions: t("ROUTE_CAPTION_4"),
       toolTipPositionLeft: "18%",
       toolTipPositionTop: "53%",
@@ -59,7 +59,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
     },
     {
       // Specific Trip information card
-      background_image: require("../../../assets/example_trip_details.png"),
+      background_image: require("../../../res/images/example_trip_details.png"),
       captions: t("ROUTE_CAPTION_5"),
       toolTipPositionLeft: "20%",
       toolTipPositionTop: "22%",
@@ -70,7 +70,7 @@ export default function RoutePlanningTutorialPage({ route, navigation }) {
     },
     {
       // Specific Direction steps card
-      background_image: require("../../../assets/example_directions.png"),
+      background_image: require("../../../res/images/example_directions.png"),
       captions: t("ROUTE_CAPTION_6"),
       toolTipPositionLeft: "15%",
       toolTipPositionTop: "25%",

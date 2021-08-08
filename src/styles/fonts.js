@@ -6,18 +6,21 @@ export const h1 = {
   flex: 1,
   fontSize: 30,
   fontWeight: "bold",
+  fontFamily: "Inter-SemiBold",
 };
 
 // For section headings
 export const h2 = {
   fontSize: 20,
   color: "black",
+  fontFamily: "Inter-SemiBold",
 };
 
 // For small informational text
 export const p = {
   fontSize: 15,
-  fontFamily: "serif",
+  fontFamily: "Inter-Regular",
+  color: "#313131",
 };
 
 // Items in the menu drawer
@@ -26,4 +29,5 @@ export const menuItems = {
   color: "black",
   paddingTop: 20,
   paddingBottom: 20, 
+  fontFamily: "Inter-Regular",
 };

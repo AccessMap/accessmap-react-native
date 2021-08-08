@@ -3,6 +3,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { View, Text, Button, } from "react-native";
+import {Fonts} from "../../styles";
 
 export default function ToolTip({
     cardDescription, // [string] generally describes the card (ex: Route Planning)
@@ -68,16 +69,15 @@ export default function ToolTip({
           </View>
           <Text
             // ref={viewRef}
-            style={{
-              fontWeight: "bold",
+            style={[Fonts.h1, {
               color: "white",
               fontSize: 20,
               marginBottom: 10,
-            }}
+            }]}
           >
             {heading}
           </Text>
-          <Text style={{ marginBottom: 20, color: "white" }}>
+          <Text style={[Fonts.p, { marginBottom: 20, color: "white" }]}>
             { paragraph }
           </Text>
           <View
