@@ -1,13 +1,7 @@
 # Bug Fixes
 
-## Notes
-- Tested on API 21 emulator Galaxy Nexus, the routing functions do not appear to work + black map sometimes shows
-   - API 23-24 routing works, but on emulator sometimes the map goes black
-   - Works completely starting API 25
-
 ## High Priority (1 = highest)
-1. More accessibility announcements + implement current page Redux state
-2. Find a replacement for native-base Drawer (it relies on deprecated React stuff)
+1. Find a replacement for native-base Drawer (it relies on deprecated React stuff)
 
 ## Low Priority
 1. Design: Update app with Chris's refactored design

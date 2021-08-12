@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   AccessibilityInfo,
+  Platform,
 } from "react-native";
 import { Button, Overlay } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -57,7 +58,7 @@ class LinkOverlay extends Component {
         >
           <Image
             style={[Position.fullWidthandHeight, { marginRight: 20, flex: 1 }]}
-            source={require("../../../assets/accessmap-logo.png")}
+            source={require("../../../res/images/accessmap-logo.png")}
             resizeMode="contain"
             resizeMethod="scale"
           />
@@ -88,7 +89,7 @@ class LinkOverlay extends Component {
         <OverlayButton
           text={this.props.t("TUTORIAL")}
           onPress={() => {
-            this.props.navigation.push("Tutorials");
+            this.props.navigation.push(this.props.t("TUTORIAL"));
             AccessibilityInfo.announceForAccessibility("Showing tutorials page.");
         }}
         />
@@ -109,7 +110,9 @@ class LinkOverlay extends Component {
                 this.props.t("NOT_TRACKING") : 
                 this.props.t("CURRENTLY_TRACKING")
                 );
-              Rakam.toggleTracking();
+              if (Platform.OS === 'android') {
+                Rakam.toggleTracking();
+              }
               this.setState({ trackSettings: !this.state.trackSettings });
             }}
             value={this.state.trackSettings}

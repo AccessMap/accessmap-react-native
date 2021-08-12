@@ -2,9 +2,9 @@ import React from 'react';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
 import { connect } from 'react-redux';
-import pinIcon from '../../../assets/map-pin.png';
-import originIcon from '../../../assets/origin.png';
-import destinationIcon from '../../../assets/destination.png';
+import pinIcon from '../../../res/images/map-pin.png';
+import originIcon from '../../../res/images/origin.png';
+import destinationIcon from '../../../res/images/destination.png';
 
 const iconStyle = {
 	iconImage: ["get", "icon"],

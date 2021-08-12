@@ -1,0 +1,57 @@
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+# MapBox
+$RNMBGL_Use_SPM = { # MapLibre, set to true if no version specified
+  url: "https://github.com/maplibre/maplibre-gl-native-distribution",
+  requirement: {
+      kind: "exactVersion",
+      version: "5.11.0"
+  },
+  product_name: "Mapbox"
+}
+
+pre_install do |installer|
+  $RNMBGL.pre_install(installer)
+end
+
+target 'AccessMap' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for AccessMap
+  config = use_native_modules!
+  use_react_native!(:path => config["reactNativePath"])
+
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  target 'AccessMapTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'AccessMap-tvOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AccessMap-tvOS
+
+  target 'AccessMap-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+post_install do |installer|
+  $RNMBGL.post_install(installer)
+end

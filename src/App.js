@@ -14,8 +14,11 @@ import Crowdsourcing from './navigation/Crowdsourcing';
 import TutorialPage from './navigation/Tutorials/TutorialPage';
 import RoutePlanningTutorialPage from './navigation/Tutorials/RoutePlanningTutorialPage';
 import SettingsTutorialPage from './navigation/Tutorials/SettingsTutorialPage';
+import { useTranslation } from 'react-i18next';
+import { enableScreens } from 'react-native-screens';
 
 LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
+enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Stack = createStackNavigator();
 
 // Transition in and out screen animations
@@ -30,10 +33,11 @@ const transitionConfig = () => {
 };
 
 function App() {
+	const { t, i18n } = useTranslation();
 	return (
 		<NavigationContainer>
 			<Stack.Navigator
-				initialRouteName="Map"
+				initialRouteName={t("MAP")}
 				screenOptions={{
 					transitionSpec: {
 						open: transitionConfig,
@@ -41,14 +45,14 @@ function App() {
 					},
 				}}>
 				<Stack.Screen
-					name="Map"
+					name={t("MAP")}
 					component={MapPage}
 					options={{
 						headerShown: false,
 					}}
 				/>
 				<Stack.Screen
-					name="Search"
+					name={t("SEARCH")}
 					component={SearchPage}
 					options={({ navigation }) => ({
 						headerLeftContainerStyle: {
@@ -84,7 +88,7 @@ function App() {
 				/>
 
 				<Stack.Screen
-					name="Tutorials"
+					name={t("TUTORIAL")}
 					component={TutorialPage}
 					options={({ navigation }) => ({
 						headerLeft: () => (
@@ -101,7 +105,7 @@ function App() {
 					})}
 				/>
 				<Stack.Screen
-					name="Map Interface"
+					name={t("MAP_INTERFACE")}
 					component={MapInterfaceTutorialPage}
 					options={({ navigation }) => ({
 						headerLeft: () => (
@@ -118,7 +122,7 @@ function App() {
 					})}
 				/>
 				<Stack.Screen
-					name="Route Planning"
+					name={t("ROUTE_PLANNING")}
 					component={RoutePlanningTutorialPage}
 					options={({ navigation }) => ({
 						headerLeft: () => (
@@ -135,7 +139,7 @@ function App() {
 					})}
 				/>
 				<Stack.Screen
-					name="Settings Menu"
+					name={t("SETTINGS_MENU")}
 					component={SettingsTutorialPage}
 					options={({ navigation }) => ({
 						headerLeft: () => (
@@ -153,7 +157,7 @@ function App() {
 				/>
 
 				<Stack.Screen
-					name="Crowdsourcing"
+					name={t("CROWDSOURCING")}
 					component={Crowdsourcing}
 					options={({ route, navigation }) => {
 						const { info } = route.params;

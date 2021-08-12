@@ -1,0 +1,37 @@
+{
+  "name": "react-native-mapbox-gl",
+  "summary": "React Native Component for Mapbox GL",
+  "version": "8.2.1",
+  "authors": {
+    "Nick Italiano": "ni6@njit.edu"
+  },
+  "homepage": "https://github.com/@react-native-mapbox-gl/maps#readme",
+  "source": {
+    "git": "https://github.com/@react-native-mapbox-gl/maps.git"
+  },
+  "license": "MIT",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "React": [
+
+    ]
+  },
+  "default_subspecs": [
+    "DynamicLibrary",
+    "StaticLibraryFixer"
+  ],
+  "subspecs": [
+    {
+      "name": "DynamicLibrary",
+      "source_files": "ios/RCTMGL/**/*.{h,m}"
+    },
+    {
+      "name": "StaticLibraryFixer"
+    }
+  ]
+}

@@ -21,6 +21,7 @@ import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
 import { useTranslation } from 'react-i18next';
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 class MapPage extends Component {
   static navigationOptions = { title: "Map", header: null };
@@ -73,7 +74,6 @@ class MapPage extends Component {
     });
   }
   render() {
-    const screenWidth = this.state.screenWidth;
     AccessibilityInfo.announceForAccessibility("Showing Map View.");
     return (
       <View style={{ flex: 1 }} onLayout={this.onLayout}>
@@ -104,7 +104,7 @@ class MapPage extends Component {
               }
               style={Views.container}
             >
-              <View style={{ flex: 1 }}>
+              <View style={{ flex: 1 }}> 
                 <View
                   importantForAccessibility={
                     this.props.route ? "no-hide-descendants" : "yes"
@@ -115,11 +115,11 @@ class MapPage extends Component {
                 </View>
                 {!this.props.viewingDirections &&
                   !this.props.viewingTripInfo && (
-                    <OmniCard navigation={this.props.navigation} />
+                    <OmniCard style={{paddingTop: insets.top,}} navigation={this.props.navigation} />
                   )}
                 <Zooms />
               </View>
-
+              
               <SpeedLegend maxIncline={this.props.maxIncline} />
 
               {this.props.isLoading && <LoadingScreen />}

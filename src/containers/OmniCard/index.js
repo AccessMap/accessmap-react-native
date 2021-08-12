@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
 import Icon from "../../components/Icon";
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import UphillSlider from "../Settings/UphillSlider";
 import DownhillSlider from "../Settings/DownhillSlider";
 import BarrierSwitch from "../Settings/BarrierSwitch";
@@ -50,11 +50,12 @@ const IconButton = (props) => {
 };
 
 const GeocodeBar = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <View style={{ flex: 1 }}>
       <TouchableWithoutFeedback
         accessibilityLabel="Enter address"
-        onPress={() => props.navigation.push("Search", { type: props.type })}
+        onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
       >
         <View pointerEvents="box-only">
           <SearchBar
@@ -148,7 +149,7 @@ class OmniCard extends Component {
           />
           <Image
             style={{ flex: 1, height: "50%" }}
-            source={require("../../../assets/accessmap-logo.png")}
+            source={require("../../../res/images/accessmap-logo.png")}
             resizeMode="center"
             resizeMethod="scale"
           />
@@ -253,7 +254,7 @@ class OmniCard extends Component {
 
     return (
       <Card
-        ref={(component) => (this.omniCard = component)}
+        // ref={(component) => (this.omniCard = component)}
         containerStyle={Views.omnicard}
       >
         {containerToRender}
