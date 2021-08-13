@@ -19,7 +19,7 @@ const Header = props => {
 			</Text>
 			<Button
 				accessibilityLabel={t("Header-close-accessibilityLabel")}
-				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 5, height: 40}}
+				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20, marginHorizontal: 5, height: 50}}
 				icon={<Icon
 					name="close"
 					size={20}

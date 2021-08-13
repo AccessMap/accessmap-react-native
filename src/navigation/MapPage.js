@@ -115,7 +115,7 @@ class MapPage extends Component {
                 </View>
                 {!this.props.viewingDirections &&
                   !this.props.viewingTripInfo && (
-                    <OmniCard style={{paddingTop: insets.top,}} navigation={this.props.navigation} />
+                    <OmniCard navigation={this.props.navigation} />
                   )}
                 <Zooms />
               </View>

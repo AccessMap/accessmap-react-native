@@ -3,6 +3,7 @@ import { Switch, Text, View } from 'react-native';
 import { toggleBarriers } from '../../actions';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Buttons } from '../../styles';
 
 const BarrierSwitch = props => {
 	const { t, i18n } = useTranslation();
@@ -10,6 +11,7 @@ const BarrierSwitch = props => {
 	return (
 		<View style={{flex: 1, flexDirection: "row", margin: 10}}>
 			<Switch
+				style={Buttons.switches}
 				onValueChange={props.toggleBarriers}
 				value={props.avoidRaisedCurbs}
 			/>

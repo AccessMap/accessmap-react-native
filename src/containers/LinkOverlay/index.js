@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Button, Overlay } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Fonts, Views, Position } from "../../styles";
+import { Fonts, Views, Position, Buttons } from "../../styles";
 import { withTranslation } from "react-i18next";
 import { connect } from 'react-redux';
 
@@ -63,7 +63,7 @@ class LinkOverlay extends Component {
             resizeMethod="scale"
           />
           <Button
-            buttonStyle={{ flex: 1, backgroundColor: "#FFFFFF" }}
+            buttonStyle={{ flex: 1, backgroundColor: "#FFFFFF", minHeight: 50, minWidth: 50 }}
             icon={
               <Icon
                 name="times"
@@ -100,9 +100,10 @@ class LinkOverlay extends Component {
           ]}
         >
           <Text style={[{ marginRight: 40 }]}>
-            {this.props.t("TRACKING_SETTINGS_TEXT")}
+            {this.props.t("TRACK_SETTINGS")}
           </Text>
           <Switch
+            style={Buttons.switches}
             accessibilityLabel={this.props.t("TRACKING_SETTINGS_TEXT")}
             onValueChange={() => {
               AccessibilityInfo.announceForAccessibility(
@@ -125,10 +126,12 @@ class LinkOverlay extends Component {
           ]}
         >
           <Text style={[{ marginRight: 40 }]}>
-            {this.props.usingMetricSystem ? this.props.t("METRIC_TOGGLE_TEXT"): this.props.t("IMPERIAL_TOGGLE_TEXT")}
+            { this.props.usingMetricSystem ? 
+            this.props.t("METRIC_TOGGLE_TEXT") : this.props.t("IMPERIAL_TOGGLE_TEXT")}
           </Text>
           <Switch
-            accessibilityLabel={this.props.usingMetricSystem ? this.props.t("METRIC_TOGGLE_TEXT"): this.props.t("IMPERIAL_TOGGLE_TEXT")}
+            style={Buttons.switches}
+            accessibilityLabel={this.props.t("TOGGLE_UNITS")}
             onValueChange={() => {
               if (this.props.usingMetricSystem) {
                 this.props.useImperialSystem();

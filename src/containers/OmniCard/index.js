@@ -33,7 +33,7 @@ const IconButton = (props) => {
   return (
     <Button
       buttonStyle={{ ...Buttons.iconButton, ...props.style }}
-      containerStyle={props.label ? null : { width: 45 }}
+      containerStyle={props.label ? null : { minWidth: 50, minHeight: 50 }}
       icon={
         <Icon
           name={props.name}
@@ -217,9 +217,11 @@ class OmniCard extends Component {
               onPress={this.updateCustomIndex}
               selectedIndex={this.state.customIndex}
               buttons={customButtons}
-              containerStyle={{ flex: 1 }}
+              containerStyle={{ flex: 1, minHeight: 50, minWidth: 50 }}
             />
-            <IconButton name="close" onPress={this.toggleCustomMode} />
+            <IconButton 
+              name="close" 
+              onPress={this.toggleCustomMode} />
           </View>
 
           {this.state.customIndex == 0 ? (

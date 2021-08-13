@@ -62,7 +62,7 @@ function App() {
 							<Button
 								accessibilityLabel={"Select to go back to map screen"}
 								icon={<Icon name="arrow-left" size={20} />}
-								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
+								buttonStyle={{ backgroundColor: 'transparent', margin: 5, height: 50 }}
 								onPress={() => {
 									navigation.goBack();
 									AccessibilityInfo.announceForAccessibility("Showing home screen with map view");
@@ -77,8 +77,8 @@ function App() {
 									alignItems: 'center',
 								}}>
 								<TextInput
-									style={{ flex: 1 }}
-									placeholder="Search address"
+									style={{ flex: 1, color: "black" }}
+									placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
 									autoFocus={true}
 									onChangeText={search => navigation.setParams({ search })}
 								/>

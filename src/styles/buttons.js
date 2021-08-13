@@ -44,5 +44,9 @@ export const mobilityButton = {
   height: 40,
 };
 
+export const switches = {
+  width: 50, height: 50,
+}
+
 // To add more button styles, just add:
 // export const ___ = { ... };

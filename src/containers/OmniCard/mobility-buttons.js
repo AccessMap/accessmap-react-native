@@ -25,8 +25,7 @@ const MobilityButtonRender = props => {
 
 	return (
 		<Button
-			accessibilityLabel={"Mobility Mode: " + props.label + ". " +
-				(selected ? "Currently selected" : "Select to set mode")}
+			accessibilityLabel={"Mobility Mode: " + props.label}
 			buttonStyle={{...Colors.mobilityButton, backgroundColor: buttonColor}}
 			icon={<Icon
 				name={props.name}

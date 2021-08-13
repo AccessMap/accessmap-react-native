@@ -20,7 +20,7 @@ class RegionSwitcher extends Component {
 	render() {
 		const goToRegion = this.props.goToRegion;
 
-		return (<View>
+		return (<View accessibilityLabel={"Region switcher screen."}>
 			<Button
 				accessibilityLabel={"Current region: " + this.props.currRegion +
 					". Select to change region."}
@@ -55,7 +55,7 @@ class RegionSwitcher extends Component {
 						data={regions}
 						renderItem={(item) =>
 							<TouchableHighlight
-								style={{padding: 5, width: 200}}
+								style={{padding: 10, width: 200, height: 50}}
 								onPress={() => {
 									this.setState({viewOverlay: !this.state.viewOverlay});
 									goToRegion(item.item);

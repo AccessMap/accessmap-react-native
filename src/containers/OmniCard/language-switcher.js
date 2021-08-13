@@ -20,7 +20,7 @@ class LanguageSwitcher extends Component {
 	render() {
 		const goToLanguage = this.props.goToLanguage;
 
-		return (<View>
+		return (<View accessibilityLabel={"Language switcher screen."}>
 			<Button
 				accessibilityLabel={"Current Language: " + 
 					languages.find(lang => 
@@ -59,7 +59,7 @@ class LanguageSwitcher extends Component {
 						data={languages}
 						renderItem={(item) =>
 							<TouchableHighlight
-								style={{padding: 5, width: 200}}
+								style={{padding: 10, width: 200, height: 50}}
 								onPress={() => {
 									this.setState({viewOverlay: !this.state.viewOverlay});
 									this.props.i18n.changeLanguage(item.item.key);
@@ -79,7 +79,6 @@ class LanguageSwitcher extends Component {
 }
 
 const mapStateToProps = state => {
-	
 	return {
 		currLanguage: state.currLanguage,
 		t: state.t

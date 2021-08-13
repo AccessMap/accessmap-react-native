@@ -76,6 +76,7 @@ class Geocoder extends Component {
 				data={this.state.searchList}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem={this._renderItem}
+				accessibilityLabel={"Search results"}
 			/>
 		);
 	}
