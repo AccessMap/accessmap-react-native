@@ -79,3 +79,13 @@ export const searchresult = {
   fontSize: 18,
   padding: 5,
 };
+
+export const searchBarContainer = {
+  backgroundColor: "white", color: "white", 
+  padding: 0, marginBottom: 5,
+  borderBottomColor: 'transparent', borderTopColor: 'transparent'
+};
+
+export const searchBarInputContainer = {
+  backgroundColor:"#F0F0F0", borderRadius: 10,
+};

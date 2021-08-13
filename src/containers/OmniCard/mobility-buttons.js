@@ -3,7 +3,7 @@ import { AccessibilityInfo, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from '../../components/Icon';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '../../styles';
+import { Colors, Buttons } from '../../styles';
 
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -21,16 +21,17 @@ const MobilityButtonRender = props => {
 		props.setMobilityMode(props.mode);
 	}
 	const selected = props.mode == props.mobilityMode;
-	const buttonColor = selected ? "#0000AA" : "#FFFFFF";
+	const buttonColor = selected ? Colors.primaryColor : "#FFFFFF";
+	const iconColor = selected ? "white" : Colors.primaryColor;
 
 	return (
 		<Button
 			accessibilityLabel={"Mobility Mode: " + props.label}
-			buttonStyle={{...Colors.mobilityButton, backgroundColor: buttonColor}}
+			buttonStyle={[Buttons.mobilityButton, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
 				size={25}
-				color={selected ? "#EEEEEE" : "#555555" }
+				color={iconColor}
 			/>}
 			title={selected ? props.label : null}
 			titleStyle={{marginLeft: 3, fontSize: 15}}

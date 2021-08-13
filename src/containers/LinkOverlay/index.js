@@ -67,7 +67,7 @@ class LinkOverlay extends Component {
             icon={
               <Icon
                 name="times"
-                size={20}
+                size={30}
                 color="#555555"
                 accessibilityLabel={this.props.t(
                   "Header-close-accessibilityLabel"

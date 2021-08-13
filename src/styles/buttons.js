@@ -1,4 +1,7 @@
 // Stylesheet for all buttons in the app
+export const minTouchTargetSize = {
+  transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
+};
 
 // Used for zooming in and out and other map buttons
 export const whiteButton = {
@@ -33,20 +36,33 @@ export const zooms = {
 
 // For small image icons that link to an external website
 export const iconButtons = {
-  flex: 1, 
-  width: "50%", 
+  flex: 1,
+  width: "50%",
   marginHorizontal: 0,
 };
 
 export const mobilityButton = {
-  borderRadius: 20,
+  borderRadius: 10,
   marginTop: 5,
   height: 40,
 };
 
-export const switches = {
-  width: 50, height: 50,
-}
+export const switches = [
+  minTouchTargetSize,
+  {
+    padding: 20,
+  },
+];
+
+export const languageOrRegionSwitch = [
+  minTouchTargetSize,
+  {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#0000AA",
+    borderWidth: 1,
+    margin: 5,
+  },
+];
 
 // To add more button styles, just add:
 // export const ___ = { ... };

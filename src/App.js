@@ -16,6 +16,7 @@ import RoutePlanningTutorialPage from './navigation/Tutorials/RoutePlanningTutor
 import SettingsTutorialPage from './navigation/Tutorials/SettingsTutorialPage';
 import { useTranslation } from 'react-i18next';
 import { enableScreens } from 'react-native-screens';
+import { Fonts, Views } from './styles';
 
 LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -55,13 +56,10 @@ function App() {
 					name={t("SEARCH")}
 					component={SearchPage}
 					options={({ navigation }) => ({
-						headerLeftContainerStyle: {
-							width: '100%',
-						},
 						headerLeft: () => (
 							<Button
 								accessibilityLabel={"Select to go back to map screen"}
-								icon={<Icon name="arrow-left" size={20} />}
+								icon={<Icon name="arrow-left" size={30} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5, height: 50 }}
 								onPress={() => {
 									navigation.goBack();
@@ -70,14 +68,9 @@ function App() {
 							/>
 						),
 						headerTitle: (
-							<View
-								style={{
-									flexDirection: 'row',
-									width: '100%',
-									alignItems: 'center',
-								}}>
+							<View>
 								<TextInput
-									style={{ flex: 1, color: "black" }}
+									placeholderTextColor="black"
 									placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
 									autoFocus={true}
 									onChangeText={search => navigation.setParams({ search })}
@@ -94,7 +87,7 @@ function App() {
 						headerLeft: () => (
 							<Button
 								accessibilityLabel={"Select to go back to Map Screen"}
-								icon={<Icon name="arrow-left" size={20} />}
+								icon={<Icon name="arrow-left" size={30} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
@@ -111,7 +104,7 @@ function App() {
 						headerLeft: () => (
 							<Button
 								accessibilityLabel={"Select to go back to Tutorial Page"}
-								icon={<Icon name="arrow-left" size={20} />}
+								icon={<Icon name="arrow-left" size={30} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
@@ -128,7 +121,7 @@ function App() {
 						headerLeft: () => (
 							<Button
 								accessibilityLabel={"Select to go back to Tutorial Page"}
-								icon={<Icon name="arrow-left" size={20} />}
+								icon={<Icon name="arrow-left" size={30} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();
@@ -145,7 +138,7 @@ function App() {
 						headerLeft: () => (
 							<Button
 								accessibilityLabel={"Select to go back to Tutorial Page"}
-								icon={<Icon name="arrow-left" size={20} />}
+								icon={<Icon name="arrow-left" size={30} />}
 								buttonStyle={{ backgroundColor: 'transparent', margin: 5 }}
 								onPress={() => {
 									navigation.goBack();

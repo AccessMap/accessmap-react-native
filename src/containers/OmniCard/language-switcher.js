@@ -8,6 +8,7 @@ import { goToLanguage } from '../../actions';
 import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
+import { Buttons } from '../../styles';
 
 class LanguageSwitcher extends Component {
 	constructor(props) {
@@ -20,18 +21,13 @@ class LanguageSwitcher extends Component {
 	render() {
 		const goToLanguage = this.props.goToLanguage;
 
-		return (<View accessibilityLabel={"Language switcher screen."}>
+		return (<View>
 			<Button
 				accessibilityLabel={"Current Language: " + 
 					languages.find(lang => 
 						lang.key == this.props.currLanguage.toLowerCase()).name +
 						". Select to change language."}
-				buttonStyle={{
-					backgroundColor: "#FFFFFF",
-					borderColor: "#0000AA",
-					borderWidth: 2,
-					marginLeft: 8,
-					padding: 5}}
+				buttonStyle={Buttons.languageOrRegionSwitch}
 				icon={
 					<Icon name="language" size={18} color="#0000AA" />
 				}

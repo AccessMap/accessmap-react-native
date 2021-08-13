@@ -10,7 +10,7 @@ import LayerCrossings from './layer-crossings';
 import LayerElevators from './layer-elevator-paths';
 import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
-import LoadingScreen from '../../components/LoadingScreen';
+// import LoadingScreen from '../../components/LoadingScreen';s
 import { Views } from '../../styles';
 import {
 	goToLocation,
@@ -192,6 +192,8 @@ class MapView extends Component {
 		
 		return (
 			<MapboxGL.MapView 
+				logoEnabled={false}
+				attributionEnabled={false}
 				ref={component => this._map = component}
 				style={ Views.map}
 				onPress={this._onPress}

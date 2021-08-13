@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Buttons, Views, Position } from "../../styles";
+import { Buttons, Views, Position, Fonts } from "../../styles";
 import {
   View,
   Image,
@@ -54,7 +54,7 @@ const GeocodeBar = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <TouchableWithoutFeedback
-        accessibilityLabel="Enter address"
+        accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
         onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
       >
         <View pointerEvents="box-only">
@@ -62,10 +62,10 @@ const GeocodeBar = (props) => {
             placeholder={props.placeholder}
             value={props.value}
             lightTheme={true}
-            containerStyle={{ backgroundColor: "#EEEEEE", padding: 0 }}
-            inputContainerStyle={{ backgroundColor: "#DDDDDD" }}
-            inputStyle={{ color: "black", margin: 0, padding: 0, fontSize: 14 }}
-            rightIconContainerStyle={{ width: 0, height: 0 }}
+            containerStyle={Views.searchBarContainer}
+            inputContainerStyle={Views.searchBarInputContainer}
+            rightIconContainerStyle={{opacity: 0}}
+            inputStyle={Fonts.p}
             editable={false}
           />
         </View>
@@ -115,7 +115,7 @@ class OmniCard extends Component {
       geocodeBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
-            accessibilityLabel={"Enter address"}
+            accessibilityLabel={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
             navigation={this.props.navigation}
             type="origin"
             value={
@@ -144,6 +144,7 @@ class OmniCard extends Component {
         <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', justifyContent: 'space-between'}]}>
           <IconButton
             name="menu"
+            style={{transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }],}}
             accessibilityLabel="Select to open drawer menu"
             onPress={this.props.openDrawer}
           />

@@ -20,8 +20,8 @@ import RouteBottomCard from "../containers/RouteBottomCard";
 import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
-import { useTranslation } from 'react-i18next';
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+// import { useTranslation } from 'react-i18next';
+// import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 class MapPage extends Component {
   static navigationOptions = { title: "Map", header: null };
@@ -111,7 +111,7 @@ class MapPage extends Component {
                   }
                   style={{ flex: 1 }}
                 >
-                  <MapView />
+                  <MapView/>
                 </View>
                 {!this.props.viewingDirections &&
                   !this.props.viewingTripInfo && (

@@ -8,6 +8,7 @@ import { goToRegion } from '../../actions';
 import { withTranslation } from 'react-i18next';
 
 import { connect } from 'react-redux';
+import { Buttons } from '../../styles';
 
 class RegionSwitcher extends Component {
 	constructor(props) {
@@ -24,12 +25,7 @@ class RegionSwitcher extends Component {
 			<Button
 				accessibilityLabel={"Current region: " + this.props.currRegion +
 					". Select to change region."}
-				buttonStyle={{
-					backgroundColor: "#FFFFFF",
-					borderColor: "#0000AA",
-					borderWidth: 2,
-					marginLeft: 8,
-					padding: 5}}
+				buttonStyle={Buttons.languageOrRegionSwitch}
 				icon={
 					<Icon name="place" size={18} color="#0000AA" />
 				}
