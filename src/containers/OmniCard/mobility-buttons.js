@@ -22,7 +22,7 @@ const MobilityButtonRender = props => {
 	}
 	const selected = props.mode == props.mobilityMode;
 	const buttonColor = selected ? Colors.primaryColor : "#FFFFFF";
-	const iconColor = selected ? "white" : Colors.primaryColor;
+	const iconColor = selected ? "white" : Colors.grey;
 
 	return (
 		<Button
@@ -30,11 +30,11 @@ const MobilityButtonRender = props => {
 			buttonStyle={[Buttons.mobilityButton, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
-				size={25}
+				size={32}
 				color={iconColor}
 			/>}
 			title={selected ? props.label : null}
-			titleStyle={{marginLeft: 3, fontSize: 15}}
+			titleStyle={{marginLeft: 3, fontSize: 15, color: iconColor}}
 			onPress={_onPress}
 		/>
 	);

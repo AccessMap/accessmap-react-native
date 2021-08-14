@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Buttons, Views, Position, Fonts } from "../../styles";
+import { Buttons, Views, Position, Fonts, Colors } from "../../styles";
 import {
   View,
   Image,
@@ -32,13 +32,12 @@ import RegionSwitcher from './region-switcher';
 const IconButton = (props) => {
   return (
     <Button
-      buttonStyle={{ ...Buttons.iconButton, ...props.style }}
-      containerStyle={props.label ? null : { minWidth: 50, minHeight: 50 }}
+      buttonStyle={{ ...Buttons.iconButton }}
       icon={
         <Icon
           name={props.name}
-          size={25}
-          color={props.label ? "#EEEEEE" : "#555555"}
+          size={35}
+          color={props.label ? "#EEEEEE" : Colors.grey}
         />
       }
       title={props.label}
@@ -61,7 +60,6 @@ const GeocodeBar = (props) => {
           <SearchBar
             placeholder={props.placeholder}
             value={props.value}
-            lightTheme={true}
             containerStyle={Views.searchBarContainer}
             inputContainerStyle={Views.searchBarInputContainer}
             rightIconContainerStyle={{opacity: 0}}
@@ -106,13 +104,13 @@ class OmniCard extends Component {
       cancelRoute,
     } = this.props;
     var containerToRender = <View></View>;
-    var geocodeBarContents = <View></View>;
+    var topBarContents = <View></View>;
     var middleRowContents = <View></View>;
 
     // if the user is in the middle of choosing a route start and end
     // TODO: X button and directions mode
     if (origin || destination || this.state.findDirections) {
-      geocodeBarContents = (
+      topBarContents = (
         <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
             accessibilityLabel={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
@@ -140,30 +138,13 @@ class OmniCard extends Component {
       );
     } else {
       // unselected route state
-      geocodeBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', justifyContent: 'space-between'}]}>
+      topBarContents = (
+        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', marginTop: 5}]}>
           <IconButton
             name="menu"
-            style={{transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }],}}
             accessibilityLabel="Select to open drawer menu"
             onPress={this.props.openDrawer}
           />
-          <Image
-            style={{ flex: 1, height: "50%" }}
-            source={require("../../../res/images/accessmap-logo.png")}
-            resizeMode="center"
-            resizeMethod="scale"
-          />
-          <LanguageSwitcher />
-          <RegionSwitcher />
-        </View>
-      );
-    }
-
-    // UI elements for the middle row of the Omnicard
-    if (!origin && !destination && !this.state.findDirections) {
-      middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
           <GeocodeBar
             accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}
@@ -181,9 +162,12 @@ class OmniCard extends Component {
           />
         </View>
       );
-    } else {
+    }
+
+    // UI elements for the middle row of the Omnicard
+    if (origin || destination || this.state.findDirections) {
       middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
+        <View style={[{ flex: 1, flexDirection: "row" }]}>
           <GeocodeBar
             accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}
@@ -234,12 +218,12 @@ class OmniCard extends Component {
           )}
         </View>
       );
-    } else {
+    } else { // not custom mode
       containerToRender = (
         <View>
-          {geocodeBarContents}
+          {topBarContents}
           {middleRowContents}
-          <View style={{ flex: 1, flexDirection: "row",  }}>
+          <View style={{ flex: 1, flexDirection: "row", marginTop: 2, marginLeft: 5,}}>
             <MobilityButtonGroup />
             {this.props.mobilityMode == MOBILITY_MODE_CUSTOM && (
               <View>
@@ -256,10 +240,7 @@ class OmniCard extends Component {
     }
 
     return (
-      <Card
-        // ref={(component) => (this.omniCard = component)}
-        containerStyle={Views.omnicard}
-      >
+      <Card containerStyle={Views.omnicard}>
         {containerToRender}
       </Card>
     );

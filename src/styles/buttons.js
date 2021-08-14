@@ -17,10 +17,6 @@ export const whiteButton = {
 // pressable icon buttons on the OmniCard
 export const iconButton = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 20,
-  marginTop: 5,
-  marginRight: 5,
-  height: 40,
 };
 
 // Represents the container holding the map white buttons (zoom...etc)
@@ -43,8 +39,6 @@ export const iconButtons = {
 
 export const mobilityButton = {
   borderRadius: 10,
-  marginTop: 5,
-  height: 40,
 };
 
 export const switches = [

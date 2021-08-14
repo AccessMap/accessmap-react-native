@@ -50,6 +50,7 @@ export {
 };
 
 export const primaryColor = "#0D47A1";
+export const grey = "#4E4E4E";
 export const disabled = {
   color: "#AAAAAA"
 };

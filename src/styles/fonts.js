@@ -20,7 +20,7 @@ export const h2 = {
 export const p = {
   fontSize: 15,
   fontFamily: "Inter-Regular",
-  color: "#313131",
+  color: "black",
 };
 
 // Items in the menu drawer
