@@ -27,7 +27,7 @@ const MobilityButtonRender = props => {
 	return (
 		<Button
 			accessibilityLabel={"Mobility Mode: " + props.label}
-			buttonStyle={[Buttons.mobilityButton, {backgroundColor: buttonColor}]}
+			buttonStyle={[Buttons.button, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
 				size={32}

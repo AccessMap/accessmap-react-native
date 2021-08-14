@@ -37,7 +37,7 @@ export const iconButtons = {
   marginHorizontal: 0,
 };
 
-export const mobilityButton = {
+export const button = {
   borderRadius: 10,
 };
 

@@ -11,6 +11,9 @@ import Header from '../../components/Header';
 import { placePin, setOrigin, setDestination } from '../../actions';
 import coordinatesToString from '../../utils/coordinates-to-string';
 import parseOpenHours from '../../utils/parse-open-hours';
+import { Buttons, Views } from '../../styles';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { primaryColor } from '../../styles/colors';
 
 
 const InfoText = props => {
@@ -47,7 +50,7 @@ const FeatureCard = props => {
 
 	return (
 		<Card
-			containerStyle={{bottom: 0, left: 0, right: 0, maxWidth: 400, margin: 10, position: "absolute", zIndex: 50}}
+			containerStyle={Views.bottomCard}
 		>
 			<View style={{maxWidth: "100%"}}>
 				<Header
@@ -113,20 +116,18 @@ const FeatureCard = props => {
 			</View>}
 			<View style={{flexDirection: "row", justifyContent: "space-between"}}>
 				<Button
-					buttonStyle={{flex: 1, padding: 0}}
+					buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
 					titleStyle={{fontSize: 15}}
 					title={t('ROUTE_FROM_HERE_TEXT')}
-					type="clear"
 					onPress={() => {
 						props.setOrigin();
 						AccessibilityInfo.announceForAccessibility("Set " + props.features.text + " as route start.");
 					}}
 				/>
 				<Button
-					buttonStyle={{flex: 1}}
+					buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
 					titleStyle={{fontSize: 15}}
 					title={t('ROUTE_TO_HERE_TEXT')}
-					type="clear"
 					onPress={() => {
 						props.setDestination();
 						AccessibilityInfo.announceForAccessibility("Set " + props.features.text + " as route destination.");

@@ -18,9 +18,9 @@ const RouteBottomCard = (props) => {
   } else if (!props.route || props.route.code != "Ok") {
     AccessibilityInfo.announceForAccessibility("No possible route found with given start and end locations.");
     return (
-      <Card containerStyle={Views.routeBottomCard}>
+      <Card containerStyle={[Views.bottomCard, ]}>
         <View style={{ margin: 5 }}>
-          <Text style={{ fontSize: 20, marginRight: 20 }}>
+          <Text style={{ fontSize: 20 }}>
             {t("NO_ROUTE_TEXT")}
           </Text>
         </View>
@@ -33,7 +33,7 @@ const RouteBottomCard = (props) => {
   AccessibilityInfo.announceForAccessibility("Route has been found. " + 
     "Select Trip info or Directions button for more details");
   return (
-    <Card containerStyle={Views.routeBottomCard}>
+    <Card containerStyle={Views.bottomCard}>
       <View style={{ margin: 5, width: "100%" }}>
         <View
           accessible={true}
@@ -44,16 +44,15 @@ const RouteBottomCard = (props) => {
             marginBottom: 5,
           }}
         >
-          <Text style={[Fonts.h2, { marginRight: 20 }]}>{t("ROUTE_TEXT")}</Text>
-          <Text style={[Fonts.p, { marginRight: 20 }]}>
+          <Text style={[Fonts.h2, { marginRight: 20 }]}>
             { (props.usingMetricSystem ? Math.round(route.distance) : Math.round(route.distance*0.000621371192*100) / 100 ) } 
             {" "}
 			      { (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) }
-          </Text>
-          <Text style={[Fonts.p, { marginRight: 20 }]}>
+            {" ("}
             {Math.round(route.duration / 60)} 
             {" "}
             {t("MINUTES_TEXT")}
+            {")"}
           </Text>
         </View>
         <View

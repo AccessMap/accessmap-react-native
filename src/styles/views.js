@@ -17,17 +17,11 @@ export const omnicard = {
   zIndex: 10,
 };
 
-export const routeBottomCard = {
-  backgroundColor: "#FFFFFF",
-  position: "absolute",
-  left: 0,
-  right: 0,
-  maxWidth: 380,
-  bottom: 0,
-  margin: 10,
-  marginBottom: 10,
-  padding: 5,
-  zIndex: 20,
+export const bottomCard = {
+  position: "absolute", 
+  bottom: 0, left: 0, right: 0, 
+  width: "100%", margin: 0,
+  zIndex: 50
 };
 
 export const geocoder = {
