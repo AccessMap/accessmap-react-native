@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {View, FlatList, AccessibilityInfo} from "react-native";
-import {OverlayButton} from "../../containers/LinkOverlay/index";
+import {MenuButton} from "../../containers/SideMenu/index";
 
 export default function TutorialPage({ route, navigation }) {
     const { t, i18n } = useTranslation();
@@ -10,10 +10,10 @@ export default function TutorialPage({ route, navigation }) {
                 data={[
                 {key: t("MAP_INTERFACE")},
                 {key: t("ROUTE_PLANNING")},
-                {key: t("SETTINGS_MENU")},
+                {key: t("SETTINGS_TUTORIAL")},
                 ]}
                 renderItem={({item}) => 
-                    <OverlayButton
+                    <MenuButton
                         text={item.key}
                         onPress={() => { 
                             navigation.push(item.key);

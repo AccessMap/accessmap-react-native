@@ -13,7 +13,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import SpeedLegend from "../components/SpeedLegend";
 import Zooms from "../containers/MapButtons/Zooms";
 import OmniCard from "../containers/OmniCard";
-import LinkOverlay from "../containers/LinkOverlay";
+import SideMenu from "../containers/SideMenu";
 import FeatureCard from "../containers/FeatureCard";
 import RouteBottomCard from "../containers/RouteBottomCard";
 
@@ -90,7 +90,7 @@ class MapPage extends Component {
             main: { paddingLeft: 3 },
           }}
           content={
-            <LinkOverlay 
+            <SideMenu 
               closeDrawer={() => this.closeDrawer()} 
               navigation={this.props.navigation}
             />

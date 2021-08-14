@@ -17,6 +17,7 @@ import SettingsTutorialPage from "./navigation/Tutorials/SettingsTutorialPage";
 import { useTranslation } from "react-i18next";
 import { enableScreens } from "react-native-screens";
 import AboutPage from "./navigation/AboutPage";
+import SettingsPage from "./navigation/SettingsPage";
 
 LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -51,6 +52,15 @@ function App() {
     <Stack.Screen
       name={t("ABOUT")}
       component={AboutPage}
+	  options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
+      })}
+    />
+  );
+  const settings = (
+	<Stack.Screen
+      name={t("SETTINGS")}
+      component={SettingsPage}
 	  options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -110,7 +120,7 @@ function App() {
   );
   const settingsTutorial = (
     <Stack.Screen
-      name={t("SETTINGS_MENU")}
+      name={t("SETTINGS_TUTORIAL")}
       component={SettingsTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
@@ -134,21 +144,22 @@ function App() {
   );
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName={t("MAP")}>
-        {map}
-        {search}
+		<NavigationContainer>
+		<Stack.Navigator initialRouteName={t("MAP")}>
+			{map}
+			{search}
 
-		{about}
+			{about}
+			{settings}
 
-        {tutorial}
-        {mapTutorial}
-        {routeTutorial}
-        {settingsTutorial}
+			{tutorial}
+			{mapTutorial}
+			{routeTutorial}
+			{settingsTutorial}
 
-        {crowdSourcing}
-      </Stack.Navigator>
-    </NavigationContainer>
+			{crowdSourcing}
+		</Stack.Navigator>
+		</NavigationContainer>
   );
 }
 
