@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { AccessibilityInfo, NativeModules } from 'react-native';
 import {
 	MAP_LOADED,
@@ -26,6 +26,8 @@ import {
 	RECEIVE_ROUTE,
 	USE_METRIC_SYSTEM,
 	USE_IMPERIAL_SYSTEM,
+	TRACK_USER_ACTIONS,
+	UNTRACK_USER_ACTIONS,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -71,6 +73,7 @@ const defaultState = {
 	drawerOpen: false,
 	route: null,
 	usingMetricSystem: false, // meters vs miles
+	trackUserActions: false,
 }
 
 // Define the states 
@@ -156,7 +159,13 @@ export default function mapApp(state = defaultState, action) {
 		case USE_IMPERIAL_SYSTEM:
 			logEvent(action.type, []);
 			return {...state, usingMetricSystem: false};
+		case TRACK_USER_ACTIONS:
+			return {...state, trackUserActions: true };
+		case UNTRACK_USER_ACTIONS:
+			return {...state, trackUserActions: false };
 		default:
 			return state;
 	}
 }
+
+export type RootState = ReturnType<typeof mapApp>

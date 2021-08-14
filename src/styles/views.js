@@ -83,3 +83,11 @@ export const searchBarContainer = {
 export const searchBarInputContainer = {
   backgroundColor:"#F0F0F0", borderRadius: 10,
 };
+
+export const scrollView = {
+  margin: 20,
+};
+
+export const settingsRow = {
+  flexDirection: "row", alignItems:"center", justifyContent: "space-between", paddingTop: 15,
+};

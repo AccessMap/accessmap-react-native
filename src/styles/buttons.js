@@ -1,3 +1,5 @@
+import { primaryColor } from "./colors";
+
 // Stylesheet for all buttons in the app
 export const minTouchTargetSize = {
   transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
@@ -43,7 +45,8 @@ export const button = {
 export const switches = [
   minTouchTargetSize,
   {
-    padding: 20,
+    marginRight: 10,
+    color: primaryColor,
   },
 ];
 

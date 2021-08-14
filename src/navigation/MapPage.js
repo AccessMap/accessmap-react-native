@@ -78,9 +78,9 @@ class MapPage extends Component {
     return (
       <View style={{ flex: 1 }} onLayout={this.onLayout}>
         <Drawer
-          ref={(ref) => {
-            this.drawer = ref;
-          }}
+          // ref={(ref) => {
+          //   this.drawer = ref;
+          // }}
           style={{
             drawer: {
               shadowColor: "#000000",

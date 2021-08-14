@@ -169,3 +169,12 @@ export const USE_IMPERIAL_SYSTEM = "USE_IMPERIAL_SYSTEM";
 export function useImperialSystem() { // changes units to miles
 	return { type: USE_IMPERIAL_SYSTEM };
 }
+
+export const TRACK_USER_ACTIONS = "TRACK_USER_ACTIONS";
+export function trackUser() {
+	return { type: TRACK_USER_ACTIONS };
+}
+export const UNTRACK_USER_ACTIONS = "UNTRACK_USER_ACTIONS";
+export function untrackUser() {
+	return { type: UNTRACK_USER_ACTIONS };
+}

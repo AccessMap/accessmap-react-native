@@ -49,7 +49,7 @@ export default function AboutPage({ route, navigation }) {
   );
 
   return (
-    <ScrollView style={{ margin: 15 }}>
+    <ScrollView style={Views.scrollView}>
       {iconAndTextRow(
         t("GITHUB_LOGO_ALT_TEXT"),
         "github",
