@@ -1,74 +1,85 @@
 // Contains information about TCAT and AccessMap as well as contact information
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Image, Text, View } from "react-native";
+import { Button } from "react-native-elements/dist/buttons/Button";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import {} from "../../res/images/uwescience.jpg";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { Buttons, Fonts, Views } from "../styles";
+import {
+  openLink,
+  donateURL,
+  wsdotURL,
+  escienceURL,
+  githubURL,
+  taskarURL,
+  twitterURL,
+  mailURL,
+} from "../constants/urls";
 
 export default function AboutPage({ route, navigation }) {
   const { t, i18n } = useTranslation();
 
-  return (
-    <View>
-      <Text style={Fonts.h2}>{t("ABOUT_TEXT")}</Text>
-      <View>
-        <Button
-          icon={
-            <Icon
-              accessibilityLabel={t("GITHUB_LOGO_ALT_TEXT")}
-              name="github"
-              size={30}
-              color="black"
-            />
-          }
-          type="clear"
-          onPress={() => {
-            openLink(githubURL);
-          }}
-        />
-        <TouchableOpacity
-          style={Views.overlayText}
-          onPress={() => {
-            openLink(githubURL);
-          }}
-        >
-          <Text style={Fonts.p}>{t("GITHUB_TEXT")}</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Button
-          icon={
-            <Icon
-              name="graduation-cap"
-              accessibilityLabel={t("TCAT_LINK_ALT_TEXT")}
-              size={30}
-              color="black"
-            />
-          }
-          type="clear"
-          containerStyle={{ flex: 2 }}
-          onPress={() => {
-            openLink(taskarURL);
-          }}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            openLink(taskarURL);
-          }}
-        >
-          <Text style={Fonts.p}>{t("UW_TEXT")}</Text>
-        </TouchableOpacity>
-      </View>
+  const iconAndTextRow = (iconLabel, iconName, url, text) => (
+    <View style={Views.iconAndText}>
+      <Button
+        icon={
+          <Icon
+            accessibilityLabel={iconLabel}
+            name={iconName}
+            size={35}
+            color="black"
+          />
+        }
+        type="clear"
+        onPress={() => {
+          openLink(url);
+        }}
+      />
+      <TouchableOpacity
+        style={Views.overlayText}
+        onPress={() => {
+          openLink(url);
+        }}
+      >
+        <Text style={Fonts.p}>{text}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
-      <View>
+  return (
+    <ScrollView style={{ margin: 15 }}>
+      {iconAndTextRow(
+        t("GITHUB_LOGO_ALT_TEXT"),
+        "github",
+        githubURL,
+        t("GITHUB_TEXT")
+      )}
+      {iconAndTextRow(
+        t("TCAT_LINK_ALT_TEXT"),
+        "graduation-cap",
+        taskarURL,
+        t("UW_TEXT")
+      )}
+      {iconAndTextRow(
+        t("DONATE_ALT_TEXT"),
+        "heart",
+        donateURL,
+        t("DONATE_TEXT")
+      )}
+
+      <View style={[Views.iconAndText, {marginTop: 10}]}>
         <TouchableOpacity
           onPress={() => {
             openLink(escienceURL);
           }}
-          style={Buttons.iconButtons}
         >
           <Image
+            style={Buttons.iconButtons}
             accessibilityLabel={t("ESCIENCE_ALT_TEXT")}
-            style={{ flex: 1, width: "70%", height: "50%" }}
-            source={require("../../../res/images/uwescience.jpg")}
-            resizeMode="contain"
+            source={require("../../res/images/uwescience.jpg")}
+            resizeMode="cover"
             resizeMethod="scale"
           />
         </TouchableOpacity>
@@ -76,46 +87,22 @@ export default function AboutPage({ route, navigation }) {
           onPress={() => {
             openLink(wsdotURL);
           }}
-          style={Buttons.iconButtons}
         >
           <Image
+            style={Buttons.iconButtons}
             accessibilityLabel={t("WSDOT_ALT_TEXT")}
-            style={{ flex: 1, width: "70%", height: "50%" }}
-            source={require("../../../res/images/wsdot.png")}
-            resizeMode="contain"
+            source={require("../../res/images/wsdot.png")}
+            resizeMode="stretch"
             resizeMethod="scale"
           />
         </TouchableOpacity>
-        <Text style={[Fonts.p, Views.overlayText]}>
-          {t("ORGANIZATIONS_TEXT")}
-        </Text>
+        <Text style={[{marginLeft: 10, flex: 1, flexWrap: "wrap"}, Fonts.p]}>{t("ORGANIZATIONS_TEXT")}</Text>
       </View>
 
-      <View>
-        <Button
-          icon={
-            <Icon
-              name="heart"
-              accessibilityLabel={t("DONATE_ALT_TEXT")}
-              size={30}
-              color="red"
-            />
-          }
-          type="clear"
-          containerStyle={{ flex: 2 }}
-          onPress={() => {
-            openLink(donateURL);
-          }}
-        />
-        <TouchableOpacity
-          style={Views.overlayText}
-          onPress={() => {
-            openLink(donateURL);
-          }}
-        >
-          <Text style={Fonts.p}>{t("DONATE_TEXT")}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      {iconAndTextRow(t("TWITTER"), "twitter", twitterURL, t("TWITTER_TEXT"))}
+
+      {iconAndTextRow(t("EMAIL"), "envelope", mailURL, t("EMAIL_TEXT"))}
+      
+    </ScrollView>
   );
 }

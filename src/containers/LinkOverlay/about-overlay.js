@@ -26,7 +26,7 @@ const AboutOverlay = props => {
 	return (
 		<View style={{width: "100%"}}>
 			<Text style={Fonts.h2}>{t("ABOUT_TEXT")}</Text>
-			<View style={Views.overlayIconandText}>
+			<View style={Views.iconAndText}>
 				<Button
 					icon={
 						<Icon
@@ -47,7 +47,7 @@ const AboutOverlay = props => {
 				</TouchableOpacity>
 			</View>
 
-			<View style={Views.overlayIconandText}>
+			<View style={Views.iconAndText}>
 				<Button
 					icon={
 						<Icon
@@ -68,7 +68,7 @@ const AboutOverlay = props => {
 				</TouchableOpacity>
 			</View>
 			
-			<View style={Views.overlayIconandText}>
+			<View style={Views.iconAndText}>
 				<TouchableOpacity onPress={() => {openLink(escienceURL)}} style={Buttons.iconButtons}>
 					<Image
 						accessibilityLabel={t("ESCIENCE_ALT_TEXT")}
@@ -90,7 +90,7 @@ const AboutOverlay = props => {
 				<Text style={[Fonts.p, Views.overlayText]}>{t("ORGANIZATIONS_TEXT")}</Text>
 			</View>
 
-			<View style={Views.overlayIconandText}>
+			<View style={Views.iconAndText}>
 				<Button
 					icon={
 						<Icon

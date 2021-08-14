@@ -32,9 +32,8 @@ export const zooms = {
 
 // For small image icons that link to an external website
 export const iconButtons = {
-  flex: 1,
-  width: "50%",
-  marginHorizontal: 0,
+  width: 50,
+  height: 50,
 };
 
 export const button = {

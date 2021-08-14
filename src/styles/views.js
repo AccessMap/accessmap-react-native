@@ -1,3 +1,5 @@
+import { center } from "./positioning";
+
 // Stylesheet for all general containers and views in the app.
 export const container = {
   flex: 1,
@@ -48,18 +50,17 @@ export const overlay = {
 
 // Container for the container that holds an icon and text description
 // in the About and Contact overlays.
-export const overlayIconandText = {
+export const iconAndText = {
   flexDirection: "row",
-  alignItems: "center",
-  width: "100%",
-  marginVertical: 10,
+  marginBottom: 10,
 };
 
 // For the text that appears in the About and Contact cards
 export const overlayText = {
   flexDirection: "row",
   flexWrap: "wrap",
-  flex: 5,
+  maxWidth: 280,
+  marginLeft: 30,
 };
 
 export const page = {

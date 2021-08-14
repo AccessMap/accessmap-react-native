@@ -1,11 +1,4 @@
-import {
-  AccessibilityInfo,
-  Animated,
-  Easing,
-  LogBox,
-  TextInput,
-  View,
-} from "react-native";
+import { AccessibilityInfo, LogBox, TextInput, View } from "react-native";
 import * as React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -23,6 +16,7 @@ import RoutePlanningTutorialPage from "./navigation/Tutorials/RoutePlanningTutor
 import SettingsTutorialPage from "./navigation/Tutorials/SettingsTutorialPage";
 import { useTranslation } from "react-i18next";
 import { enableScreens } from "react-native-screens";
+import AboutPage from "./navigation/AboutPage";
 
 LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -49,7 +43,17 @@ function App() {
     <Stack.Screen
       name={t("MAP")}
       component={MapPage}
-      options={{ headerShown: false,}}
+      options={{ headerShown: false }}
+    />
+  );
+
+  const about = (
+    <Stack.Screen
+      name={t("ABOUT")}
+      component={AboutPage}
+	  options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
+      })}
     />
   );
 
@@ -81,7 +85,8 @@ function App() {
     <Stack.Screen
       name={t("TUTORIAL")}
       component={TutorialPage}
-      options={({ navigation }) => ({headerLeft: () => backButton(navigation),
+      options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
       })}
     />
   );
@@ -89,7 +94,8 @@ function App() {
     <Stack.Screen
       name={t("MAP_INTERFACE")}
       component={MapInterfaceTutorialPage}
-      options={({ navigation }) => ({headerLeft: () => backButton(navigation),
+      options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
       })}
     />
   );
@@ -97,7 +103,8 @@ function App() {
     <Stack.Screen
       name={t("ROUTE_PLANNING")}
       component={RoutePlanningTutorialPage}
-      options={({ navigation }) => ({headerLeft: () => backButton(navigation),
+      options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
       })}
     />
   );
@@ -105,7 +112,8 @@ function App() {
     <Stack.Screen
       name={t("SETTINGS_MENU")}
       component={SettingsTutorialPage}
-      options={({ navigation }) => ({headerLeft: () => backButton(navigation),
+      options={({ navigation }) => ({
+        headerLeft: () => backButton(navigation),
       })}
     />
   );
@@ -130,6 +138,8 @@ function App() {
       <Stack.Navigator initialRouteName={t("MAP")}>
         {map}
         {search}
+
+		{about}
 
         {tutorial}
         {mapTutorial}

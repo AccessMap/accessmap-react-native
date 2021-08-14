@@ -80,11 +80,10 @@ class LinkOverlay extends Component {
 
         <OverlayButton
           text={this.props.t("ABOUT_TEXT")}
-          onPress={() => this.setState({ showAbout: true })}
-        />
-        <OverlayButton
-          text={this.props.t("CONTACT_TEXT")}
-          onPress={() => this.setState({ showContact: true })}
+          onPress={() => {
+            this.props.navigation.push(this.props.t("ABOUT"));
+            AccessibilityInfo.announceForAccessibility("Showing about page.");
+        }}
         />
         <OverlayButton
           text={this.props.t("TUTORIAL")}
