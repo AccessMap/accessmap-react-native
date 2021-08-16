@@ -28,6 +28,7 @@ import {
 import MobilityButtonGroup from './mobility-buttons';
 import LanguageSwitcher from './language-switcher';
 import RegionSwitcher from './region-switcher';
+import { DrawerActions } from "@react-navigation/routers";
 
 const IconButton = (props) => {
   return (
@@ -143,7 +144,7 @@ class OmniCard extends Component {
           <IconButton
             name="menu"
             accessibilityLabel="Select to open drawer menu"
-            onPress={this.props.openDrawer}
+            onPress={this.props.navigation.dispatch(DrawerActions.toggleDrawer())}
           />
           <GeocodeBar
             accessibilityLabel={"Enter end address"}
