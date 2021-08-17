@@ -141,11 +141,6 @@ class OmniCard extends Component {
       // unselected route state
       topBarContents = (
         <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', marginTop: 5}]}>
-          <IconButton
-            name="menu"
-            accessibilityLabel="Select to open drawer menu"
-            onPress={this.props.navigation.dispatch(DrawerActions.toggleDrawer())}
-          />
           <GeocodeBar
             accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}

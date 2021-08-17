@@ -59,7 +59,7 @@ export const iconAndText = {
 export const overlayText = {
   flexDirection: "row",
   flexWrap: "wrap",
-  maxWidth: 280,
+  maxWidth: 270,
   marginLeft: 30,
 };
 
@@ -85,7 +85,7 @@ export const searchBarInputContainer = {
 };
 
 export const scrollView = {
-  margin: 20,
+  padding: 20,
 };
 
 export const settingsRow = {

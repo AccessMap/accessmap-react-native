@@ -21,7 +21,9 @@ import { RootState } from "../reducers";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
 import { FlatList, TouchableHighlight } from "react-native-gesture-handler";
-import { Radio } from "native-base";
+import AboutPage from "./AboutPage";
+import { Divider } from "react-native-elements/dist/divider/Divider";
+// import { Radio } from "native-base";
 
 function SettingsPage({ props, route, navigation }) {
   const { Rakam } = NativeModules;
@@ -39,11 +41,11 @@ function SettingsPage({ props, route, navigation }) {
     <ScrollView style={Views.scrollView}>
       <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
       <FlatList
-        style={{marginBottom: 50}} 
+        // style={{ marginBottom: 50 }}
         data={languages}
         renderItem={(item) => (
           <TouchableHighlight
-            style={{paddingVertical: 10}}
+            style={{ paddingVertical: 10 }}
             onPress={() => {
               i18n.changeLanguage(item.item.key);
               goToLanguage(item.item);
@@ -58,14 +60,16 @@ function SettingsPage({ props, route, navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
 
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
       <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
       <FlatList
-        style={{marginBottom: 50}} 
         data={regions}
         renderItem={(item) => (
           <TouchableHighlight
-          style={{paddingVertical: 10}}
-            onPress={() => { goToRegion(item.item);}}
+            style={{ paddingVertical: 10 }}
+            onPress={() => {
+              goToRegion(item.item);
+            }}
           >
             <Text style={[Fonts.p]}>{item.item.properties.name}</Text>
           </TouchableHighlight>
@@ -73,18 +77,7 @@ function SettingsPage({ props, route, navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
 
-    <Radio.Group name="ex" defaultValue="1">
-      <Radio value="1" colorScheme="red" size="sm" my={1}>
-        Small
-      </Radio>
-      <Radio value="2" colorScheme="green" size="md" my={1}>
-        Medium
-      </Radio>
-      <Radio value="3" colorScheme="yellow" size="lg" my={1}>
-        Large
-      </Radio>
-    </Radio.Group>
-
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
       <Text style={Fonts.h2}>{t("OTHER_TEXT")}</Text>
       <View style={[Views.settingsRow]}>
         <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
@@ -117,6 +110,12 @@ function SettingsPage({ props, route, navigation }) {
           }}
           value={metricSetting}
         />
+      </View>
+
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
+      <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
+      <View style={[Views.settingsRow]}>
+        <AboutPage />
       </View>
     </ScrollView>
   );

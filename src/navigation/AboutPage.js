@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import {} from "../../res/images/uwescience.jpg";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Buttons, Fonts, Views } from "../styles";
@@ -49,7 +49,7 @@ export default function AboutPage({ route, navigation }) {
   );
 
   return (
-    <ScrollView style={Views.scrollView}>
+    <View style={{paddingBottom: 40}}>
       {iconAndTextRow(
         t("GITHUB_LOGO_ALT_TEXT"),
         "github",
@@ -103,6 +103,6 @@ export default function AboutPage({ route, navigation }) {
 
       {iconAndTextRow(t("EMAIL"), "envelope", mailURL, t("EMAIL_TEXT"))}
       
-    </ScrollView>
+    </View>
   );
 }

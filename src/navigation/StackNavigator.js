@@ -16,7 +16,6 @@ import RoutePlanningTutorialPage from "./Tutorials/RoutePlanningTutorialPage";
 import SettingsTutorialPage from "./Tutorials/SettingsTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import DrawerNavigator from "./DrawerNavigator";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
@@ -139,12 +138,8 @@ function MainStackNavigator() {
     />
   );
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={DrawerNavigator}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator>
+      {map}
       {search}
 
       {about}
