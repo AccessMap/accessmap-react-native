@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Buttons, Views, Position, Fonts, Colors } from "../../styles";
 import {
   View,
-  Image,
   TouchableWithoutFeedback, 
   AccessibilityInfo
 } from "react-native";
@@ -18,7 +17,6 @@ import { MOBILITY_MODE_CUSTOM } from "../../constants";
 
 import { connect } from "react-redux";
 import {
-	openDrawer,
 	reverseRoute,
 	cancelRoute,
 	closeDirections,
@@ -26,9 +24,6 @@ import {
 } from '../../actions';
 
 import MobilityButtonGroup from './mobility-buttons';
-import LanguageSwitcher from './language-switcher';
-import RegionSwitcher from './region-switcher';
-import { DrawerActions } from "@react-navigation/routers";
 
 const IconButton = (props) => {
   return (
@@ -54,7 +49,7 @@ const GeocodeBar = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <TouchableWithoutFeedback
-        accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
+        // accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
         onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
       >
         <View pointerEvents="box-only">
@@ -131,7 +126,7 @@ class OmniCard extends Component {
             accessibilityLabel="Select to exit route finding"
             onPress={() => {
               cancelRoute();
-              AccessibilityInfo.announceForAccessibility("Cancelled route. Showing home screen with drawer menu open.");
+              AccessibilityInfo.announceForAccessibility("Cancelled route.");
               this.setState({ findDirections: false });
             }}
           />
@@ -256,9 +251,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openDrawer: () => {
-      dispatch(openDrawer());
-    },
     reverseRoute: () => {
       dispatch(reverseRoute());
     },

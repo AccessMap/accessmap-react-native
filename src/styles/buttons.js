@@ -2,7 +2,7 @@ import { primaryColor } from "./colors";
 
 // Stylesheet for all buttons in the app
 export const minTouchTargetSize = {
-  transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
+  transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
 };
 
 // Used for zooming in and out and other map buttons
@@ -44,6 +44,7 @@ export const switches = [
   {
     marginRight: 10,
     color: primaryColor,
+    height: 50,
   },
 ];
 

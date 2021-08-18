@@ -91,18 +91,6 @@ export function locateUser(enable) {
 	return { type: LOCATE_USER, enable };
 }
 
-// Drawer actions
-
-export const OPEN_DRAWER = "OPEN_DRAWER";
-export function openDrawer() {
-	return { type: OPEN_DRAWER };
-}
-
-export const CLOSE_DRAWER = "CLOSE_DRAWER";
-export function closeDrawer() {
-	return { type: CLOSE_DRAWER };
-}
-
 // Route-finding actions
 
 export const CANCEL_ROUTE = "CANCEL_ROUTE";

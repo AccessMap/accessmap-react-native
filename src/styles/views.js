@@ -59,7 +59,7 @@ export const iconAndText = {
 export const overlayText = {
   flexDirection: "row",
   flexWrap: "wrap",
-  maxWidth: 270,
+  maxWidth: 280,
   marginLeft: 30,
 };
 

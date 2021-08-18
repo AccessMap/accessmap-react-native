@@ -49,7 +49,7 @@ export default function AboutPage({ route, navigation }) {
   );
 
   return (
-    <View style={{paddingBottom: 40}}>
+    <View style={{paddingTop: 20, paddingBottom: 40}}>
       {iconAndTextRow(
         t("GITHUB_LOGO_ALT_TEXT"),
         "github",

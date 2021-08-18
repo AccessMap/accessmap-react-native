@@ -10,7 +10,7 @@ import Crowdsourcing from "./Crowdsourcing";
 
 import AboutPage from "./AboutPage";
 import SettingsPage from "./SettingsPage";
-import TutorialPage from "./Tutorials/TutorialPage";
+import InformationPage from "./Tutorials/TutorialPage";
 import MapInterfaceTutorialPage from "./Tutorials/MapInterfaceTutorialPage";
 import RoutePlanningTutorialPage from "./Tutorials/RoutePlanningTutorialPage";
 import SettingsTutorialPage from "./Tutorials/SettingsTutorialPage";
@@ -24,8 +24,8 @@ function MainStackNavigator() {
   const backButton = (navigation) => (
     <Button
       accessibilityLabel={"Select to go back"}
-      icon={<Icon name="arrow-left" size={30} />}
-      buttonStyle={{ backgroundColor: "transparent", margin: 5, height: 50 }}
+      icon={<Icon name="arrow-left" size={25} />}
+      buttonStyle={{ backgroundColor: "transparent", margin: 5, height: 50, width: 50 }}
       onPress={() => {
         navigation.goBack();
         AccessibilityInfo.announceForAccessibility("Navigated back one page");
@@ -88,8 +88,8 @@ function MainStackNavigator() {
   // List of tutorials screen
   const tutorial = (
     <Stack.Screen
-      name={t("TUTORIAL")}
-      component={TutorialPage}
+      name="Information"
+      component={InformationPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}

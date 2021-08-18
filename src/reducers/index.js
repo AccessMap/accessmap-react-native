@@ -54,7 +54,7 @@ const defaultState = {
 	zoomLevel: 14,
 	bbox: seattleProps.bounds,
 	currRegion: seattleProps.name.toUpperCase(),
-	currLanguage: englishLanguageProps.key.toUpperCase(),
+	currLanguage: englishLanguageProps.key.toLowerCase(),
 	centerCoordinate: seattleCoords,
 	locateUserSwitch: false,
 	canAccessLocation: false,
@@ -96,7 +96,7 @@ export default function mapApp(state = defaultState, action) {
 		case GO_TO_LANGUAGE:
 			logEvent(action.type, ["language", action.language.name]);
 			// centerCoordinate, bbox
-			return {...state, language: action.language, currLanguage: action.language.key.toUpperCase()};
+			return {...state, language: action.language, currLanguage: action.language.key.toLowerCase()};
 		case PLACE_PIN:
 			logEvent(action.type, action.item == null ? ["segment", "null"] : ["segment", action.item.description]);
 			return {...state, pinFeatures: action.item};
@@ -146,11 +146,6 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, viewingDirections: false};
 		case LOCATE_USER:
 			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
-		case OPEN_DRAWER:
-			AccessibilityInfo.announceForAccessibility("Drawer menu opened.");
-			return {...state, openDrawer: true};
-		case CLOSE_DRAWER:
-			return {...state, openDrawer: false};
 		case RECEIVE_ROUTE:
 			return {...state, route: action.route};
 		case USE_METRIC_SYSTEM:

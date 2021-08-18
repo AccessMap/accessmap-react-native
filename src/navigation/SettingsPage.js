@@ -9,6 +9,7 @@ import {
 import React from "react";
 import {
   goToLanguage,
+  goToRegion,
   trackUser,
   untrackUser,
   useImperialSystem,
@@ -20,10 +21,8 @@ import { Buttons, Colors, Fonts, Views } from "../styles";
 import { RootState } from "../reducers";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
-import { FlatList, TouchableHighlight } from "react-native-gesture-handler";
-import AboutPage from "./AboutPage";
-import { Divider } from "react-native-elements/dist/divider/Divider";
-// import { Radio } from "native-base";
+import GreyDivider from "../components/GreyDivider";
+import { RadioButton } from "react-native-paper";
 
 function SettingsPage({ props, route, navigation }) {
   const { Rakam } = NativeModules;
@@ -33,51 +32,59 @@ function SettingsPage({ props, route, navigation }) {
   let trackingSetting = useSelector((state: RootState) => {
     return state.trackUserActions;
   });
-
+  let currentLanguage = useSelector((state: RootState) => {
+    return state.currLanguage;
+  });
+  let currentRegion = useSelector((state: RootState) => {
+    return state.currRegion;
+  });
   const dispatch = useDispatch();
-
   const { t, i18n } = useTranslation();
+
   return (
     <ScrollView style={Views.scrollView}>
       <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
-      <FlatList
-        // style={{ marginBottom: 50 }}
-        data={languages}
-        renderItem={(item) => (
-          <TouchableHighlight
-            style={{ paddingVertical: 10 }}
-            onPress={() => {
-              i18n.changeLanguage(item.item.key);
-              goToLanguage(item.item);
-              AccessibilityInfo.announceForAccessibility(
-                "Changed language to " + item.item.name
-              );
-            }}
-          >
-            <Text style={[Fonts.p]}>{item.item.name}</Text>
-          </TouchableHighlight>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <RadioButton.Group
+        onValueChange={(value) => {
+          var item = languages.filter((data) => {return data.key.toUpperCase() == value.toUpperCase(); });
+          dispatch(goToLanguage(item[0]));
+          AccessibilityInfo.announceForAccessibility("Changed language to " + item[0].name);
+          console.log(item[0].name);
+          i18n.changeLanguage(value.toLowerCase());
+        }}
+        value={currentLanguage}
+      >
+        {languages.map((lang) => (
+          <RadioButton.Item 
+          color={Colors.primaryColor} 
+          label={lang.name} 
+          key={lang.key}
+          value={lang.key} />
+        ))}
+      </RadioButton.Group>
 
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
+      <GreyDivider />
       <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
-      <FlatList
-        data={regions}
-        renderItem={(item) => (
-          <TouchableHighlight
-            style={{ paddingVertical: 10 }}
-            onPress={() => {
-              goToRegion(item.item);
-            }}
-          >
-            <Text style={[Fonts.p]}>{item.item.properties.name}</Text>
-          </TouchableHighlight>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <RadioButton.Group
+        onValueChange={(value) => {
+            var item = regions.filter((data) => { 
+              return data.properties.name.toUpperCase() == value; 
+            }); 
+            AccessibilityInfo.announceForAccessibility("Changed region to " + item[0].properties.name);
+            dispatch(goToRegion(item[0]));
+        }}
+        value={currentRegion.toUpperCase()}
+      >
+        {regions.map((region) => (
+          <RadioButton.Item 
+            color={Colors.primaryColor} 
+            label={region.properties.name} 
+            value={region.properties.name.toUpperCase()} 
+            key={region.properties.key}/>
+        ))}
+      </RadioButton.Group>
 
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
+      <GreyDivider />
       <Text style={Fonts.h2}>{t("OTHER_TEXT")}</Text>
       <View style={[Views.settingsRow]}>
         <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
@@ -96,7 +103,7 @@ function SettingsPage({ props, route, navigation }) {
           value={trackingSetting}
         />
       </View>
-      <View style={[Views.settingsRow]}>
+      <View style={[Views.settingsRow, {paddingBottom: 50}]}>
         <Text style={[Fonts.p]}>
           {metricSetting ? t("METRIC_TOGGLE_TEXT") : t("IMPERIAL_TOGGLE_TEXT")}
         </Text>
@@ -110,12 +117,6 @@ function SettingsPage({ props, route, navigation }) {
           }}
           value={metricSetting}
         />
-      </View>
-
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
-      <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
-      <View style={[Views.settingsRow]}>
-        <AboutPage />
       </View>
     </ScrollView>
   );

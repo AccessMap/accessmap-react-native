@@ -27,7 +27,7 @@ export const p = {
 export const menuItems = {
   fontSize: 20,
   color: "black",
-  paddingTop: 20,
-  paddingBottom: 20, 
+  paddingVertical: 15,
+  marginVertical: 1,
   fontFamily: "Inter-Regular",
 };

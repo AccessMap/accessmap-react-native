@@ -88,8 +88,6 @@ class MapPage extends Component {
               <Zooms navigation={this.props.navigation}/>
             </View>
 
-            <SpeedLegend maxIncline={this.props.maxIncline} />
-
             {this.props.isLoading && <LoadingScreen />}
             {this.props.pinFeatures && (
               <FeatureCard navigation={this.props.navigation} />

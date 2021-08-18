@@ -24,6 +24,8 @@ function App() {
           component={MainStackNavigator}
           options={{
             headerShown: false,
+            tabBarActiveTintColor: Colors.primaryColor,
+            tabBarInactiveTintColor: Colors.grey,
             tabBarIcon: ({ focused, color, size }) => {
               return <MaterialCommunityIcons name={"map"} color={focused ? Colors.primaryColor : Colors.grey} size={35}/>
             }
@@ -33,6 +35,8 @@ function App() {
           name={t("SETTINGS")} 
           component={SettingsPage} 
           options={{
+            tabBarActiveTintColor: Colors.primaryColor,
+            tabBarInactiveTintColor: Colors.grey,
             tabBarIcon: ({ focused, color, size }) => {
               return <MaterialCommunityIcons name="cog" color={focused ? Colors.primaryColor : Colors.grey} size={35}/>
             }
