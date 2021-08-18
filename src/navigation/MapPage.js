@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions, Alert, AccessibilityInfo } from "react-native";
+import { View, Dimensions, Alert, AccessibilityInfo, Button } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { connect } from "react-redux";
 
@@ -57,15 +57,6 @@ class MapPage extends Component {
       this.openDrawer();
     }
   }
-
-  closeDrawer() {
-    AccessibilityInfo.announceForAccessibility("Drawer menu is closed");
-    this.drawer._root.close();
-    this.props.closeDrawer();
-  }
-  openDrawer() {
-    this.drawer._root.open();
-  }
   onLayout(e) {
     this.setState({
       screenWidth: Math.round(Dimensions.get("window").width),
@@ -94,7 +85,7 @@ class MapPage extends Component {
               {!this.props.viewingDirections && !this.props.viewingTripInfo && (
                 <OmniCard navigation={this.props.navigation} />
               )}
-              <Zooms />
+              <Zooms navigation={this.props.navigation}/>
             </View>
 
             <SpeedLegend maxIncline={this.props.maxIncline} />
@@ -103,7 +94,7 @@ class MapPage extends Component {
             {this.props.pinFeatures && (
               <FeatureCard navigation={this.props.navigation} />
             )}
-            {this.props.route && <RouteBottomCard />}
+            {this.props.route && !this.props.pinFeatures && <RouteBottomCard />}
             {this.props.viewingDirections && (
               <Directions
                 route={this.props.route}

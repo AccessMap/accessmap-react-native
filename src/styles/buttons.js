@@ -9,10 +9,7 @@ export const minTouchTargetSize = {
 export const whiteButton = {
   backgroundColor: "white",
   borderRadius: 30,
-  paddingTop: 15,
-  paddingRight: 15,
-  paddingBottom: 15,
-  paddingLeft: 15,
+  padding: 8,
   margin: 5,
 };
 

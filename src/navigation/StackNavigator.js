@@ -37,7 +37,7 @@ function MainStackNavigator() {
   // Home screen showing a mapview, top Omnicard, and bottom gradient incline key.
   const map = (
     <Stack.Screen
-      name={t("MAP")}
+      name="mappage"
       component={MapPage}
       options={{ headerShown: false }}
     />

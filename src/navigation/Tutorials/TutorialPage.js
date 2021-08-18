@@ -10,7 +10,6 @@ export default function TutorialPage({ route, navigation }) {
                 data={[
                 {key: t("MAP_INTERFACE")},
                 {key: t("ROUTE_PLANNING")},
-                {key: t("SETTINGS_TUTORIAL")},
                 ]}
                 renderItem={({item}) => 
                     <MenuButton

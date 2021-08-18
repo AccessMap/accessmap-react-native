@@ -60,7 +60,7 @@ function SettingsPage({ props, route, navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
       <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
       <FlatList
         data={regions}
@@ -77,7 +77,7 @@ function SettingsPage({ props, route, navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
       <Text style={Fonts.h2}>{t("OTHER_TEXT")}</Text>
       <View style={[Views.settingsRow]}>
         <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
@@ -112,7 +112,7 @@ function SettingsPage({ props, route, navigation }) {
         />
       </View>
 
-      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 25}}/>
+      <Divider orientation="horizontal" color={Colors.grey} style={{marginVertical: 15}}/>
       <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
       <View style={[Views.settingsRow]}>
         <AboutPage />

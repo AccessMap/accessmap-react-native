@@ -1,4 +1,4 @@
-import { LogBox, Text, View } from "react-native";
+import { LogBox } from "react-native";
 import * as React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Colors } from "./styles";
 import { useTranslation } from "react-i18next";
 
+LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Tab = createBottomTabNavigator();
 
@@ -17,14 +18,14 @@ function App() {
   const { t, i18n } = useTranslation();
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator initialRouteName={t("HOME")}>
         <Tab.Screen
           name={t("MAP")}
           component={MainStackNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({ focused, color, size }) => {
-              return <MaterialCommunityIcons name="map" color={focused ? Colors.primaryColor : Colors.grey} size={35}/>
+              return <MaterialCommunityIcons name={"map"} color={focused ? Colors.primaryColor : Colors.grey} size={35}/>
             }
           }}
         />
