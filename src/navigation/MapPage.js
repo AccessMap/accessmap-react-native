@@ -9,7 +9,6 @@ import { Views } from "../styles";
 
 import MapView from "../containers/MapView";
 import LoadingScreen from "../components/LoadingScreen";
-import SpeedLegend from "../components/SpeedLegend";
 import Zooms from "../containers/MapButtons/Zooms";
 import OmniCard from "../containers/OmniCard";
 import FeatureCard from "../containers/FeatureCard";

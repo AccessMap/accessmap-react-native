@@ -7,8 +7,10 @@ import { Button, Card } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { viewDirections, viewTripInfo } from "../../actions";
-import { Fonts, Views } from "../../styles";
+import { cancelRoute, closeDirections, closeTripInfo, viewDirections, viewTripInfo } from "../../actions";
+import { Buttons, Fonts, Views } from "../../styles";
+import Header from "../../components/Header";
+import { primaryColor } from "../../styles/colors";
 
 const RouteBottomCard = (props) => {
   const { t, i18n } = useTranslation();
@@ -16,13 +18,13 @@ const RouteBottomCard = (props) => {
   if (props.viewingDirections || props.viewingTripInfo) {
     return null;
   } else if (!props.route || props.route.code != "Ok") {
-    AccessibilityInfo.announceForAccessibility("No possible route found with given start and end locations.");
+    AccessibilityInfo.announceForAccessibility(
+      "No possible route found with given start and end locations."
+    );
     return (
-      <Card containerStyle={[Views.bottomCard, ]}>
+      <Card containerStyle={[Views.bottomCard]}>
         <View style={{ margin: 5 }}>
-          <Text style={{ fontSize: 20 }}>
-            {t("NO_ROUTE_TEXT")}
-          </Text>
+          <Text style={{ fontSize: 20 }}>{t("NO_ROUTE_TEXT")}</Text>
         </View>
       </Card>
     );
@@ -30,8 +32,10 @@ const RouteBottomCard = (props) => {
 
   const route = props.route.routes[0];
 
-  AccessibilityInfo.announceForAccessibility("Route has been found. " + 
-    "Select Trip info or Directions button for more details");
+  AccessibilityInfo.announceForAccessibility(
+    "Route has been found. " +
+      "Select Trip info or Directions button for more details"
+  );
   return (
     <Card containerStyle={Views.bottomCard}>
       <View style={{ margin: 5, width: "100%" }}>
@@ -44,16 +48,15 @@ const RouteBottomCard = (props) => {
             marginBottom: 5,
           }}
         >
-          <Text style={[Fonts.h2, { marginRight: 20 }]}>
-            { (props.usingMetricSystem ? Math.round(route.distance) : Math.round(route.distance*0.000621371192*100) / 100 ) } 
-            {" "}
-			      { (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) }
-            {" ("}
-            {Math.round(route.duration / 60)} 
-            {" "}
-            {t("MINUTES_TEXT")}
-            {")"}
-          </Text>
+          <Header
+            title={ "" + (props.usingMetricSystem ? 
+              Math.round(route.distance) : 
+              Math.round(route.distance * 0.000621371192 * 100) / 100) + " " + 
+                (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
+                (Math.round(route.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
+            }
+            close={props.cancelRoute}
+          />
         </View>
         <View
           style={{
@@ -64,14 +67,18 @@ const RouteBottomCard = (props) => {
           }}
         >
           <Button
+            buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
             title={t("TRIP_INFO_TEXT")}
-            onPress={() => { 
+            onPress={() => {
               props.viewTripInfo();
-              AccessibilityInfo.announceForAccessibility("Showing Trip details screen.");
+              AccessibilityInfo.announceForAccessibility(
+                "Showing Trip details screen."
+              );
             }}
             containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
           />
           <Button
+            buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
             title={t("DIRECTIONS_TEXT")}
             onPress={() => props.viewDirections()}
             containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
@@ -98,6 +105,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     viewTripInfo: () => {
       dispatch(viewTripInfo());
+    },
+    cancelRoute: () => {
+      dispatch(cancelRoute());
+      dispatch(closeDirections());
+      dispatch(closeTripInfo());
     },
   };
 };

@@ -22,7 +22,7 @@ const Header = props => {
 				buttonStyle={{backgroundColor: "#FFFFFF", borderRadius: 20}}
 				icon={<Icon
 					name="close"
-					size={30}
+					size={32}
 					color="black"
 				/>}
 				onPress={props.close}
