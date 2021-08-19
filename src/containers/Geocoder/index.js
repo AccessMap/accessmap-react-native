@@ -1,110 +1,117 @@
 // A Geocoder consists of a list of items reflecting geographic locations
 // based on user input.
-import React, { Component } from 'react';
-import { AccessibilityInfo, Alert, FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { AccessibilityInfo, Alert, FlatList } from "react-native";
+import { ListItem } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
 
-import { connect } from 'react-redux';
-import { goToLocation, placePin, setOrigin, setDestination } from '../../actions';
-import { ACCESS_TOKEN } from '../../constants';
-import { useTranslation } from 'react-i18next';
+import {
+  goToLocation,
+  placePin,
+  setOrigin,
+  setDestination,
+} from "../../actions";
+import { ACCESS_TOKEN } from "../../constants";
 
-const accessToken = ACCESS_TOKEN;
+export default function Geocoder(props) {
+  const [searchList, setSearchList] = useState({});
+  const prevSearch = usePrevious(props.search);
+  let bbox = useSelector((state: RootState) => state.bbox.join(","));
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
-class Geocoder extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
+  };
 
-	componentDidUpdate(prevProps) {
-		if (this.props.search !== prevProps.search) {
-			const query = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + this.props.search +
-				".json?bbox=" + this.props.bbox +
-				"&limit=10&access_token=" + accessToken;
-		
-			fetch(query)
-				.then(response => response.json())
-				.then(json => {
-					this.setState({ searchList: json.features });
-				})
-				.catch((error) => {
-					console.log(error);
-					Alert.alert(
-						"Failed to retrieve location data",
-						"Please check your connection to the internet.",
-						[
-						  { text: "OK" }
-						]
-					);
-				});
-		}
-	}
+  const panToLocation = (item) => {
+    dispatch(goToLocation(item));
+    dispatch(placePin(item));
+  };
 
-	_renderItem = ({item, index}) => {
-		return (
-			<ListItem onPress={() => {
-					switch (this.props.type) {
-						case "search":
-							AccessibilityInfo.announceForAccessibility("Showing location of " + 
-								item.place_name + ". Select Route from here to set location as route start. Or," +
-								"Select Route to here to set location as route end.");
-							this.props.goToLocation(item);
-							break;
-						case "origin":
-							AccessibilityInfo.announceForAccessibility("Route start set to " + 
-								item.place_name);
-							this.props.setOrigin(item);
-							break;
-						case "destination":
-							AccessibilityInfo.announceForAccessibility("Route destination set to " + 
-								item.place_name);
-							this.props.setDestination(item);
-					}
-					this.props.navigation.pop();
-				}}>
-				<ListItem.Content>
-					<ListItem.Title>{item.place_name}</ListItem.Title>
-				</ListItem.Content>
-			</ListItem>
-		);
-	}
+  const setAndPinOrigin = (item) => {
+    dispatch(goToLocation(item));
+    dispatch(placePin(item));
+    dispatch(setOrigin());
+  };
 
-	render() {
-		return (
-			<FlatList
-				data={this.state.searchList}
-				keyExtractor={(item, index) => index.toString()}
-				renderItem={this._renderItem}
-				accessibilityLabel={"Search results"}
-			/>
-		);
-	}
+  const setAndPinDestination = (item) => {
+    dispatch(goToLocation(item));
+    dispatch(placePin(item));
+    dispatch(setDestination());
+  };
+
+  useEffect(() => {
+    if (prevSearch == props.search) {
+      return;
+    }
+    console.log("SEARCHED");
+    const query =
+      "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+      props.search +
+      ".json?bbox=" +
+      bbox +
+      "&limit=10&access_token=" +
+      ACCESS_TOKEN;
+
+    fetch(query)
+      .then((response) => response.json())
+      .then((json) => {
+        setSearchList(json.features);
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
+      });
+  }, [props.search]);
+
+  const renderItem = ({ item, index }) => {
+    return (
+      <ListItem
+        onPress={() => {
+          switch (props.type) {
+            case "search":
+              AccessibilityInfo.announceForAccessibility(
+                "Showing location of " +
+                  item.place_name +
+                  ". Select Route from here to set location as route start. Or," +
+                  "Select Route to here to set location as route end."
+              );
+              panToLocation(item);
+              break;
+            case "origin":
+              AccessibilityInfo.announceForAccessibility(
+                "Route start set to " + item.place_name
+              );
+              setAndPinOrigin(item);
+              break;
+            case "destination":
+              AccessibilityInfo.announceForAccessibility(
+                "Route destination set to " + item.place_name
+              );
+              setAndPinDestination(item);
+          }
+          props.navigation.pop();
+        }}
+      >
+        <ListItem.Content>
+          <ListItem.Title>{item.place_name}</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+    );
+  };
+
+  return (
+    <FlatList
+      data={searchList}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={renderItem}
+      accessibilityLabel={"Search results"}
+    />
+  );
 }
-
-const mapStateToProps = state => {
-	return {
-		bbox: state.bbox.join(","),
-	};
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		goToLocation: item => {
-			dispatch(goToLocation(item));
-			dispatch(placePin(item));
-		},
-		setOrigin: item => {
-			dispatch(goToLocation(item));
-			dispatch(placePin(item));
-			dispatch(setOrigin());
-		},
-		setDestination: item => {
-			dispatch(goToLocation(item));
-			dispatch(placePin(item));
-			dispatch(setDestination());
-		},
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Geocoder);

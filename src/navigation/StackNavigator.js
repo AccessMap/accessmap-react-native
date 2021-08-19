@@ -70,15 +70,13 @@ function MainStackNavigator() {
       component={SearchPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
-        headerTitle: (
-          <View>
-            <TextInput
-              placeholderTextColor="black"
-              placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
-              autoFocus={true}
-              onChangeText={(search) => navigation.setParams({ search })}
-            />
-          </View>
+        headerTitle: () => (
+          <TextInput
+            placeholderTextColor="black"
+            placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
+            autoFocus={true}
+            onChangeText={(search) => navigation.setParams({ search })}
+          />
         ),
       })}
     />
