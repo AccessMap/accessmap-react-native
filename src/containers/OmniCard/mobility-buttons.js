@@ -30,7 +30,7 @@ const MobilityButtonRender = props => {
 			buttonStyle={[Buttons.button, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
-				size={32}
+				size={30}
 				color={iconColor}
 			/>}
 			title={selected ? props.label : null}

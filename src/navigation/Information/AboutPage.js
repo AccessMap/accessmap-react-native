@@ -4,9 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import {} from "../../res/images/uwescience.jpg";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Buttons, Fonts, Views } from "../styles";
+import { Buttons, Fonts, Views } from "../../styles";
 import {
   openLink,
   donateURL,
@@ -16,7 +15,7 @@ import {
   taskarURL,
   twitterURL,
   mailURL,
-} from "../constants/urls";
+} from "../../constants/urls";
 
 export default function AboutPage({ route, navigation }) {
   const { t, i18n } = useTranslation();
@@ -78,7 +77,7 @@ export default function AboutPage({ route, navigation }) {
           <Image
             style={Buttons.iconButtons}
             accessibilityLabel={t("ESCIENCE_ALT_TEXT")}
-            source={require("../../res/images/uwescience.jpg")}
+            source={require("../../../res/images/uwescience.jpg")}
             resizeMode="cover"
             resizeMethod="scale"
           />
@@ -91,7 +90,7 @@ export default function AboutPage({ route, navigation }) {
           <Image
             style={Buttons.iconButtons}
             accessibilityLabel={t("WSDOT_ALT_TEXT")}
-            source={require("../../res/images/wsdot.png")}
+            source={require("../../../res/images/wsdot.png")}
             resizeMode="stretch"
             resizeMethod="scale"
           />

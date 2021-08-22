@@ -10,7 +10,6 @@ import LayerCrossings from './layer-crossings';
 import LayerElevators from './layer-elevator-paths';
 import LayerAnnotations from './layer-annotations';
 import LayerRoute from './layer-route';
-// import LoadingScreen from '../../components/LoadingScreen';s
 import { Views } from '../../styles';
 import {
 	goToLocation,

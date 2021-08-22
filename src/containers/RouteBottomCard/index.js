@@ -63,7 +63,6 @@ const RouteBottomCard = (props) => {
             flex: 1,
             flexDirection: "row",
             width: "100%",
-            marginBottom: 5,
           }}
         >
           <Button

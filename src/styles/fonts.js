@@ -3,7 +3,6 @@
 // For card or view header text
 export const h1 = {
   color: "black",
-  flex: 1,
   fontSize: 30,
   fontWeight: "bold",
   fontFamily: "Inter-SemiBold",

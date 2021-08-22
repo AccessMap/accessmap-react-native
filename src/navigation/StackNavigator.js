@@ -8,12 +8,12 @@ import MapPage from "./MapPage";
 import SearchPage from "./SearchPage";
 import Crowdsourcing from "./Crowdsourcing";
 
-import AboutPage from "./AboutPage";
+import AboutPage from "./Information/AboutPage";
 import SettingsPage from "./SettingsPage";
-import InformationPage from "./Tutorials/TutorialPage";
-import MapInterfaceTutorialPage from "./Tutorials/MapInterfaceTutorialPage";
-import RoutePlanningTutorialPage from "./Tutorials/RoutePlanningTutorialPage";
-import SettingsTutorialPage from "./Tutorials/SettingsTutorialPage";
+import InformationPage from "./Information/InformationPage";
+import MapInterfaceTutorialPage from "./Information/MapInterfaceTutorialPage";
+import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
+import SettingsTutorialPage from "./Information/SettingsTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 

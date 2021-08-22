@@ -7,7 +7,7 @@ import SpeedLegend from "../../components/SpeedLegend";
 import MenuButton from "../../components/MenuButton";
 import { Fonts, Views } from "../../styles";
 import getInclineLimit from "../../utils/get-incline-limit";
-import AboutPage from "../AboutPage";
+import AboutPage from "./AboutPage";
 
 export default function InformationPage({ route, navigation }) {
   let maxIncline = useSelector((state: RootState) => {

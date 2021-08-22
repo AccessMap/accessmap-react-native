@@ -1,10 +1,7 @@
-import React, { Component } from "react";
-import { View, Dimensions, Alert, AccessibilityInfo, Button } from "react-native";
-import NetInfo from "@react-native-community/netinfo";
-import { connect } from "react-redux";
-
-import getInclineLimit from "../utils/get-incline-limit";
-import { closeDrawer, closeDirections, closeTripInfo } from "../actions";
+import React from "react";
+import { View, AccessibilityInfo } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { closeDirections, closeTripInfo } from "../actions";
 import { Views } from "../styles";
 
 import MapView from "../containers/MapView";
@@ -17,127 +14,52 @@ import RouteBottomCard from "../containers/RouteBottomCard";
 import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
-// import { useTranslation } from 'react-i18next';
-// import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from 'react-i18next';
 
-class MapPage extends Component {
-  static navigationOptions = { title: "Map", header: null };
+export default function MapPage(props) {
+  let pinFeatures = useSelector((state: RootState) => {return state.pinFeatures});
+  let route = useSelector((state: RootState) => {return state.route});
+  let viewingDirections = useSelector((state: RootState) => {return state.viewingDirections});
+  let viewingTripInfo = useSelector((state: RootState) => {return state.viewingTripInfo});
+  let isLoading = useSelector((state: RootState) => {return state.isLoading});
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      screenWidth: Math.round(Dimensions.get("window").width),
-    };
-    this.onLayout = this.onLayout.bind(this);
-    NetInfo.fetch().then((state) => {
-      if (!state.isConnected) {
-        Alert.alert(
-          "No Internet Connection",
-          "Please check your connection to the internet to use AccessMap.",
-          [{ text: "OK" }]
-        );
-      }
-    });
-  }
-
-  handleFirstConnectivityChange = (isConnected) => {
-    NetInfo.isConnected.removeEventListener(
-      "connectionChange",
-      this.handleFirstConnectivityChange
-    );
-
-    if (isConnected === false) {
-      Alert.alert("You are offline!");
-    }
-  };
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.openDrawer && this.props.openDrawer) {
-      this.openDrawer();
-    }
-  }
-  onLayout(e) {
-    this.setState({
-      screenWidth: Math.round(Dimensions.get("window").width),
-    });
-  }
-  render() {
-    AccessibilityInfo.announceForAccessibility("Showing Map View.");
-    return (
-      <View style={{ flex: 1 }} onLayout={this.onLayout}>
-        <View style={Views.page}>
-          <View
-            importantForAccessibility={
-              this.props.openDrawer ? "no-hide-descendants" : "yes"
-            }
-            style={Views.container}
-          >
-            <View style={{ flex: 1 }}>
-              <View
-                importantForAccessibility={
-                  this.props.route ? "no-hide-descendants" : "yes"
-                }
-                style={{ flex: 1 }}
-              >
-                <MapView />
-              </View>
-              {!this.props.viewingDirections && !this.props.viewingTripInfo && (
-                <OmniCard navigation={this.props.navigation} />
-              )}
-              <Zooms navigation={this.props.navigation}/>
+  AccessibilityInfo.announceForAccessibility("Showing Map View.");
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={Views.page}>
+        <View style={Views.container}>
+          <View style={{ flex: 1 }}>
+            <View
+              importantForAccessibility={route ? "no-hide-descendants" : "yes"}
+              style={{ flex: 1 }}
+            >
+              <MapView />
             </View>
-
-            {this.props.isLoading && <LoadingScreen />}
-            {this.props.pinFeatures && (
-              <FeatureCard navigation={this.props.navigation} />
+            {!viewingDirections && !viewingTripInfo && (
+              <OmniCard navigation={props.navigation} />
             )}
-            {this.props.route && !this.props.pinFeatures && <RouteBottomCard />}
-            {this.props.viewingDirections && (
-              <Directions
-                route={this.props.route}
-                close={() => this.props.closeDirections()}
-              />
-            )}
-            {this.props.viewingTripInfo && (
-              <TripInfo
-                route={this.props.route}
-                close={() => this.props.closeTripInfo()}
-              />
-            )}
+            <Zooms navigation={props.navigation}/>
           </View>
+
+          {isLoading && <LoadingScreen />}
+          {pinFeatures && (<FeatureCard navigation={props.navigation} />)}
+          {route && !pinFeatures && <RouteBottomCard />}
+          {viewingDirections && (
+            <Directions
+              route={route}
+              close={() => dispatch(closeDirections())}
+            />
+          )}
+          {viewingTripInfo && (
+            <TripInfo
+              route={route}
+              close={() => dispatch(closeTripInfo())}
+            />
+          )}
         </View>
       </View>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    openDrawer: state.openDrawer,
-    pinFeatures: state.pinFeatures,
-    route: state.route,
-    viewingDirections: state.viewingDirections,
-    viewingTripInfo: state.viewingTripInfo,
-    isLoading: state.isLoading,
-    maxIncline: getInclineLimit(
-      state.customUphill,
-      state.customDownhill,
-      state.mobilityMode
-    )[0],
-  };
+    </View>
+  );
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    closeDrawer: () => {
-      dispatch(closeDrawer());
-    },
-    closeDirections: () => {
-      dispatch(closeDirections());
-    },
-    closeTripInfo: () => {
-      dispatch(closeTripInfo());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapPage);

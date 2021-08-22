@@ -54,3 +54,4 @@ export const grey = "#4E4E4E";
 export const disabled = {
   color: "#AAAAAA"
 };
+export const error = "#B30000";
