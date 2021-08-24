@@ -32,9 +32,7 @@ export default function OmniCard(props) {
   let origin = useSelector((state: RootState) => state.origin);
   let destination = useSelector((state: RootState) => state.destination);
   let originText = useSelector((state: RootState) => state.originText);
-  let destinationText = useSelector(
-    (state: RootState) => state.destinationText
-  );
+  let destinationText = useSelector((state: RootState) => state.destinationText);
 
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {

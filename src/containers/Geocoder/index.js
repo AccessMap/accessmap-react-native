@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { AccessibilityInfo, Alert, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
+import { usePrevious } from "../../utils/usePreviousHook";
 
 import {
   goToLocation,
@@ -20,14 +21,6 @@ export default function Geocoder(props) {
   let bbox = useSelector((state: RootState) => state.bbox.join(","));
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
-
-  function usePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    }, [value]);
-    return ref.current;
-  };
 
   const panToLocation = (item) => {
     dispatch(goToLocation(item));
