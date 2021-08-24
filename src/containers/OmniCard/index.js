@@ -5,13 +5,14 @@ import {
   TouchableWithoutFeedback, 
   AccessibilityInfo
 } from "react-native";
-import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
+import { Card, Button, ButtonGroup } from "react-native-elements";
 import Icon from "../../components/Icon";
 import { useTranslation, withTranslation } from 'react-i18next';
 import UphillSlider from "../Settings/UphillSlider";
 import DownhillSlider from "../Settings/DownhillSlider";
 import BarrierSwitch from "../Settings/BarrierSwitch";
 import coordinatesToString from "../../utils/coordinates-to-string";
+import { Searchbar } from "react-native-paper";
 
 import { MOBILITY_MODE_CUSTOM } from "../../constants";
 
@@ -47,21 +48,20 @@ const IconButton = (props) => {
 const GeocodeBar = (props) => {
   const { t, i18n } = useTranslation();
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, marginRight: 5 }} 
+      accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")} 
+      accessibilityRole="button">
       <TouchableWithoutFeedback
-        // accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
         onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
       >
-        <View pointerEvents="box-only">
-          <SearchBar
+        <View pointerEvents="box-only" importantForAccessibility="no-hide-descendants">
+          <Searchbar
             placeholder={props.placeholder}
             value={props.value}
-            containerStyle={Views.searchBarContainer}
-            inputContainerStyle={Views.searchBarInputContainer}
-            rightIconContainerStyle={{opacity: 0}}
-            inputStyle={Fonts.p}
             editable={false}
-          />
+            clearIcon={<View></View>}
+            style={{borderColor:"white"}}
+            />
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -107,7 +107,7 @@ class OmniCard extends Component {
     // TODO: X button and directions mode
     if (origin || destination || this.state.findDirections) {
       topBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
+        <View style={[{ flex: 1, flexDirection: "row"}, Position.center]}>
           <GeocodeBar
             accessibilityLabel={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
             navigation={this.props.navigation}
@@ -135,9 +135,8 @@ class OmniCard extends Component {
     } else {
       // unselected route state
       topBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', marginTop: 5}]}>
+        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center'}]}>
           <GeocodeBar
-            accessibilityLabel={"Enter end address"}
             navigation={this.props.navigation}
             value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
             type="search"
@@ -214,7 +213,7 @@ class OmniCard extends Component {
         <View>
           {topBarContents}
           {middleRowContents}
-          <View style={{ flex: 1, flexDirection: "row", marginTop: 2, marginLeft: 5,}}>
+          <View style={{ flex: 1, flexDirection: "row", marginTop: 5}}>
             <MobilityButtonGroup />
             {this.props.mobilityMode == MOBILITY_MODE_CUSTOM && (
               <View>

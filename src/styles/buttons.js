@@ -36,7 +36,7 @@ export const iconButtons = {
 };
 
 export const button = {
-  borderRadius: 6,
+  borderRadius: 5,
   padding: 10,
 };
 

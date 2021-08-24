@@ -2,13 +2,14 @@ import React from "react";
 import { PermissionsAndroid, View } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "../../components/Icon";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import { locateUser, zoomIn, zoomOut } from "../../actions";
 import { Buttons, Colors, Views } from "../../styles";
 import { useTranslation } from "react-i18next";
 
 function Zooms(props) {
+  const dispatch = useDispatch();
   const locateUserPressed = async (e) => {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -20,7 +21,7 @@ function Zooms(props) {
       }
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      locateUser(true);
+      dispatch(locateUser(true));
     }
   };
 
@@ -29,7 +30,7 @@ function Zooms(props) {
   return (
     <View accessible={true} style={Buttons.zooms}>
       <Button
-        accessibilityLabel={"Tutorial"}
+        accessibilityLabel={t("INFORMATION")}
         buttonStyle={Buttons.whiteButton}
         icon={<Icon name="information" size={32} color={Colors.primaryColor} />}
         onPress={() => props.navigation.push(t("INFORMATION"))}

@@ -50,7 +50,6 @@ export default function Geocoder(props) {
     if (prevSearch == props.search) {
       return;
     }
-    console.log("SEARCHED");
     const query =
       "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
       props.search +
