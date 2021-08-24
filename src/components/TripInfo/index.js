@@ -64,8 +64,8 @@ const TripInfo = (props) => {
   }
   return (
     <View style={{ height: "50%", backgroundColor: "white" }}>
-      <View>
-        <Header title={t("ROUTE_INFO_TEXT")} close={props.close} />
+      <View style={{marginLeft:10}}>
+        <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
       </View>
       <ScrollView style={{ paddingHorizontal: 10}}>
         <Text>Experienced elevation gain</Text>
@@ -75,7 +75,7 @@ const TripInfo = (props) => {
             height: 200,
             flexDirection: "row",
             alignItems: "center",
-            marginHorizontal: 5,
+            marginLeft: 15,
           }}
         >
           <View
@@ -93,7 +93,7 @@ const TripInfo = (props) => {
             </Text>
           </View>
           <YAxis
-            style={{ marginLeft: 15 }}
+            style={{ marginLeft: 10 }}
             data={elevChange}
             contentInset={{ top: 20, bottom: 20 }}
             svg={{
@@ -104,7 +104,7 @@ const TripInfo = (props) => {
             formatLabel={(value) => `${value}`}
           />
           <AreaChart
-            style={{ flex: 1, marginLeft: 15}}
+            style={{ flex: 1, marginLeft: 10}}
             data={elevChange}
             yAccessor={({ item }) => item}
             xAccessor={({ index }) => dist[index]}
@@ -119,7 +119,7 @@ const TripInfo = (props) => {
           </AreaChart>
         </View>
         <XAxis
-          style={{ marginLeft: 40, width: "80%" }}
+          style={{ marginLeft: 45, width: "80%" }}
           data={xAxis}
           formatLabel={(index) => `${xAxis[index].toFixed(1)}`}
           contentInset={{ left: 10, right: 10 }}
