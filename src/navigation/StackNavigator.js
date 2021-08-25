@@ -16,6 +16,7 @@ import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
 import SettingsTutorialPage from "./Information/SettingsTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
+import { Keyboard } from "react-native";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
@@ -28,6 +29,7 @@ function MainStackNavigator() {
       buttonStyle={{ backgroundColor: "transparent", margin: 5, height: 50, width: 50 }}
       onPress={() => {
         navigation.goBack();
+        Keyboard.dismiss();
         AccessibilityInfo.announceForAccessibility("Navigated back one page");
       }}
     />

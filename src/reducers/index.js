@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from 'redux';
+// import { combineReducers, createStore } from 'redux';
 import { AccessibilityInfo, NativeModules } from 'react-native';
 import {
 	MAP_LOADED,
@@ -20,8 +20,6 @@ import {
 	CLOSE_TRIP_INFO,
 	VIEW_DIRECTIONS,
 	CLOSE_DIRECTIONS,
-	OPEN_DRAWER,
-	CLOSE_DRAWER,
 	LOCATE_USER,
 	RECEIVE_ROUTE,
 	USE_METRIC_SYSTEM,
@@ -36,8 +34,8 @@ import {
 	MOBILITY_MODE_CANE,
 	SEATTLE
 } from '../constants';
-import regions from '../../regions';
-import languages from '../../languages';
+import regions from '../../regions.json';
+import languages from '../../languages.json';
 
 const { Rakam } = NativeModules;
 

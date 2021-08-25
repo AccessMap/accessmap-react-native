@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AccessibilityInfo, NativeModules } from "react-native";
@@ -30,91 +30,99 @@ const { Rakam } = NativeModules;
 
 MapboxGL.setAccessToken(ACCESS_TOKEN);
 MapboxGL.setTelemetryEnabled(false);
-if (Platform.OS === "android") {
-  MapboxGL.setConnected(true);
-}
 
-const getPreferences = (mode) => {
-  switch (mode) {
-    case MOBILITY_MODE_WHEELCHAIR:
-      return [8, 10, 1];
-    case MOBILITY_MODE_POWERED:
-      return [12, 12, 1];
-    case MOBILITY_MODE_CANE:
-      return [14, 14, 0];
-    default:
-      return [
-        useSelector((state: RootState) => state.customUphill),
-        useSelector((state: RootState) => state.customDownhill),
-        useSelector((state: RootState) => state.avoidRaisedCurbs),
-      ];
-  }
-};
-
-export default function MapView(props) {
+export default function MapView() {
+  const dispatch = useDispatch();
   const [userLoc, setUserLoc] = useState(null);
   const map = useRef(null);
   const camera = useRef(null);
+  if (Platform.OS === "android") {
+    MapboxGL.setConnected(true);
+  }
 
-  let preferences = getPreferences(useSelector((state: RootState) => state.mobilityMode));
+  let mobilityCode = useSelector((state: RootState) => state.mobilityMode);
   let centerCoordinate = useSelector((state: RootState) => state.centerCoordinate);
   let zoomLevel = useSelector((state: RootState) => state.zoomLevel);
   let geocodeCoords = useSelector((state: RootState) => state.geocodeCoords);
   let origin = useSelector((state: RootState) => state.origin);
   let destination = useSelector((state: RootState) => state.destination);
-  let uphill = preferences[0] / 100;
-  let downhill = preferences[1] / 100;
-  let avoidCurbs = preferences[2];
   let route = useSelector((state: RootState) => state.route);
-  let viewingDirections = useSelector(
-    (state: RootState) => state.viewingDirections
-  );
-  let canAccessLocation = useSelector(
-    (state: RootState) => state.canAccessLocation
-  );
-  let locateUserSwitch = useSelector(
-    (state: RootState) => state.locateUserSwitch
-  );
+  let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
+  let canAccessLocation = useSelector((state: RootState) => state.canAccessLocation);
+  let locateUserSwitch = useSelector((state: RootState) => state.locateUserSwitch);
+
+  let customUphill = useSelector((state: RootState) => state.customUphill);
+  let customDownhill = useSelector((state: RootState) => state.customDownhill);
+  let avoidRaisedCurbs = useSelector((state: RootState) => state.avoidRaisedCurbs);
 //   let bbox = useSelector((state: RootState) => state.bbox);
   //   const bounds = {
   // 	sw: [bbox[1], bbox[0]],
   // 	ne: [bbox[3], bbox[2]],
   //   };
+  let prevZoomLevel = usePrevious(zoomLevel);
 
-  const dispatch = useDispatch();
-  const fetchRouteWithInfo = (
-    origin,
-    destination,
-    uphill,
-    downhill,
-    avoidCurbs
-  ) => {
+  useEffect(() => { // changing and displaying routes
+    const preferences = getPreferences(mobilityCode);
+    const uphill = preferences[0] / 100;
+    const downhill = preferences[1] / 100;
+    const avoidCurbs = preferences[2];
     dispatch(fetchRoute(origin, destination, uphill, downhill, avoidCurbs));
-  };
+  }, [origin, destination, mobilityCode]);
+  useEffect(() => { // update zoom level
+    zoomPress(zoomLevel, prevZoomLevel);
+  }, [zoomLevel]);
+  useEffect(() => { // set camera coordinates
+    if (camera.current && geocodeCoords) {
+      camera.current.setCamera({
+        centerCoordinate: geocodeCoords,
+        animationDuration: 1000,
+      });
+    }
+  }, [geocodeCoords]);
+  useEffect(() => { // map pan to user location
+    if (locateUserSwitch && userLoc) { userLocationPress() }
+  }, [userLoc, locateUserSwitch]);
+  useEffect(() => {
+    updatePath();
+  }, [route]);
 
-  const zoomPress = async (zoom, prevZoom) => {
-	if (!map.current || !camera.current) { return; }
-    const currZoom = await map.current.getZoom();
-    if (zoom > prevZoom) {
-      camera.current.zoomTo(currZoom + 1, 200);
-      Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
-      AccessibilityInfo.announceForAccessibility(
-        currZoom >= 20
-          ? "Zoom level unchanged. Maximum reached."
-          : "Zoom level increased to " + Math.round(currZoom + 1)
-      );
-    } else if (zoom < prevZoom) {
-      camera.current.zoomTo(currZoom - 1, 200);
-      Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
-      AccessibilityInfo.announceForAccessibility(
-        currZoom <= 10
-          ? "Zoom level unchanged. Minimum reached."
-          : "Zoom level decreased to " + Math.round(currZoom - 1)
-      );
+  const getPreferences = (mode) => {
+    switch (mode) {
+      case MOBILITY_MODE_WHEELCHAIR:
+        return [8, 10, 1];
+      case MOBILITY_MODE_POWERED:
+        return [12, 12, 1];
+      case MOBILITY_MODE_CANE:
+        return [14, 14, 0];
+      default:
+        return [customUphill, customDownhill, avoidRaisedCurbs,];
     }
   };
 
+  const zoomPress = async (zoom, prevZoom) => {
+    if (!map.current || !camera.current || !prevZoom) { return; }
+      const currZoom = await map.current.getZoom();
+      if (zoom > prevZoom) {
+        camera.current.zoomTo(currZoom + 1, 200);
+        Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
+        AccessibilityInfo.announceForAccessibility(
+          currZoom >= 20
+            ? "Zoom level unchanged. Maximum reached."
+            : "Zoom level increased to " + Math.round(currZoom + 1)
+        );
+      } else if (zoom < prevZoom) {
+        camera.current.zoomTo(currZoom - 1, 200);
+        Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
+        AccessibilityInfo.announceForAccessibility(
+          currZoom <= 10
+            ? "Zoom level unchanged. Minimum reached."
+            : "Zoom level decreased to " + Math.round(currZoom - 1)
+        );
+      }
+  };
+
   const userLocationPress = async () => {
+    if (!camera.current) { return; } 
     const ul = userLoc.coords;
     const center = [ul.longitude, ul.latitude];
 
@@ -134,56 +142,30 @@ export default function MapView(props) {
     dispatch(placePin({ ...featureCollection, center }));
   };
 
-  const prevZoomLevel = usePrevious(zoomLevel);
-  const prevGeocodeCoords = usePrevious(geocodeCoords);
-  const prevRoute = usePrevious(route);
-  const prevOrigin = usePrevious(origin);
-  const prevDestination = usePrevious(destination);
-  const prevUphill = usePrevious(uphill);
-  const prevDownhill = usePrevious(downhill);
-  const prevAvoidCurbs = usePrevious(avoidCurbs);
-
-  const updateMap = () => {
-    if (zoomLevel !== prevZoomLevel) { zoomPress(zoomLevel, prevZoomLevel) }
-    if (geocodeCoords && geocodeCoords !== prevGeocodeCoords) {
-      camera.current.setCamera({
-        centerCoordinate: geocodeCoords,
-        animationDuration: 1000,
-      });
-    }
-    if (locateUserSwitch && userLoc != null) {
-      userLocationPress();
-    }
-    if (route && route.code == "Ok" && route != prevRoute) {
+  const updatePath = () => {
+    if (camera.current && route && route.code == "Ok") {
       var [maxLon, maxLat, minLon, minLat] = [-180, -90, 180, 90];
       var path = route.routes[0].geometry.coordinates;
       // let distance = 0;
-      for (var i = 0; i < path.length; i++) {
-        if (path[i][0] > maxLon) {
-          maxLon = path[i][0];
+      if (path) {
+        for (var i = 0; i < path.length; i++) {
+          if (path[i][0] > maxLon) {
+            maxLon = path[i][0];
+          }
+          if (path[i][0] < minLon) {
+            minLon = path[i][0];
+          }
+          if (path[i][1] > maxLat) {
+            maxLat = path[i][1];
+          }
+          if (path[i][1] < minLat) {
+            minLat = path[i][1];
+          }
         }
-        if (path[i][0] < minLon) {
-          minLon = path[i][0];
-        }
-        if (path[i][1] > maxLat) {
-          maxLat = path[i][1];
-        }
-        if (path[i][1] < minLat) {
-          minLat = path[i][1];
-        }
+        var northEast = [maxLon, maxLat];
+        var southWest = [minLon, minLat];
+        camera.current.fitBounds(northEast, southWest, viewingDirections ? 20 : 100, 100);
       }
-      var northEast = [maxLon, maxLat];
-      var southWest = [minLon, minLat];
-      camera.current.fitBounds(northEast, southWest, viewingDirections ? 20 : 100, 100);
-    }
-    if (
-      origin != prevOrigin ||
-      destination != prevDestination ||
-      uphill != prevUphill ||
-      downhill != prevDownhill ||
-      avoidCurbs != prevAvoidCurbs
-    ) {
-      fetchRouteWithInfo(origin, destination, uphill, downhill, avoidCurbs);
     }
   };
 
@@ -198,13 +180,15 @@ export default function MapView(props) {
   };
 
   const panMap = async (e) => {
-    const center = e.geometry.coordinates;
-    Rakam.trackEvent("MOVE_MAP", [
-      "lat",
-      `${center[0]}`,
-      "lon",
-      `${center[1]}`,
-    ]);
+    if (e) {
+      const center = e.geometry.coordinates;
+      Rakam.trackEvent("MOVE_MAP", [
+        "lat",
+        `${center[0]}`,
+        "lon",
+        `${center[1]}`,
+      ]);
+    }
   };
 
   const updateUserLocation = (location) => {
@@ -217,8 +201,7 @@ export default function MapView(props) {
     // const speed = location.coords.speed;
     setUserLoc(location);
   };
-
-  updateMap();
+  
   return (
     <MapboxGL.MapView
       logoEnabled={false}

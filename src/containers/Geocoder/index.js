@@ -43,23 +43,26 @@ export default function Geocoder(props) {
     if (prevSearch == props.search) {
       return;
     }
-    const query =
-      "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
-      props.search +
-      ".json?bbox=" +
-      bbox +
-      "&limit=10&access_token=" +
-      ACCESS_TOKEN;
 
-    fetch(query)
-      .then((response) => response.json())
-      .then((json) => {
-        setSearchList(json.features);
-      })
-      .catch((error) => {
-        console.log(error);
-        Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
-      });
+    const timeoutId = setTimeout(() => {
+      const query =
+        "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+        props.search +
+        ".json?bbox=" +
+        bbox +
+        "&limit=10&access_token=" +
+        ACCESS_TOKEN;
+      fetch(query)
+        .then((response) => response.json())
+        .then((json) => {
+          setSearchList(json.features);
+        })
+        .catch((error) => {
+          console.log(error);
+          Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
+        });
+    }, 1000);
+    return () => clearTimeout(timeoutId);
   }, [props.search]);
 
   const renderItem = ({ item, index }) => {

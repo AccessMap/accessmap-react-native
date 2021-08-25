@@ -1,5 +1,5 @@
-import React from "react";
-import { View, AccessibilityInfo } from "react-native";
+import React, { useEffect } from "react";
+import { View, AccessibilityInfo, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { closeDirections, closeTripInfo } from "../actions";
 import { Views } from "../styles";
@@ -15,6 +15,7 @@ import Directions from "../components/Directions";
 import TripInfo from "../components/TripInfo";
 
 import { useTranslation } from 'react-i18next';
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function MapPage(props) {
   let pinFeatures = useSelector((state: RootState) => {return state.pinFeatures});
@@ -24,6 +25,19 @@ export default function MapPage(props) {
   let isLoading = useSelector((state: RootState) => {return state.isLoading});
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
+
+  const netInfo = useNetInfo({
+    reachabilityTest: async (response) => response.status === 204,
+    reachabilityLongTimeout: 60 * 1000, // 60s
+    reachabilityShortTimeout: 5 * 1000, // 5s
+    reachabilityRequestTimeout: 15 * 1000, // 15s
+  });
+  useEffect(() => { 
+    console.log(netInfo.isConnected);
+    if (netInfo.isConnected != null && netInfo.isConnected == false) {
+      Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
+    }
+  }, [netInfo]);
 
   AccessibilityInfo.announceForAccessibility("Showing Map View.");
   return (

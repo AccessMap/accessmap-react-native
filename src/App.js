@@ -9,10 +9,25 @@ import SettingsPage from "./navigation/SettingsPage";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from "./styles";
 import { useTranslation } from "react-i18next";
+import { Logger } from "@react-native-mapbox-gl/maps";
 
-LogBox.ignoreAllLogs(true); // temporarily hides the yellow warning boxes, especially for Drawer component
+LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Tab = createBottomTabNavigator();
+
+// Suppresses Mapbox warning and error messages
+Logger.setLogCallback(log => {
+  const { message } = log;
+  if ( // expected log output when zooming in and out or panning
+    message.match('Request failed due to a permanent error: Canceled') ||
+    message.match('Request failed due to a permanent error: Socket Closed') ||
+    message.includes("Failed to load")
+  ) {
+    return true;
+  }
+  return false;
+});
+
 
 function App() {
   const { t, i18n } = useTranslation();

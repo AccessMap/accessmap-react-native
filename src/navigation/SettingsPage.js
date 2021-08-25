@@ -49,7 +49,6 @@ function SettingsPage({ props, route, navigation }) {
           var item = languages.filter((data) => {return data.key.toUpperCase() == value.toUpperCase(); });
           dispatch(goToLanguage(item[0]));
           AccessibilityInfo.announceForAccessibility("Changed language to " + item[0].name);
-          console.log(item[0].name);
           i18n.changeLanguage(value.toLowerCase());
         }}
         value={currentLanguage}
