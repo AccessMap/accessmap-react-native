@@ -33,7 +33,6 @@ export default function MapPage(props) {
     reachabilityRequestTimeout: 15 * 1000, // 15s
   });
   useEffect(() => { 
-    console.log(netInfo.isConnected);
     if (netInfo.isConnected != null && netInfo.isConnected == false) {
       Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
     }

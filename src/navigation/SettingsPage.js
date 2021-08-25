@@ -5,6 +5,7 @@ import {
   Text,
   AccessibilityInfo,
   NativeModules,
+  Alert,
 } from "react-native";
 import React from "react";
 import {
@@ -84,7 +85,31 @@ function SettingsPage({ props, route, navigation }) {
       </RadioButton.Group>
 
       <GreyDivider />
-      <Text style={Fonts.h2}>{t("OTHER_TEXT")}</Text>
+      <Text style={Fonts.h2}>{t("UNITS_TEXT")}</Text>
+      <RadioButton.Group
+        onValueChange={(value) => {  
+          if (value) {
+            dispatch(useMetricSystem());
+          } else {
+            dispatch(useImperialSystem());
+          }
+        }}
+        value={metricSetting}
+      >
+        <RadioButton.Item 
+          color={Colors.primaryColor} 
+          label={t("IMPERIAL_TOGGLE_TEXT")} 
+          value={false} 
+          key={"imperial"}/>
+        <RadioButton.Item 
+          color={Colors.primaryColor} 
+          label={t("METRIC_TOGGLE_TEXT")} 
+          value={true} 
+          key={"metric"}/>
+      </RadioButton.Group>
+
+      <GreyDivider />
+      <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
       <View style={[Views.settingsRow]}>
         <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
         <Switch
@@ -94,29 +119,23 @@ function SettingsPage({ props, route, navigation }) {
             AccessibilityInfo.announceForAccessibility(
               trackingSetting ? t("CURRENTLY_TRACKING") : t("NOT_TRACKING")
             );
-            if (Platform.OS === "android") {
-              Rakam.toggleTracking();
+            if (trackingSetting) {
+              console.log("UNTRACKING USER");
+              dispatch(untrackUser());
+            } else {
+              Alert.alert(t("USER_TRACKING_TITLE"), t("USER_TRACKING_TEXT"), 
+                [{ text: "OK", onPress: () => {
+                  if (Platform.OS === "android") {
+                    Rakam.toggleTracking();
+                    dispatch(trackUser());
+                  }
+                }}, {text: "Cancel"}]);
             }
-            trackingSetting ? dispatch(untrackUser()) : dispatch(trackUser());
           }}
           value={trackingSetting}
         />
       </View>
-      <View style={[Views.settingsRow, {paddingBottom: 50}]}>
-        <Text style={[Fonts.p]}>
-          {metricSetting ? t("METRIC_TOGGLE_TEXT") : t("IMPERIAL_TOGGLE_TEXT")}
-        </Text>
-        <Switch
-          style={Buttons.switches}
-          accessibilityLabel={t("TOGGLE_UNITS")}
-          onValueChange={() => {
-            metricSetting
-              ? dispatch(useImperialSystem())
-              : dispatch(useMetricSystem());
-          }}
-          value={metricSetting}
-        />
-      </View>
+      <View style={{height: 50}}></View>
     </ScrollView>
   );
 }

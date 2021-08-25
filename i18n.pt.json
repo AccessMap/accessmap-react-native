@@ -44,8 +44,10 @@
     "METERS_TEXT": "metros",
     "MILES_TEXT": "milhas",
     "FEET_TEXT": "pés",
-    "METRIC_TOGGLE_TEXT": "mostrando unidades métricas",
-    "IMPERIAL_TOGGLE_TEXT": "mostrando unidades imperiais",
+    "UNITS_TEXT": "Unidades",
+    "METRIC_TOGGLE_TEXT": "Unidades métricas",
+    "IMPERIAL_TOGGLE_TEXT": "Unidades imperiais",
+    "PRIVACY": "Privacidade",
     "MINUTES_TEXT": "minutos",
     "NO_ROUTE_TEXT": "Nenhum trajeto encontrado",
     "TRIP_INFO_TEXT": "informações de viagem",
@@ -158,5 +160,7 @@
     "SETTINGS_TUT_2": "Alternar isso permitirá que o aplicativo rastreie as ações que você realiza nele. Suas informações são mantidas em total sigilo.",
     "SETTINGS_CAPTION_3": "Abaixo da opção Configurações de rastreamento está a opção Exibindo unidades imperiais. Não é alternado.",
     "SETTINGS_TUT_3": "Alternar isso mudará as unidades exibidas no aplicativo.",
-    "END_TOUR": "Finalizar"
+    "END_TOUR": "Finalizar",
+    "USER_TRACKING_TITLE": "Consentimento de rastreio do utilizador",
+    "USER_TRACKING_TEXT": "A utilização de 'dados de utilizador de rastreio' permitir-nos-á recolher dados sobre as ações dos utilizadores, como a frequência dos botões pressionados no mapa. Isto permite-nos compreender melhor como os utilizadores interagem com o AccessMap. Nenhuma informação pessoal ou identificante será armazenada ou ligada às suas ações. Ao clicar em OK, você concorda com esta recolha de dados."
 }

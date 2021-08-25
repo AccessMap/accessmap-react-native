@@ -44,9 +44,10 @@
   "METERS_TEXT": "meters",
   "MILES_TEXT": "miles",
   "FEET_TEXT": "feet",
+  "UNITS_TEXT": "Units",
   "TOGGLE_UNITS": "Toggle units",
-  "METRIC_TOGGLE_TEXT": "Showing metric units",
-  "IMPERIAL_TOGGLE_TEXT": "Showing imperial units",
+  "METRIC_TOGGLE_TEXT": "Metric system",
+  "IMPERIAL_TOGGLE_TEXT": "Imperial system",
   "MINUTES_TEXT": "minutes",
   "NO_ROUTE_TEXT": "No route found",
   "TRIP_INFO_TEXT": "Trip info",
@@ -82,6 +83,7 @@
   "TWITTER": "Twitter",
   "TWITTER_TEXT": "Follow updates on AccessMap Seattle on Twitter!",
   "EMAIL": "E-mail",
+  "PRIVACY": "Privacy",
   "EMAIL_TEXT": "Email us if you encounter issues or wish to contribute to AccessMap.",
   "CROWDSOURCING_INFO_TEXT": "Help AccessMap by reporting issues/features in our dataset. Please note that submitting feedback will not update the map immediately.",
   "SIDEWALK_PRESENT_TEXT": "Sidewalk is not present",
@@ -165,5 +167,7 @@
   "SETTINGS_TUT_2": "Toggling this will allow the app to track the actions you take in this app. Your information is kept completely confidential.",
   "SETTINGS_CAPTION_3": "Below the Tracking Settings switch is the Showing Imperial Units switch. It is untoggled.",
   "SETTINGS_TUT_3": "Toggling this will change the units displayed in the app.",
-  "END_TOUR": "End Tour"
+  "END_TOUR": "End Tour",
+  "USER_TRACKING_TITLE": "User Tracking Consent",
+  "USER_TRACKING_TEXT": "Turning on 'track user data' will allow us to collect data on user actions, such as the frequency of buttons pressed on the map. This allows us to better understand how users interact with AccessMap. No personal or identifying information will be stored or linked to your actions. By clicking OK, you consent to this data collection."
 }
