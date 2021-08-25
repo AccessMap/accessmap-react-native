@@ -48,6 +48,7 @@ export default function MapView() {
   let destination = useSelector((state: RootState) => state.destination);
   let route = useSelector((state: RootState) => state.route);
   let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
+  let viewingTripInfo = useSelector((state: RootState) => {return state.viewingTripInfo});
   let canAccessLocation = useSelector((state: RootState) => state.canAccessLocation);
   let locateUserSwitch = useSelector((state: RootState) => state.locateUserSwitch);
 
@@ -170,6 +171,7 @@ export default function MapView() {
   };
 
   const handleScreenPress = async (e) => {
+    if (viewingDirections || viewingTripInfo) {return;}
     const center = e.geometry.coordinates;
     const { screenPointX, screenPointY } = e.properties;
     const featureCollection = await map.current.queryRenderedFeaturesAtPoint(

@@ -91,6 +91,7 @@
     "CROSSING_TACTILE_SIGNAL_TEXT": "Tiene señal táctil",
     "utils-send-email-error": "URL proporcionada no se puede manejar",
     "Header-crowdsourcingInfo-accessibilityLabel": "Seleccionar para informar un problema con este segmento",
+    "REPORT_ISSUE": "Problema del informe",
     "Header-close-accessibilityLabel": "Seleccionar para cerrar aquellos vista",
     "SpeedLegend-index-accessibilityLabel": "Max inclinación al máximo de inclinación * * ciento",
     "FeatureCard-Index-OpenHours day": "Su / Mo / M / Nosotros / Th / Fr / Sa",

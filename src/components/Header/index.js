@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import { Colors, Fonts } from "../../styles";
 import { useTranslation } from "react-i18next";
+import { primaryColor } from "../../styles/colors";
 
 const Header = (props) => {
   // Props:
@@ -14,13 +15,17 @@ const Header = (props) => {
   const info = props.info;
 
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row", paddingBottom: 10 }}>
       <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
         <Text style={Fonts.h1}>{props.title}</Text>
         {props.reportButton && (
           <Button
-            icon={<Icon name="report" size={32} color={Colors.error} />}
-            buttonStyle={{ backgroundColor: "#FFFFFF", borderRadius: 20 }}
+            type="outline"
+            title={t("REPORT_ISSUE")}
+            buttonStyle={{ backgroundColor: "white", marginLeft: 30, 
+              paddingHorizontal: 10, paddingVertical: 12}}
+            titleStyle={{ fontSize: 15, color: primaryColor }}
+            icon={<Icon name="report" size={20} color={primaryColor} style={{marginRight: 10}}/>}
             accessibilityLabel={t(
               "Header-crowdsourcingInfo-accessibilityLabel"
             )}

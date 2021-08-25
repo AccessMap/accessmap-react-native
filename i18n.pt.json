@@ -90,6 +90,7 @@
     "CROSSING_TACTILE_SIGNAL_TEXT": "Tem sinal táctil",
     "utils-send-email-error": "URL fornecido não pode ser tratada",
     "Header-crowdsourcingInfo-accessibilityLabel": "Selecione para relatar um problema com este segmento",
+    "REPORT_ISSUE": "Problema del informe",
     "Header-close-accessibilityLabel": "Selecione para fechar aquelas vista",
     "SpeedLegend-index-accessibilityLabel": "inclinação máxima a inclinação * max * por cento",
     "FeatureCard-Index-OpenHours day": "Su / Mo / Tu / Nós / Th / Fr / Sa",

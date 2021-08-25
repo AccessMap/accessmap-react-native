@@ -141,12 +141,12 @@ const FeatureCard = (props) => {
       )}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Button
-          buttonStyle={
-            ([Buttons.button],
-            { backgroundColor: primaryColor, paddingVertical: 13 })
-          }
-          titleStyle={{ fontSize: 15 }}
+          buttonStyle={{ backgroundColor: "white", paddingVertical: 13, paddingHorizontal: 15,
+          borderColor: primaryColor}}
+          titleStyle={{ fontSize: 15, color: primaryColor }}
           title={t("ROUTE_FROM_HERE_TEXT")}
+          type="outline"
+          raised={true}
           onPress={() => {
             props.setOrigin();
             AccessibilityInfo.announceForAccessibility(
@@ -155,11 +155,11 @@ const FeatureCard = (props) => {
           }}
         />
         <Button
-          buttonStyle={
-            ([Buttons.button],
-            { backgroundColor: primaryColor, paddingVertical: 13 })
-          }
-          titleStyle={{ fontSize: 15 }}
+          type="outline"
+          raised={true}
+          buttonStyle={{ backgroundColor: "white", paddingVertical: 13, paddingHorizontal: 15,
+            borderColor: primaryColor}}
+          titleStyle={{ fontSize: 15, color: primaryColor }}
           title={t("ROUTE_TO_HERE_TEXT")}
           onPress={() => {
             props.setDestination();

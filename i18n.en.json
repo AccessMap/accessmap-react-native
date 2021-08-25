@@ -97,6 +97,7 @@
   "CROSSING_TACTILE_SIGNAL_TEXT": "Has tactile signal",
   "utils-send-email-error": "Provided URL can not be handled",
   "Header-crowdsourcingInfo-accessibilityLabel": "Select to report an issue with this segment",
+  "REPORT_ISSUE": "Report Issue",
   "Header-close-accessibilityLabel": "Select to close this view",
   "SpeedLegend-index-accessibilityLabel": "Max incline at *max incline* percent",
   "FeatureCard-Index-OpenHours day": "Su/Mo/Tu/We/Th/Fr/Sa",

@@ -36,8 +36,10 @@ export const iconButtons = {
 };
 
 export const button = {
-  borderRadius: 5,
-  padding: 10,
+  borderRadius: 20,
+  paddingHorizontal: 13,
+  paddingVertical: 13,
+  backgroundColor: primaryColor, 
 };
 
 export const switches = [
