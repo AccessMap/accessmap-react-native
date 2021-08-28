@@ -23,7 +23,9 @@ export const bottomCard = {
   position: "absolute", 
   bottom: 0, left: 0, right: 0, 
   width: "100%", margin: 0, 
-  paddingHorizontal: 15, paddingTop: 5,
+  paddingLeft: 15, 
+  paddingRight: 0,
+  paddingTop: 5,
   zIndex: 50
 };
 

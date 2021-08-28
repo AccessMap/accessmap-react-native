@@ -1,8 +1,9 @@
 // Card details that show on the bottom of the screen when clicking on a sidewalk
-// or coordinate. Includes the option to "Route from/to here".
+// or coordinate. Title describes what the feature is, ex: 'Sidewalk'
+// Includes the option to "Route from/to here".
 import React from "react";
 import { View, Text, AccessibilityInfo } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Card } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -10,9 +11,8 @@ import Header from "../../components/Header";
 import { placePin, setOrigin, setDestination } from "../../actions";
 import coordinatesToString from "../../utils/coordinates-to-string";
 import parseOpenHours from "../../utils/parse-open-hours";
-import { Buttons, Views } from "../../styles";
-import { primaryColor } from "../../styles/colors";
-import { IconButton } from "react-native-paper";
+import { Views } from "../../styles";
+import BottomCardButton from "../../components/BottomCardButton";
 
 const InfoText = (props) => {
   return (
@@ -64,28 +64,26 @@ const FeatureCard = (props) => {
 
   return (
     <Card containerStyle={Views.bottomCard}>
-      <View style={{ maxWidth: "100%" }}>
-        <Header
-          title={
-            props.features.text
-              ? props.features.text
-              : info
-              ? info.footway == "sidewalk"
-                ? t("SIDEWALK_TEXT")
-                : info.footway == "crossing"
-                ? t("CROSSING_TEXT")
-                : coordinatesToString(props.features.center)
+      <Header
+        title={
+          props.features.text
+            ? props.features.text
+            : info
+            ? info.footway == "sidewalk"
+              ? t("SIDEWALK_TEXT")
+              : info.footway == "crossing"
+              ? t("CROSSING_TEXT")
               : coordinatesToString(props.features.center)
-          }
-          reportButton={info}
-          close={() => props.placePin(null)}
-          cs={
-            info && (info.footway == "sidewalk" || info.footway == "crossing")
-          }
-          navigation={props.navigation}
-          info={info}
-        />
-      </View>
+            : coordinatesToString(props.features.center)
+        }
+        reportButton={info}
+        close={() => props.placePin(null)}
+        cs={
+          info && (info.footway == "sidewalk" || info.footway == "crossing")
+        }
+        navigation={props.navigation}
+        info={info}
+      />
 
       {info && (
         <View>
@@ -139,29 +137,21 @@ const FeatureCard = (props) => {
           )}
         </View>
       )}
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <Button
-          buttonStyle={{ backgroundColor: "white", paddingVertical: 13, paddingHorizontal: 15,
-          borderColor: primaryColor}}
-          titleStyle={{ fontSize: 15, color: primaryColor }}
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between', 
+      marginTop: 5, marginRight: 15,}}>
+        <BottomCardButton
           title={t("ROUTE_FROM_HERE_TEXT")}
-          type="outline"
-          raised={true}
-          onPress={() => {
+          style={{marginRight: 10,}}
+          pressFunction={() => {
             props.setOrigin();
             AccessibilityInfo.announceForAccessibility(
               "Set " + props.features.text + " as route start."
             );
           }}
         />
-        <Button
-          type="outline"
-          raised={true}
-          buttonStyle={{ backgroundColor: "white", paddingVertical: 13, paddingHorizontal: 15,
-            borderColor: primaryColor}}
-          titleStyle={{ fontSize: 15, color: primaryColor }}
+        <BottomCardButton
           title={t("ROUTE_TO_HERE_TEXT")}
-          onPress={() => {
+          pressFunction={() => {
             props.setDestination();
             AccessibilityInfo.announceForAccessibility(
               "Set " + props.features.text + " as route destination."

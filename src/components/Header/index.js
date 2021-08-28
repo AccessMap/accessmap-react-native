@@ -15,14 +15,13 @@ const Header = (props) => {
   const info = props.info;
 
   return (
-    <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-      <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
+    <View style={{ flexDirection: "row", paddingBottom: 10, justifyContent: "space-between" }}>
+      <View style={{ flexDirection: "row", alignItems: "center", }}>
         <Text style={Fonts.h1}>{props.title}</Text>
         {props.reportButton && (
           <Button
-            type="outline"
             title={t("REPORT_ISSUE")}
-            buttonStyle={{ backgroundColor: "white", marginLeft: 30, 
+            buttonStyle={{ backgroundColor: "white", marginLeft: 10, 
               paddingHorizontal: 10, paddingVertical: 12}}
             titleStyle={{ fontSize: 15, color: primaryColor }}
             icon={<Icon name="report" size={20} color={primaryColor} style={{marginRight: 10}}/>}
@@ -38,8 +37,8 @@ const Header = (props) => {
 
       <Button
         accessibilityLabel={t("Header-close-accessibilityLabel")}
-        buttonStyle={{ backgroundColor: "#FFFFFF", borderRadius: 20 }}
-        icon={<Icon name="close" size={32} color="black" />}
+        buttonStyle={{ backgroundColor: "#FFFFFF" }}
+        icon={<Icon name="close" size={35} color="black"/>}
         onPress={props.close}
       />
     </View>

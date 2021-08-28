@@ -11,6 +11,7 @@ import { cancelRoute, closeDirections, closeTripInfo, viewDirections, viewTripIn
 import { Buttons, Fonts, Views } from "../../styles";
 import Header from "../../components/Header";
 import { primaryColor } from "../../styles/colors";
+import BottomCardButton from "../../components/BottomCardButton";
 
 const RouteBottomCard = (props) => {
   const { t, i18n } = useTranslation();
@@ -38,51 +39,32 @@ const RouteBottomCard = (props) => {
   );
   return (
     <Card containerStyle={Views.bottomCard}>
-      <View style={{ margin: 5, width: "100%" }}>
-        <View
-          accessible={true}
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 5,
+      <View>
+        <Header
+          title={ "" + (props.usingMetricSystem ? 
+            Math.round(route.distance) : 
+            Math.round(route.distance * 0.000621371192 * 100) / 100) + " " + 
+              (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
+              (Math.round(route.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
+          }
+          close={props.cancelRoute}
+        />
+      </View>
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", marginRight: 15 }}>
+        <BottomCardButton
+          style={{ marginRight: 10 }}
+          title={t("TRIP_INFO_TEXT")}
+          pressFunction={() => {
+            props.viewTripInfo();
+            AccessibilityInfo.announceForAccessibility(
+              "Showing Trip details screen."
+            );
           }}
-        >
-          <Header
-            title={ "" + (props.usingMetricSystem ? 
-              Math.round(route.distance) : 
-              Math.round(route.distance * 0.000621371192 * 100) / 100) + " " + 
-                (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
-                (Math.round(route.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
-            }
-            close={props.cancelRoute}
-          />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            width: "100%",
-          }}
-        >
-          <Button
-            buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
-            title={t("TRIP_INFO_TEXT")}
-            onPress={() => {
-              props.viewTripInfo();
-              AccessibilityInfo.announceForAccessibility(
-                "Showing Trip details screen."
-              );
-            }}
-            containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
-          />
-          <Button
-            buttonStyle={[Buttons.button], {backgroundColor: primaryColor}}
-            title={t("DIRECTIONS_TEXT")}
-            onPress={() => props.viewDirections()}
-            containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
-          />
-        </View>
+        />
+        <BottomCardButton
+          title={t("DIRECTIONS_TEXT")}
+          pressFunction={() => props.viewDirections()}
+        />
       </View>
     </Card>
   );

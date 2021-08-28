@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { metersToFeet, metersToMiles } from "../../utils/metric-imperial-conversion";
 
 import Header from "../Header";
+import { Views } from "../../styles";
 
 const InfoText = (props) => {
   return (
@@ -63,10 +64,8 @@ const TripInfo = (props) => {
     elevChange[i] += elevChange[i - 1];
   }
   return (
-    <View style={{ height: "50%", backgroundColor: "white" }}>
-      <View style={{marginLeft:10}}>
-        <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
-      </View>
+    <View style={[Views.bottomCard, { height: "40%", backgroundColor: "white" }]}>
+      <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
       <ScrollView style={{ paddingHorizontal: 10}}>
         <Text>Experienced elevation gain</Text>
         <View
