@@ -23,9 +23,8 @@ export default function InformationPage({ route, navigation }) {
         <Text style={[Fonts.h2, {marginBottom: 10}]}>{t("MAP_HEAD_6")}</Text>
         <SpeedLegend maxIncline={maxIncline} />
 
-        <GreyDivider/>
-
-        <Text style={[Fonts.h2]}>{"Tutorials"}</Text>
+        {/* <GreyDivider/> */}
+        {/* <Text style={[Fonts.h2]}>{"Tutorials"}</Text>
         <FlatList
         data={[{ key: t("MAP_INTERFACE") }, { key: t("ROUTE_PLANNING") }]}
         renderItem={({ item }) => (
@@ -39,7 +38,7 @@ export default function InformationPage({ route, navigation }) {
             }}
           />
         )}
-        />
+        /> */}
 
     <GreyDivider/>
     <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>

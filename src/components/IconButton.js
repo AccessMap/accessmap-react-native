@@ -14,10 +14,8 @@ export default IconButton = (props) => {
           name={props.name}
           size={35}
           color={props.label ? "#EEEEEE" : Colors.grey}
-        />
+        />  
       }
-      title={props.label}
-      titleStyle={{ marginLeft: 3, fontSize: 15 }}
       onPress={props.onPress}
       accessibilityLabel={props.accessibilityLabel}
     />

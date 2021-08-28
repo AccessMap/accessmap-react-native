@@ -22,19 +22,22 @@ const MobilityButtonRender = props => {
 	}
 	const selected = props.mode == props.mobilityMode;
 	const buttonColor = selected ? Colors.primaryColor : "#FFFFFF";
-	const iconColor = selected ? "white" : Colors.grey;
+	const iconColor = selected ? "white" : Colors.primaryColor;
 
 	return (
 		<Button
+			containerStyle={selected ? {marginRight: 10} : 
+				{marginRight: 10, borderRadius: 200}}
+			raised={!selected}
 			accessibilityLabel={"Mobility Mode: " + props.label}
 			buttonStyle={[Buttons.button, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
-				size={30}
+				size={32}
 				color={iconColor}
 			/>}
 			title={selected ? props.label : null}
-			titleStyle={{marginLeft: 3, fontSize: 15, color: iconColor}}
+			titleStyle={{marginLeft: 5, fontSize: 15, color: iconColor}}
 			onPress={_onPress}
 		/>
 	);
@@ -60,12 +63,7 @@ const MobilityButtonGroup = props => {
 	const { t, i18n } = useTranslation();
 
 	return (
-		<View style={{flexDirection: "row"}}>
-			<MobilityButton
-				name="person-pin"
-				label={t("CUSTOM_MODE_TEXT")}
-				mode={MOBILITY_MODE_CUSTOM}
-			/>
+		<View style={{flexDirection: "row", flex: 1, alignItems: "center"}}>
 			<MobilityButton
 				name="wheelchair"
 				label={t("WHEELCHAIR_MODE_TEXT")}
@@ -80,6 +78,11 @@ const MobilityButtonGroup = props => {
 				name="cane-user"
 				label={t("CANE_MODE_TEXT")}
 				mode={MOBILITY_MODE_CANE}
+			/>
+			<MobilityButton
+				name="person-pin"
+				label={t("CUSTOM_MODE_TEXT")}
+				mode={MOBILITY_MODE_CUSTOM}
 			/>
 		</View>
 	);

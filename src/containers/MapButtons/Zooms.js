@@ -30,28 +30,36 @@ function Zooms(props) {
   return (
     <View accessible={true} style={Buttons.zooms}>
       <Button
+        raised={true}
+        containerStyle={Buttons.whiteButton}
         accessibilityLabel={t("INFORMATION")}
-        buttonStyle={Buttons.whiteButton}
+        buttonStyle={{backgroundColor: "white"}}
         icon={<Icon name="information" size={32} color={Colors.primaryColor} />}
         onPress={() => props.navigation.push(t("INFORMATION"))}
       />
       <Button
+        raised={true}
+        containerStyle={Buttons.whiteButton}
         accessibilityLabel="Find my location"
-        buttonStyle={Buttons.whiteButton}
+        buttonStyle={{backgroundColor: "white"}}
         icon={
           <Icon name="crosshairs-gps" size={32} color={Colors.primaryColor} />
         }
         onPress={locateUserPressed}
       />
       <Button
+        raised={true}
+        containerStyle={Buttons.whiteButton}
         accessibilityLabel="Select to zoom in"
-        buttonStyle={[Buttons.whiteButton]}
+        buttonStyle={{backgroundColor: "white"}}
         icon={<Icon name="plus" size={32} color={Colors.primaryColor} />}
         onPress={props.onZoomInPressed}
       />
       <Button
+        raised={true}
+        containerStyle={Buttons.whiteButton}
         accessibilityLabel="Select to zoom out"
-        buttonStyle={[Buttons.whiteButton]}
+        buttonStyle={{backgroundColor: "white"}}
         icon={<Icon name="minus" size={32} color={Colors.primaryColor} />}
         onPress={props.onZoomOutPressed}
       />

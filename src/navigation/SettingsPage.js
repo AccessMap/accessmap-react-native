@@ -24,6 +24,7 @@ import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/GreyDivider";
 import { RadioButton } from "react-native-paper";
+import { greyLight, primaryLight } from "../styles/colors";
 
 function SettingsPage({ props, route, navigation }) {
   const { Rakam } = NativeModules;
@@ -114,6 +115,8 @@ function SettingsPage({ props, route, navigation }) {
         <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
         <Switch
           style={Buttons.switches}
+          trackColor={{ false: greyLight, true: primaryLight }}
+				  thumbColor={Colors.primaryColor}
           accessibilityLabel={t("TRACKING_SETTINGS_TEXT")}
           onValueChange={(value) => {
             AccessibilityInfo.announceForAccessibility(

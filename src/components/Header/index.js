@@ -16,8 +16,8 @@ const Header = (props) => {
 
   return (
     <View style={{ flexDirection: "row", paddingBottom: 10, justifyContent: "space-between" }}>
-      <View style={{ flexDirection: "row", alignItems: "center", }}>
-        <Text style={Fonts.h1}>{props.title}</Text>
+      <View style={{ flexDirection: "row", alignItems: "center", flex: 1}}>
+        <Text style={[Fonts.h1]}>{props.title}</Text>
         {props.reportButton && (
           <Button
             title={t("REPORT_ISSUE")}
