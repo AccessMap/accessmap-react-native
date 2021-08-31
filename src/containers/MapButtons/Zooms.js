@@ -1,27 +1,66 @@
 import React from "react";
-import { PermissionsAndroid, View } from "react-native";
+import { Alert, PermissionsAndroid, Platform, View } from "react-native";
+import {check, PERMISSIONS, request, RESULTS} from "react-native-permissions";
 import { Button } from "react-native-elements";
 import Icon from "../../components/Icon";
 import { connect, useDispatch } from "react-redux";
 
 import { locateUser, zoomIn, zoomOut } from "../../actions";
-import { Buttons, Colors, Views } from "../../styles";
+import { Buttons, Colors } from "../../styles";
 import { useTranslation } from "react-i18next";
 
 function Zooms(props) {
   const dispatch = useDispatch();
-  const locateUserPressed = async (e) => {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: "User Location",
-        message: "Can AccessMap track your current location?",
-        buttonNegative: "No",
-        buttonPositive: "Yes",
-      }
+  const alertPermissionRequest = () => {
+    Alert.alert(
+      "Failed to retrieve your current location",
+      "Please enable location tracking for AccessMap in your device settings.",
+      [
+        { text: "OK" }
+      ]
     );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      dispatch(locateUser(true));
+  }
+  const locateUserPressed = async (e) => {
+    if (Platform.OS === "ios") {
+      request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
+        console.log(result);
+        check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+          .then((result) => {
+            switch (result) {
+              case RESULTS.UNAVAILABLE:
+                console.log('This feature is not available (on this device / in this context)');
+                break;
+              case RESULTS.DENIED:
+                console.log('The permission has not been requested / is denied but requestable');
+                alertPermissionRequest();
+                break;
+              case RESULTS.LIMITED:
+                console.log('The permission is limited: some actions are possible');
+                break;
+              case RESULTS.GRANTED:
+                dispatch(locateUser(true));
+                break;
+              case RESULTS.BLOCKED:
+                console.log('The permission is denied and not requestable anymore');
+                alertPermissionRequest();
+                break;
+            }
+          })
+        .catch(error => console.log(error))
+      });
+    } else if (Platform.OS === "android") {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "User Location",
+          message: "May AccessMap track your current location?",
+          buttonNegative: "No",
+          buttonPositive: "Yes",
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        dispatch(locateUser(true));
+      } else { alertPermissionRequest(); }
     }
   };
 

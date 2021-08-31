@@ -24,13 +24,15 @@ end
 target 'AccessMap' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
+  
+  permissions_path = '../node_modules/react-native-permissions/ios'
 
   # Pods for AccessMap
   config = use_native_modules!
   use_react_native!(:path => config["reactNativePath"])
 
-
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
 
   target 'AccessMapTests' do
     inherit! :search_paths
