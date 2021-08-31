@@ -1,5 +1,5 @@
 // import { combineReducers, createStore } from 'redux';
-import { AccessibilityInfo, NativeModules } from 'react-native';
+import { AccessibilityInfo, NativeModules, Platform } from 'react-native';
 import {
 	MAP_LOADED,
 	ZOOM_IN,
@@ -44,7 +44,9 @@ const seattleCoords = [seattleProps.lon, seattleProps.lat];
 const englishLanguageProps = languages[0];
 
 const logEvent = async (type, props) => {
-	Rakam.trackEvent(type, props);
+	if (Platform.OS === "android") {
+		Rakam.trackEvent(type, props);
+	}
 }
 
 const defaultState = {

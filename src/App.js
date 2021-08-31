@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 // Suppresses Mapbox warning and error messages
 Logger.setLogCallback(log => {
   const { message } = log;
-  if ( // expected log output when zooming in and out or panning
+  if ( // Mapbox expected log output when zooming in and out or panning
     message.match('Request failed due to a permanent error: Canceled') ||
     message.match('Request failed due to a permanent error: Socket Closed') ||
     message.includes("Failed to load")

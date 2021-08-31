@@ -1,5 +1,6 @@
+// The MapPage displays the map, top white card (Omnicard), and the bottom white cards.
 import React, { useEffect } from "react";
-import { View, AccessibilityInfo, Alert } from "react-native";
+import { View, AccessibilityInfo, Alert, SafeAreaView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { closeDirections, closeTripInfo } from "../actions";
 import { Views } from "../styles";
@@ -26,6 +27,7 @@ export default function MapPage(props) {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
+  // Output a log decsribing connection status of device
   const netInfo = useNetInfo({
     reachabilityTest: async (response) => response.status === 204,
     reachabilityLongTimeout: 60 * 1000, // 60s
@@ -40,7 +42,7 @@ export default function MapPage(props) {
 
   AccessibilityInfo.announceForAccessibility("Showing Map View.");
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={Views.page}>
         <View style={Views.container}>
           <View style={{ flex: 1 }}>
@@ -73,6 +75,6 @@ export default function MapPage(props) {
           )}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

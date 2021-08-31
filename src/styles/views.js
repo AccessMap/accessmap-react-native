@@ -55,15 +55,17 @@ export const overlay = {
 // in the About and Contact overlays.
 export const iconAndText = {
   flexDirection: "row",
-  marginBottom: 10,
+  alignItems: "center",
+  marginBottom: 15,
 };
 
 // For the text that appears in the About and Contact cards
 export const overlayText = {
   flexDirection: "row",
   flexWrap: "wrap",
-  maxWidth: 280,
-  marginLeft: 30,
+  maxWidth: 260,
+  marginLeft: 20,
+  justifyContent: "center",
 };
 
 export const page = {

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import Icon, { FA5Style } from "react-native-vector-icons/FontAwesome5";
 import { Buttons, Fonts, Views } from "../../styles";
 import {
   openLink,
@@ -42,13 +42,21 @@ export default function AboutPage({ route, navigation }) {
           openLink(url);
         }}
       >
-        <Text style={Fonts.p}>{text}</Text>
+        <Text style={[Fonts.p]}>{text}</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <View style={{paddingTop: 20, paddingBottom: 40}}>
+    <View style={{paddingBottom: 40}}>
+      <Image
+        importantForAccessibility={false}
+        style={{width: "100%",}}
+        source={require("../../../res/images/accessmap-logo.png")}
+        resizeMode="contain"
+        resizeMethod="scale"
+      />
+
       {iconAndTextRow(
         t("GITHUB_LOGO_ALT_TEXT"),
         "github",
