@@ -1,3 +1,5 @@
+import { center } from "./positioning";
+
 // Stylesheet for all general containers and views in the app.
 export const container = {
   flex: 1,
@@ -7,28 +9,24 @@ export const container = {
 // A centered floating card with a white background
 export const omnicard = {
   position: "absolute",
-  justifyContent: "space-evenly",
   backgroundColor: "#FFFFFF",
-  flex: 1,
+  width: "100%",
   flexDirection: "column",
   left: 0,
-  right: 0,
   top: 0,
-  margin: 10,
+  margin: 0,
+  padding: 10,
   zIndex: 10,
 };
 
-export const routeBottomCard = {
-  backgroundColor: "#FFFFFF",
-  position: "absolute",
-  left: 0,
-  right: 0,
-  maxWidth: 380,
-  bottom: 0,
-  margin: 10,
-  marginBottom: 10,
-  padding: 5,
-  zIndex: 20,
+export const bottomCard = {
+  position: "absolute", 
+  bottom: 0, left: 0, right: 0, 
+  width: "100%", margin: 0, 
+  paddingLeft: 15, 
+  paddingRight: 0,
+  paddingTop: 5,
+  zIndex: 50
 };
 
 export const geocoder = {
@@ -55,18 +53,19 @@ export const overlay = {
 
 // Container for the container that holds an icon and text description
 // in the About and Contact overlays.
-export const overlayIconandText = {
+export const iconAndText = {
   flexDirection: "row",
   alignItems: "center",
-  width: "100%",
-  marginVertical: 10,
+  marginBottom: 15,
 };
 
 // For the text that appears in the About and Contact cards
 export const overlayText = {
   flexDirection: "row",
   flexWrap: "wrap",
-  flex: 5,
+  maxWidth: 260,
+  marginLeft: 20,
+  justifyContent: "center",
 };
 
 export const page = {
@@ -78,4 +77,22 @@ export const searchresult = {
   backgroundColor: "#F5FCFF",
   fontSize: 18,
   padding: 5,
+};
+
+export const searchBarContainer = {
+  backgroundColor: "white", color: "white", 
+  padding: 0, marginBottom: 5,
+  borderBottomColor: 'transparent', borderTopColor: 'transparent'
+};
+
+export const searchBarInputContainer = {
+  backgroundColor:"#F0F0F0", borderRadius: 10,
+};
+
+export const scrollView = {
+  padding: 20,
+};
+
+export const settingsRow = {
+  flexDirection: "row", alignItems:"center", justifyContent: "space-between", paddingTop: 15,
 };

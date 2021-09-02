@@ -11,7 +11,7 @@ const Directions = props => {
 	AccessibilityInfo.announceForAccessibility("Showing Directions screen.")
 
 	return (
-		<View style={{width: "100%", backgroundColor: "white", flex: 1}}>
+		<View style={{width: "100%", backgroundColor: "white", height: "40%"}}>
 			<View style={{ marginLeft: 10 }}>
 				<Header
 					title={t("DIRECTIONS_TEXT")}

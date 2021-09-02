@@ -7,8 +7,11 @@ import { Button, Card } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { viewDirections, viewTripInfo } from "../../actions";
-import { Fonts, Views } from "../../styles";
+import { cancelRoute, closeDirections, closeTripInfo, viewDirections, viewTripInfo } from "../../actions";
+import { Buttons, Fonts, Views } from "../../styles";
+import Header from "../../components/Header";
+import { primaryColor } from "../../styles/colors";
+import BottomCardButton from "../../components/BottomCardButton";
 
 const RouteBottomCard = (props) => {
   const { t, i18n } = useTranslation();
@@ -16,13 +19,13 @@ const RouteBottomCard = (props) => {
   if (props.viewingDirections || props.viewingTripInfo) {
     return null;
   } else if (!props.route || props.route.code != "Ok") {
-    AccessibilityInfo.announceForAccessibility("No possible route found with given start and end locations.");
+    AccessibilityInfo.announceForAccessibility(
+      "No possible route found with given start and end locations."
+    );
     return (
-      <Card containerStyle={Views.routeBottomCard}>
+      <Card containerStyle={[Views.bottomCard]}>
         <View style={{ margin: 5 }}>
-          <Text style={{ fontSize: 20, marginRight: 20 }}>
-            {t("NO_ROUTE_TEXT")}
-          </Text>
+          <Text style={{ fontSize: 20 }}>{t("NO_ROUTE_TEXT")}</Text>
         </View>
       </Card>
     );
@@ -30,54 +33,38 @@ const RouteBottomCard = (props) => {
 
   const route = props.route.routes[0];
 
-  AccessibilityInfo.announceForAccessibility("Route has been found. " + 
-    "Select Trip info or Directions button for more details");
+  AccessibilityInfo.announceForAccessibility(
+    "Route has been found. " +
+      "Select Trip info or Directions button for more details"
+  );
   return (
-    <Card containerStyle={Views.routeBottomCard}>
-      <View style={{ margin: 5, width: "100%" }}>
-        <View
-          accessible={true}
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 5,
+    <Card containerStyle={Views.bottomCard}>
+      <View>
+        <Header
+          title={ "" + (props.usingMetricSystem ? 
+            Math.round(route.distance) : 
+            Math.round(route.distance * 0.000621371192 * 100) / 100) + " " + 
+              (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
+              (Math.round(route.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
+          }
+          close={props.cancelRoute}
+        />
+      </View>
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", marginRight: 15 }}>
+        <BottomCardButton
+          style={{ marginRight: 10 }}
+          title={t("TRIP_INFO_TEXT")}
+          pressFunction={() => {
+            props.viewTripInfo();
+            AccessibilityInfo.announceForAccessibility(
+              "Showing Trip details screen."
+            );
           }}
-        >
-          <Text style={[Fonts.h2, { marginRight: 20 }]}>{t("ROUTE_TEXT")}</Text>
-          <Text style={[Fonts.p, { marginRight: 20 }]}>
-            { (props.usingMetricSystem ? Math.round(route.distance) : Math.round(route.distance*0.000621371192*100) / 100 ) } 
-            {" "}
-			      { (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) }
-          </Text>
-          <Text style={[Fonts.p, { marginRight: 20 }]}>
-            {Math.round(route.duration / 60)} 
-            {" "}
-            {t("MINUTES_TEXT")}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            width: "100%",
-            marginBottom: 5,
-          }}
-        >
-          <Button
-            title={t("TRIP_INFO_TEXT")}
-            onPress={() => { 
-              props.viewTripInfo();
-              AccessibilityInfo.announceForAccessibility("Showing Trip details screen.");
-            }}
-            containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
-          />
-          <Button
-            title={t("DIRECTIONS_TEXT")}
-            onPress={() => props.viewDirections()}
-            containerStyle={{ flex: 1, marginRight: 10, width: "40%" }}
-          />
-        </View>
+        />
+        <BottomCardButton
+          title={t("DIRECTIONS_TEXT")}
+          pressFunction={() => props.viewDirections()}
+        />
       </View>
     </Card>
   );
@@ -99,6 +86,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     viewTripInfo: () => {
       dispatch(viewTripInfo());
+    },
+    cancelRoute: () => {
+      dispatch(cancelRoute());
+      dispatch(closeDirections());
+      dispatch(closeTripInfo());
     },
   };
 };

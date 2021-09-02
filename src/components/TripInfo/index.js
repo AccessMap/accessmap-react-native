@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { metersToFeet, metersToMiles } from "../../utils/metric-imperial-conversion";
 
 import Header from "../Header";
+import { Views } from "../../styles";
 
 const InfoText = (props) => {
   return (
@@ -63,19 +64,17 @@ const TripInfo = (props) => {
     elevChange[i] += elevChange[i - 1];
   }
   return (
-    <View style={{ height: "50%" }}>
-      <View>
-        <Header title={t("ROUTE_INFO_TEXT")} close={props.close} />
-      </View>
-      <ScrollView style={{ width: "100%", paddingHorizontal: 10}}>
+    <View style={[Views.bottomCard, { height: "40%", backgroundColor: "white" }]}>
+      <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
+      <ScrollView style={{ paddingHorizontal: 10}}>
         <Text>Experienced elevation gain</Text>
         <View
           style={{
-            width: "100%",
+            width: "90%",
             height: 200,
             flexDirection: "row",
             alignItems: "center",
-            paddingHorizontal: 5,
+            marginLeft: 15,
           }}
         >
           <View
@@ -119,7 +118,7 @@ const TripInfo = (props) => {
           </AreaChart>
         </View>
         <XAxis
-          style={{ marginLeft: 36, width: "80%" }}
+          style={{ marginLeft: 45, width: "80%" }}
           data={xAxis}
           formatLabel={(index) => `${xAxis[index].toFixed(1)}`}
           contentInset={{ left: 10, right: 10 }}

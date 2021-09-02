@@ -1,8 +1,10 @@
+// Map Styles describe how the sidewalks, crossings, etc should be displayed.
 import { Platform } from "react-native";
 import { Colors } from "./index";
 const OUTLINE_WIDTH = 2;
 
-export const sidewalks = (incline) => {
+// Returns an object describing the style for a MapboxGL.LineLayer
+export const sidewalks = (incline) => { // ex incline: maxUphill
   const nSamples = 15;
   const nSide = parseInt(nSamples / 2);
   const range = [...Array(nSamples).keys()].map((d) => (d - nSide) / nSide);
@@ -16,12 +18,32 @@ export const sidewalks = (incline) => {
     inclineStops.push(color.hex());
   });
 
+  // https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
+  // filters for Mapbox GL JS to categorize sidewalk colors.
+  const widthRules = [ // changes line width depending on zoom level
+    "interpolate",
+    ["exponential", 1.5],
+    ["zoom"],
+    10, 0.1,
+    16, 5,
+    20, 24,
+  ];
+
   if (Platform.OS === 'ios') {
-    return {}; // has issues on iOS side
+    console.log(inclineStops);
+    return {
+      lineCap: "round",
+      lineWidth: widthRules,
+      lineColor: ["interpolate", 
+        ["exponential", 1.5],
+        ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
+      ],
+    };
   }
 
   return { 
     lineCap: "round",
+    lineWidth: widthRules,
     lineColor: [
       "case",
       [">", ["to-number", ["get", "incline"]], incline],
@@ -34,17 +56,6 @@ export const sidewalks = (incline) => {
         ["abs", ["*", 100, ["get", "incline"]]],
         ...inclineStops,
       ],
-    ],
-    lineWidth: [
-      "interpolate",
-      ["exponential", 1.5],
-      ["zoom"],
-      10,
-      0.1,
-      16,
-      5,
-      20,
-      24,
     ],
   };
 };

@@ -1,23 +1,20 @@
+import { primaryColor } from "./colors";
+
 // Stylesheet for all buttons in the app
+export const minTouchTargetSize = {
+  transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
+};
 
 // Used for zooming in and out and other map buttons
 export const whiteButton = {
   backgroundColor: "white",
   borderRadius: 30,
-  paddingTop: 15,
-  paddingRight: 15,
-  paddingBottom: 15,
-  paddingLeft: 15,
   margin: 5,
 };
 
 // pressable icon buttons on the OmniCard
 export const iconButton = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 20,
-  marginTop: 5,
-  marginRight: 5,
-  height: 40,
 };
 
 // Represents the container holding the map white buttons (zoom...etc)
@@ -33,16 +30,35 @@ export const zooms = {
 
 // For small image icons that link to an external website
 export const iconButtons = {
-  flex: 1, 
-  width: "50%", 
-  marginHorizontal: 0,
+  width: 50,
+  height: 50,
 };
 
-export const mobilityButton = {
-  borderRadius: 20,
-  marginTop: 5,
-  height: 40,
+export const button = {
+  borderRadius: 40,
+  paddingHorizontal: 12,
+  paddingVertical: 10,
+  backgroundColor: primaryColor, 
 };
+
+export const switches = [
+  minTouchTargetSize,
+  {
+    marginRight: 10,
+    color: primaryColor,
+    height: 50,
+  },
+];
+
+export const languageOrRegionSwitch = [
+  minTouchTargetSize,
+  {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#0000AA",
+    borderWidth: 1,
+    margin: 5,
+  },
+];
 
 // To add more button styles, just add:
 // export const ___ = { ... };

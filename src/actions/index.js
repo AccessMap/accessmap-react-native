@@ -1,5 +1,4 @@
 import { AccessibilityInfo, Alert } from "react-native";
-import { useTranslation } from 'react-i18next';
 
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
@@ -91,18 +90,6 @@ export function locateUser(enable) {
 	return { type: LOCATE_USER, enable };
 }
 
-// Drawer actions
-
-export const OPEN_DRAWER = "OPEN_DRAWER";
-export function openDrawer() {
-	return { type: OPEN_DRAWER };
-}
-
-export const CLOSE_DRAWER = "CLOSE_DRAWER";
-export function closeDrawer() {
-	return { type: CLOSE_DRAWER };
-}
-
 // Route-finding actions
 
 export const CANCEL_ROUTE = "CANCEL_ROUTE";
@@ -125,7 +112,8 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
-	return function(dispatch) {
+	// const { t, i18n } = useTranslation();
+	return (dispatch) => {
 		if (origin && destination) {
 			const data = {
 				lon1: origin[0],
@@ -168,4 +156,13 @@ export function useMetricSystem() { // changes units to meters
 export const USE_IMPERIAL_SYSTEM = "USE_IMPERIAL_SYSTEM";
 export function useImperialSystem() { // changes units to miles
 	return { type: USE_IMPERIAL_SYSTEM };
+}
+
+export const TRACK_USER_ACTIONS = "TRACK_USER_ACTIONS";
+export function trackUser() {
+	return { type: TRACK_USER_ACTIONS };
+}
+export const UNTRACK_USER_ACTIONS = "UNTRACK_USER_ACTIONS";
+export function untrackUser() {
+	return { type: UNTRACK_USER_ACTIONS };
 }

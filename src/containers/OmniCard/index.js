@@ -1,293 +1,156 @@
-import React, { Component } from "react";
-import { Buttons, Views, Position } from "../../styles";
-import {
-  View,
-  Image,
-  TouchableWithoutFeedback, 
-  AccessibilityInfo
-} from "react-native";
-import { Card, Button, ButtonGroup, SearchBar } from "react-native-elements";
-import Icon from "../../components/Icon";
-import { useTranslation, withTranslation } from 'react-i18next';
-import UphillSlider from "../Settings/UphillSlider";
-import DownhillSlider from "../Settings/DownhillSlider";
-import BarrierSwitch from "../Settings/BarrierSwitch";
+import React, { useState } from "react";
+import { Views, Colors } from "../../styles";
+import { View, AccessibilityInfo } from "react-native";
+import { Card } from "react-native-elements";
+import { Icon } from "react-native-elements";
+import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
+import GeocodeBar from "../../components/GeocodeBar";
 
-import { MOBILITY_MODE_CUSTOM } from "../../constants";
-
-import { connect } from "react-redux";
 import {
-	openDrawer,
-	reverseRoute,
-	cancelRoute,
-	closeDirections,
-	closeTripInfo
-} from '../../actions';
+  reverseRoute,
+  closeDirections,
+  closeTripInfo,
+  cancelRoute,
+} from "../../actions";
 
-import MobilityButtonGroup from './mobility-buttons';
-import LanguageSwitcher from './language-switcher';
-import RegionSwitcher from './region-switcher';
+import MobilityButtonGroup from "./mobility-buttons";
+import { MOBILITY_MODE_CUSTOM } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import MobilityProfile from "../MobilityProfile";
+import IconButton from "../../components/IconButton";
 
-const IconButton = (props) => {
-  return (
-    <Button
-      buttonStyle={{ ...Buttons.iconButton, ...props.style }}
-      containerStyle={props.label ? null : { width: 45 }}
-      icon={
-        <Icon
-          name={props.name}
-          size={25}
-          color={props.label ? "#EEEEEE" : "#555555"}
-        />
-      }
-      title={props.label}
-      titleStyle={{ marginLeft: 3, fontSize: 15 }}
-      onPress={props.onPress}
-      accessibilityLabel={props.accessibilityLabel}
-    />
-  );
-};
-
-const GeocodeBar = (props) => {
+export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
-  return (
-    <View style={{ flex: 1 }}>
-      <TouchableWithoutFeedback
-        accessibilityLabel="Enter address"
-        onPress={() => props.navigation.push(t("SEARCH"), { type: props.type })}
-      >
-        <View pointerEvents="box-only">
-          <SearchBar
-            placeholder={props.placeholder}
-            value={props.value}
-            lightTheme={true}
-            containerStyle={{ backgroundColor: "#EEEEEE", padding: 0 }}
-            inputContainerStyle={{ backgroundColor: "#DDDDDD" }}
-            inputStyle={{ color: "black", margin: 0, padding: 0, fontSize: 14 }}
-            rightIconContainerStyle={{ width: 0, height: 0 }}
-            editable={false}
+  const [customMode, setCustomMode] = useState(false);
+  const [customIndex, setCustomIndex] = useState(0);
+  const [findDirections, setFindDirections] = useState(false);
+
+  let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
+  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
+  let origin = useSelector((state: RootState) => state.origin);
+  let destination = useSelector((state: RootState) => state.destination);
+  let originText = useSelector((state: RootState) => state.originText);
+  let destinationText = useSelector((state: RootState) => state.destinationText);
+
+  const dispatch = useDispatch();
+  const cancelAndCloseRoute = () => {
+    dispatch(cancelRoute());
+    dispatch(closeDirections());
+    dispatch(closeTripInfo());
+  };
+
+  const customButtons = [
+    t("UPHILL_TEXT"),
+    t("DOWNHILL_TEXT"),
+    t("BARRIERS_TEXT"),
+  ];
+  const updateCustomIndex = (customIndex) => {
+    setCustomIndex(customIndex);
+  };
+  const toggleCustomMode = () => {
+    setCustomMode(!customMode);
+  };
+
+  let topRow = null;
+  let middleRow = null;
+  const bottomRow = (
+    <View style={{ flex: 1, flexDirection: "row", marginTop: 10, 
+    alignItems: "center", marginBottom: 5 }}>
+      <MobilityButtonGroup />
+      {mobilityMode == MOBILITY_MODE_CUSTOM && (
+          <Icon
+            size={35}
+            color={Colors.primaryColor}
+            name="dots-horizontal"
+            type="material-community"
+            accessibilityLabel="Select to modify custom mobility preferences"
+            onPress={toggleCustomMode}
           />
-        </View>
-      </TouchableWithoutFeedback>
+      )}
     </View>
   );
-};
 
-class OmniCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      customMode: false,
-      customIndex: 0,
-      findDirections: false,
-    };
-  }
-
-  updateCustomIndex = (customIndex) => {
-    this.setState({ customIndex });
-  };
-
-  toggleCustomMode = () => {
-    this.setState({ customMode: !this.state.customMode });
-  };
-
-  render() {
-    const customButtons = [
-			this.props.t("UPHILL_TEXT"), 
-			this.props.t("DOWNHILL_TEXT"), 
-			this.props.t("BARRIERS_TEXT")];
-    const {
-      pinFeatures,
-      origin,
-      destination,
-      originText,
-      destinationText,
-      cancelRoute,
-    } = this.props;
-    var containerToRender = <View></View>;
-    var geocodeBarContents = <View></View>;
-    var middleRowContents = <View></View>;
-
-    // if the user is in the middle of choosing a route start and end
-    // TODO: X button and directions mode
-    if (origin || destination || this.state.findDirections) {
-      geocodeBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
-          <GeocodeBar
-            accessibilityLabel={"Enter address"}
-            navigation={this.props.navigation}
-            type="origin"
-            value={
-              originText
-                ? originText
-                : origin
-                ? coordinatesToString(origin)
-                : ""
-            }
-            placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_START")}
-          />
-          <IconButton
-            name="close"
-            accessibilityLabel="Select to exit route finding"
-            onPress={() => {
-              cancelRoute();
-              AccessibilityInfo.announceForAccessibility("Cancelled route. Showing home screen with drawer menu open.");
-              this.setState({ findDirections: false });
-            }}
-          />
-        </View>
-      );
-    } else {
-      // unselected route state
-      geocodeBarContents = (
-        <View style={[{ flex: 1, flexDirection: "row", alignItems: 'center', justifyContent: 'space-between'}]}>
-          <IconButton
-            name="menu"
-            accessibilityLabel="Select to open drawer menu"
-            onPress={this.props.openDrawer}
-          />
-          <Image
-            style={{ flex: 1, height: "50%" }}
-            source={require("../../../res/images/accessmap-logo.png")}
-            resizeMode="center"
-            resizeMethod="scale"
-          />
-          <LanguageSwitcher />
-          <RegionSwitcher />
-        </View>
-      );
-    }
-
-    // UI elements for the middle row of the Omnicard
-    if (!origin && !destination && !this.state.findDirections) {
-      middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
-          <GeocodeBar
-            accessibilityLabel={"Enter end address"}
-            navigation={this.props.navigation}
-            value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
-            type="search"
-            placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
-          />
-          <IconButton
-            name="directions"
-            accessibilityLabel="Select to look up routes"
-            onPress={() => {
-              this.setState({ findDirections: true }); 
-              AccessibilityInfo.announceForAccessibility("Showing route start and end address selection window.");
-            }}
-          />
-        </View>
-      );
-    } else {
-      middleRowContents = (
-        <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
-          <GeocodeBar
-            accessibilityLabel={"Enter end address"}
-            navigation={this.props.navigation}
-            value={
-              destinationText
-                ? destinationText
-                : destination
-                ? coordinatesToString(destination)
-                : ""
-            }
-            type="destination"
-            placeholder={this.props.t("GEOCODER_PLACEHOLDER_TEXT_END")}
-          />
-          <IconButton
-            accessibilityLabel="Select to reverse route."
-            name="swap-vert"
-            onPress={() => {
-              this.props.reverseRoute();
-              AccessibilityInfo.announceForAccessibility("Start and end locations reversed.");
-            }}
-          />
-        </View>
-      );
-    }
-
-    // Rendering the entire card and bottom row
-    if (this.state.customMode) {
-      containerToRender = (
-        <View>
-          <View style={[{ flex: 1, flexDirection: "row" }, Position.center]}>
-            <ButtonGroup
-              onPress={this.updateCustomIndex}
-              selectedIndex={this.state.customIndex}
-              buttons={customButtons}
-              containerStyle={{ flex: 1 }}
-            />
-            <IconButton name="close" onPress={this.toggleCustomMode} />
-          </View>
-
-          {this.state.customIndex == 0 ? (
-            <UphillSlider />
-          ) : this.state.customIndex == 1 ? (
-            <DownhillSlider />
-          ) : (
-            <BarrierSwitch />
-          )}
-        </View>
-      );
-    } else {
-      containerToRender = (
-        <View>
-          {geocodeBarContents}
-          {middleRowContents}
-          <View style={{ flex: 1, flexDirection: "row",  }}>
-            <MobilityButtonGroup />
-            {this.props.mobilityMode == MOBILITY_MODE_CUSTOM && (
-              <View>
-                <IconButton
-                  name="pencil"
-                  accessibilityLabel="Select to modify custom mobility preferences"
-                  onPress={this.toggleCustomMode}
-                />
-              </View>
-            )}
-          </View>
-        </View>
-      );
-    }
-
-    return (
-      <Card
-        // ref={(component) => (this.omniCard = component)}
-        containerStyle={Views.omnicard}
-      >
-        {containerToRender}
-      </Card>
+  // User is in the middle of choosing a route start and end
+  if (origin || destination || findDirections) {
+    topRow = (
+      <View style={[{ flex: 1, flexDirection: "row", 
+      justifyContent: "space-between", alignItems:"center" }]}>
+        <GeocodeBar
+          accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
+          navigation={props.navigation}
+          type="origin"
+          value={
+            originText ? originText : origin ? coordinatesToString(origin) : ""
+          }
+          placeholder={t("GEOCODER_PLACEHOLDER_TEXT_START")}
+        />
+        <IconButton
+          name="close"
+          size={40}
+          accessibilityLabel="Select to exit route finding"
+          onPress={() => {
+            cancelAndCloseRoute();
+            AccessibilityInfo.announceForAccessibility("Cancelled route.");
+            setFindDirections(false);
+          }}
+        />
+      </View>
+    );
+    middleRow = (
+      <View style={[{ flex: 1, flexDirection: "row" }]}>
+        <GeocodeBar
+          accessibilityLabel={"Enter end address"}
+          navigation={props.navigation}
+          value={
+            destinationText
+              ? destinationText
+              : destination
+              ? coordinatesToString(destination)
+              : ""
+          }
+          type="destination"
+          placeholder={t("GEOCODER_PLACEHOLDER_TEXT_END")}
+        />
+        <IconButton
+          accessibilityLabel="Select to reverse route."
+          name="swap-vert"
+          onPress={() => {
+            dispatch(reverseRoute());
+            AccessibilityInfo.announceForAccessibility(
+              "Start and end locations reversed."
+            );
+          }}
+        />
+      </View>
+    );
+  } else { // unselected route
+    topRow = (
+      <View style={[{ flex: 1, flexDirection: "row", 
+      justifyContent: "space-between", alignItems:"center" }]}>
+        <GeocodeBar
+          navigation={props.navigation}
+          value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
+          type="search"
+          placeholder={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
+        />
+        <IconButton
+          name="directions"
+          accessibilityLabel="Select to look up routes"
+          onPress={() => {
+            setFindDirections(true);
+            AccessibilityInfo.announceForAccessibility(
+              "Showing route start and end address selection window."
+            );
+          }}
+        />
+      </View>
     );
   }
+
+  // Rendering the entire card and bottom row
+  let mainContainer = customMode ? (<MobilityProfile close={toggleCustomMode}/>) : 
+    (<View>{topRow}{middleRow}{bottomRow}</View>);
+
+  return <Card containerStyle={Views.omnicard}>{mainContainer}</Card>;
 }
-
-const mapStateToProps = (state) => {
-  return {
-    mobilityMode: state.mobilityMode,
-    pinFeatures: state.pinFeatures,
-    origin: state.origin,
-    destination: state.destination,
-    originText: state.originText,
-    destinationText: state.destinationText,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openDrawer: () => {
-      dispatch(openDrawer());
-    },
-    reverseRoute: () => {
-      dispatch(reverseRoute());
-    },
-    cancelRoute: () => {
-      dispatch(cancelRoute());
-      dispatch(closeDirections());
-      dispatch(closeTripInfo());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(OmniCard));

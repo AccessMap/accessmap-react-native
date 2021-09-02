@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { AccessibilityInfo, NativeModules } from 'react-native';
+// import { combineReducers, createStore } from 'redux';
+import { AccessibilityInfo, NativeModules, Platform } from 'react-native';
 import {
 	MAP_LOADED,
 	ZOOM_IN,
@@ -20,12 +20,12 @@ import {
 	CLOSE_TRIP_INFO,
 	VIEW_DIRECTIONS,
 	CLOSE_DIRECTIONS,
-	OPEN_DRAWER,
-	CLOSE_DRAWER,
 	LOCATE_USER,
 	RECEIVE_ROUTE,
 	USE_METRIC_SYSTEM,
 	USE_IMPERIAL_SYSTEM,
+	TRACK_USER_ACTIONS,
+	UNTRACK_USER_ACTIONS,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -34,8 +34,8 @@ import {
 	MOBILITY_MODE_CANE,
 	SEATTLE
 } from '../constants';
-import regions from '../../regions';
-import languages from '../../languages';
+import regions from '../../regions.json';
+import languages from '../../languages.json';
 
 const { Rakam } = NativeModules;
 
@@ -44,7 +44,9 @@ const seattleCoords = [seattleProps.lon, seattleProps.lat];
 const englishLanguageProps = languages[0];
 
 const logEvent = async (type, props) => {
-	Rakam.trackEvent(type, props);
+	if (Platform.OS === "android") {
+		Rakam.trackEvent(type, props);
+	}
 }
 
 const defaultState = {
@@ -52,7 +54,7 @@ const defaultState = {
 	zoomLevel: 14,
 	bbox: seattleProps.bounds,
 	currRegion: seattleProps.name.toUpperCase(),
-	currLanguage: englishLanguageProps.key.toUpperCase(),
+	currLanguage: englishLanguageProps.key.toLowerCase(),
 	centerCoordinate: seattleCoords,
 	locateUserSwitch: false,
 	canAccessLocation: false,
@@ -71,6 +73,7 @@ const defaultState = {
 	drawerOpen: false,
 	route: null,
 	usingMetricSystem: false, // meters vs miles
+	trackUserActions: false,
 }
 
 // Define the states 
@@ -93,7 +96,7 @@ export default function mapApp(state = defaultState, action) {
 		case GO_TO_LANGUAGE:
 			logEvent(action.type, ["language", action.language.name]);
 			// centerCoordinate, bbox
-			return {...state, language: action.language, currLanguage: action.language.key.toUpperCase()};
+			return {...state, language: action.language, currLanguage: action.language.key.toLowerCase()};
 		case PLACE_PIN:
 			logEvent(action.type, action.item == null ? ["segment", "null"] : ["segment", action.item.description]);
 			return {...state, pinFeatures: action.item};
@@ -143,11 +146,6 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, viewingDirections: false};
 		case LOCATE_USER:
 			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
-		case OPEN_DRAWER:
-			AccessibilityInfo.announceForAccessibility("Drawer menu opened.");
-			return {...state, openDrawer: true};
-		case CLOSE_DRAWER:
-			return {...state, openDrawer: false};
 		case RECEIVE_ROUTE:
 			return {...state, route: action.route};
 		case USE_METRIC_SYSTEM:
@@ -156,7 +154,13 @@ export default function mapApp(state = defaultState, action) {
 		case USE_IMPERIAL_SYSTEM:
 			logEvent(action.type, []);
 			return {...state, usingMetricSystem: false};
+		case TRACK_USER_ACTIONS:
+			return {...state, trackUserActions: true };
+		case UNTRACK_USER_ACTIONS:
+			return {...state, trackUserActions: false };
 		default:
 			return state;
 	}
 }
+
+export type RootState = ReturnType<typeof mapApp>

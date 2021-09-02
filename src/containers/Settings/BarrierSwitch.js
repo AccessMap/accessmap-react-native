@@ -1,35 +1,25 @@
 import React from 'react';
 import { Switch, Text, View } from 'react-native';
 import { toggleBarriers } from '../../actions';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Buttons, Colors, Fonts } from '../../styles';
+import { greyLight, primaryLight } from '../../styles/colors';
 
-const BarrierSwitch = props => {
+export default function BarrierSwitch(props) {
 	const { t, i18n } = useTranslation();
-
+	let avoidRaisedCurbs = useSelector((state: RootState) => state.avoidRaisedCurbs);
+	const dispatch = useDispatch();
 	return (
-		<View style={{flex: 1, flexDirection: "row", margin: 10}}>
+		<View style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
+			<Text style={[{marginLeft: 5, flex: 1}, Fonts.p]}>{t("AVOID_BARRIERS_TEXT")}</Text>
 			<Switch
-				onValueChange={props.toggleBarriers}
-				value={props.avoidRaisedCurbs}
+				style={Buttons.switches}
+				trackColor={{ false: greyLight, true: primaryLight }}
+				thumbColor={Colors.primaryColor}
+				onValueChange={() => dispatch(toggleBarriers())}
+				value={avoidRaisedCurbs}
 			/>
-			<Text style={{marginLeft: 5}}>{t("AVOID_BARRIERS_TEXT")}</Text>
 		</View>
 	);
 };
-
-const mapStateToProps = state => {
-	return ({
-		avoidRaisedCurbs: state.avoidRaisedCurbs,	
-	});
-};
-
-const mapDispatchToProps = dispatch => {
-	return ({
-		toggleBarriers: () => {
-			dispatch(toggleBarriers());
-		}
-	});
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BarrierSwitch);

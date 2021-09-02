@@ -3,7 +3,6 @@
 // For card or view header text
 export const h1 = {
   color: "black",
-  flex: 1,
   fontSize: 30,
   fontWeight: "bold",
   fontFamily: "Inter-SemiBold",
@@ -20,14 +19,14 @@ export const h2 = {
 export const p = {
   fontSize: 15,
   fontFamily: "Inter-Regular",
-  color: "#313131",
+  color: "black",
 };
 
 // Items in the menu drawer
 export const menuItems = {
   fontSize: 20,
   color: "black",
-  paddingTop: 20,
-  paddingBottom: 20, 
+  paddingVertical: 15,
+  marginVertical: 1,
   fontFamily: "Inter-Regular",
 };
