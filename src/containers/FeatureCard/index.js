@@ -3,7 +3,7 @@
 // Includes the option to "Route from/to here".
 import React from "react";
 import { View, Text, AccessibilityInfo } from "react-native";
-import { Card } from "react-native-elements";
+import { Card, Icon, Button } from "react-native-elements";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +13,7 @@ import coordinatesToString from "../../utils/coordinates-to-string";
 import parseOpenHours from "../../utils/parse-open-hours";
 import { Views } from "../../styles";
 import BottomCardButton from "../../components/BottomCardButton";
+import { primaryColor } from "../../styles/colors";
 
 const InfoText = (props) => {
   return (
@@ -159,6 +160,24 @@ const FeatureCard = (props) => {
           }}
         />
       </View>
+      <Button
+        title={t("REPORT_ISSUE")}
+        containerStyle={[{flex: 1, marginTop: 20, marginRight: 15},]}
+        buttonStyle={{
+          backgroundColor: "white",
+          paddingVertical: 13,
+          borderColor: primaryColor,
+        }}
+        titleStyle={{ fontSize: 15, color: primaryColor }}
+        icon={<Icon name="report" size={20} color={primaryColor} style={{marginRight: 10}}/>}
+        accessibilityLabel={t(
+          "Header-crowdsourcingInfo-accessibilityLabel"
+        )}
+        onPress={() => {
+          props.navigation.push(t("CROWDSOURCING"), { info });
+        }}
+        type="outline"
+      />
     </Card>
   );
 };

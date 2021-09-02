@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { View, AccessibilityInfo, Alert, SafeAreaView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { closeDirections, closeTripInfo } from "../actions";
+import { closeDirections, closeTripInfo, toggleMobilityProfile } from "../actions";
 import { Views } from "../styles";
 
 import MapView from "../containers/MapView";
@@ -17,13 +17,15 @@ import TripInfo from "../components/TripInfo";
 
 import { useTranslation } from 'react-i18next';
 import { useNetInfo } from "@react-native-community/netinfo";
+import MobilityProfile from "../containers/MobilityProfile";
 
 export default function MapPage(props) {
-  let pinFeatures = useSelector((state: RootState) => {return state.pinFeatures});
-  let route = useSelector((state: RootState) => {return state.route});
-  let viewingDirections = useSelector((state: RootState) => {return state.viewingDirections});
-  let viewingTripInfo = useSelector((state: RootState) => {return state.viewingTripInfo});
-  let isLoading = useSelector((state: RootState) => {return state.isLoading});
+  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
+  let route = useSelector((state: RootState) => state.route);
+  let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
+  let viewingTripInfo = useSelector((state: RootState) => state.viewingTripInfo);
+  let viewingMobilityProfile = useSelector((state: RootState) => state.viewingMobilityProfile);
+  let isLoading = useSelector((state: RootState) => state.isLoading);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -39,6 +41,31 @@ export default function MapPage(props) {
       Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
     }
   }, [netInfo]);
+
+  function showBottomCard(navigation) {
+    if (viewingMobilityProfile) {
+      return (<MobilityProfile close={() => dispatch(toggleMobilityProfile())}/>);
+    } 
+    if (viewingDirections) {
+      return (<Directions
+        route={route}
+        close={() => dispatch(closeDirections())}
+      />);
+    } 
+    if (viewingTripInfo) {
+      return (<TripInfo
+        route={route}
+        close={() => dispatch(closeTripInfo())}
+      />);
+    }
+    if (pinFeatures) {
+      return (<FeatureCard navigation={navigation} />);
+    } else if (route) {
+      return <RouteBottomCard />
+    } else {
+      return null;
+    }
+  };
 
   AccessibilityInfo.announceForAccessibility("Showing Map View.");
   return (
@@ -59,20 +86,7 @@ export default function MapPage(props) {
           </View>
 
           {isLoading && <LoadingScreen />}
-          {pinFeatures && (<FeatureCard navigation={props.navigation} />)}
-          {route && !pinFeatures && <RouteBottomCard />}
-          {viewingDirections && (
-            <Directions
-              route={route}
-              close={() => dispatch(closeDirections())}
-            />
-          )}
-          {viewingTripInfo && (
-            <TripInfo
-              route={route}
-              close={() => dispatch(closeTripInfo())}
-            />
-          )}
+          {showBottomCard(props.navigation)}
         </View>
       </View>
     </SafeAreaView>

@@ -9,6 +9,8 @@ export const container = {
 // A centered floating card with a white background
 export const omnicard = {
   position: "absolute",
+  // borderBottomLeftRadius: 30,
+  // borderBottomRightRadius: 30,
   backgroundColor: "#FFFFFF",
   width: "100%",
   flexDirection: "column",
@@ -36,7 +38,7 @@ export const geocoder = {
   right: 0,
   top: 0,
   margin: 10,
-  zIndex: 20,
+  zIndex: 10,
 };
 
 export const map = {

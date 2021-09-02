@@ -12,6 +12,7 @@ import {
   closeDirections,
   closeTripInfo,
   cancelRoute,
+  toggleMobilityProfile,
 } from "../../actions";
 
 import MobilityButtonGroup from "./mobility-buttons";
@@ -22,7 +23,6 @@ import IconButton from "../../components/IconButton";
 
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
-  const [customMode, setCustomMode] = useState(false);
   const [customIndex, setCustomIndex] = useState(0);
   const [findDirections, setFindDirections] = useState(false);
 
@@ -45,12 +45,6 @@ export default function OmniCard(props) {
     t("DOWNHILL_TEXT"),
     t("BARRIERS_TEXT"),
   ];
-  const updateCustomIndex = (customIndex) => {
-    setCustomIndex(customIndex);
-  };
-  const toggleCustomMode = () => {
-    setCustomMode(!customMode);
-  };
 
   let topRow = null;
   let middleRow = null;
@@ -58,16 +52,14 @@ export default function OmniCard(props) {
     <View style={{ flex: 1, flexDirection: "row", marginTop: 10, 
     alignItems: "center", marginBottom: 5 }}>
       <MobilityButtonGroup />
-      {mobilityMode == MOBILITY_MODE_CUSTOM && (
-          <Icon
-            size={35}
-            color={Colors.primaryColor}
-            name="dots-horizontal"
-            type="material-community"
-            accessibilityLabel="Select to modify custom mobility preferences"
-            onPress={toggleCustomMode}
-          />
-      )}
+      <Icon
+        size={35}
+        color={Colors.primaryColor}
+        name="dots-horizontal"
+        type="material-community"
+        accessibilityLabel="Select to modify custom mobility preferences"
+        onPress={() => dispatch(toggleMobilityProfile())}
+      />
     </View>
   );
 
@@ -149,8 +141,7 @@ export default function OmniCard(props) {
   }
 
   // Rendering the entire card and bottom row
-  let mainContainer = customMode ? (<MobilityProfile close={toggleCustomMode}/>) : 
-    (<View>{topRow}{middleRow}{bottomRow}</View>);
-
-  return <Card containerStyle={Views.omnicard}>{mainContainer}</Card>;
+  return <Card containerStyle={Views.omnicard}>{
+    <View>{topRow}{middleRow}{bottomRow}</View>}
+    </Card>;
 }

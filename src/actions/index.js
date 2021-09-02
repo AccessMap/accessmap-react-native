@@ -85,6 +85,11 @@ export function closeDirections() {
 	return { type: CLOSE_DIRECTIONS };
 }
 
+export const TOGGLE_MOBILITY_PROFILE = "TOGGLE_MOBILITY_PROFILE";
+export function toggleMobilityProfile() {
+	return { type: TOGGLE_MOBILITY_PROFILE };
+}
+
 export const LOCATE_USER = "LOCATE_USER";
 export function locateUser(enable) {
 	return { type: LOCATE_USER, enable };

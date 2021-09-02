@@ -26,6 +26,7 @@ import {
 	USE_IMPERIAL_SYSTEM,
 	TRACK_USER_ACTIONS,
 	UNTRACK_USER_ACTIONS,
+	TOGGLE_MOBILITY_PROFILE,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -70,7 +71,7 @@ const defaultState = {
 	avoidRaisedCurbs: true,
 	viewingTripInfo: false,
 	viewingDirections: false,
-	drawerOpen: false,
+	viewingMobilityProfile: false,
 	route: null,
 	usingMetricSystem: false, // meters vs miles
 	trackUserActions: false,
@@ -144,6 +145,8 @@ export default function mapApp(state = defaultState, action) {
 		case CLOSE_DIRECTIONS:
 			logEvent(action.type, []);
 			return {...state, viewingDirections: false};
+		case TOGGLE_MOBILITY_PROFILE:
+			return {...state, viewingMobilityProfile: !state.viewingMobilityProfile};
 		case LOCATE_USER:
 			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
 		case RECEIVE_ROUTE:

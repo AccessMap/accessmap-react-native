@@ -78,7 +78,7 @@
   "TWITTER_TEXT": "Follow us on social media",
   "EMAIL": "E-mail",
   "EMAIL_TEXT": "Email us if you encounter issues or want to help out",
-  "CROWDSOURCING_INFO_TEXT": "Help AccessMap by reporting issues/features in our dataset. Please note that submitting feedback will not update the map immediately.",
+  "CROWDSOURCING_INFO_TEXT": "Help AccessMap by reporting issues/features in our dataset. Please note that submitting feedback will not update the map for several weeks.",
   "SIDEWALK_PRESENT_TEXT": "Sidewalk is not present",
   "SIDEWALK_PAVED_TEXT": "Sidewalk is not paved",
   "SIDEWALK_WIDTH_TEXT": "Width below 3ft at some points",
