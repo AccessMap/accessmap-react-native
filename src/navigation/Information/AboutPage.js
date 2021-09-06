@@ -50,7 +50,7 @@ export default function AboutPage({ route, navigation }) {
   return (
     <View style={{paddingBottom: 40}}>
       <Image
-        importantForAccessibility={false}
+        accessibilityLabel="Accessmap"
         style={{width: "100%",}}
         source={require("../../../res/images/accessmap-logo.png")}
         resizeMode="contain"

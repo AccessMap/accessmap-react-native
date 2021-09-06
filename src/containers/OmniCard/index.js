@@ -50,7 +50,7 @@ export default function OmniCard(props) {
   let middleRow = null;
   const bottomRow = (
     <View style={{ flex: 1, flexDirection: "row", marginTop: 10, 
-    alignItems: "center", marginBottom: 5 }}>
+    alignItems: "center", marginBottom: 5, marginRight: 5 }}>
       <MobilityButtonGroup />
       <Icon
         size={35}

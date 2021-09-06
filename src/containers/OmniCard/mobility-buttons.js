@@ -1,3 +1,5 @@
+// Mobility Buttons allow the user to change between settings
+// that determine how acceptable certain steepnesses are of sidewalks
 import React from 'react';
 import { AccessibilityInfo, View } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -23,6 +25,11 @@ const MobilityButtonRender = props => {
 	const selected = props.mode == props.mobilityMode;
 	const buttonColor = selected ? Colors.primaryColor : "#FFFFFF";
 	const iconColor = selected ? "white" : Colors.primaryColor;
+	var shortLabel = props.label;
+
+	if (shortLabel && shortLabel.length > 6) {
+		shortLabel = shortLabel.substring(0,5) + "...";
+	}
 
 	return (
 		<Button
@@ -36,7 +43,7 @@ const MobilityButtonRender = props => {
 				size={32}
 				color={iconColor}
 			/>}
-			title={selected ? props.label : null}
+			title={selected ? shortLabel : null}
 			titleStyle={{marginLeft: 5, fontSize: 15, color: iconColor}}
 			onPress={_onPress}
 		/>

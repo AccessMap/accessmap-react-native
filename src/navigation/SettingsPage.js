@@ -74,10 +74,14 @@ function SettingsPage({ props, route, navigation }) {
   );
 
   const PrivacyConsentPopupContent = (
-    <View style={{height: "100%"}}>
-      <Header title={t("USER_TRACKING_TITLE")} 
-        close={() => setModalVisible(false)} />
-      <Text style={[Fonts.p, { marginRight: 20 }]}>{t("USER_TRACKING_TEXT")}</Text>
+    <View style={{ height: "100%" }}>
+      <Header
+        title={t("USER_TRACKING_TITLE")}
+        close={() => setModalVisible(false)}
+      />
+      <Text style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]}>
+        {t("USER_TRACKING_TEXT")}
+      </Text>
       <View
         style={{
           flex: 1,
@@ -86,109 +90,112 @@ function SettingsPage({ props, route, navigation }) {
           alignItems: "center",
         }}
       >
-          <BottomCardButton
-            style={{ marginRight: 10 }}
-            title={"OK"}
-            pressFunction={() => {
-              Rakam.toggleTracking(); 
-              dispatch(trackUser());
-              setModalVisible(false);
-            }}
-          />
-          <BottomCardButton
-            style={{ marginRight: 20 }}
-            title={"Cancel"}
-            pressFunction={() => {setModalVisible(false)}}
-          />
+        <BottomCardButton
+          style={{ marginRight: 10 }}
+          title={t("AGREE_TEXT")}
+          pressFunction={() => {
+            Rakam.toggleTracking();
+            dispatch(trackUser());
+            setModalVisible(false);
+          }}
+        />
+        <BottomCardButton
+          style={{ marginRight: 20 }}
+          title={t("DISAGREE_TEXT")}
+          pressFunction={() => {
+            setModalVisible(false);
+          }}
+        />
       </View>
     </View>
   );
 
   return (
-    <ScrollView style={Views.scrollView}>
-      <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
-      <RadioButton.Group
-        onValueChange={(value) => {
-          var item = languages.filter((data) => {
-            return data.key.toUpperCase() == value.toUpperCase();
-          });
-          dispatch(goToLanguage(item[0]));
-          AccessibilityInfo.announceForAccessibility(
-            "Changed language to " + item[0].name
-          );
-          i18n.changeLanguage(value.toLowerCase());
-        }}
-        value={currentLanguage}
-      >
-        {languages.map((lang) => (
+    <View>
+      <ScrollView style={Views.scrollView}>
+        <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
+        <RadioButton.Group
+          onValueChange={(value) => {
+            var item = languages.filter((data) => {
+              return data.key.toUpperCase() == value.toUpperCase();
+            });
+            dispatch(goToLanguage(item[0]));
+            AccessibilityInfo.announceForAccessibility(
+              "Changed language to " + item[0].name
+            );
+            i18n.changeLanguage(value.toLowerCase());
+          }}
+          value={currentLanguage}
+        >
+          {languages.map((lang) => (
+            <RadioButton.Item
+              color={Colors.primaryColor}
+              label={lang.name}
+              key={lang.key}
+              value={lang.key}
+            />
+          ))}
+        </RadioButton.Group>
+
+        <GreyDivider />
+        <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
+        <RadioButton.Group
+          onValueChange={(value) => {
+            var item = regions.filter((data) => {
+              return data.properties.name.toUpperCase() == value;
+            });
+            AccessibilityInfo.announceForAccessibility(
+              "Changed region to " + item[0].properties.name
+            );
+            dispatch(goToRegion(item[0]));
+          }}
+          value={currentRegion.toUpperCase()}
+        >
+          {regions.map((region) => (
+            <RadioButton.Item
+              color={Colors.primaryColor}
+              label={region.properties.name}
+              value={region.properties.name.toUpperCase()}
+              key={region.properties.key}
+            />
+          ))}
+        </RadioButton.Group>
+
+        <GreyDivider />
+        <Text style={Fonts.h2}>{t("UNITS_TEXT")}</Text>
+        <RadioButton.Group
+          onValueChange={(value) => {
+            if (value) {
+              dispatch(useMetricSystem());
+            } else {
+              dispatch(useImperialSystem());
+            }
+          }}
+          value={metricSetting}
+        >
           <RadioButton.Item
             color={Colors.primaryColor}
-            label={lang.name}
-            key={lang.key}
-            value={lang.key}
+            label={t("IMPERIAL_TOGGLE_TEXT")}
+            value={false}
+            key={"imperial"}
           />
-        ))}
-      </RadioButton.Group>
-
-      <GreyDivider />
-      <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
-      <RadioButton.Group
-        onValueChange={(value) => {
-          var item = regions.filter((data) => {
-            return data.properties.name.toUpperCase() == value;
-          });
-          AccessibilityInfo.announceForAccessibility(
-            "Changed region to " + item[0].properties.name
-          );
-          dispatch(goToRegion(item[0]));
-        }}
-        value={currentRegion.toUpperCase()}
-      >
-        {regions.map((region) => (
           <RadioButton.Item
             color={Colors.primaryColor}
-            label={region.properties.name}
-            value={region.properties.name.toUpperCase()}
-            key={region.properties.key}
+            label={t("METRIC_TOGGLE_TEXT")}
+            value={true}
+            key={"metric"}
           />
-        ))}
-      </RadioButton.Group>
+        </RadioButton.Group>
 
-      <GreyDivider />
-      <Text style={Fonts.h2}>{t("UNITS_TEXT")}</Text>
-      <RadioButton.Group
-        onValueChange={(value) => {
-          if (value) {
-            dispatch(useMetricSystem());
-          } else {
-            dispatch(useImperialSystem());
-          }
-        }}
-        value={metricSetting}
-      >
-        <RadioButton.Item
-          color={Colors.primaryColor}
-          label={t("IMPERIAL_TOGGLE_TEXT")}
-          value={false}
-          key={"imperial"}
-        />
-        <RadioButton.Item
-          color={Colors.primaryColor}
-          label={t("METRIC_TOGGLE_TEXT")}
-          value={true}
-          key={"metric"}
-        />
-      </RadioButton.Group>
-
-      {Platform.OS === "android" && <GreyDivider />}
-      {Platform.OS === "android" && (
-        <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
-      )}
-      {Platform.OS === "android" && PrivacySection}
-      <View style={{ height: 50 }}></View>
-
-      <CustomCard cardVisible={modalVisible} content={PrivacyConsentPopupContent}/>
-    </ScrollView>
+        {Platform.OS === "android" && <GreyDivider />}
+        {Platform.OS === "android" && (
+          <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
+        )}
+        {Platform.OS === "android" && PrivacySection}
+        <View style={{ height: 50 }}></View>
+      </ScrollView>
+      <CustomCard cardVisible={modalVisible} content={PrivacyConsentPopupContent} />
+    </View>
   );
 }
 

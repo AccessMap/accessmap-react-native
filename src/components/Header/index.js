@@ -2,9 +2,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Button, Icon } from "react-native-elements";
-import { Colors, Fonts } from "../../styles";
+import { Fonts } from "../../styles";
 import { useTranslation } from "react-i18next";
-import { primaryColor } from "../../styles/colors";
 
 const Header = (props) => {
   // Props:
@@ -22,8 +21,8 @@ const Header = (props) => {
 
       <Button
         accessibilityLabel={t("Header-close-accessibilityLabel")}
-        buttonStyle={{ backgroundColor: "#FFFFFF" }}
-        icon={<Icon name="close" size={35} color="black"/>}
+        buttonStyle={{ backgroundColor: "#FFFFFF", paddingLeft: 20, margin: 0}}
+        icon={<Icon name="close" size={40} color="black"/>}
         onPress={props.close}
       />
     </View>

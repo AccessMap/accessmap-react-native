@@ -163,5 +163,7 @@
     "SETTINGS_TUT_3": "Alternar isso mudará as unidades exibidas no aplicativo.",
     "END_TOUR": "Finalizar",
     "USER_TRACKING_TITLE": "Consentimento de rastreio do utilizador",
-    "USER_TRACKING_TEXT": "A utilização de 'dados de utilizador de rastreio' permitir-nos-á recolher dados sobre as ações dos utilizadores, como a frequência dos botões pressionados no mapa. Isto permite-nos compreender melhor como os utilizadores interagem com o AccessMap. Nenhuma informação pessoal ou identificante será armazenada ou ligada às suas ações. Ao clicar em OK, você concorda com esta recolha de dados."
+    "USER_TRACKING_TEXT": "A utilização de 'dados de utilizador de rastreio' permitir-nos-á recolher dados sobre as ações dos utilizadores, como a frequência dos botões pressionados no mapa. Isto permite-nos compreender melhor como os utilizadores interagem com o AccessMap. Nenhuma informação pessoal ou identificante será armazenada ou ligada às suas ações. Ao clicar em OK, você concorda com esta recolha de dados.",
+    "AGREE_TEXT": "Aceita",
+    "DISAGREE_TEXT": "Discordo"
 }

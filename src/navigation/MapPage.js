@@ -44,22 +44,25 @@ export default function MapPage(props) {
 
   function showBottomCard(navigation) {
     if (viewingMobilityProfile) {
-      return (<MobilityProfile close={() => dispatch(toggleMobilityProfile())}/>);
+      return (<MobilityProfile cardVisible={viewingMobilityProfile} 
+        close={() => dispatch(toggleMobilityProfile())}/>);
     } 
     if (viewingDirections) {
       return (<Directions
+        cardVisible={viewingDirections}
         route={route}
         close={() => dispatch(closeDirections())}
       />);
     } 
     if (viewingTripInfo) {
       return (<TripInfo
+        cardVisible={viewingTripInfo}
         route={route}
         close={() => dispatch(closeTripInfo())}
       />);
     }
     if (pinFeatures) {
-      return (<FeatureCard navigation={navigation} />);
+      return (<FeatureCard navigation={navigation}/>);
     } else if (route) {
       return <RouteBottomCard />
     } else {

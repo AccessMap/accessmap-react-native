@@ -1,47 +1,48 @@
-// A Custom Card built off of React Native's native Modal
-import React from "react";
-import { Modal, TouchableWithoutFeedback, View } from "react-native";
-// cardVisible [boolean: visibility state of the modal
-// content: [View] content to be shown in middle of card
+// A Custom Card built off of React Native's native Modal that will
+// slide in, has no lowered opacity outside the card, adjusts its height 
+// based on its content, and is stuck to the bottom of the screen.
+import React, { useEffect, useRef } from "react";
+import { Animated, View } from "react-native";
+
 export default function CustomCard(props) {
+  // cardVisible [boolean: visibility state of the modal
+  // content: [View] content to be shown in middle of card
+  const translation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => { // Sliding Animation of Card
+      Animated.timing(translation, {
+        toValue: props.cardVisible ? -500 : 500,
+        useNativeDriver: true,
+      }).start();
+  }, [props.cardVisible]);
+
   return (
-    <Modal transparent={true} 
-      visible={props.cardVisible} 
-      animationType="slide"
-      accessibilityLabel={"Popup card displayed at bottom of screen."}
+    <Animated.View
+      style={{
+        position: "absolute",
+        width: "100%",
+        bottom: -500,
+        flex: 1,
+        zIndex: 50,
+        flexDirection: "column",
+        alignItems: "center",
+        transform: [{ translateY: translation }],
+      }}
     >
-      <TouchableWithoutFeedback 
-        onPress={props.dismissCard}
-        accessibilityLabel={"Region outside popup card."}
-      >
-        <View
-          style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
-        />
-      </TouchableWithoutFeedback>
       <View
         style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "center",
+          backgroundColor: "white",
+          width: "100%",
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          paddingTop: 15,
+          paddingLeft: 20,
+          paddingRight: 10,
+          paddingBottom: 20,
         }}
       >
-        <View
-          style={{
-            backgroundColor: "white",
-            width: "100%",
-            height: 330,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            paddingTop: 15,
-            paddingLeft: 20,
-            paddingRight: 5,
-            paddingBottom: 10,
-          }}
-        >
-          {props.content}
-        </View>
+        {props.content}
       </View>
-    </Modal>
+    </Animated.View>
   );
 }

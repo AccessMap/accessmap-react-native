@@ -3,22 +3,34 @@
 // to view the Trip Info and Directions.
 import React from "react";
 import { View, Text, AccessibilityInfo } from "react-native";
-import { Button, Card } from "react-native-elements";
-import { connect } from "react-redux";
+import { Card } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { cancelRoute, closeDirections, closeTripInfo, viewDirections, viewTripInfo } from "../../actions";
-import { Buttons, Fonts, Views } from "../../styles";
+import { Views } from "../../styles";
 import Header from "../../components/Header";
-import { primaryColor } from "../../styles/colors";
 import BottomCardButton from "../../components/BottomCardButton";
+import CustomCard from "../CustomCard";
 
-const RouteBottomCard = (props) => {
+export default function RouteBottomCard(props) {
+  let route = useSelector((state: RootState) => state.route);
+  let viewingTripInfo = useSelector((state: RootState) => state.viewingTripInfo);
+  let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
+  let usingMetricSystem = useSelector((state: RootState) => state.usingMetricSystem);
+
+  const dispatch = useDispatch();
+  const cancelAndCloseRoute = () => {
+    dispatch(cancelRoute());
+    dispatch(closeDirections());
+    dispatch(closeTripInfo());
+  }
+
   const { t, i18n } = useTranslation();
 
-  if (props.viewingDirections || props.viewingTripInfo) {
+  if (viewingDirections || viewingTripInfo) {
     return null;
-  } else if (!props.route || props.route.code != "Ok") {
+  } else if (!route || route.code != "Ok") {
     AccessibilityInfo.announceForAccessibility(
       "No possible route found with given start and end locations."
     );
@@ -31,23 +43,24 @@ const RouteBottomCard = (props) => {
     );
   }
 
-  const route = props.route.routes[0];
+  const calculatedRoute = route.routes[0];
 
   AccessibilityInfo.announceForAccessibility(
     "Route has been found. " +
       "Select Trip info or Directions button for more details"
   );
-  return (
-    <Card containerStyle={Views.bottomCard}>
+
+  const content = (
+    <View style={{height: "100%"}}>
       <View>
         <Header
-          title={ "" + (props.usingMetricSystem ? 
-            Math.round(route.distance) : 
-            Math.round(route.distance * 0.000621371192 * 100) / 100) + " " + 
-              (props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
-              (Math.round(route.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
+          title={ "" + (usingMetricSystem ? 
+            Math.round(calculatedRoute.distance) : 
+            Math.round(calculatedRoute.distance * 0.000621371192 * 100) / 100) + " " + 
+              (usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT")) + " (" +
+              (Math.round(calculatedRoute.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
           }
-          close={props.cancelRoute}
+          close={cancelAndCloseRoute}
         />
       </View>
       <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", marginRight: 15 }}>
@@ -55,7 +68,7 @@ const RouteBottomCard = (props) => {
           style={{ marginRight: 10 }}
           title={t("TRIP_INFO_TEXT")}
           pressFunction={() => {
-            props.viewTripInfo();
+            dispatch(viewTripInfo());
             AccessibilityInfo.announceForAccessibility(
               "Showing Trip details screen."
             );
@@ -63,36 +76,13 @@ const RouteBottomCard = (props) => {
         />
         <BottomCardButton
           title={t("DIRECTIONS_TEXT")}
-          pressFunction={() => props.viewDirections()}
+          pressFunction={() => dispatch(viewDirections())}
         />
       </View>
-    </Card>
+    </View>
+  );
+
+  return (
+    <CustomCard content={content} cardVisible={true}/>  
   );
 };
-
-const mapStateToProps = (state) => {
-  return {
-    route: state.route,
-    viewingTripInfo: state.viewingTripInfo,
-    viewingDirections: state.viewingDirections,
-    usingMetricSystem: state.usingMetricSystem,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    viewDirections: () => {
-      dispatch(viewDirections());
-    },
-    viewTripInfo: () => {
-      dispatch(viewTripInfo());
-    },
-    cancelRoute: () => {
-      dispatch(cancelRoute());
-      dispatch(closeDirections());
-      dispatch(closeTripInfo());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RouteBottomCard);
