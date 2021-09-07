@@ -4,13 +4,25 @@ import React from "react";
 import Header from "../components/Header";
 import CustomSlider from "./Settings/CustomSlider";
 import BarrierSwitch from "./Settings/BarrierSwitch";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import CustomCard from "../containers/CustomCard";
+import { useSelector } from "react-redux";
+import getInclineLimit from "../utils/get-incline-limit";
+import SpeedLegend from "../components/SpeedLegend";
+import GreyDivider from "../components/GreyDivider";
+import { Fonts } from "../styles";
 
 export default function MobilityProfile(props) {
   // close: function that runs when the close button is clicked
   // cardVisible [boolean]
+  let maxIncline = useSelector((state: RootState) => {
+    return getInclineLimit(
+        state.customUphill,
+        state.customDownhill,
+        state.mobilityMode
+    )[0];
+  });
   const { t, i18n } = useTranslation();
   const content = (
     <View style={{ height: "100%", marginRight: 15 }}>
@@ -18,6 +30,11 @@ export default function MobilityProfile(props) {
       <CustomSlider title={t("MAX_UPHILL_STEEPNESS_TEXT")} uphill={true} />
       <CustomSlider title={t("MAX_DOWNHILL_STEEPNESS_TEXT")} uphill={false} />
       <BarrierSwitch />
+
+      <GreyDivider/>
+
+      <Text style={[Fonts.h2, {marginBottom: 10}]}>{t("MAP_HEAD_6")}</Text>
+      <SpeedLegend maxIncline={maxIncline} />
     </View>
   );
   return <CustomCard cardVisible={props.cardVisible} content={content} />;

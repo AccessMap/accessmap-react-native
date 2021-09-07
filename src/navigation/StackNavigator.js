@@ -133,6 +133,7 @@ function MainStackNavigator() {
         footway = footway.charAt(0).toUpperCase() + footway.slice(1);
         return {
           title: info.description != null ? info.description : footway,
+          headerLeft: () => backButton(navigation),
         };
       }}
     />

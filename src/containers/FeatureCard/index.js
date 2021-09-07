@@ -15,6 +15,7 @@ import { days } from "../../utils/parse-open-hours";
 import CustomCard from "../../containers/CustomCard";
 import BottomCardButton from "../../components/BottomCardButton";
 import { primaryColor } from "../../styles/colors";
+import { Fonts } from "../../styles";
 
 export default function FeatureCard(props) {
   let features = useSelector((state: RootState) => state.pinFeatures);
@@ -42,10 +43,10 @@ export default function FeatureCard(props) {
           marginBottom: 10,
         }}
       >
-        <Text style={{ flex: 2, fontSize: 16, flexWrap: "wrap" }}>
+        <Text style={[Fonts.p, { flex: 2, flexWrap: "wrap" }]}>
           {props.label}
         </Text>
-        <Text style={{ flex: 3, fontSize: 16, flexWrap: "wrap" }}>
+        <Text style={[Fonts.p, { flex: 3, flexWrap: "wrap" }]}>
           {props.info}
         </Text>
       </View>
@@ -69,19 +70,18 @@ export default function FeatureCard(props) {
     );
   };
 
+  var heading = "Unknown";
+  if (features.text) { // elevator
+    heading = features.text;
+  } else if (info && info.description) {
+    heading = info.description;
+  } else { // info.footway == "sidewalk" || "crossing"
+    heading = coordinatesToString(features.center);
+  }
+
   const header = (
     <Header
-      title={
-        features.text
-          ? features.text
-          : info
-          ? info.footway == "sidewalk"
-            ? t("SIDEWALK_TEXT")
-            : info.footway == "crossing"
-            ? t("CROSSING_TEXT")
-            : coordinatesToString(features.center)
-          : coordinatesToString(features.center)
-      }
+      title={heading}
       reportButton={info}
       close={() => dispatch(placePin(null))}
       cs={info && (info.footway == "sidewalk" || info.footway == "crossing")}
@@ -91,12 +91,9 @@ export default function FeatureCard(props) {
   );
 
   const details = () => {
-    if (!info) {
-      return null;
-    }
+    if (!info) { return null; }
     return (
-      <View>
-        <InfoText label={t("DESCRIPTION_TEXT")} info={info.description} />
+      <View style={{paddingVertical:10}}>
         {info.footway == "sidewalk" ? (
           <InfoText
             label={t("INCLINE_TEXT")}
@@ -112,8 +109,8 @@ export default function FeatureCard(props) {
             style={{
               height: 120,
               flexDirection: "row",
-              alignItems: "center",
-              marginBottom: 5,
+              alignItems: "flex-start",
+              marginBottom: 10,
             }}
           >
             <Text style={{ flex: 2, fontSize: 16, flexWrap: "wrap" }}>

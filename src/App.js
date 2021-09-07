@@ -35,7 +35,6 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator initialRouteName={t("HOME")} screenOptions={{
-        tabBarStyle: {height: bottomTabHeight},
         tabBarActiveTintColor: Colors.primaryColor,
         tabBarInactiveTintColor: Colors.grey,
         tabBarLabelStyle: Fonts.p,
