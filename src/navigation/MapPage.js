@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   closeDirections,
   closeTripInfo,
+  toggleMapTutorial,
   toggleMobilityProfile,
+  toggleRouteTutorial,
 } from "../actions";
 import { Views } from "../styles";
 
@@ -24,7 +26,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import MobilityProfile from "../containers/MobilityProfile";
 
 import ToolTip from "../components/TutorialComponents/ToolTip";
-import { mapTutorialContent } from "../constants/tutorial-content";
+import { mapTutorialContent, routeTutorialContent } from "../constants/tutorial-content";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function MapPage(props) {
@@ -43,6 +45,7 @@ export default function MapPage(props) {
   let showingMapTutorial = useSelector(
     (state: RootState) => state.showingMapTutorial
   );
+  let showingRouteTutorial = useSelector((state: RootState) => state.showingRouteTutorial);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -64,7 +67,7 @@ export default function MapPage(props) {
   useEffect(() => {
     // to reset the tutorial to step 0
     goToNextStep(0);
-  }, [showingMapTutorial]);
+  }, [showingMapTutorial, showingRouteTutorial]);
 
   function showBottomCard(navigation) {
     if (viewingMobilityProfile) {
@@ -144,8 +147,32 @@ export default function MapPage(props) {
                 paragraph={t(mapTutorialContent[numStep].paragraph)}
                 goToNextStep={goToNextStep}
                 navigation={props.navigation}
+                onEnd={() => dispatch(toggleMapTutorial())}
               />
             ) : null}
+
+            {showingRouteTutorial ? (
+              <ToolTip 
+                cardDescription={t("ROUTE_PLANNING")}
+                numStep={numStep}
+                maxStep={2}
+                toolTipPositionLeft={
+                  routeTutorialContent[numStep].toolTipPositionLeft
+                }
+                toolTipPositionTop={
+                  routeTutorialContent[numStep].toolTipPositionTop
+                }
+                arrowPositionLeft={
+                  routeTutorialContent[numStep].arrowPositionLeft
+                }
+                arrowPositionTop={routeTutorialContent[numStep].arrowPositionTop}
+                heading={t(routeTutorialContent[numStep].heading)}
+                paragraph={t(routeTutorialContent[numStep].paragraph)}
+                goToNextStep={goToNextStep}
+                navigation={props.navigation}
+                onEnd={() => dispatch(toggleRouteTutorial())}
+              />
+            ): null}
 
             {showBottomCard(props.navigation)}
           </View>

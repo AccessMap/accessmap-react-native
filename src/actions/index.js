@@ -176,3 +176,7 @@ export const TOGGLE_MAP_TUTORIAL = "TOGGLE_MAP_TUTORIAL";
 export function toggleMapTutorial() {
 	return { type: TOGGLE_MAP_TUTORIAL };
 }
+export const TOGGLE_ROUTE_TUTORIAL = "TOGGLE_ROUTE_TUTORIAL";
+export function toggleRouteTutorial() {
+	return { type: TOGGLE_ROUTE_TUTORIAL };
+};

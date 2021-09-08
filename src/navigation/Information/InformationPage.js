@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, AccessibilityInfo, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
-import { toggleMapTutorial } from "../../actions";
+import { toggleMapTutorial, toggleRouteTutorial } from "../../actions";
 import MenuButton from "../../components/MenuButton";
 import { Views } from "../../styles";
 
@@ -18,7 +18,11 @@ export default function InformationPage({ route, navigation }) {
             text={item.key}
             onPress={() => {
               navigation.pop();
-              dispatch(toggleMapTutorial());
+              if (item.key == t("MAP_INTERFACE")) {
+                dispatch(toggleMapTutorial());
+              } else {
+                dispatch(toggleRouteTutorial());
+              }
               AccessibilityInfo.announceForAccessibility(
                 "Showing " + item.key + " Tutorial."
               );

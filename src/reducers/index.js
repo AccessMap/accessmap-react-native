@@ -28,12 +28,13 @@ import {
 	UNTRACK_USER_ACTIONS,
 	TOGGLE_MOBILITY_PROFILE,
 	TOGGLE_MAP_TUTORIAL,
+	TOGGLE_ROUTE_TUTORIAL,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
-	MOBILITY_MODE_WHEELCHAIR,
-	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE,
+	// MOBILITY_MODE_WHEELCHAIR,
+	// MOBILITY_MODE_POWERED,
+	// MOBILITY_MODE_CANE,
 	SEATTLE
 } from '../constants';
 import regions from '../../regions.json';
@@ -77,6 +78,7 @@ const defaultState = {
 	usingMetricSystem: false, // meters vs miles
 	trackUserActions: false,
 	showingMapTutorial: false,
+	showingRouteTutorial: false,
 }
 
 // Define the states 
@@ -164,7 +166,15 @@ export default function mapApp(state = defaultState, action) {
 		case UNTRACK_USER_ACTIONS:
 			return {...state, trackUserActions: false };
 		case TOGGLE_MAP_TUTORIAL:
-			return {...state, showingMapTutorial: !state.showingMapTutorial};
+			return {...state, 
+				showingMapTutorial: !state.showingMapTutorial,
+				showingRouteTutorial: false,
+			};
+		case TOGGLE_ROUTE_TUTORIAL:
+			return {...state, 
+				showingRouteTutorial: !state.showingRouteTutorial,
+				showingMapTutorial: false,
+			};
 		default:
 			return state;
 	}

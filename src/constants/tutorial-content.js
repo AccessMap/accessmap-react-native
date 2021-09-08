@@ -45,3 +45,24 @@ export const mapTutorialContent = [
     paragraph: "MAP_TUT_5",
   },
 ];
+
+export const routeTutorialContent = [
+  {
+    // choose start and destination
+    toolTipPositionLeft: "5%",
+    toolTipPositionTop: "25%",
+    arrowPositionLeft: "50%",
+    arrowPositionTop: "50%",
+    heading: "ROUTE_HEAD_1",
+    paragraph: "ROUTE_TUT_1",
+  },
+  {
+    // Trip information general card
+    toolTipPositionLeft: "15%",
+    toolTipPositionTop: "40%",
+    arrowPositionLeft: "360%",
+    arrowPositionTop: "660%",
+    heading: "ROUTE_HEAD_4",
+    paragraph: "ROUTE_TUT_4",
+  },
+];
