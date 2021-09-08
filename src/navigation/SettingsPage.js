@@ -30,6 +30,7 @@ import { greyLight, primaryLight } from "../styles/colors";
 import CustomCard from "../containers/CustomCard";
 import Header from "../components/Header";
 import BottomCardButton from "../components/BottomCardButton";
+import AboutPage from "./Information/AboutPage";
 
 function SettingsPage({ props, route, navigation }) {
   const { Rakam } = NativeModules;
@@ -192,6 +193,10 @@ function SettingsPage({ props, route, navigation }) {
           <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
         )}
         {Platform.OS === "android" && PrivacySection}
+
+        <GreyDivider />
+        <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
+        <AboutPage/>
         <View style={{ height: 50 }}></View>
       </ScrollView>
       <CustomCard cardVisible={modalVisible} content={PrivacyConsentPopupContent} />

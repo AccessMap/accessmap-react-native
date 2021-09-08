@@ -21,7 +21,6 @@ export default function CustomSlider(props) {
     (state: RootState) => state.avoidRaisedCurbs
   );
   let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
-  console.log("---" + mobilityMode + "---");
 
   const getPreferences = (mode) => {
     switch (mode) {
@@ -44,7 +43,6 @@ export default function CustomSlider(props) {
     }
     const mode = getPreferences(mobilityMode);
     const incline = mode[props.uphill ? 0 : 1];
-    console.log(incline);
     return incline;
   });
 

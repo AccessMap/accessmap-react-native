@@ -30,7 +30,7 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
   ];
 
   if (Platform.OS === 'ios') {
-    console.log(inclineStops);
+    // console.log(inclineStops);
     return {
       lineCap: "round",
       lineWidth: widthRules,

@@ -1,33 +1,31 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, AccessibilityInfo, Text, ScrollView } from "react-native";
-import GreyDivider from "../../components/GreyDivider";
+import { FlatList, AccessibilityInfo, ScrollView } from "react-native";
+import { useDispatch } from "react-redux";
+import { toggleMapTutorial } from "../../actions";
 import MenuButton from "../../components/MenuButton";
-import { Fonts, Views } from "../../styles";
-import AboutPage from "./AboutPage";
+import { Views } from "../../styles";
 
 export default function InformationPage({ route, navigation }) {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   return (
     <ScrollView style={Views.scrollView}>
-        {/* <Text style={[Fonts.h2]}>{"Tutorials"}</Text>
-        <FlatList
+      <FlatList
         data={[{ key: t("MAP_INTERFACE") }, { key: t("ROUTE_PLANNING") }]}
         renderItem={({ item }) => (
           <MenuButton
             text={item.key}
             onPress={() => {
-              navigation.push(item.key);
+              navigation.pop();
+              dispatch(toggleMapTutorial());
               AccessibilityInfo.announceForAccessibility(
-                "Showing " + item.key + " Page."
+                "Showing " + item.key + " Tutorial."
               );
             }}
           />
         )}
-        /> */}
-    <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
-    <AboutPage/>
-
+      />
     </ScrollView>
   );
 }

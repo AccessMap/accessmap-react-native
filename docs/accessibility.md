@@ -17,7 +17,7 @@ const viewRef = useRef();
         // and https://github.com/facebook/react-native/issues/30097 
         AccessibilityInfo.setAccessibilityFocus(handle); 
         AccessibilityInfo.setAccessibilityFocus(handle); 
-        console.log("set focus");
+        // console.log("set focus");
       }
     }
   }

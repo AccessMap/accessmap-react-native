@@ -8,12 +8,8 @@ import MapPage from "./MapPage";
 import SearchPage from "./SearchPage";
 import Crowdsourcing from "./Crowdsourcing";
 
-import AboutPage from "./Information/AboutPage";
-import SettingsPage from "./SettingsPage";
 import InformationPage from "./Information/InformationPage";
-import MapInterfaceTutorialPage from "./Information/MapInterfaceTutorialPage";
 import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
-import SettingsTutorialPage from "./Information/SettingsTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
@@ -45,25 +41,6 @@ function MainStackNavigator() {
     />
   );
 
-  const about = (
-    <Stack.Screen
-      name={t("ABOUT")}
-      component={AboutPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const settings = (
-    <Stack.Screen
-      name={t("SETTINGS")}
-      component={SettingsPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-
   //-------------------------------------------------------------------------------------------
   // Search Page for addresses that shows after you tap the "Enter address" GeocodeBar
   const search = (
@@ -88,17 +65,8 @@ function MainStackNavigator() {
   // List of tutorials screen
   const tutorial = (
     <Stack.Screen
-      name="Information"
+      name={t("TUTORIAL")}
       component={InformationPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const mapTutorial = (
-    <Stack.Screen
-      name={t("MAP_INTERFACE")}
-      component={MapInterfaceTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -108,15 +76,6 @@ function MainStackNavigator() {
     <Stack.Screen
       name={t("ROUTE_PLANNING")}
       component={RoutePlanningTutorialPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const settingsTutorial = (
-    <Stack.Screen
-      name={t("SETTINGS_TUTORIAL")}
-      component={SettingsTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -143,13 +102,8 @@ function MainStackNavigator() {
       {map}
       {search}
 
-      {about}
-      {settings}
-
       {tutorial}
-      {mapTutorial}
       {routeTutorial}
-      {settingsTutorial}
 
       {crowdSourcing}
     </Stack.Navigator>

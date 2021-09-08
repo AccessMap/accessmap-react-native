@@ -73,7 +73,7 @@ function Zooms(props) {
         accessibilityLabel={t("INFORMATION")}
         buttonStyle={{backgroundColor: "white"}}
         icon={<Icon name="information" size={32} color={Colors.primaryColor} />}
-        onPress={() => props.navigation.push(t("INFORMATION"))}
+        onPress={() => props.navigation.push(t("TUTORIAL"))}
       />
       <Button
         containerStyle={Buttons.whiteButton}

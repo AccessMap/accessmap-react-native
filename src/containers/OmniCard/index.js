@@ -16,22 +16,21 @@ import {
 } from "../../actions";
 
 import MobilityButtonGroup from "./mobility-buttons";
-import { MOBILITY_MODE_CUSTOM } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import MobilityProfile from "../MobilityProfile";
 import IconButton from "../../components/IconButton";
 
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
-  const [customIndex, setCustomIndex] = useState(0);
   const [findDirections, setFindDirections] = useState(false);
 
-  let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
+  // let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
   let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
   let origin = useSelector((state: RootState) => state.origin);
   let destination = useSelector((state: RootState) => state.destination);
   let originText = useSelector((state: RootState) => state.originText);
-  let destinationText = useSelector((state: RootState) => state.destinationText);
+  let destinationText = useSelector(
+    (state: RootState) => state.destinationText
+  );
 
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {
@@ -40,17 +39,19 @@ export default function OmniCard(props) {
     dispatch(closeTripInfo());
   };
 
-  const customButtons = [
-    t("UPHILL_TEXT"),
-    t("DOWNHILL_TEXT"),
-    t("BARRIERS_TEXT"),
-  ];
-
   let topRow = null;
   let middleRow = null;
   const bottomRow = (
-    <View style={{ flex: 1, flexDirection: "row", marginTop: 10, 
-    alignItems: "center", marginBottom: 5, marginRight: 5 }}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 10,
+        alignItems: "center",
+        marginBottom: 5,
+        marginRight: 5,
+      }}
+    >
       <MobilityButtonGroup />
       <Icon
         size={35}
@@ -66,8 +67,16 @@ export default function OmniCard(props) {
   // User is in the middle of choosing a route start and end
   if (origin || destination || findDirections) {
     topRow = (
-      <View style={[{ flex: 1, flexDirection: "row", 
-      justifyContent: "space-between", alignItems:"center" }]}>
+      <View
+        style={[
+          {
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          },
+        ]}
+      >
         <GeocodeBar
           accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
           navigation={props.navigation}
@@ -116,10 +125,19 @@ export default function OmniCard(props) {
         />
       </View>
     );
-  } else { // unselected route
+  } else {
+    // unselected route
     topRow = (
-      <View style={[{ flex: 1, flexDirection: "row", 
-      justifyContent: "space-between", alignItems:"center" }]}>
+      <View
+        style={[
+          {
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          },
+        ]}
+      >
         <GeocodeBar
           navigation={props.navigation}
           value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
@@ -141,7 +159,15 @@ export default function OmniCard(props) {
   }
 
   // Rendering the entire card and bottom row
-  return <Card containerStyle={Views.omnicard}>{
-    <View>{topRow}{middleRow}{bottomRow}</View>}
-    </Card>;
+  return (
+    <Card containerStyle={Views.omnicard}>
+      {
+        <View>
+          {topRow}
+          {middleRow}
+          {bottomRow}
+        </View>
+      }
+    </Card>
+  );
 }

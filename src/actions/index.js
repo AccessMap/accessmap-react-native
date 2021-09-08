@@ -117,7 +117,7 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
-	// const { t, i18n } = useTranslation();
+	console.log("fetching route");
 	return (dispatch) => {
 		if (origin && destination) {
 			const data = {
@@ -170,4 +170,9 @@ export function trackUser() {
 export const UNTRACK_USER_ACTIONS = "UNTRACK_USER_ACTIONS";
 export function untrackUser() {
 	return { type: UNTRACK_USER_ACTIONS };
+}
+
+export const TOGGLE_MAP_TUTORIAL = "TOGGLE_MAP_TUTORIAL";
+export function toggleMapTutorial() {
+	return { type: TOGGLE_MAP_TUTORIAL };
 }

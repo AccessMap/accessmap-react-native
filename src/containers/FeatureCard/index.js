@@ -29,7 +29,6 @@ export default function FeatureCard(props) {
   var openHours;
   if (info && info.opening_hours) {
     openHours = parseOpenHours(info.opening_hours);
-    console.log(info);
   }
 
   const InfoText = (props) => {

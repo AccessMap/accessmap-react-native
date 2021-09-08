@@ -27,6 +27,7 @@ import {
 	TRACK_USER_ACTIONS,
 	UNTRACK_USER_ACTIONS,
 	TOGGLE_MOBILITY_PROFILE,
+	TOGGLE_MAP_TUTORIAL,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -75,6 +76,7 @@ const defaultState = {
 	route: null,
 	usingMetricSystem: false, // meters vs miles
 	trackUserActions: false,
+	showingMapTutorial: false,
 }
 
 // Define the states 
@@ -161,6 +163,8 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, trackUserActions: true };
 		case UNTRACK_USER_ACTIONS:
 			return {...state, trackUserActions: false };
+		case TOGGLE_MAP_TUTORIAL:
+			return {...state, showingMapTutorial: !state.showingMapTutorial};
 		default:
 			return state;
 	}

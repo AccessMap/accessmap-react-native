@@ -120,8 +120,6 @@
   "NO_INTERNET": "Please check your connection to the internet.",
   "NO_ROUTE": "Failed to retrieve route data.",
   "NO_LOCATION": "Failed to retrieve location data",
-
-
   "MAP_CAPTION_1": "Search bar located at the top of the app. Gray text inside the bar reads: Enter Address",
   "MAP_HEAD_1": "Find Directions",
   "MAP_TUT_1": "Set a route start or destination by tapping on the map or entering a location in the Search Bar.",
@@ -131,7 +129,7 @@
   "MAP_HEAD_3": "Mobility Profile",
   "MAP_TUT_3" : "Customize your travel by selecting the mode of transportation that best fits you. As an example, the Custom Profile is currently selected.",
   "MAP_CAPTION_4": "A gray pencil icon button next to the Mobility Mode buttons.",
-  "MAP_TUT_4": "While in the Custom Profile setting, tap on the pencil icon to adjust route characteristics such as sidewalk steepness.",
+  "MAP_TUT_4": "While in the Custom Profile setting, tap on this icon to adjust route characteristics such as sidewalk steepness.",
   "MAP_CAPTION_5": "Three circular buttons on the bottom right of the map. The top one has a target symbol, the middle has a Plus icon, the bottom has a minus icon.",
   "MAP_HEAD_5": "Adjusting the Map",
   "MAP_TUT_5": "The three buttons on the right control your view of the map. The top one centers your location, the middle zooms in, and the bottom zooms out.",

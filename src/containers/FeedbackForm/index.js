@@ -16,7 +16,7 @@ const TWO_CR = 1;
 class FeedbackForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props.info);
+    // console.log(props.info);
 
     this.state = {
       swNotPresent: false,
