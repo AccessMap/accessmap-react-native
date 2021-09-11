@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Views, Colors } from "../../styles";
+import { Views, Colors, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
+import { Button } from "react-native-elements";
+import CustomIcon from "../../components/Icon";
 import { Card } from "react-native-elements";
 import { Icon } from "react-native-elements";
+
 import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
 import GeocodeBar from "../../components/GeocodeBar";
@@ -18,6 +21,7 @@ import {
 import MobilityButtonGroup from "./mobility-buttons";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
+import { primaryColor } from "../../styles/colors";
 
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
@@ -160,14 +164,34 @@ export default function OmniCard(props) {
 
   // Rendering the entire card and bottom row
   return (
-    <Card containerStyle={Views.omnicard}>
-      {
-        <View>
-          {topRow}
-          {middleRow}
-          {bottomRow}
-        </View>
-      }
-    </Card>
+    <View
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        margin: 0,
+        flexDirection: "column",
+      }}
+    >
+      <Card containerStyle={Views.omnicard}>
+        {
+          <View>
+            {topRow}
+            {middleRow}
+            {bottomRow}
+          </View>
+        }
+      </Card>
+
+      <Button
+        containerStyle={[Buttons.whiteButton, 
+          {width: 50, alignSelf: "flex-end", marginTop: 10}]}
+        accessibilityLabel={t("INFORMATION")}
+        buttonStyle={{ backgroundColor: "white" }}
+        icon={<CustomIcon name="information" size={32} color={primaryColor} />}
+        onPress={() => props.navigation.push(t("TUTORIAL"))}
+      />
+    </View>
   );
 }

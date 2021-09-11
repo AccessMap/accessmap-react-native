@@ -1,4 +1,11 @@
-import { AccessibilityInfo, Alert } from "react-native";
+import { 
+	// AccessibilityInfo, 
+	Alert } from "react-native";
+
+export const MAP_LOADING = "LOADING";
+export function mapLoading() {
+	return { type: MAP_LOADING };
+}
 
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
@@ -117,9 +124,9 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
-	console.log("fetching route");
-	return (dispatch) => {
+	return (dispatch) => {		
 		if (origin && destination) {
+			dispatch(mapLoading());
 			const data = {
 				lon1: origin[0],
 				lat1: origin[1],
@@ -136,12 +143,14 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 				.then(response => response.json())
 				.then(json => {
 					dispatch(receiveRoute(json));
+					dispatch(mapLoaded());
 				})
 				.catch((error) => {
 					console.log(error);
+					dispatch(mapLoaded());
 					Alert.alert(
 						"Failed to retrieve route data",
-						"Please check your connection to the internet.",
+						{error},
 						[
 						  { text: "OK" }
 						]

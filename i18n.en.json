@@ -137,7 +137,7 @@
   "MAP_TUT_2": "Alternatively, tap on this grey icon to manually input a start and destination.",
   "MAP_CAPTION_3": "Mobility buttons located under the search bar in order: Custom, Wheelchair, Powered, and Cane.", 
   "MAP_HEAD_3": "Mobility Profile",
-  "MAP_TUT_3" : "Customize your travel by selecting the mode of transportation that best fits you. As an example, the Custom Profile is currently selected.",
+  "MAP_TUT_3" : "Customize your travel by selecting the mode of transportation that best fits you.",
   "MAP_CAPTION_4": "A gray icon button next to the Mobility Mode buttons.",
   "MAP_TUT_4": "While in the Custom Profile setting, tap on this icon to adjust route characteristics such as sidewalk steepness.",
   "MAP_CAPTION_5": "Three circular buttons on the bottom right of the map. The top one has a target symbol, the middle has a Plus icon, the bottom has a minus icon.",

@@ -125,8 +125,8 @@ export default function MapPage(props) {
               )}
               <Zooms navigation={props.navigation} />
             </View>
-
-            {isLoading && <LoadingScreen />}
+            
+            {isLoading && <LoadingScreen isLoading={isLoading}/>}
 
             {showingMapTutorial ? (
               <ToolTip

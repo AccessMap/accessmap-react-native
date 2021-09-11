@@ -1,6 +1,7 @@
 // import { combineReducers, createStore } from 'redux';
 import { AccessibilityInfo, NativeModules, Platform } from 'react-native';
 import {
+	MAP_LOADING,
 	MAP_LOADED,
 	ZOOM_IN,
 	ZOOM_OUT,
@@ -84,6 +85,8 @@ const defaultState = {
 // Define the states 
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
+		case MAP_LOADING:
+			return {...state, isLoading: true};
 		case MAP_LOADED:
 			AccessibilityInfo.announceForAccessibility("Map successfully loaded.");
 			return {...state, isLoading: false};

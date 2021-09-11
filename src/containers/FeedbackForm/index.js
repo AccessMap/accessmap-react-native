@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, NativeModules, ScrollView } from "react-native";
+import { Text, View, NativeModules, ScrollView, Platform } from "react-native";
 import { Button, CheckBox } from "react-native-elements";
 import { withTranslation } from "react-i18next";
 import { Colors, Fonts } from "../../styles";
@@ -217,21 +217,23 @@ class FeedbackForm extends Component {
               data += !swNotPresent + "\t";
               data += !swNotPaved + "\t";
               data += !swSub3Ft;
-              Rakam.trackEvent("SUBMIT_FORM", [
-                "footway",
-                "sidewalk",
-                "description",
-                this.props.info.description,
-              ]);
-              SheetsManager.sendData(
-                accountId,
-                accountName,
-                key,
-                keyId,
-                spreadsheetId,
-                "Sidewalks",
-                data
-              );
+              if (Platform.OS === "android") {
+                Rakam.trackEvent("SUBMIT_FORM", [
+                  "footway",
+                  "sidewalk",
+                  "description",
+                  this.props.info.description,
+                ]);
+                SheetsManager.sendData(
+                  accountId,
+                  accountName,
+                  key,
+                  keyId,
+                  spreadsheetId,
+                  "Sidewalks",
+                  data
+                );
+              }
             } else if (this.props.info.footway == "crossing") {
               data += !cxUnsafe + "\t";
               data +=
@@ -240,21 +242,24 @@ class FeedbackForm extends Component {
               data += cxPedSignal + "\t";
               data += cxAuditorySignal + "\t";
               data += cxTactileSignal;
-              Rakam.trackEvent("SUBMIT_FORM", [
-                "footway",
-                "crossing",
-                "description",
-                this.props.info.description,
-              ]);
-              SheetsManager.sendData(
-                accountId,
-                accountName,
-                key,
-                keyId,
-                spreadsheetId,
-                "Crossings",
-                data
-              );
+
+              if (Platform.OS === "android") {
+                Rakam.trackEvent("SUBMIT_FORM", [
+                  "footway",
+                  "crossing",
+                  "description",
+                  this.props.info.description,
+                ]);
+                SheetsManager.sendData(
+                  accountId,
+                  accountName,
+                  key,
+                  keyId,
+                  spreadsheetId,
+                  "Crossings",
+                  data
+                );
+              }
             }
             this.exit();
           }}

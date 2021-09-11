@@ -13,10 +13,15 @@ import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { mapLoaded } from "../actions";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
   const Stack = createStackNavigator();
+
+  let isLoading = useSelector((state: RootState) => state.isLoading);
+  const dispatch = useDispatch();
 
   const backButton = (navigation) => (
     <Button
@@ -26,6 +31,7 @@ function MainStackNavigator() {
       onPress={() => {
         navigation.goBack();
         Keyboard.dismiss();
+        if (isLoading) { dispatch(mapLoaded()); }
         AccessibilityInfo.announceForAccessibility("Navigated back one page");
       }}
     />
