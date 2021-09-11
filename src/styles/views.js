@@ -14,7 +14,7 @@ export const omnicard = {
   width: "100%",
   flexDirection: "column",
   margin: 0,
-  padding: 10,
+  paddingTop: 10, paddingHorizontal: 10, paddingBottom: 0,
   zIndex: 0,
 };
 

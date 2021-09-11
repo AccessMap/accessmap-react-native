@@ -124,6 +124,8 @@
     "NO_INTERNET": "Por favor, compruebe su conexión a Internet.",
     "NO_ROUTE": "No se pudieron recuperar los datos de ruta.",
     "NO_LOCATION": "No se pudieron recuperar los datos de ubicación",
+    "MAP_HEAD_0": "Explore el mapa",
+    "MAP_TUT_0": "El mapa muestra aceras de diferentes colores que representan su inclinación en relación con su perfil de movilidad; el rojo es el más empinado.",
     "MAP_CAPTION_1": "Barra de búsqueda ubicada en la parte superior de la aplicación. El texto gris dentro de la barra dice: Ingrese dirección",
     "MAP_HEAD_1": "Buscar direcciones",
     "MAP_TUT_1": "Establezca un inicio o destino de ruta pulsando en el mapa o introduciendo una ubicación en la barra de búsqueda.",

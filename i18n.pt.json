@@ -124,6 +124,8 @@
     "NO_ROUTE": "Falhou em recuperar os dados da rota.",
     "NO_LOCATION": "Falhou na recuperação de dados de localização",
     "MAP_CAPTION_1": "Barra de pesquisa localizada no topo da aplicação. Texto cinzento dentro da barra diz: Inserir Endereço",
+    "MAP_HEAD_0": "Explore o mapa",
+    "MAP_TUT_0": "O mapa mostra calçadas de cores variadas, representando sua inclinação em relação ao seu perfil de mobilidade; o vermelho é o mais íngreme.",
     "MAP_HEAD_1": "Encontrar Direções",
     "MAP_TUT_1": "Desabar um início ou destino de rota tocando no mapa ou entrando num local na Barra de Busca.",
     "MAP_CAPTION_2": "Um botão cinzento com um símbolo de entrada à direita da barra de pesquisa.",

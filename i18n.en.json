@@ -131,6 +131,8 @@
   "NO_ROUTE": "Failed to retrieve route data.",
   "NO_LOCATION": "Failed to retrieve location data",
   "MAP_CAPTION_1": "Search bar located at the top of the app. Gray text inside the bar reads: Enter Address",
+  "MAP_HEAD_0": "Explore the Map",
+  "MAP_TUT_0": "The map shows sidewalks of varying colors representing their steepness relative to your mobility profile; red is the steepest.",
   "MAP_HEAD_1": "Find Directions",
   "MAP_TUT_1": "Set a route start or destination by tapping on the map or entering a location in the Search Bar.",
   "MAP_CAPTION_2": "A grey button with an enter symbol to the right of the search bar.",

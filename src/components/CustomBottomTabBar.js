@@ -40,13 +40,14 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
 
         return (
           <TouchableOpacity
+            key={label}
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[{ flex: 1, height: 80,
+            style={[{ flex: 1, height: 75,
                 backgroundColor: isFocused ? primaryColor: "white"}, 
                 Position.center]}
           >

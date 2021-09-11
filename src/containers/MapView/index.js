@@ -213,6 +213,8 @@ export default function MapView() {
     <MapboxGL.MapView
       logoEnabled={false}
       attributionEnabled={false}
+      compassViewPosition={3}
+      compassViewMargins={{x: 19, y: 190}}
       ref={map}
       style={Views.map}
       onPress={handleScreenPress}

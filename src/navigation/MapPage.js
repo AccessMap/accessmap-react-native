@@ -111,7 +111,8 @@ export default function MapPage(props) {
       <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "white" }}>
         <View style={Views.page}>
           <View style={Views.container}>
-            <View style={{ flex: 1 }}>
+
+            <View style={{ flex: 1}}>
               <View
                 importantForAccessibility={
                   route ? "no-hide-descendants" : "yes"
@@ -132,16 +133,14 @@ export default function MapPage(props) {
               <ToolTip
                 cardDescription={t("MAP_INTERFACE")}
                 numStep={numStep}
-                maxStep={5}
+                maxStep={6}
                 toolTipPositionLeft={
                   mapTutorialContent[numStep].toolTipPositionLeft
                 }
                 toolTipPositionTop={
                   mapTutorialContent[numStep].toolTipPositionTop
                 }
-                arrowPositionLeft={
-                  mapTutorialContent[numStep].arrowPositionLefts
-                }
+                arrowPositionLeft={mapTutorialContent[numStep].arrowPositionLeft}
                 arrowPositionTop={mapTutorialContent[numStep].arrowPositionTop}
                 heading={t(mapTutorialContent[numStep].heading)}
                 paragraph={t(mapTutorialContent[numStep].paragraph)}
@@ -162,9 +161,7 @@ export default function MapPage(props) {
                 toolTipPositionTop={
                   routeTutorialContent[numStep].toolTipPositionTop
                 }
-                arrowPositionLeft={
-                  routeTutorialContent[numStep].arrowPositionLeft
-                }
+                arrowPositionLeft={routeTutorialContent[numStep].arrowPositionLeft}
                 arrowPositionTop={routeTutorialContent[numStep].arrowPositionTop}
                 heading={t(routeTutorialContent[numStep].heading)}
                 paragraph={t(routeTutorialContent[numStep].paragraph)}

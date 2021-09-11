@@ -1,5 +1,14 @@
 export const mapTutorialContent = [
   {
+    // Introducing the map itself
+    toolTipPositionLeft: "15%",
+    toolTipPositionTop: "30%",
+    arrowPositionLeft: 100,
+    arrowPositionTop: 30,
+    heading: "MAP_HEAD_0",
+    paragraph: "MAP_TUT_0",
+  },
+  {
     // Choose a destination with Search Bar
     toolTipPositionLeft: "15%",
     toolTipPositionTop: "10%",

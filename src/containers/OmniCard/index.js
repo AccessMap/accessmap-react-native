@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Views, Colors, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
@@ -22,11 +22,23 @@ import MobilityButtonGroup from "./mobility-buttons";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
 import { primaryColor } from "../../styles/colors";
+import Animated, { EasingNode } from "react-native-reanimated";
 
 export default function OmniCard(props) {
+  const useComponentSize = () => {
+    const [size, setSize] = useState(null);
+    const onLayout = useCallback(event => {
+      const { width, height } = event.nativeEvent.layout;
+      setSize({ width, height });
+    }, []);
+    return [size, onLayout];
+  };
+
   const { t, i18n } = useTranslation();
+  const [size, onLayout] = useComponentSize(); // current size width/height
   const [findDirections, setFindDirections] = useState(false);
 
+  //---------------------------------------------------------------------------
   // let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
   let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
   let origin = useSelector((state: RootState) => state.origin);
@@ -36,6 +48,21 @@ export default function OmniCard(props) {
     (state: RootState) => state.destinationText
   );
 
+  //---------------------------------------------------------------------------
+  // Handles minimizing the card
+  const [showingCard, toggleCard] = useState(true);
+  const translation = useRef(new Animated.Value(0)).current;
+  const slide = () => {
+    Animated.timing(translation, {
+      toValue: showingCard ? -(size.height / 1.9) : 0,
+      useNativeDriver: true,
+      duration: 500,
+      easing: EasingNode.linear,
+    }).start();
+    toggleCard(!showingCard);
+  };
+
+  //---------------------------------------------------------------------------
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {
     dispatch(cancelRoute());
@@ -66,6 +93,19 @@ export default function OmniCard(props) {
         onPress={() => dispatch(toggleMobilityProfile())}
       />
     </View>
+  );
+  
+  const minimizerRow = (
+    <Icon
+      size={40}
+      containerStyle={{paddingHorizontal: 20, paddingTop: 8,}}
+      color={Colors.primaryColor}
+      name={showingCard ? 
+        "keyboard-arrow-up" : "keyboard-arrow-down"}
+      type="material"
+      accessibilityLabel="Minimize top card"
+      onPress={slide}
+    />
   );
 
   // User is in the middle of choosing a route start and end
@@ -162,9 +202,11 @@ export default function OmniCard(props) {
     );
   }
 
+  //---------------------------------------------------------------------------
   // Rendering the entire card and bottom row
   return (
-    <View
+    <Animated.View 
+      onLayout={onLayout}
       style={{
         position: "absolute",
         left: 0,
@@ -172,6 +214,7 @@ export default function OmniCard(props) {
         top: 0,
         margin: 0,
         flexDirection: "column",
+        transform: [{ translateY: translation }],
       }}
     >
       <Card containerStyle={Views.omnicard}>
@@ -180,6 +223,7 @@ export default function OmniCard(props) {
             {topRow}
             {middleRow}
             {bottomRow}
+            {minimizerRow}
           </View>
         }
       </Card>
@@ -192,6 +236,6 @@ export default function OmniCard(props) {
         icon={<CustomIcon name="information" size={32} color={primaryColor} />}
         onPress={() => props.navigation.push(t("TUTORIAL"))}
       />
-    </View>
+    </Animated.View>
   );
 }
