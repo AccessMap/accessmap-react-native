@@ -11,6 +11,7 @@ import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
 import { bottomTabHeight } from "./constants";
+import CustomBottomTabBar, {} from "./components/CustomBottomTabBar";
 
 LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -34,7 +35,10 @@ function App() {
   const { t, i18n } = useTranslation();
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName={t("HOME")} screenOptions={{
+      <Tab.Navigator 
+      tabBar={props => <CustomBottomTabBar {...props}/>}
+      initialRouteName={t("HOME")} 
+      screenOptions={{
         tabBarActiveTintColor: Colors.primaryColor,
         tabBarInactiveTintColor: Colors.grey,
         tabBarLabelStyle: Fonts.p,

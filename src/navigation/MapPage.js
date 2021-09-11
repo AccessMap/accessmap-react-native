@@ -108,7 +108,7 @@ export default function MapPage(props) {
   AccessibilityInfo.announceForAccessibility("Showing Map View.");
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "white" }}>
         <View style={Views.page}>
           <View style={Views.container}>
             <View style={{ flex: 1 }}>
@@ -140,7 +140,7 @@ export default function MapPage(props) {
                   mapTutorialContent[numStep].toolTipPositionTop
                 }
                 arrowPositionLeft={
-                  mapTutorialContent[numStep].arrowPositionLeft
+                  mapTutorialContent[numStep].arrowPositionLefts
                 }
                 arrowPositionTop={mapTutorialContent[numStep].arrowPositionTop}
                 heading={t(mapTutorialContent[numStep].heading)}
