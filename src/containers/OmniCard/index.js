@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Views, Colors, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
 import CustomIcon from "../../components/Icon";
-import { Card } from "react-native-elements";
-import { Icon } from "react-native-elements";
+import { Card, Icon } from "react-native-elements";
 
 import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
@@ -53,6 +52,9 @@ export default function OmniCard(props) {
   const [showingCard, toggleCard] = useState(true);
   const translation = useRef(new Animated.Value(0)).current;
   const slide = () => {
+    AccessibilityInfo.announceForAccessibility(showingCard ? 
+      "Top card has been minimized." : 
+      "Top card has been maximized.");
     Animated.timing(translation, {
       toValue: showingCard ? -(size.height / 1.9) : 0,
       useNativeDriver: true,
