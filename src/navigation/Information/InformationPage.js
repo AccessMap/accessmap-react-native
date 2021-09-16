@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, AccessibilityInfo, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
-import { toggleMapTutorial, toggleRouteTutorial } from "../../actions";
+import { cancelRoute, closeDirections, closeTripInfo, toggleMapTutorial, toggleRouteTutorial } from "../../actions";
 import MenuButton from "../../components/MenuButton";
 import { Views } from "../../styles";
 
@@ -23,6 +23,9 @@ export default function InformationPage({ route, navigation }) {
               } else {
                 dispatch(toggleRouteTutorial());
               }
+              dispatch(closeTripInfo());
+              dispatch(closeDirections());
+              dispatch(cancelRoute());
               AccessibilityInfo.announceForAccessibility(
                 "Showing " + item.key + " Tutorial."
               );
