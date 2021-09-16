@@ -14,6 +14,6 @@ export const openLink = async (url) => {
   if (supported) {
     await Linking.openURL(url);
   } else {
-    console.log("cannot open url");
+    console.log("Error: cannot open url");
   }
 };

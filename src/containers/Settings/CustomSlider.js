@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Slider } from "react-native-elements";
 
-import { setCustomDownhill, setCustomUphill, setMobilityMode } from "../../actions";
+import { setCustomDownhill, setCustomUphill, setMobilityMode, showDownhill, showUphill } from "../../actions";
 import { Colors, Fonts } from "../../styles";
 import {
   MOBILITY_MODE_CANE,
@@ -70,6 +70,7 @@ export default function CustomSlider(props) {
               ? setCustomUphill(nextIncline)
               : setCustomDownhill(nextIncline)
           );
+          dispatch(props.uphill ? showUphill() : showDownhill());
         }}
       >
         <Text style={[Fonts.p]}>
@@ -84,6 +85,7 @@ export default function CustomSlider(props) {
               ? setCustomUphill(Math.round(value * 10) / 10)
               : setCustomDownhill(Math.round(value * 10) / 10)
           );
+          dispatch(props.uphill ? showUphill() : showDownhill());
           dispatch(setMobilityMode(MOBILITY_MODE_CUSTOM));
         }}
         minimumValue={minValue}

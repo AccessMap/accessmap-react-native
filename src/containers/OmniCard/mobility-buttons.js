@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 
 const MobilityButtonRender = props => {
 	const _onPress = () => {
-		AccessibilityInfo.announceForAccessibility("Currently in " + props.label + " mobility mode");
+		AccessibilityInfo.announceForAccessibility("Switched to " + props.label + " mobility mode");
 		props.setMobilityMode(props.mode);
 	}
 	const selected = props.mode == props.mobilityMode;
@@ -30,13 +30,15 @@ const MobilityButtonRender = props => {
 	if (shortLabel && shortLabel.length > 6) {
 		shortLabel = shortLabel.substring(0,5) + "...";
 	}
+	var altText = (props.label != "Custom" ? "Preset " : "") + 
+		" mobility mode: " + props.label + ". ";
 
 	return (
 		<Button
 			containerStyle={selected ? {marginRight: 10} : 
 				{marginRight: 10, borderRadius: 200}}
 			raised={!selected}
-			accessibilityLabel={"Mobility Mode: " + props.label}
+			accessibilityLabel={selected ? altText + " Already in this mode." : altText}
 			buttonStyle={[Buttons.button, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}

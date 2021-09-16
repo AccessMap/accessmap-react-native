@@ -16,12 +16,13 @@ import { Fonts } from "../styles";
 export default function MobilityProfile(props) {
   // close: function that runs when the close button is clicked
   // cardVisible [boolean]
+  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
   let maxIncline = useSelector((state: RootState) => {
     return getInclineLimit(
         state.customUphill,
         state.customDownhill,
         state.mobilityMode
-    )[0];
+    )[showingUphillColors ? 0 : 1];
   });
   const { t, i18n } = useTranslation();
   const content = (

@@ -2,11 +2,16 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Colors } from "../../styles";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const SpeedLegend = (props) => {
-  // Props: Max uphill incline
+  // Props: Max uphill/downhill incline
+  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
   const maxIncline = Math.round(props.maxIncline);
-  const colorMap = Colors.uphillColorMap(maxIncline, maxIncline, maxIncline);
+  const colorMap = (showingUphillColors ? 
+    Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
+    Colors.downhillColorMap(maxIncline, maxIncline, maxIncline));
+  
   const { t, i18n } = useTranslation();
 
   // Represents an incline percentage beyond the maximum on Speed Legend bottom bar

@@ -30,7 +30,6 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
   ];
 
   if (Platform.OS === 'ios') {
-    // console.log(inclineStops);
     return {
       lineCap: "round",
       lineWidth: widthRules,
@@ -126,12 +125,9 @@ export const crossing = {
     "interpolate",
     ["exponential", 1.5],
     ["zoom"],
-    10,
-    0.07,
-    16,
-    3.5,
-    20,
-    20,
+    10, 0.3, 
+    16, 6.0,
+    20, 30, 
   ],
 };
 

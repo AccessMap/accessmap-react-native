@@ -10,7 +10,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
-import { bottomTabHeight } from "./constants";
 import CustomBottomTabBar, {} from "./components/CustomBottomTabBar";
 
 LogBox.ignoreAllLogs(true); // hides the yellow warning boxes

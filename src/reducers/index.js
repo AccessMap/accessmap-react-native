@@ -30,6 +30,8 @@ import {
 	TOGGLE_MOBILITY_PROFILE,
 	TOGGLE_MAP_TUTORIAL,
 	TOGGLE_ROUTE_TUTORIAL,
+	SHOWING_UPHILL_COLORS,
+	SHOWING_DOWNHILL_COLORS,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
@@ -72,6 +74,7 @@ const defaultState = {
 	customUphill: 8,
 	customDownhill: 10,
 	avoidRaisedCurbs: true,
+	showingUphillColors: true, // either uphill or downhill colors on map
 	viewingTripInfo: false,
 	viewingDirections: false,
 	viewingMobilityProfile: false,
@@ -120,6 +123,10 @@ export default function mapApp(state = defaultState, action) {
 		case TOGGLE_BARRIERS:
 			logEvent(action.type, ["avoidRaisedCurbs", `${!state.avoidRaisedCurbs}`]);
 			return {...state, avoidRaisedCurbs: !state.avoidRaisedCurbs};
+		case SHOWING_UPHILL_COLORS:
+			return {...state, showingUphillColors: true};
+		case SHOWING_DOWNHILL_COLORS:
+			return {...state, showingUphillColors: false};
 		case SET_ORIGIN:
 			const originText = state.pinFeatures && state.pinFeatures.text ? state.pinFeatures.text : null;
 			logEvent(action.type, ["lat", `${state.pinFeatures.center[0]}`, "lon", `${state.pinFeatures.center[1]}`]);

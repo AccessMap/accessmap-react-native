@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { bottomTabHeight } from '../constants';
 import { Fonts, Position } from '../styles';
 import { primaryColor } from '../styles/colors';
 
@@ -47,7 +48,7 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[{ flex: 1, height: 75,
+            style={[{ flex: 1, height: bottomTabHeight,
                 backgroundColor: isFocused ? primaryColor: "white"}, 
                 Position.center]}
           >

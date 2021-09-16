@@ -1,6 +1,6 @@
 // The MapPage displays the map, top white card (Omnicard), and the bottom white cards.
 import React, { useEffect, useState } from "react";
-import { View, AccessibilityInfo, Alert, } from "react-native";
+import { View, AccessibilityInfo, Alert, Platform, StatusBar, } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeDirections,
@@ -104,11 +104,11 @@ export default function MapPage(props) {
       return null;
     }
   }
-
-  AccessibilityInfo.announceForAccessibility("Showing Map View.");
   return (
     <SafeAreaProvider>
-      <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "white" }}>
+      <SafeAreaView 
+        edges={["top"]}
+        style={{ flex: 1, backgroundColor: "white", }}>
         <View style={Views.page}>
           <View style={Views.container}>
 

@@ -2,29 +2,25 @@ import React from "react";
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import { MapStyles } from "../../styles";
-import { connect } from "react-redux";
-
+import { useSelector } from "react-redux";
 import getInclineLimit from "../../utils/get-incline-limit";
-import {
-  MOBILITY_MODE_WHEELCHAIR,
-  MOBILITY_MODE_POWERED,
-  MOBILITY_MODE_CANE,
-} from "../../constants";
 
-const LayerSidewalks = (props) => {
-  var incline = getInclineLimit(
-    props.customUphill,
-    props.customDownhill,
-    props.mobilityMode
-  );
-  var [maxUphill, maxDownhill] = incline;
+export default function LayerSidewalks(props) {
+  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let incline = useSelector((state: RootState) => {
+    return getInclineLimit(
+        state.customUphill,
+        state.customDownhill,
+        state.mobilityMode
+    )[showingUphillColors ? 0 : 1];
+  });
 
   const isSidewalkExpression = ["==", ["get", "footway"], "sidewalk"];
 
   const accessibleExpression = [
     "<=",
     ["abs", ["*", 100, ["get", "incline"]]],
-    maxUphill,
+    incline,
   ];
 
   const isAccessibleSidewalk = [
@@ -49,7 +45,7 @@ const LayerSidewalks = (props) => {
         sourceLayerID="transportation"
         filter={isAccessibleSidewalk}
         layerIndex={80}
-        style={MapStyles.sidewalks(maxUphill)}
+        style={MapStyles.sidewalks(incline)}
       />
       <MapboxGL.LineLayer
         id="sidewalk-outline"
@@ -71,13 +67,3 @@ const LayerSidewalks = (props) => {
     </React.Fragment>
   );
 };
-
-const mapStateToProps = (state) => {
-  return {
-    mobilityMode: state.mobilityMode,
-    customUphill: state.customUphill,
-    customDownhill: state.customDownhill,
-  };
-};
-
-export default connect(mapStateToProps, null)(LayerSidewalks);
