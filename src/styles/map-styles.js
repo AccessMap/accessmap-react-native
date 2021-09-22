@@ -1,16 +1,23 @@
 // Map Styles describe how the sidewalks, crossings, etc should be displayed.
 import { Platform } from "react-native";
+import { useSelector } from "react-redux";
 import { Colors } from "./index";
 const OUTLINE_WIDTH = 2;
 
 // Returns an object describing the style for a MapboxGL.LineLayer
 export const sidewalks = (incline) => { // ex incline: maxUphill
+  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  const maxIncline = Math.abs(incline);
+
   const nSamples = 15;
   const nSide = parseInt(nSamples / 2);
   const range = [...Array(nSamples).keys()].map((d) => (d - nSide) / nSide);
 
-  const colorMap = Colors.uphillColorMap(incline, incline, incline);
-  const inclineSamples = range.map((d) => d * incline);
+  const colorMap = (showingUphillColors ? 
+    Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
+    Colors.downhillColorMap(maxIncline, maxIncline, maxIncline));
+
+  const inclineSamples = range.map((d) => d * maxIncline);
   const inclineStops = [];
   inclineSamples.map((d) => {
     const color = colorMap(d);
@@ -29,34 +36,33 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
     20, 24,
   ];
 
-  if (Platform.OS === 'ios') {
-    return {
-      lineCap: "round",
-      lineWidth: widthRules,
-      lineColor: ["interpolate", 
-        ["exponential", 1.5],
-        ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
-      ],
-    };
-  }
-
-  return { 
+  const parameters = {
     lineCap: "round",
     lineWidth: widthRules,
-    lineColor: [
-      "case",
-      [">", ["to-number", ["get", "incline"]], incline],
-      "#ff0000",
-      ["<", ["to-number", ["get", "incline"]], -incline],
-      "#ff0000",
-      [
-        "interpolate",
-        ["exponential", 1.5],
-        ["abs", ["*", 100, ["get", "incline"]]],
-        ...inclineStops,
-      ],
+    lineColor: ["interpolate", 
+      ["exponential", 1.5],
+      ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
     ],
   };
+
+  console.log(parameters);
+  // {"lineCap": "round", "lineColor": ["interpolate", ["exponential", 1.5], ["abs", [Array]], -14, "#ff774d", -12, "#ff8a52", -10, "#ffa258", -8, "#ffbd61", -6, "#ffdf6c", -4, "#f7ff76", -2, "#ceff74", 0, "#92ff72", 2, "#ceff74", 4, "#f7ff76", 6, "#ffdf6c", 8, "#ffbd61", 10, "#ffa258", 12, "#ff8a52", 14, "#ff774d"], "lineWidth": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.1, 16, 5, 20, 24]}
+
+  if (Platform.OS === 'ios') { return parameters; }
+  parameters.lineColor = [
+    "case",
+    [">", ["to-number", ["get", "incline"]], maxIncline],
+    "#ff0000",
+    ["<", ["to-number", ["get", "incline"]], -maxIncline],
+    "#ff0000",
+    [
+      "interpolate",
+      ["exponential", 1.5],
+      ["abs", ["*", 100, ["get", "incline"]]],
+      ...inclineStops,
+    ],
+  ];
+  return parameters;
 };
 
 export const sidewalkPress = {

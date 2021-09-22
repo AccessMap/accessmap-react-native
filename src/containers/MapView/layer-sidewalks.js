@@ -14,13 +14,14 @@ export default function LayerSidewalks(props) {
         state.mobilityMode
     )[showingUphillColors ? 0 : 1];
   });
+  const maxIncline = Math.abs(incline);
 
   const isSidewalkExpression = ["==", ["get", "footway"], "sidewalk"];
 
   const accessibleExpression = [
     "<=",
     ["abs", ["*", 100, ["get", "incline"]]],
-    incline,
+    maxIncline,
   ];
 
   const isAccessibleSidewalk = [

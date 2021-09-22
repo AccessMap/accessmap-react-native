@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const SpeedLegend = (props) => {
   // Props: Max uphill/downhill incline
   let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
-  const maxIncline = Math.round(props.maxIncline);
+  const maxIncline = Math.abs(Math.round(props.maxIncline));
   const colorMap = (showingUphillColors ? 
     Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
     Colors.downhillColorMap(maxIncline, maxIncline, maxIncline));
