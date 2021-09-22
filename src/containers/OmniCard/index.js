@@ -105,7 +105,7 @@ export default function OmniCard(props) {
       name={showingCard ? 
         "keyboard-arrow-up" : "keyboard-arrow-down"}
       type="material"
-      accessibilityLabel="Minimize top card"
+      accessibilityLabel={(showingCard ? "Minimize top card" : "Maximize top card")}
       onPress={slide}
     />
   );
@@ -236,7 +236,7 @@ export default function OmniCard(props) {
         accessibilityLabel={t("INFORMATION")}
         buttonStyle={{ backgroundColor: "white" }}
         icon={<CustomIcon name="information" size={32} color={primaryColor} />}
-        onPress={() => props.navigation.push(t("TUTORIAL"))}
+        onPress={() => props.navigation.push(t("INFORMATION"))}
       />
     </Animated.View>
   );

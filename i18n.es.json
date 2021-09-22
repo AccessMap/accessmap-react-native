@@ -170,5 +170,6 @@
     "USER_TRACKING_TITLE": "Consentimiento de seguimiento del usuario",
     "USER_TRACKING_TEXT": "Activar 'rastrear datos de usuario' nos permitirá recopilar datos sobre las acciones del usuario, como la frecuencia de los botones presionados en el mapa. Esto nos permite comprender mejor cómo interactúan los usuarios con AccessMap. Ninguna información personal o de identificación será almacenada o vinculada a sus acciones. Al hacer clic en Aceptar, usted acepta esta recopilación de datos.",
     "AGREE_TEXT": "De acuerdo",
-    "DISAGREE_TEXT": "Discrepar"
+    "DISAGREE_TEXT": "Discrepar",
+    "SIDEWALK_COLORS": "Colores de acera"
 }

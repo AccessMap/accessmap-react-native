@@ -71,7 +71,7 @@ function MainStackNavigator() {
   // List of tutorials screen
   const tutorial = (
     <Stack.Screen
-      name={t("TUTORIAL")}
+      name={t("INFORMATION")}
       component={InformationPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),

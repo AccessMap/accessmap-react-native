@@ -1,8 +1,38 @@
 // Map Styles describe how the sidewalks, crossings, etc should be displayed.
-import { Platform } from "react-native";
+import React from "react";
+import { Platform, View } from "react-native";
 import { useSelector } from "react-redux";
 import { Colors } from "./index";
+
 const OUTLINE_WIDTH = 2;
+
+// Represents an incline percentage beyond the maximum on Speed Legend bottom bar
+// and Map Legend
+export function renderRedDashedLine() {
+  return (
+    <View
+      style={{
+        height: 0,
+        borderRadius: 1,
+        borderWidth: 1,
+        borderColor: "red",
+        borderStyle: "dashed",
+        zIndex: 0,
+      }}
+    >
+      <View
+        style={{
+          left: -1,
+          bottom: 0,
+          width: "101%",
+          height: 1,
+          backgroundColor: "white",
+          zIndex: 1,
+        }}
+      />
+    </View>
+  );
+}
 
 // Returns an object describing the style for a MapboxGL.LineLayer
 export const sidewalks = (incline) => { // ex incline: maxUphill
@@ -44,9 +74,6 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
       ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
     ],
   };
-
-  console.log(parameters);
-  // {"lineCap": "round", "lineColor": ["interpolate", ["exponential", 1.5], ["abs", [Array]], -14, "#ff774d", -12, "#ff8a52", -10, "#ffa258", -8, "#ffbd61", -6, "#ffdf6c", -4, "#f7ff76", -2, "#ceff74", 0, "#92ff72", 2, "#ceff74", 4, "#f7ff76", 6, "#ffdf6c", 8, "#ffbd61", 10, "#ffa258", 12, "#ff8a52", 14, "#ff774d"], "lineWidth": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.1, 16, 5, 20, 24]}
 
   if (Platform.OS === 'ios') { return parameters; }
   parameters.lineColor = [
