@@ -2,8 +2,10 @@
 // Custom tooltip used in tutorial onboarding screens
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text, Button, } from "react-native";
+import { View, Text } from "react-native";
+import { Button } from "react-native-elements";
 import {Fonts} from "../../styles";
+import { primaryColor, primaryColor2, primaryLight } from "../../styles/colors";
 
 export default function ToolTip({
     cardDescription, // [string] generally describes the card (ex: Route Planning)
@@ -16,7 +18,7 @@ export default function ToolTip({
     heading, // [string] bold heading text
     paragraph, // [string] smaller detail text
     goToNextStep, // [function] executed when pressing the 'Next'/'End' Button
-    navigation, // [navigation] ability to close the current screen
+    onEnd, // [function] what to do when ending the tooltip
   }) {
 
   // TODO: see accesssibility.md
@@ -83,21 +85,27 @@ export default function ToolTip({
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={{ width: 100, opacity: (numStep > 0) ? 1.0 : 0.0 }}>
+            <View style={{ width: 100 }}>
               <Button
-                disabled={(numStep == 0)}
-                title={t("BACK")}
-                color='#0F47A1'
-                onPress={() => goToNextStep(numStep - 1)}
+                buttonStyle={{backgroundColor: numStep == 0 ? primaryColor2 : primaryColor}}
+                title={numStep == 0 ? t("END_TOUR") : t("BACK")}
+                onPress={() => {
+                  if (numStep == 0) {
+                    onEnd();
+                  } else {
+                    goToNextStep(numStep - 1);
+                  }
+                }}
               />
             </View>
             <View style={{ width: 100}}>
               <Button
+                raised={true}
+                buttonStyle={{backgroundColor: primaryLight}}
                 title={(numStep < maxStep - 1) ? t("NEXT_TEXT") : t("END_TOUR") }
-                color='#0164FF'
                 onPress={() => { 
-                  if (numStep >= maxStep - 1) {
-                    navigation.goBack();
+                  if (numStep >= maxStep - 1) { // the last step
+                    onEnd(); // turn off the map tutorial
                   } else {
                     goToNextStep(numStep + 1);
                   }
@@ -105,6 +113,15 @@ export default function ToolTip({
               />
             </View>
           </View>
+
+          { numStep < maxStep - 1 && numStep > 0 ?
+          <Button
+            raised={true}
+            buttonStyle={{backgroundColor: primaryColor2}}
+            containerStyle={{marginTop: 10}}
+            title={t("END_TOUR")}
+            onPress={onEnd}
+          /> : null}
         </View>
       </View>
     </View>

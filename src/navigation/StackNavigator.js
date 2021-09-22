@@ -8,19 +8,20 @@ import MapPage from "./MapPage";
 import SearchPage from "./SearchPage";
 import Crowdsourcing from "./Crowdsourcing";
 
-import AboutPage from "./Information/AboutPage";
-import SettingsPage from "./SettingsPage";
 import InformationPage from "./Information/InformationPage";
-import MapInterfaceTutorialPage from "./Information/MapInterfaceTutorialPage";
 import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
-import SettingsTutorialPage from "./Information/SettingsTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { mapLoaded } from "../actions";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
   const Stack = createStackNavigator();
+
+  let isLoading = useSelector((state: RootState) => state.isLoading);
+  const dispatch = useDispatch();
 
   const backButton = (navigation) => (
     <Button
@@ -30,6 +31,7 @@ function MainStackNavigator() {
       onPress={() => {
         navigation.goBack();
         Keyboard.dismiss();
+        if (isLoading) { dispatch(mapLoaded()); }
         AccessibilityInfo.announceForAccessibility("Navigated back one page");
       }}
     />
@@ -42,25 +44,6 @@ function MainStackNavigator() {
       name="mappage"
       component={MapPage}
       options={{ headerShown: false }}
-    />
-  );
-
-  const about = (
-    <Stack.Screen
-      name={t("ABOUT")}
-      component={AboutPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const settings = (
-    <Stack.Screen
-      name={t("SETTINGS")}
-      component={SettingsPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
     />
   );
 
@@ -88,17 +71,8 @@ function MainStackNavigator() {
   // List of tutorials screen
   const tutorial = (
     <Stack.Screen
-      name="Information"
+      name={t("TUTORIAL")}
       component={InformationPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const mapTutorial = (
-    <Stack.Screen
-      name={t("MAP_INTERFACE")}
-      component={MapInterfaceTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -108,15 +82,6 @@ function MainStackNavigator() {
     <Stack.Screen
       name={t("ROUTE_PLANNING")}
       component={RoutePlanningTutorialPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const settingsTutorial = (
-    <Stack.Screen
-      name={t("SETTINGS_TUTORIAL")}
-      component={SettingsTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -133,6 +98,7 @@ function MainStackNavigator() {
         footway = footway.charAt(0).toUpperCase() + footway.slice(1);
         return {
           title: info.description != null ? info.description : footway,
+          headerLeft: () => backButton(navigation),
         };
       }}
     />
@@ -142,13 +108,8 @@ function MainStackNavigator() {
       {map}
       {search}
 
-      {about}
-      {settings}
-
       {tutorial}
-      {mapTutorial}
       {routeTutorial}
-      {settingsTutorial}
 
       {crowdSourcing}
     </Stack.Navigator>

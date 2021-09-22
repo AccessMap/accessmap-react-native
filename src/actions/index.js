@@ -1,15 +1,54 @@
-import { AccessibilityInfo, Alert } from "react-native";
+import { Alert } from "react-native";
+
+//---------------------------Loading-related actions---------------------------//
+export const MAP_LOADING = "LOADING";
+export function mapLoading() {
+	return { type: MAP_LOADING };
+}
 
 export const MAP_LOADED = "MAP_LOADED";
 export function mapLoaded() {
 	return { type: MAP_LOADED };
 }
 
+//---------------------------Mobility Mode Settings---------------------------//
+export const TOGGLE_MOBILITY_PROFILE = "TOGGLE_MOBILITY_PROFILE";
+export function toggleMobilityProfile() {
+	return { type: TOGGLE_MOBILITY_PROFILE };
+}
+
+export const SET_MOBILITY_MODE = "SET_MOBILITY_MODE";
+export function setMobilityMode(mode) {
+	return { type: SET_MOBILITY_MODE, mode };
+}
+
+export const SET_CUSTOM_UPHILL = "SET_CUSTOM_UPHILL";
+export function setCustomUphill(incline) {
+	return { type: SET_CUSTOM_UPHILL, incline };
+}
+export const SET_CUSTOM_DOWNHILL = "SET_CUSTOM_DOWNHILL";
+export function setCustomDownhill(incline) {
+	return { type: SET_CUSTOM_DOWNHILL, incline };
+}
+export const SHOWING_UPHILL_COLORS = "SHOWING_UPHILL_COLORS";
+export function showUphill() {
+	return { type: SHOWING_UPHILL_COLORS };
+}
+export const SHOWING_DOWNHILL_COLORS = "SHOWING_DOWNHILL_COLORS";
+export function showDownhill() {
+	return { type: SHOWING_DOWNHILL_COLORS };
+}
+
+export const TOGGLE_BARRIERS = "TOGGLE_BARRIERS";
+export function toggleBarriers() {
+	return { type: TOGGLE_BARRIERS };
+}
+
+//---------------------------Map-interacting actions---------------------------//
 export const ZOOM_IN = "ZOOM_IN";
 export function zoomIn() {
 	return { type: ZOOM_IN };
 }
-
 export const ZOOM_OUT = "ZOOM_OUT";
 export function zoomOut() {
 	return { type: ZOOM_OUT };
@@ -25,41 +64,10 @@ export function placePin(item) {
 	return { type: PLACE_PIN, item };
 }
 
-export const GO_TO_REGION = "GO_TO_REGION";
-export function goToRegion(region) {
-	return { type: GO_TO_REGION, region };
-}
-
-export const GO_TO_LANGUAGE = "GO_TO_LANGUAGE";
-export function goToLanguage(language) {
-	return { type: GO_TO_LANGUAGE, language };
-}
-
-export const SET_MOBILITY_MODE = "SET _MOBILITY_MODE";
-export function setMobilityMode(mode) {
-	return { type: SET_MOBILITY_MODE, mode };
-}
-
-export const SET_CUSTOM_UPHILL = "SET_CUSTOM_UPHILL";
-export function setCustomUphill(incline) {
-	return { type: SET_CUSTOM_UPHILL, incline };
-}
-
-export const SET_CUSTOM_DOWNHILL = "SET_CUSTOM_DOWNHILL";
-export function setCustomDownhill(incline) {
-	return { type: SET_CUSTOM_DOWNHILL, incline };
-}
-
-export const TOGGLE_BARRIERS = "TOGGLE_BARRIERS";
-export function toggleBarriers() {
-	return { type: TOGGLE_BARRIERS };
-}
-
 export const SET_ORIGIN = "SET_ORIGIN";
 export function setOrigin() {
 	return { type: SET_ORIGIN };
 }
-
 export const SET_DESTINATION = "SET_DESTINATION";
 export function setDestination() {
 	return { type: SET_DESTINATION };
@@ -69,7 +77,6 @@ export const VIEW_TRIP_INFO = "VIEW_TRIP_INFO";
 export function viewTripInfo() {
 	return { type: VIEW_TRIP_INFO };
 }
-
 export const CLOSE_TRIP_INFO = "CLOSE_TRIP_INFO";
 export function closeTripInfo() {
 	return { type: CLOSE_TRIP_INFO };
@@ -79,7 +86,6 @@ export const VIEW_DIRECTIONS = "VIEW_DIRECTIONS";
 export function viewDirections() {
 	return { type: VIEW_DIRECTIONS };
 }
-
 export const CLOSE_DIRECTIONS = "CLOSE_DIRECTIONS";
 export function closeDirections() {
 	return { type: CLOSE_DIRECTIONS };
@@ -90,7 +96,7 @@ export function locateUser(enable) {
 	return { type: LOCATE_USER, enable };
 }
 
-// Route-finding actions
+//---------------------------Route-finding actions---------------------------//
 
 export const CANCEL_ROUTE = "CANCEL_ROUTE";
 export function cancelRoute() {
@@ -112,9 +118,9 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
-	// const { t, i18n } = useTranslation();
-	return (dispatch) => {
+	return (dispatch) => {		
 		if (origin && destination) {
+			dispatch(mapLoading());
 			const data = {
 				lon1: origin[0],
 				lat1: origin[1],
@@ -126,17 +132,20 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 				.map(key => key + "=" + encodeURIComponent(data[key]))
 				.join("&");
 
-			const url = "https://www.accessmap.io/api/v1/routing/directions/wheelchair.json?" + queryString;
+			const url = "https://www.accessmap.io/api/v1/routing/directions/" + 
+				"wheelchair.json?" + queryString;
 			return fetch(url)
 				.then(response => response.json())
 				.then(json => {
 					dispatch(receiveRoute(json));
+					dispatch(mapLoaded());
 				})
 				.catch((error) => {
 					console.log(error);
+					dispatch(mapLoaded());
 					Alert.alert(
 						"Failed to retrieve route data",
-						"Please check your connection to the internet.",
+						{error},
 						[
 						  { text: "OK" }
 						]
@@ -147,12 +156,21 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
 	}
 }
 
-// App Setting Actions
+//---------------------------App-setting actions---------------------------//
+export const GO_TO_LANGUAGE = "GO_TO_LANGUAGE";
+export function goToLanguage(language) {
+	return { type: GO_TO_LANGUAGE, language };
+}
+
+export const GO_TO_REGION = "GO_TO_REGION";
+export function goToRegion(region) {
+	return { type: GO_TO_REGION, region };
+}
+
 export const USE_METRIC_SYSTEM = "USE_METRIC_SYSTEM";
 export function useMetricSystem() { // changes units to meters
 	return { type: USE_METRIC_SYSTEM };
 }
-
 export const USE_IMPERIAL_SYSTEM = "USE_IMPERIAL_SYSTEM";
 export function useImperialSystem() { // changes units to miles
 	return { type: USE_IMPERIAL_SYSTEM };
@@ -166,3 +184,13 @@ export const UNTRACK_USER_ACTIONS = "UNTRACK_USER_ACTIONS";
 export function untrackUser() {
 	return { type: UNTRACK_USER_ACTIONS };
 }
+
+//---------------------------Tutorial Tooltips---------------------------//
+export const TOGGLE_MAP_TUTORIAL = "TOGGLE_MAP_TUTORIAL";
+export function toggleMapTutorial() {
+	return { type: TOGGLE_MAP_TUTORIAL };
+}
+export const TOGGLE_ROUTE_TUTORIAL = "TOGGLE_ROUTE_TUTORIAL";
+export function toggleRouteTutorial() {
+	return { type: TOGGLE_ROUTE_TUTORIAL };
+};

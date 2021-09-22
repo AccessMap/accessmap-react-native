@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Views, Colors } from "../../styles";
+import React, { useCallback, useRef, useState } from "react";
+import { Views, Colors, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
-import { Card } from "react-native-elements";
-import { Icon } from "react-native-elements";
+import { Button } from "react-native-elements";
+import CustomIcon from "../../components/Icon";
+import { Card, Icon } from "react-native-elements";
+
 import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
 import GeocodeBar from "../../components/GeocodeBar";
@@ -12,27 +14,57 @@ import {
   closeDirections,
   closeTripInfo,
   cancelRoute,
+  toggleMobilityProfile,
 } from "../../actions";
 
 import MobilityButtonGroup from "./mobility-buttons";
-import { MOBILITY_MODE_CUSTOM } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import MobilityProfile from "../MobilityProfile";
 import IconButton from "../../components/IconButton";
+import { primaryColor } from "../../styles/colors";
+import Animated, { EasingNode } from "react-native-reanimated";
 
 export default function OmniCard(props) {
+  const useComponentSize = () => {
+    const [size, setSize] = useState(null);
+    const onLayout = useCallback(event => {
+      const { width, height } = event.nativeEvent.layout;
+      setSize({ width, height });
+    }, []);
+    return [size, onLayout];
+  };
+
   const { t, i18n } = useTranslation();
-  const [customMode, setCustomMode] = useState(false);
-  const [customIndex, setCustomIndex] = useState(0);
+  const [size, onLayout] = useComponentSize(); // current size width/height
   const [findDirections, setFindDirections] = useState(false);
 
-  let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
+  //---------------------------------------------------------------------------
+  // let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
   let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
   let origin = useSelector((state: RootState) => state.origin);
   let destination = useSelector((state: RootState) => state.destination);
   let originText = useSelector((state: RootState) => state.originText);
-  let destinationText = useSelector((state: RootState) => state.destinationText);
+  let destinationText = useSelector(
+    (state: RootState) => state.destinationText
+  );
 
+  //---------------------------------------------------------------------------
+  // Handles minimizing the card
+  const [showingCard, toggleCard] = useState(true);
+  const translation = useRef(new Animated.Value(0)).current;
+  const slide = () => {
+    AccessibilityInfo.announceForAccessibility(showingCard ? 
+      "Top card has been minimized." : 
+      "Top card has been maximized.");
+    Animated.timing(translation, {
+      toValue: showingCard ? -(size.height / 1.9) : 0,
+      useNativeDriver: true,
+      duration: 500,
+      easing: EasingNode.linear,
+    }).start();
+    toggleCard(!showingCard);
+  };
+
+  //---------------------------------------------------------------------------
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {
     dispatch(cancelRoute());
@@ -40,42 +72,57 @@ export default function OmniCard(props) {
     dispatch(closeTripInfo());
   };
 
-  const customButtons = [
-    t("UPHILL_TEXT"),
-    t("DOWNHILL_TEXT"),
-    t("BARRIERS_TEXT"),
-  ];
-  const updateCustomIndex = (customIndex) => {
-    setCustomIndex(customIndex);
-  };
-  const toggleCustomMode = () => {
-    setCustomMode(!customMode);
-  };
-
   let topRow = null;
   let middleRow = null;
   const bottomRow = (
-    <View style={{ flex: 1, flexDirection: "row", marginTop: 10, 
-    alignItems: "center", marginBottom: 5 }}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 10,
+        alignItems: "center",
+        marginBottom: 5,
+        marginRight: 5,
+      }}
+    >
       <MobilityButtonGroup />
-      {mobilityMode == MOBILITY_MODE_CUSTOM && (
-          <Icon
-            size={35}
-            color={Colors.primaryColor}
-            name="dots-horizontal"
-            type="material-community"
-            accessibilityLabel="Select to modify custom mobility preferences"
-            onPress={toggleCustomMode}
-          />
-      )}
+      <Icon
+        size={35}
+        color={Colors.primaryColor}
+        name="dots-horizontal"
+        type="material-community"
+        accessibilityLabel="Select to modify custom mobility preferences"
+        onPress={() => dispatch(toggleMobilityProfile())}
+      />
     </View>
+  );
+  
+  const minimizerRow = (
+    <Icon
+      size={40}
+      containerStyle={{paddingHorizontal: 20, paddingTop: 8,}}
+      color={Colors.primaryColor}
+      name={showingCard ? 
+        "keyboard-arrow-up" : "keyboard-arrow-down"}
+      type="material"
+      accessibilityLabel="Minimize top card"
+      onPress={slide}
+    />
   );
 
   // User is in the middle of choosing a route start and end
   if (origin || destination || findDirections) {
     topRow = (
-      <View style={[{ flex: 1, flexDirection: "row", 
-      justifyContent: "space-between", alignItems:"center" }]}>
+      <View
+        style={[
+          {
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          },
+        ]}
+      >
         <GeocodeBar
           accessibilityLabel={t("GEOCODER_PLACEHOLDER_TEXT_DEFAULT")}
           navigation={props.navigation}
@@ -124,10 +171,19 @@ export default function OmniCard(props) {
         />
       </View>
     );
-  } else { // unselected route
+  } else {
+    // unselected route
     topRow = (
-      <View style={[{ flex: 1, flexDirection: "row", 
-      justifyContent: "space-between", alignItems:"center" }]}>
+      <View
+        style={[
+          {
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          },
+        ]}
+      >
         <GeocodeBar
           navigation={props.navigation}
           value={pinFeatures && pinFeatures.text ? pinFeatures.text : ""}
@@ -148,9 +204,40 @@ export default function OmniCard(props) {
     );
   }
 
+  //---------------------------------------------------------------------------
   // Rendering the entire card and bottom row
-  let mainContainer = customMode ? (<MobilityProfile close={toggleCustomMode}/>) : 
-    (<View>{topRow}{middleRow}{bottomRow}</View>);
+  return (
+    <Animated.View 
+      onLayout={onLayout}
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        margin: 0,
+        flexDirection: "column",
+        transform: [{ translateY: translation }],
+      }}
+    >
+      <Card containerStyle={Views.omnicard}>
+        {
+          <View>
+            {topRow}
+            {middleRow}
+            {bottomRow}
+            {minimizerRow}
+          </View>
+        }
+      </Card>
 
-  return <Card containerStyle={Views.omnicard}>{mainContainer}</Card>;
+      <Button
+        containerStyle={[Buttons.whiteButton, 
+          {width: 50, alignSelf: "flex-end", marginTop: 10}]}
+        accessibilityLabel={t("INFORMATION")}
+        buttonStyle={{ backgroundColor: "white" }}
+        icon={<CustomIcon name="information" size={32} color={primaryColor} />}
+        onPress={() => props.navigation.push(t("TUTORIAL"))}
+      />
+    </Animated.View>
+  );
 }

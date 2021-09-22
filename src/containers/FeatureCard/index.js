@@ -3,184 +3,208 @@
 // Includes the option to "Route from/to here".
 import React from "react";
 import { View, Text, AccessibilityInfo } from "react-native";
-import { Card } from "react-native-elements";
-import { connect } from "react-redux";
+import { Icon, Button } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import Header from "../../components/Header";
 import { placePin, setOrigin, setDestination } from "../../actions";
 import coordinatesToString from "../../utils/coordinates-to-string";
 import parseOpenHours from "../../utils/parse-open-hours";
-import { Views } from "../../styles";
+import { days } from "../../utils/parse-open-hours";
+import CustomCard from "../../containers/CustomCard";
 import BottomCardButton from "../../components/BottomCardButton";
+import { primaryColor } from "../../styles/colors";
+import { Fonts } from "../../styles";
 
-const InfoText = (props) => {
-  return (
-    <View
-      accessible={true}
-      style={{
-        color: "black",
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 10,
-      }}
-    >
-      <Text style={{ flex: 2, fontSize: 16, flexWrap: "wrap" }}>
-        {props.label}
-      </Text>
-      <Text style={{ flex: 3, fontSize: 16, flexWrap: "wrap" }}>
-        {props.info}
-      </Text>
-    </View>
-  );
-};
+export default function FeatureCard(props) {
+  let features = useSelector((state: RootState) => state.pinFeatures);
+  const dispatch = useDispatch();
 
-const OpenHours = (props) => {
-  const { hours, day } = props;
-  const color = hours.open ? "green" : "red";
-  return (
-    <Text
-      style={{
-        flex: 1,
-        fontSize: 12,
-        color: hours.today == day ? color : null,
-      }}
-    >
-      {day}: {hours[day]}
-    </Text>
-  );
-};
-
-const FeatureCard = (props) => {
   const { t, i18n } = useTranslation();
   const info =
-    props.features.features && props.features.features[0]
-      ? props.features.features[0].properties
+    features.features && features.features[0]
+      ? features.features[0].properties
       : null;
   var openHours;
   if (info && info.opening_hours) {
     openHours = parseOpenHours(info.opening_hours);
   }
 
-  return (
-    <Card containerStyle={Views.bottomCard}>
-      <Header
-        title={
-          props.features.text
-            ? props.features.text
-            : info
-            ? info.footway == "sidewalk"
-              ? t("SIDEWALK_TEXT")
-              : info.footway == "crossing"
-              ? t("CROSSING_TEXT")
-              : coordinatesToString(props.features.center)
-            : coordinatesToString(props.features.center)
-        }
-        reportButton={info}
-        close={() => props.placePin(null)}
-        cs={
-          info && (info.footway == "sidewalk" || info.footway == "crossing")
-        }
-        navigation={props.navigation}
-        info={info}
-      />
+  const InfoText = (props) => {
+    return (
+      <View
+        accessible={true}
+        style={{
+          color: "black",
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 10,
+        }}
+      >
+        <Text style={[Fonts.p, { flex: 2, flexWrap: "wrap" }]}>
+          {props.label}
+        </Text>
+        <Text style={[Fonts.p, { flex: 3, flexWrap: "wrap" }]}>
+          {props.info}
+        </Text>
+      </View>
+    );
+  };
+  
+  const OpenHours = (props) => {
+    const { hours, day } = props;
+    const color = hours.open ? "green" : "red";
+    return (
+      <Text
+        style={{
+          flex: 1,
+          fontSize: 12,
+          color: hours.today == day ? color : "black",
+        }}
+      >
+        {day}: {hours[day]}{" "}
+        {hours.open && day == hours.today ? " (Currently Open)" : null}
+      </Text>
+    );
+  };
 
-      {info && (
-        <View>
-          <InfoText label={t("DESCRIPTION_TEXT")} info={info.description} />
-          {info.footway == "sidewalk" ? (
-            <InfoText
-              label={t("INCLINE_TEXT")}
-              info={Math.abs(Math.round(info.incline * 1000) / 10) + "%"}
-            />
-          ) : info.footway == "crossing" ? (
-            <InfoText
-              label={t("CURBRAMPS_TEXT")}
-              info={info.curbramps ? t("YES_TEXT") : t("NO_TEXT")}
-            />
-          ) : (
-            <View
-              style={{
-                height: 120,
-                flexDirection: "row",
-                alignItems: "center",
-                marginBottom: 5,
-              }}
-            >
-              <Text style={{ flex: 2, fontSize: 16, flexWrap: "wrap" }}>
-                {t("OPEN_HOURS_TEXT")}
-              </Text>
-              <View style={{ flex: 3 }}>
-                <OpenHours hours={openHours} day="Su" />
-                <OpenHours hours={openHours} day="Mo" />
-                <OpenHours hours={openHours} day="Tu" />
-                <OpenHours hours={openHours} day="We" />
-                <OpenHours hours={openHours} day="Th" />
-                <OpenHours hours={openHours} day="Fr" />
-                <OpenHours hours={openHours} day="Sa" />
-              </View>
+  var heading = "Unknown";
+  if (features.text) { // elevator
+    heading = features.text;
+  } else if (info && info.description) {
+    heading = info.description;
+  } else { // info.footway == "sidewalk" || "crossing"
+    heading = coordinatesToString(features.center);
+  }
+
+  const header = (
+    <Header
+      title={heading}
+      reportButton={info}
+      close={() => dispatch(placePin(null))}
+      cs={info && (info.footway == "sidewalk" || info.footway == "crossing")}
+      navigation={props.navigation}
+      info={info}
+    />
+  );
+
+  const details = () => {
+    if (!info) { return null; }
+    return (
+      <View style={{paddingVertical:10}}>
+        {info.footway == "sidewalk" ? (
+          <InfoText
+            label={t("INCLINE_TEXT")}
+            info={Math.abs(Math.round(info.incline * 1000) / 10) + "%"}
+          />
+        ) : info.footway == "crossing" ? (
+          <InfoText
+            label={t("CURBRAMPS_TEXT")}
+            info={info.curbramps ? t("YES_TEXT") : t("NO_TEXT")}
+          />
+        ) : (
+          <View
+            style={{
+              height: 120,
+              flexDirection: "row",
+              alignItems: "flex-start",
+              marginBottom: 10,
+            }}
+          >
+            <Text style={{ flex: 2, fontSize: 16, flexWrap: "wrap" }}>
+              {t("OPEN_HOURS_TEXT")}
+            </Text>
+            <View style={{ flex: 3 }}>
+              {days.map((string) =>
+                openHours[string] ? (
+                  <OpenHours hours={openHours} day={string} />
+                ) : null
+              )}
             </View>
-          )}
+          </View>
+        )}
 
-          {info.footway == "sidewalk" ? (
-            <InfoText label={t("SURFACE_TEXT")} info={info.surface} />
-          ) : info.footway == "crossing" ? (
-            <InfoText
-              label={t("MARKED_CROSSWALK_TEXT")}
-              info={info.crossing == "marked" ? t("YES_TEXT") : t("NO_TEXT")}
-            />
-          ) : (
-            <InfoText
-              label={t("INDOOR_TEXT")}
-              info={info.indoor ? t("YES_TEXT") : t("NO_TEXT")}
-            />
-          )}
-        </View>
-      )}
-      <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between', 
-      marginTop: 5, marginRight: 15,}}>
+        {info.footway == "sidewalk" ? (
+          <InfoText label={t("SURFACE_TEXT")} info={info.surface} />
+        ) : info.footway == "crossing" ? (
+          <InfoText
+            label={t("MARKED_CROSSWALK_TEXT")}
+            info={info.crossing == "marked" ? t("YES_TEXT") : t("NO_TEXT")}
+          />
+        ) : (
+          <InfoText
+            label={t("INDOOR_TEXT")}
+            info={info.indoor ? t("YES_TEXT") : t("NO_TEXT")}
+          />
+        )}
+      </View>
+    );
+  };
+
+  const content = (
+    <View style={{height:"100%"}}>
+      {header}
+      {details()}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: 5,
+          marginRight: 15,
+        }}
+      >
         <BottomCardButton
           title={t("ROUTE_FROM_HERE_TEXT")}
-          style={{marginRight: 10,}}
+          style={{ marginRight: 10 }}
           pressFunction={() => {
-            props.setOrigin();
+            dispatch(setOrigin());
             AccessibilityInfo.announceForAccessibility(
-              "Set " + props.features.text + " as route start."
+              "Set " + features.text + " as route start."
             );
           }}
         />
         <BottomCardButton
           title={t("ROUTE_TO_HERE_TEXT")}
           pressFunction={() => {
-            props.setDestination();
+            dispatch(setDestination());
             AccessibilityInfo.announceForAccessibility(
-              "Set " + props.features.text + " as route destination."
+              "Set " + features.text + " as route destination."
             );
           }}
         />
       </View>
-    </Card>
+      {info && info.footway && (
+        <Button
+          title={t("REPORT_ISSUE")}
+          containerStyle={[{ flex: 1, marginTop: 20, marginRight: 15 }]}
+          buttonStyle={{
+            backgroundColor: "white",
+            paddingVertical: 13,
+            borderColor: primaryColor,
+          }}
+          titleStyle={{ fontSize: 15, color: primaryColor }}
+          icon={
+            <Icon
+              name="report"
+              size={20}
+              color={primaryColor}
+              style={{ marginRight: 10 }}
+            />
+          }
+          accessibilityLabel={t("Header-crowdsourcingInfo-accessibilityLabel")}
+          onPress={() => {
+            props.navigation.push(t("CROWDSOURCING"), { info });
+          }}
+          type="outline"
+        />
+      )}
+    </View>
   );
-};
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.pinFeatures,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    placePin: (features) => {
-      dispatch(placePin(features));
-    },
-    setOrigin: () => {
-      dispatch(setOrigin());
-    },
-    setDestination: () => {
-      dispatch(setDestination());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FeatureCard);
+  return (
+    <CustomCard content={content} cardVisible={true}/>
+  );
+}

@@ -1,12 +1,22 @@
+// Contains a simple loading wheel which stops and hides automatically when
+// the app is not in a loading state.
 import React from "react";
-import { Position } from "../../styles";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+import { primaryColor } from "../../styles/colors";
 
 const LoadingScreen = (props) => {
   return (
-    <View style={[Position.center, Position.fullWidthandHeight, {position: "absolute"}]}>
+    <View 
+      style={{ position: "absolute", 
+        top: "50%",
+        width: "100%",
+      }}>
       <View>
-        <Text>Loading</Text>
+        <ActivityIndicator 
+          animating={props.isLoading}
+          color={primaryColor} 
+          style={{transform: [{ scale: 3 }]}}/>
       </View>
     </View>
   );

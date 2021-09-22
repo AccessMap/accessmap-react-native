@@ -105,7 +105,8 @@ export default function MapView() {
       const currZoom = await map.current.getZoom();
       if (zoom > prevZoom) {
         camera.current.zoomTo(currZoom + 1, 200);
-        Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
+        if (Platform.OS === "android") {
+        Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]); }
         AccessibilityInfo.announceForAccessibility(
           currZoom >= 20
             ? "Zoom level unchanged. Maximum reached."
@@ -113,7 +114,9 @@ export default function MapView() {
         );
       } else if (zoom < prevZoom) {
         camera.current.zoomTo(currZoom - 1, 200);
-        Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
+        if (Platform.OS === "android") {
+          Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]); 
+        }
         AccessibilityInfo.announceForAccessibility(
           currZoom <= 10
             ? "Zoom level unchanged. Minimum reached."
@@ -184,12 +187,14 @@ export default function MapView() {
   const panMap = async (e) => {
     if (e) {
       const center = e.geometry.coordinates;
-      Rakam.trackEvent("MOVE_MAP", [
-        "lat",
-        `${center[0]}`,
-        "lon",
-        `${center[1]}`,
-      ]);
+      if (Platform.OS === "android") {
+        Rakam.trackEvent("MOVE_MAP", [
+          "lat",
+          `${center[0]}`,
+          "lon",
+          `${center[1]}`,
+        ]);
+      }
     }
   };
 
@@ -208,6 +213,8 @@ export default function MapView() {
     <MapboxGL.MapView
       logoEnabled={false}
       attributionEnabled={false}
+      compassViewPosition={3}
+      compassViewMargins={{x: 19, y: 190}}
       ref={map}
       style={Views.map}
       onPress={handleScreenPress}

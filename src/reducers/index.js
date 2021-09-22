@@ -1,6 +1,7 @@
 // import { combineReducers, createStore } from 'redux';
 import { AccessibilityInfo, NativeModules, Platform } from 'react-native';
 import {
+	MAP_LOADING,
 	MAP_LOADED,
 	ZOOM_IN,
 	ZOOM_OUT,
@@ -26,12 +27,17 @@ import {
 	USE_IMPERIAL_SYSTEM,
 	TRACK_USER_ACTIONS,
 	UNTRACK_USER_ACTIONS,
+	TOGGLE_MOBILITY_PROFILE,
+	TOGGLE_MAP_TUTORIAL,
+	TOGGLE_ROUTE_TUTORIAL,
+	SHOWING_UPHILL_COLORS,
+	SHOWING_DOWNHILL_COLORS,
 } from '../actions';
 import {
 	MOBILITY_MODE_CUSTOM,
-	MOBILITY_MODE_WHEELCHAIR,
-	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE,
+	// MOBILITY_MODE_WHEELCHAIR,
+	// MOBILITY_MODE_POWERED,
+	// MOBILITY_MODE_CANE,
 	SEATTLE
 } from '../constants';
 import regions from '../../regions.json';
@@ -68,17 +74,22 @@ const defaultState = {
 	customUphill: 8,
 	customDownhill: 10,
 	avoidRaisedCurbs: true,
+	showingUphillColors: true, // either uphill or downhill colors on map
 	viewingTripInfo: false,
 	viewingDirections: false,
-	drawerOpen: false,
+	viewingMobilityProfile: false,
 	route: null,
 	usingMetricSystem: false, // meters vs miles
 	trackUserActions: false,
+	showingMapTutorial: false,
+	showingRouteTutorial: false,
 }
 
 // Define the states 
 export default function mapApp(state = defaultState, action) {
 	switch (action.type) {
+		case MAP_LOADING:
+			return {...state, isLoading: true};
 		case MAP_LOADED:
 			AccessibilityInfo.announceForAccessibility("Map successfully loaded.");
 			return {...state, isLoading: false};
@@ -112,6 +123,10 @@ export default function mapApp(state = defaultState, action) {
 		case TOGGLE_BARRIERS:
 			logEvent(action.type, ["avoidRaisedCurbs", `${!state.avoidRaisedCurbs}`]);
 			return {...state, avoidRaisedCurbs: !state.avoidRaisedCurbs};
+		case SHOWING_UPHILL_COLORS:
+			return {...state, showingUphillColors: true};
+		case SHOWING_DOWNHILL_COLORS:
+			return {...state, showingUphillColors: false};
 		case SET_ORIGIN:
 			const originText = state.pinFeatures && state.pinFeatures.text ? state.pinFeatures.text : null;
 			logEvent(action.type, ["lat", `${state.pinFeatures.center[0]}`, "lon", `${state.pinFeatures.center[1]}`]);
@@ -144,6 +159,8 @@ export default function mapApp(state = defaultState, action) {
 		case CLOSE_DIRECTIONS:
 			logEvent(action.type, []);
 			return {...state, viewingDirections: false};
+		case TOGGLE_MOBILITY_PROFILE:
+			return {...state, viewingMobilityProfile: !state.viewingMobilityProfile};
 		case LOCATE_USER:
 			return {...state, locateUserSwitch: action.enable, canAccessLocation: true };
 		case RECEIVE_ROUTE:
@@ -158,6 +175,16 @@ export default function mapApp(state = defaultState, action) {
 			return {...state, trackUserActions: true };
 		case UNTRACK_USER_ACTIONS:
 			return {...state, trackUserActions: false };
+		case TOGGLE_MAP_TUTORIAL:
+			return {...state, 
+				showingMapTutorial: !state.showingMapTutorial,
+				showingRouteTutorial: false,
+			};
+		case TOGGLE_ROUTE_TUTORIAL:
+			return {...state, 
+				showingRouteTutorial: !state.showingRouteTutorial,
+				showingMapTutorial: false,
+			};
 		default:
 			return state;
 	}

@@ -68,6 +68,8 @@
     "CONTACT_TEXT": "Contacto",
     "OTHER_TEXT": "Otros ajustes",
     "INFORMATION": "Información",
+    "ISSUES": "Cuestiones",
+    "FEATURES": "Funciones",
     "TRACK_SETTINGS": "Seguimiento de los datos del usuario",
     "TRACKING_SETTINGS_TEXT": "El seguimiento de los ajustes",
     "CURRENTLY_TRACKING": "ahora rastreando sus acciones en la aplicación",
@@ -122,6 +124,8 @@
     "NO_INTERNET": "Por favor, compruebe su conexión a Internet.",
     "NO_ROUTE": "No se pudieron recuperar los datos de ruta.",
     "NO_LOCATION": "No se pudieron recuperar los datos de ubicación",
+    "MAP_HEAD_0": "Explore el mapa",
+    "MAP_TUT_0": "El mapa muestra aceras de diferentes colores que representan su inclinación en relación con su perfil de movilidad; el rojo es el más empinado.",
     "MAP_CAPTION_1": "Barra de búsqueda ubicada en la parte superior de la aplicación. El texto gris dentro de la barra dice: Ingrese dirección",
     "MAP_HEAD_1": "Buscar direcciones",
     "MAP_TUT_1": "Establezca un inicio o destino de ruta pulsando en el mapa o introduciendo una ubicación en la barra de búsqueda.",
@@ -129,7 +133,7 @@
     "MAP_TUT_2": "Alternativamente, toque este icono gris para ingresar manualmente un inicio y un destino.",
     "MAP_CAPTION_3": "Botones de movilidad ubicados debajo de la barra de búsqueda en orden: Personalizado, Silla de ruedas, Accionado y Baste.",
     "MAP_HEAD_3": "Perfil de movilidad",
-    "MAP_TUT_3": "Personaliza tu viaje seleccionando el modo de transporte que mejor se adapte a ti. Por ejemplo, el perfil personalizado está seleccionado actualmente.",
+    "MAP_TUT_3": "Personaliza tu viaje seleccionando el modo de transporte que mejor se adapte a ti.",
     "MAP_CAPTION_4": "Un botón de icono de lápiz gris junto a los botones del modo de movilidad.",
     "MAP_TUT_4": "Mientras esté en la configuración perfil personalizado, toque el icono de lápiz para ajustar las características de la ruta, como la inclinación de la acera.",
     "MAP_CAPTION_5": "Tres botones circulares en la parte inferior derecha del mapa. La parte superior tiene un símbolo de destino, el medio tiene un icono más, la parte inferior tiene un icono menos.",
@@ -164,5 +168,7 @@
     "SETTINGS_TUT_3": "Alternar esto cambiará las unidades que se muestran en la aplicación.",
     "END_TOUR": "Terminar",
     "USER_TRACKING_TITLE": "Consentimiento de seguimiento del usuario",
-    "USER_TRACKING_TEXT": "Activar 'rastrear datos de usuario' nos permitirá recopilar datos sobre las acciones del usuario, como la frecuencia de los botones presionados en el mapa. Esto nos permite comprender mejor cómo interactúan los usuarios con AccessMap. Ninguna información personal o de identificación será almacenada o vinculada a sus acciones. Al hacer clic en Aceptar, usted acepta esta recopilación de datos."
+    "USER_TRACKING_TEXT": "Activar 'rastrear datos de usuario' nos permitirá recopilar datos sobre las acciones del usuario, como la frecuencia de los botones presionados en el mapa. Esto nos permite comprender mejor cómo interactúan los usuarios con AccessMap. Ninguna información personal o de identificación será almacenada o vinculada a sus acciones. Al hacer clic en Aceptar, usted acepta esta recopilación de datos.",
+    "AGREE_TEXT": "De acuerdo",
+    "DISAGREE_TEXT": "Discrepar"
 }

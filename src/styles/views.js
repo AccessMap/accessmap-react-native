@@ -3,20 +3,19 @@ import { center } from "./positioning";
 // Stylesheet for all general containers and views in the app.
 export const container = {
   flex: 1,
-  backgroundColor: "#F5FCFF",
+  backgroundColor: "white",
 };
 
 // A centered floating card with a white background
 export const omnicard = {
-  position: "absolute",
+  borderBottomLeftRadius: 30,
+  borderBottomRightRadius: 30,
   backgroundColor: "#FFFFFF",
   width: "100%",
   flexDirection: "column",
-  left: 0,
-  top: 0,
   margin: 0,
-  padding: 10,
-  zIndex: 10,
+  paddingTop: 10, paddingHorizontal: 10, paddingBottom: 0,
+  zIndex: 0,
 };
 
 export const bottomCard = {
@@ -36,7 +35,7 @@ export const geocoder = {
   right: 0,
   top: 0,
   margin: 10,
-  zIndex: 20,
+  zIndex: 10,
 };
 
 export const map = {
@@ -70,7 +69,7 @@ export const overlayText = {
 
 export const page = {
   flex: 1,
-  backgroundColor: "#F5FCFF",
+  backgroundColor: "white",
 };
 
 export const searchresult = {

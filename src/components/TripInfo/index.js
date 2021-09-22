@@ -26,6 +26,9 @@ const InfoText = (props) => {
 
 const TripInfo = (props) => {
   const { t, i18n } = useTranslation();
+  if (props.route == null || props.route.routes == null) {
+    return (<Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>);
+  }
   const route = props.route.routes[0];
   const data = route.legs[0];
   const nRoutes = [...Array(data.length + 1).keys()];
