@@ -8,6 +8,7 @@ import {
   AccessibilityInfo,
   NativeModules,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -33,6 +34,7 @@ import Header from "../components/Header";
 import BottomCardButton from "../components/BottomCardButton";
 import AboutPage from "./Information/AboutPage";
 import { setFocus } from "../utils/setFocus";
+import Collapsible from "react-native-collapsible";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -79,11 +81,28 @@ function SettingsPage({ props, route, navigation }) {
     </View>
   );
 
+  const [collapsedFirst, setCollapsedFirst] = useState(true);
+  const [collapsedSecond, setCollapsedSecond] = useState(true);
+  const [collapsedThird, setCollapsedThird] = useState(true);
+  const [collapsedFourth, setCollapsedFourth] = useState(true);
   return (
     <View>
       <ScrollView style={Views.scrollView}>
-        <View accessibilityRole="radiogroup">
+        <TouchableOpacity
+          style={{ paddingVertical: 10 }}
+          onPress={() => {
+            console.log("HEHUERHORHE");
+            setCollapsedFirst(!collapsedFirst);
+            AccessibilityInfo.announceForAccessibility(
+              collapsedFirst
+                ? "Language section has been maximized."
+                : "Language section has been collapsed."
+            );
+          }}
+        >
           <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
+        </TouchableOpacity>
+        <Collapsible collapsed={collapsedFirst}>
           <RadioButton.Group
             onValueChange={(value) => {
               var item = languages.filter((data) => {
@@ -106,11 +125,24 @@ function SettingsPage({ props, route, navigation }) {
               />
             ))}
           </RadioButton.Group>
-        </View>
+        </Collapsible>
 
         <GreyDivider />
-        <View accessibilityRole="radiogroup">
+        <TouchableOpacity
+          style={{ paddingVertical: 10 }}
+          onPress={() => {
+            setCollapsedSecond(!collapsedSecond);
+            AccessibilityInfo.announceForAccessibility(
+              collapsedSecond
+                ? "Region section has been maximized."
+                : "Region section has been collapsed."
+            );
+          }}
+          accessibilityRole="button"
+        >
           <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
+        </TouchableOpacity>
+        <Collapsible collapsed={collapsedSecond}>
           <RadioButton.Group
             onValueChange={(value) => {
               var item = regions.filter((data) => {
@@ -132,11 +164,24 @@ function SettingsPage({ props, route, navigation }) {
               />
             ))}
           </RadioButton.Group>
-        </View>
+        </Collapsible>
 
         <GreyDivider />
-        <View accessibilityRole="radiogroup">
+        <TouchableOpacity
+          style={{ paddingVertical: 10 }}
+          onPress={() => {
+            setCollapsedThird(!collapsedThird);
+            AccessibilityInfo.announceForAccessibility(
+              collapsedThird
+                ? "Units section has been maximized."
+                : "Units section has been collapsed."
+            );
+          }}
+          accessibilityRole="button"
+        >
           <Text style={Fonts.h2}>{t("UNITS_TEXT")}</Text>
+        </TouchableOpacity>
+        <Collapsible collapsed={collapsedThird}>
           <RadioButton.Group
             onValueChange={(value) => {
               if (value) {
@@ -160,7 +205,7 @@ function SettingsPage({ props, route, navigation }) {
               key={"metric"}
             />
           </RadioButton.Group>
-        </View>
+        </Collapsible>
 
         {Platform.OS === "android" && <GreyDivider />}
         {Platform.OS === "android" && (
@@ -169,18 +214,38 @@ function SettingsPage({ props, route, navigation }) {
         {Platform.OS === "android" && PrivacySection}
 
         <GreyDivider />
-        <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
-        <AboutPage />
+
+        <TouchableOpacity
+          style={{ paddingVertical: 10 }}
+          onPress={() => {
+            setCollapsedFourth(!collapsedFourth);
+            AccessibilityInfo.announceForAccessibility(
+              collapsedFourth
+                ? "About section has been maximized."
+                : "About section has been collapsed."
+            );
+          }}
+          accessibilityRole="button"
+        >
+          <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
+        </TouchableOpacity>
+        <Collapsible collapsed={collapsedFourth}>
+          <AboutPage />
+        </Collapsible>
         <View style={{ height: 50 }}></View>
       </ScrollView>
 
-      {modalVisible && <CustomCard
-        cardVisible={modalVisible}
-        content={
-          <PrivacyConsentPopupContent t={t} 
-          setModalVisible={setModalVisible}/>
-        }
-      /> }
+      {modalVisible && (
+        <CustomCard
+          cardVisible={modalVisible}
+          content={
+            <PrivacyConsentPopupContent
+              t={t}
+              setModalVisible={setModalVisible}
+            />
+          }
+        />
+      )}
     </View>
   );
 }
@@ -195,7 +260,10 @@ function PrivacyConsentPopupContent(props) {
         title={props.t("USER_TRACKING_TITLE")}
         close={() => props.setModalVisible(false)}
       />
-      <Text ref={setFocus} style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]} >
+      <Text
+        ref={setFocus}
+        style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]}
+      >
         {props.t("USER_TRACKING_TEXT")}
       </Text>
       <View
@@ -212,7 +280,9 @@ function PrivacyConsentPopupContent(props) {
           pressFunction={() => {
             Rakam.toggleTracking();
             dispatch(trackUser());
-            AccessibilityInfo.announceForAccessibility(props.t("CURRENTLY_TRACKING"));
+            AccessibilityInfo.announceForAccessibility(
+              props.t("CURRENTLY_TRACKING")
+            );
             props.setModalVisible(false);
           }}
         />

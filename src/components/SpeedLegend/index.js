@@ -18,7 +18,7 @@ const SpeedLegend = (props) => {
   return (
     <View
       accessible={true}
-      accessibilityLabel={"Max incline at " + maxIncline + " percent"}
+      accessibilityLabel={"Max incline currently at " + maxIncline + " percent out of 15 maximum."}
       style={{
         height: 50,
         margin: 0,

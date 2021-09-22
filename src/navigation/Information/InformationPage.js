@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FlatList,
@@ -6,6 +6,8 @@ import {
   ScrollView,
   Text,
   View,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +22,7 @@ import MenuButton from "../../components/MenuButton";
 import SpeedLegend from "../../components/SpeedLegend";
 import { Fonts, Views } from "../../styles";
 import getInclineLimit from "../../utils/get-incline-limit";
+import Collapsible from "react-native-collapsible";
 
 export default function InformationPage({ route, navigation }) {
   let showingUphillColors = useSelector(
@@ -40,7 +43,10 @@ export default function InformationPage({ route, navigation }) {
       <Text style={[Fonts.h2, { marginBottom: 5, marginTop: 10 }]}>
         {t("SIDEWALK_COLORS")}
       </Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={"A bright green line representing flat incline."}
+      >
         <View
           style={{
             flex: 1,
@@ -49,13 +55,17 @@ export default function InformationPage({ route, navigation }) {
             borderRadius: 10,
             marginRight: 15,
           }}
-          accessibilityLabel={"A bright green line."}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
           {"Flat Incline"}
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={
+          "A bright yellow line representing moderate incline."
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -64,13 +74,17 @@ export default function InformationPage({ route, navigation }) {
             borderRadius: 10,
             marginRight: 15,
           }}
-          accessibilityLabel={"A bright yellow line."}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
           {"Moderate Incline"}
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={
+          "A bright red line representing significant incline."
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -79,13 +93,17 @@ export default function InformationPage({ route, navigation }) {
             borderRadius: 10,
             marginRight: 15,
           }}
-          accessibilityLabel={"A bright red line."}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
           {"Significant Incline"}
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={
+          "A dotted red line representing inaccessible paths given the current Mobility Profile Setting"
+        }
+      >
         <View
           style={{
             height: 0,
@@ -96,7 +114,6 @@ export default function InformationPage({ route, navigation }) {
             zIndex: 0,
             flex: 1,
           }}
-          accessibilityLabel={"A dotted red line."}
         >
           <View
             style={{
@@ -127,14 +144,21 @@ export default function InformationPage({ route, navigation }) {
       <Text style={[Fonts.h2, { marginBottom: 5, marginTop: 10 }]}>
         {t("Other Features")}
       </Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ flex: 1, marginRight: 15, height: 15}}
-          accessibilityLabel={"A thick black line with a white line on the inside."}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={
+          "A thick black line with a white line on the inside representing Marked Crossings."
+        }
+      >
+        <View style={{ flex: 1, marginRight: 15, height: 15 }}>
           <View
             style={{
               position: "absolute",
               zIndex: 1,
-              left: 0, right: 0, bottom: 0, top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              top: 0,
               backgroundColor: "black",
               borderColor: "black",
               borderRadius: 10,
@@ -144,7 +168,10 @@ export default function InformationPage({ route, navigation }) {
             style={{
               position: "absolute",
               zIndex: 2,
-              left: 1, right: 1, bottom: 3, top: 3,
+              left: 1,
+              right: 1,
+              bottom: 3,
+              top: 3,
               borderRadius: 10,
               borderColor: "white",
               borderWidth: 1,
@@ -155,7 +182,12 @@ export default function InformationPage({ route, navigation }) {
           {"Marked Crossing"}
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={
+          "A rounded white rectangle with a thin black border representing Unmarked Crossings."
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -163,14 +195,17 @@ export default function InformationPage({ route, navigation }) {
             borderRadius: 10,
             borderColor: "black",
             borderWidth: 2,
-            marginRight: 15, 
+            marginRight: 15,
           }}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
           {"Unmarked Crossing"}
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{ flexDirection: "row", alignItems: "center" }}
+        accessibilityLabel={"A thin black double line representing Elevators."}
+      >
         <View
           style={{
             flex: 1,
@@ -179,7 +214,7 @@ export default function InformationPage({ route, navigation }) {
             borderWidth: 1,
             borderStartWidth: 0,
             borderEndWidth: 0,
-            marginRight: 15, 
+            marginRight: 15,
           }}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
@@ -189,42 +224,75 @@ export default function InformationPage({ route, navigation }) {
     </View>
   );
 
+  const [collapsedFirst, setCollapsedFirst] = useState(true);
+  const [collapsedSecond, setCollapsedSecond] = useState(true);
+
   return (
     <ScrollView style={Views.scrollView}>
-      <Text style={[Fonts.h1, { marginBottom: 5, marginTop: 10 }]}>
-        {t("MAP_HEAD_6")}
-      </Text>
-      {ColorsSection}
-      {FeaturesSection}
+      <TouchableOpacity
+        onPress={() => {
+          setCollapsedFirst(!collapsedFirst);
+          AccessibilityInfo.announceForAccessibility(
+            collapsedFirst
+              ? "Map Legend section has been maximized."
+              : "Map Legend section has been collapsed."
+          );
+        }}
+        accessibilityRole="button"
+      >
+        <Text style={[Fonts.h1, { marginBottom: 5, marginTop: 10 }]}>
+          {t("MAP_HEAD_6")}
+        </Text>
+      </TouchableOpacity>
+
+      <Collapsible collapsed={collapsedFirst}>
+        {ColorsSection}
+        {FeaturesSection}
+      </Collapsible>
 
       <GreyDivider />
 
-      <Text style={[Fonts.h1, { marginBottom: 5, marginTop: 10 }]}>
-        {t("TUTORIAL")}
-      </Text>
-      <FlatList
-        data={[{ key: t("MAP_INTERFACE") }, { key: t("ROUTE_PLANNING") }]}
-        renderItem={({ item }) => (
-          <MenuButton
-            text={item.key}
-            onPress={() => {
-              navigation.pop();
-              if (item.key == t("MAP_INTERFACE")) {
-                dispatch(toggleMapTutorial());
-              } else {
-                dispatch(toggleRouteTutorial());
-              }
-              dispatch(cancelRoute());
-              dispatch(closeTripInfo());
-              dispatch(closeDirections());
-              AccessibilityInfo.announceForAccessibility(
-                "Showing " + item.key + " Tutorial."
-              );
-            }}
-          />
-        )}
-      />
-      <View style={{height:200}}/>
+      <TouchableOpacity
+        onPress={() => {
+          setCollapsedSecond(!collapsedSecond);
+          AccessibilityInfo.announceForAccessibility(
+            collapsedSecond
+              ? "Tutorials section has been maximized."
+              : "Tutorials section has been collapsed."
+          );
+        }}
+        accessibilityRole="button"
+      >
+        <Text style={[Fonts.h1, { marginBottom: 5, marginTop: 10 }]}>
+          {t("TUTORIAL")}
+        </Text>
+      </TouchableOpacity>
+
+      <Collapsible collapsed={collapsedSecond}>
+        <FlatList
+          data={[{ key: t("MAP_INTERFACE") }, { key: t("ROUTE_PLANNING") }]}
+          renderItem={({ item }) => (
+            <MenuButton
+              text={item.key}
+              onPress={() => {
+                navigation.pop();
+                if (item.key == t("MAP_INTERFACE")) {
+                  dispatch(toggleMapTutorial());
+                } else {
+                  dispatch(toggleRouteTutorial());
+                }
+                dispatch(cancelRoute());
+                dispatch(closeTripInfo());
+                dispatch(closeDirections());
+                AccessibilityInfo.announceForAccessibility(
+                  "Showing " + item.key + " Tutorial."
+                );
+              }}
+            />
+          )}
+        />
+        <View style={{ height: 200 }} />
+      </Collapsible>
     </ScrollView>
   );
 }
