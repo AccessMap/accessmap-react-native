@@ -1,11 +1,15 @@
 //------------------------------------------------------------------------------------------
 // Custom tooltip used in tutorial onboarding screens
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text } from "react-native";
+import { View, Text, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
+import { placePin, setDestination, setOrigin } from "../../actions";
 import {Fonts} from "../../styles";
 import { primaryColor, primaryColor2, primaryLight } from "../../styles/colors";
+import { setFocus } from "../../utils/setFocus";
+import {exampleOrigin, exampleDestination} from "../../constants/regions";
 
 export default function ToolTip({
     cardDescription, // [string] generally describes the card (ex: Route Planning)
@@ -23,6 +27,16 @@ export default function ToolTip({
 
   // TODO: see accesssibility.md
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+
+  let origin = useSelector((state: RootState) => state.origin);
+  let destination = useSelector((state: RootState) => state.destination);
+
+  var viewRef = null; // for force-focusing screen reader per tooltip update
+
+  useEffect(() => {
+    setFocus(viewRef);
+  });
 
   return (
     <View style={{
@@ -65,7 +79,10 @@ export default function ToolTip({
             <Text style={{ color: "#E6E6E6", fontSize: 12, marginBottom: 10 }}>
               { cardDescription }
             </Text>
-            <Text style={{ color: "#E6E6E6", fontSize: 12, marginBottom: 10 }}>
+            <Text 
+              ref={ el => {viewRef = el}} 
+              accessibilityLabel={"Step " + (numStep + 1) + " out of " + maxStep}
+              style={{ color: "#E6E6E6", fontSize: 12, marginBottom: 10 }}>
                 {numStep + 1}{"/"}{maxStep}
             </Text>
           </View>
@@ -92,6 +109,7 @@ export default function ToolTip({
                 onPress={() => {
                   if (numStep == 0) {
                     onEnd();
+                    AccessibilityInfo.announceForAccessibility("Exited " + cardDescription + " tour.");
                   } else {
                     goToNextStep(numStep - 1);
                   }
@@ -106,7 +124,16 @@ export default function ToolTip({
                 onPress={() => { 
                   if (numStep >= maxStep - 1) { // the last step
                     onEnd(); // turn off the map tutorial
+                    AccessibilityInfo.announceForAccessibility("Exited " + cardDescription + " tour.");
                   } else {
+                    if (cardDescription == "Route Planning" && numStep == 0 && (!origin || !destination)) {
+                      // trigger an example complete route
+                      dispatch(placePin(exampleOrigin));
+                      dispatch(setOrigin());
+                
+                      dispatch(placePin(exampleDestination));
+                      dispatch(setDestination());
+                    }
                     goToNextStep(numStep + 1);
                   }
                 }}

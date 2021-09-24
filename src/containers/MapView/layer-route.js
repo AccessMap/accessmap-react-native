@@ -1,9 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import { connect } from 'react-redux';
 
-import { fetchRoute } from '../../actions';
+// import { fetchRoute } from '../../actions';
 import { MapStyles } from '../../styles';
 
 const LayerRoute = props => {
