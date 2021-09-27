@@ -214,7 +214,7 @@ export default function MapView() {
       logoEnabled={false}
       attributionEnabled={false}
       compassViewPosition={3}
-      compassViewMargins={{x: 19, y: 190}}
+      compassViewMargins={{x: 19, y: 300}}
       ref={map}
       style={Views.map}
       onPress={handleScreenPress}

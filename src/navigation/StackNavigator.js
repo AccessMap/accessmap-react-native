@@ -9,7 +9,6 @@ import SearchPage from "./SearchPage";
 import Crowdsourcing from "./Crowdsourcing";
 
 import InformationPage from "./Information/InformationPage";
-import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
@@ -78,15 +77,6 @@ function MainStackNavigator() {
       })}
     />
   );
-  const routeTutorial = (
-    <Stack.Screen
-      name={t("ROUTE_PLANNING")}
-      component={RoutePlanningTutorialPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
 
   const crowdSourcing = (
     <Stack.Screen
@@ -109,7 +99,6 @@ function MainStackNavigator() {
       {search}
 
       {tutorial}
-      {routeTutorial}
 
       {crowdSourcing}
     </Stack.Navigator>
