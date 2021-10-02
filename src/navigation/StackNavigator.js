@@ -97,7 +97,7 @@ function MainStackNavigator() {
     <Stack.Navigator>
       {map}
       {search}
-
+    
       {tutorial}
 
       {crowdSourcing}

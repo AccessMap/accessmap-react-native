@@ -91,7 +91,6 @@ function SettingsPage({ props, route, navigation }) {
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            console.log("HEHUERHORHE");
             setCollapsedFirst(!collapsedFirst);
             AccessibilityInfo.announceForAccessibility(
               collapsedFirst

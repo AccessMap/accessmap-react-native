@@ -129,7 +129,7 @@ export default function MapPage(props) {
             
             {isLoading && <LoadingScreen isLoading={isLoading}/>}
 
-            {showingMapTutorial ? (
+            {showingMapTutorial && (
               <ToolTip
                 cardDescription={t("MAP_INTERFACE")}
                 numStep={numStep}
@@ -147,10 +147,10 @@ export default function MapPage(props) {
                 goToNextStep={goToNextStep}
                 navigation={props.navigation}
                 onEnd={() => dispatch(toggleMapTutorial())}
-              />
-            ) : null}
+              />)
+            }
 
-            {showingRouteTutorial ? (
+            {showingRouteTutorial && 
               <ToolTip 
                 cardDescription={t("ROUTE_PLANNING")}
                 numStep={numStep}
@@ -169,7 +169,7 @@ export default function MapPage(props) {
                 navigation={props.navigation}
                 onEnd={() => dispatch(toggleRouteTutorial())}
               />
-            ): null}
+            }
 
             {showBottomCard(props.navigation)}
           </View>

@@ -4,7 +4,7 @@ import { ScrollView, Text, View } from "react-native";
 import { connect } from "react-redux";
 import {
   AreaChart,
-  LineChart,
+  // LineChart,
   Grid,
   XAxis,
   YAxis,

@@ -27,7 +27,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* AccessMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AccessMapTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		43BC64EF5C3BB821C4BED1FD /* libPods-AccessMapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA04AC84936B147DF64BAAE /* libPods-AccessMapTests.a */; };
-		47D48C16B53E1F5123A84B2B /* libPods-AccessMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6796126C326943668A42FF /* libPods-AccessMap.a */; };
 		9CB798866F15630083EE8184 /* Pods_AccessMap_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B894524D66BB71E0144C24 /* Pods_AccessMap_tvOSTests.framework */; };
 		B486D85657DB445359400395 /* Pods_AccessMap_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEC0B54F6547E53F932FBF7 /* Pods_AccessMap_tvOS.framework */; };
 		BCBF4678B94D44F6B14FB6E6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9284F34E92E7404C998C262A /* Inter-Regular.ttf */; };
@@ -514,7 +513,6 @@
 				CEDEF81326B8FA9D00C391C3 /* libYoga.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				CEBD8F1826B1D96400EDF2AF /* Mapbox in Frameworks */,
-				47D48C16B53E1F5123A84B2B /* libPods-AccessMap.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,7 +960,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -982,10 +980,9 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AccessMap" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -1680,9 +1677,10 @@
 			baseConfigurationReference = 2B2C8E8224C3D63256874D8F /* Pods-AccessMap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = A7YKUFZXAC;
+				DEVELOPMENT_TEAM = G8MQVE5WWW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
@@ -1696,12 +1694,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.uwtcat.AccessMapGlobal;
 				PRODUCT_NAME = AccessMap;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1712,8 +1711,9 @@
 			baseConfigurationReference = 444447FFD7526044BF10D410 /* Pods-AccessMap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A7YKUFZXAC;
+				DEVELOPMENT_TEAM = G8MQVE5WWW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
@@ -1727,12 +1727,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.uwtcat.AccessMapGlobal;
 				PRODUCT_NAME = AccessMap;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
