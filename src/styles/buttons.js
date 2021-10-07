@@ -10,6 +10,7 @@ export const whiteButton = {
   backgroundColor: "white",
   borderRadius: 30,
   margin: 5,
+  marginTop: 10,
 };
 
 // pressable icon buttons on the OmniCard
@@ -36,8 +37,8 @@ export const iconButtons = {
 
 export const button = {
   borderRadius: 40,
-  paddingHorizontal: 12,
-  paddingVertical: 10,
+  paddingHorizontal: 14,
+  paddingVertical: 12,
   backgroundColor: primaryColor, 
 };
 

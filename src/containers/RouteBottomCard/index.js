@@ -21,6 +21,7 @@ export default function RouteBottomCard(props) {
 
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {
+    AccessibilityInfo.announceForAccessibility("Route card has been closed. Route has been canceled.");
     dispatch(cancelRoute());
     dispatch(closeDirections());
     dispatch(closeTripInfo());
@@ -83,6 +84,6 @@ export default function RouteBottomCard(props) {
   );
 
   return (
-    <CustomCard content={content} cardVisible={true}/>  
+    <CustomCard dismissCard={cancelAndCloseRoute} content={content} cardVisible={true}/>  
   );
 };

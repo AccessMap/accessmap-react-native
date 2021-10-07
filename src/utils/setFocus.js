@@ -8,7 +8,9 @@ export const setFocus = (element: React.Component | null) => {
   if (id) {
     AccessibilityInfo.setAccessibilityFocus(id);
     setTimeout(() => {
-      AccessibilityInfo.setAccessibilityFocus(id);
+      if (findNodeHandle(element)) {
+        AccessibilityInfo.setAccessibilityFocus(id);
+      }
     }, 1000);
   }
 };

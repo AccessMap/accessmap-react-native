@@ -1,9 +1,9 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Views, Colors, Buttons } from "../../styles";
+import React, { useRef, useState } from "react";
+import { Views, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
 import CustomIcon from "../../components/Icon";
-import { Card, Icon } from "react-native-elements";
+import { Card } from "react-native-elements";
 
 import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
@@ -14,31 +14,20 @@ import {
   closeDirections,
   closeTripInfo,
   cancelRoute,
-  toggleMobilityProfile,
 } from "../../actions";
 
-import MobilityButtonGroup from "./mobility-buttons";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
 import { primaryColor } from "../../styles/colors";
 import Animated, { EasingNode } from "react-native-reanimated";
+import { useComponentSize } from "../../utils/useComponentSize";
 
 export default function OmniCard(props) {
-  const useComponentSize = () => {
-    const [size, setSize] = useState(null);
-    const onLayout = useCallback(event => {
-      const { width, height } = event.nativeEvent.layout;
-      setSize({ width, height });
-    }, []);
-    return [size, onLayout];
-  };
-
   const { t, i18n } = useTranslation();
   const [size, onLayout] = useComponentSize(); // current size width/height
   const [findDirections, setFindDirections] = useState(false);
 
   //---------------------------------------------------------------------------
-  // let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
   let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
   let origin = useSelector((state: RootState) => state.origin);
   let destination = useSelector((state: RootState) => state.destination);
@@ -56,7 +45,7 @@ export default function OmniCard(props) {
       "Top card has been minimized." : 
       "Top card has been maximized.");
     Animated.timing(translation, {
-      toValue: showingCard ? -(size.height / 1.9) : 0,
+      toValue: showingCard ? -(size.height - 120) : 0,
       useNativeDriver: true,
       duration: 500,
       easing: EasingNode.linear,
@@ -74,41 +63,6 @@ export default function OmniCard(props) {
 
   let topRow = null;
   let middleRow = null;
-  const bottomRow = (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-        marginTop: 10,
-        alignItems: "center",
-        marginBottom: 5,
-        marginRight: 5,
-      }}
-    >
-      <MobilityButtonGroup />
-      <Icon
-        size={35}
-        color={Colors.primaryColor}
-        name="dots-horizontal"
-        type="material-community"
-        accessibilityLabel="Select to modify custom mobility preferences"
-        onPress={() => dispatch(toggleMobilityProfile())}
-      />
-    </View>
-  );
-  
-  const minimizerRow = (
-    <Icon
-      size={40}
-      containerStyle={{paddingHorizontal: 20, paddingTop: 8,}}
-      color={Colors.primaryColor}
-      name={showingCard ? 
-        "keyboard-arrow-up" : "keyboard-arrow-down"}
-      type="material"
-      accessibilityLabel={(showingCard ? "Minimize top card" : "Maximize top card")}
-      onPress={slide}
-    />
-  );
 
   // User is in the middle of choosing a route start and end
   if (origin || destination || findDirections) {
@@ -224,12 +178,9 @@ export default function OmniCard(props) {
           <View>
             {topRow}
             {middleRow}
-            {bottomRow}
-            {minimizerRow}
           </View>
         }
       </Card>
-
       <Button
         containerStyle={[Buttons.whiteButton, 
           {width: 50, alignSelf: "flex-end", marginTop: 10}]}

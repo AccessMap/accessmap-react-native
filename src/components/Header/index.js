@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import { Fonts } from "../../styles";
 import { useTranslation } from "react-i18next";
+import { setFocus } from "../../utils/setFocus";
 
 const Header = (props) => {
   // Props:
@@ -14,9 +15,9 @@ const Header = (props) => {
   const info = props.info;
 
   return (
-    <View style={{ flexDirection: "row", paddingBottom: 10, justifyContent: "space-between" }}>
+    <View style={{ flexDirection: "row", paddingBottom: 5, justifyContent: "space-between" }}>
       <View style={{ flexDirection: "row", alignItems: "center", flex: 1}}>
-        <Text style={[Fonts.h1]}>{props.title}</Text>
+        <Text ref={setFocus} style={[Fonts.h1]}>{props.title}</Text>
       </View>
 
       <Button

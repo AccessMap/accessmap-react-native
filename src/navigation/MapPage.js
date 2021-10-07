@@ -1,6 +1,6 @@
 // The MapPage displays the map, top white card (Omnicard), and the bottom white cards.
 import React, { useEffect, useState } from "react";
-import { View, AccessibilityInfo, Alert, Platform, StatusBar, } from "react-native";
+import { View, AccessibilityInfo, Alert, StatusBar, Platform, } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeDirections,
@@ -74,7 +74,10 @@ export default function MapPage(props) {
       return (
         <MobilityProfile
           cardVisible={viewingMobilityProfile}
-          close={() => dispatch(toggleMobilityProfile())}
+          close={() => {
+            dispatch(toggleMobilityProfile())
+            AccessibilityInfo.announceForAccessibility("Mobility Profile closed.")
+          }}
         />
       );
     }
@@ -104,11 +107,25 @@ export default function MapPage(props) {
       return null;
     }
   }
+  
+
   return (
     <SafeAreaProvider>
       <SafeAreaView 
-        edges={["top"]}
-        style={{ flex: 1, backgroundColor: "white", }}>
+        edges={(Platform.OS === "android") ? null : ["top"]}
+        style={{ 
+          flex: 1, backgroundColor: "white", 
+          paddingTop: (StatusBar.currentHeight && Platform.OS === "android" ? 
+            StatusBar.currentHeight - 10 : 15)
+        }}
+        >
+
+        <StatusBar
+          translucent={true}
+          barStyle="dark-content"
+          backgroundColor={'rgba(52, 52, 52, 0)'}
+          />
+
         <View style={Views.page}>
           <View style={Views.container}>
 

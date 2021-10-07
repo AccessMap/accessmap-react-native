@@ -236,6 +236,7 @@ function SettingsPage({ props, route, navigation }) {
 
       {modalVisible && (
         <CustomCard
+          dismissCard={() => props.setModalVisible(false)}
           cardVisible={modalVisible}
           content={
             <PrivacyConsentPopupContent
@@ -257,7 +258,9 @@ function PrivacyConsentPopupContent(props) {
     <View style={{ height: "100%" }}>
       <Header
         title={props.t("USER_TRACKING_TITLE")}
-        close={() => props.setModalVisible(false)}
+        close={() => {
+          props.setModalVisible(false)
+        }}
       />
       <Text
         ref={setFocus}

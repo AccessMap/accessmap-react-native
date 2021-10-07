@@ -62,6 +62,8 @@ export default function Geocoder(props) {
         .then((response) => response.json())
         .then((json) => {
           setSearchList(json.features);
+          AccessibilityInfo.announceForAccessibility(json.features.length + " results found for query: " + 
+            props.search)
           dispatch(mapLoaded());
         })
         .catch((error) => {
