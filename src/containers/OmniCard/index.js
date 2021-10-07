@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Views, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
@@ -19,12 +19,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
 import { primaryColor } from "../../styles/colors";
-import Animated, { EasingNode } from "react-native-reanimated";
-import { useComponentSize } from "../../utils/useComponentSize";
 
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
-  const [size, onLayout] = useComponentSize(); // current size width/height
   const [findDirections, setFindDirections] = useState(false);
 
   //---------------------------------------------------------------------------
@@ -35,23 +32,6 @@ export default function OmniCard(props) {
   let destinationText = useSelector(
     (state: RootState) => state.destinationText
   );
-
-  //---------------------------------------------------------------------------
-  // Handles minimizing the card
-  const [showingCard, toggleCard] = useState(true);
-  const translation = useRef(new Animated.Value(0)).current;
-  const slide = () => {
-    AccessibilityInfo.announceForAccessibility(showingCard ? 
-      "Top card has been minimized." : 
-      "Top card has been maximized.");
-    Animated.timing(translation, {
-      toValue: showingCard ? -(size.height - 120) : 0,
-      useNativeDriver: true,
-      duration: 500,
-      easing: EasingNode.linear,
-    }).start();
-    toggleCard(!showingCard);
-  };
 
   //---------------------------------------------------------------------------
   const dispatch = useDispatch();
@@ -161,8 +141,7 @@ export default function OmniCard(props) {
   //---------------------------------------------------------------------------
   // Rendering the entire card and bottom row
   return (
-    <Animated.View 
-      onLayout={onLayout}
+    <View 
       style={{
         position: "absolute",
         left: 0,
@@ -170,7 +149,6 @@ export default function OmniCard(props) {
         top: 0,
         margin: 0,
         flexDirection: "column",
-        transform: [{ translateY: translation }],
       }}
     >
       <Card containerStyle={Views.omnicard}>
@@ -189,6 +167,6 @@ export default function OmniCard(props) {
         icon={<CustomIcon name="information" size={32} color={primaryColor} />}
         onPress={() => props.navigation.push(t("INFORMATION"))}
       />
-    </Animated.View>
+    </View>
   );
 }

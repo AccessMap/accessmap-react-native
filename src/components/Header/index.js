@@ -17,7 +17,7 @@ const Header = (props) => {
   return (
     <View style={{ flexDirection: "row", paddingBottom: 5, justifyContent: "space-between" }}>
       <View style={{ flexDirection: "row", alignItems: "center", flex: 1}}>
-        <Text ref={setFocus} style={[Fonts.h1]}>{props.title}</Text>
+        <Text accessible={true} ref={setFocus} style={[Fonts.h1]}>{props.title}</Text>
       </View>
 
       <Button

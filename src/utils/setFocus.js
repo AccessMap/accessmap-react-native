@@ -6,11 +6,15 @@ export const setFocus = (element: React.Component | null) => {
   if (element == null) return;
   const id = findNodeHandle(element);
   if (id) {
-    AccessibilityInfo.setAccessibilityFocus(id);
-    setTimeout(() => {
-      if (findNodeHandle(element)) {
-        AccessibilityInfo.setAccessibilityFocus(id);
-      }
-    }, 1000);
+    console.log("sending a11y event to " + id);
+    try {
+      setTimeout(() => {
+        if (findNodeHandle(element)) {
+          AccessibilityInfo.setAccessibilityFocus(id);
+        }
+      }, 2000);
+    } catch (e) {
+      console.log(e);
+    }
   }
 };
