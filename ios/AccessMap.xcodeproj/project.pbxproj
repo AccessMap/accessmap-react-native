@@ -27,8 +27,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* AccessMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AccessMapTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		43BC64EF5C3BB821C4BED1FD /* libPods-AccessMapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA04AC84936B147DF64BAAE /* libPods-AccessMapTests.a */; };
-		9CB798866F15630083EE8184 /* Pods_AccessMap_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B894524D66BB71E0144C24 /* Pods_AccessMap_tvOSTests.framework */; };
-		B486D85657DB445359400395 /* Pods_AccessMap_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEC0B54F6547E53F932FBF7 /* Pods_AccessMap_tvOS.framework */; };
+		791283D1A9F054FAB6EF4731 /* libPods-AccessMap-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 164A40B143B797513E32BE2E /* libPods-AccessMap-tvOSTests.a */; };
+		AE211FA5AD198DEFAB6344E2 /* libPods-AccessMap-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B1C5E7D047C99E25B5D7B6 /* libPods-AccessMap-tvOS.a */; };
 		BCBF4678B94D44F6B14FB6E6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9284F34E92E7404C998C262A /* Inter-Regular.ttf */; };
 		CEBD8F1826B1D96400EDF2AF /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = 1C71D2855833453FB1B862B8 /* Mapbox */; };
 		CEBD8F1926B1D96400EDF2AF /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = 3B5245FC132C0C8CAA2BB257 /* Mapbox */; };
@@ -359,10 +359,8 @@
 		00E356EE1AD99517003FC87E /* AccessMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccessMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* AccessMapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessMapTests.m; sourceTree = "<group>"; };
-		07B894524D66BB71E0144C24 /* Pods_AccessMap_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccessMap_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6796126C326943668A42FF /* libPods-AccessMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccessMap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA04AC84936B147DF64BAAE /* libPods-AccessMapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccessMapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CEC0B54F6547E53F932FBF7 /* Pods_AccessMap_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccessMap_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AccessMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +372,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AccessMap/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		14771D2BD39844728B298582 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		164A40B143B797513E32BE2E /* libPods-AccessMap-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccessMap-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B67FD2DDE6A4AD2AF5B11BF /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		1BA3F851AE6F4F57B4069B23 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1C6F7AAC0E974AEBB69B91E0 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -410,6 +409,7 @@
 		B08BF21990A54126A3B9B47D /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		BF24129C516C41FFBD8FDD3E /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		C1648E4EF745435A8D696860 /* RCTMGL.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMGL.xcodeproj; path = "../node_modules/@react-native-mapbox-gl/maps/ios/RCTMGL.xcodeproj"; sourceTree = "<group>"; };
+		C1B1C5E7D047C99E25B5D7B6 /* libPods-AccessMap-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccessMap-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2E92A9F50374F9589C93559 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		CA8DDD2CD52748279BE20B61 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		CC1C89D647BC4CE29847059A /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				CEBD8F1A26B1D96400EDF2AF /* Mapbox in Frameworks */,
-				B486D85657DB445359400395 /* Pods_AccessMap_tvOS.framework in Frameworks */,
+				AE211FA5AD198DEFAB6344E2 /* libPods-AccessMap-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +540,7 @@
 			files = (
 				CEBD8F1B26B1D96400EDF2AF /* Mapbox in Frameworks */,
 				2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */,
-				9CB798866F15630083EE8184 /* Pods_AccessMap_tvOSTests.framework in Frameworks */,
+				791283D1A9F054FAB6EF4731 /* libPods-AccessMap-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,10 +700,10 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				0CEC0B54F6547E53F932FBF7 /* Pods_AccessMap_tvOS.framework */,
-				07B894524D66BB71E0144C24 /* Pods_AccessMap_tvOSTests.framework */,
 				0A6796126C326943668A42FF /* libPods-AccessMap.a */,
 				0BA04AC84936B147DF64BAAE /* libPods-AccessMapTests.a */,
+				C1B1C5E7D047C99E25B5D7B6 /* libPods-AccessMap-tvOS.a */,
+				164A40B143B797513E32BE2E /* libPods-AccessMap-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1615,11 +1615,17 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = AccessMapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1648,11 +1654,17 @@
 				DEVELOPMENT_TEAM = A7YKUFZXAC;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = AccessMapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1683,11 +1695,17 @@
 				DEVELOPMENT_TEAM = G8MQVE5WWW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = AccessMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1716,11 +1734,17 @@
 				DEVELOPMENT_TEAM = G8MQVE5WWW;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = AccessMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1754,11 +1778,17 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = "AccessMap-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1793,11 +1823,17 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = "AccessMap-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1831,11 +1867,17 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = "AccessMap-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1870,11 +1912,17 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules@react-native-mapbox-glmapsiosRCTMGL",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)..\node_modules\neact-native-svgios/**",
+					"$(SRCROOT)..",
+					"ode_modules@react-native-mapbox-glmapsiosRCTMGL",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-gesture-handlerios/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-svgios/**",
 				);
 				INFOPLIST_FILE = "AccessMap-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1928,6 +1976,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1983,6 +2032,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

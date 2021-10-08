@@ -147,7 +147,10 @@ export default function ToolTip({
             buttonStyle={{backgroundColor: primaryColor2}}
             containerStyle={{marginTop: 10}}
             title={t("END_TOUR")}
-            onPress={onEnd}
+            onPress={() => {
+              AccessibilityInfo.announceForAccessibility("Exited " + cardDescription + " tour.");
+              onEnd();
+            }}
           /> : null}
         </View>
       </View>

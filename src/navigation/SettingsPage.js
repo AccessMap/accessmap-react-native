@@ -33,7 +33,6 @@ import CustomCard from "../containers/CustomCard";
 import Header from "../components/Header";
 import BottomCardButton from "../components/BottomCardButton";
 import AboutPage from "./Information/AboutPage";
-import { setFocus } from "../utils/setFocus";
 import Collapsible from "react-native-collapsible";
 
 function SettingsPage({ props, route, navigation }) {
@@ -263,7 +262,6 @@ function PrivacyConsentPopupContent(props) {
         }}
       />
       <Text
-        ref={setFocus}
         style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]}
       >
         {props.t("USER_TRACKING_TEXT")}

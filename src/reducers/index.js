@@ -86,7 +86,7 @@ const defaultState = {
 }
 
 // Define the states 
-export default function mapApp(state = defaultState, action) {
+export default function appReducer(state = defaultState, action) {
 	switch (action.type) {
 		case MAP_LOADING:
 			return {...state, isLoading: true};
@@ -190,4 +190,4 @@ export default function mapApp(state = defaultState, action) {
 	}
 }
 
-export type RootState = ReturnType<typeof mapApp>
+export type RootState = ReturnType<typeof appReducer>
