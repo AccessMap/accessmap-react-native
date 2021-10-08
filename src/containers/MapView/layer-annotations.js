@@ -84,9 +84,9 @@ const LayerAnnotations = props => {
 
 const mapStateToProps = state => {
 	return {
-		pinFeatures: state.pinFeatures,
-		origin: state.origin,
-		destination: state.destination,
+		pinFeatures: state.map.pinFeatures,
+		origin: state.map.origin,
+		destination: state.map.destination,
 	};
 }
 

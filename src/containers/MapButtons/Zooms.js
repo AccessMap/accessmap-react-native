@@ -11,10 +11,11 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { locateUser, toggleMobilityProfile, zoomIn, zoomOut } from "../../actions";
 import { Buttons, Colors } from "../../styles";
 import { useTranslation } from "react-i18next";
+import { RootState } from "../../reducers";
 
 function Zooms(props) {
   let viewingMobilityProfile = useSelector((state: RootState) => 
-    state.viewingMobilityProfile);
+    state.mobility.viewingMobilityProfile);
 
   const dispatch = useDispatch();
 

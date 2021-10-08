@@ -12,18 +12,19 @@ import getInclineLimit from "../utils/get-incline-limit";
 import SpeedLegend from "../components/SpeedLegend";
 import { Fonts } from "../styles";
 import MobilityButtonGroup from "./OmniCard/mobility-buttons";
+import { RootState } from "../reducers";
 
 export default function MobilityProfile(props) {
   // close: function that runs when the close button is clicked
   // cardVisible [boolean]
   let showingUphillColors = useSelector(
-    (state: RootState) => state.showingUphillColors
+    (state: RootState) => state.mobility.showingUphillColors
   );
   let maxIncline = useSelector((state: RootState) => {
     return getInclineLimit(
-      state.customUphill,
-      state.customDownhill,
-      state.mobilityMode
+      state.mobility.customUphill,
+      state.mobility.customDownhill,
+      state.mobility.mobilityMode
     )[showingUphillColors ? 0 : 1];
   });
   const { t, i18n } = useTranslation();

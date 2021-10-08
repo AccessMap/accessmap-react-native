@@ -4,10 +4,12 @@ import { Colors } from "../../styles";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { renderRedDashedLine } from "../../styles/map-styles";
+import { RootState } from "../../reducers";
 
 const SpeedLegend = (props) => {
   // Props: Max uphill/downhill incline
-  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
   const maxIncline = Math.abs(Math.round(props.maxIncline));
   const colorMap = (showingUphillColors ? 
     Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 

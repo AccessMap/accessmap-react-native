@@ -10,6 +10,7 @@ import {Fonts} from "../../styles";
 import { primaryColor, primaryColor2, primaryLight } from "../../styles/colors";
 import { setFocus } from "../../utils/setFocus";
 import {exampleOrigin, exampleDestination} from "../../constants/regions";
+import { RootState } from "../../reducers";
 
 export default function ToolTip({
     cardDescription, // [string] generally describes the card (ex: Route Planning)
@@ -29,8 +30,8 @@ export default function ToolTip({
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
-  let origin = useSelector((state: RootState) => state.origin);
-  let destination = useSelector((state: RootState) => state.destination);
+  let origin = useSelector((state: RootState) => state.map.origin);
+  let destination = useSelector((state: RootState) => state.map.destination);
 
   var viewRef = null; // for force-focusing screen reader per tooltip update
 

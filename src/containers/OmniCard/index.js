@@ -19,18 +19,19 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
 import { primaryColor } from "../../styles/colors";
+import { RootState } from "../../reducers";
 
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
   const [findDirections, setFindDirections] = useState(false);
 
   //---------------------------------------------------------------------------
-  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
-  let origin = useSelector((state: RootState) => state.origin);
-  let destination = useSelector((state: RootState) => state.destination);
-  let originText = useSelector((state: RootState) => state.originText);
+  let pinFeatures = useSelector((state: RootState) => state.map.pinFeatures);
+  let origin = useSelector((state: RootState) => state.map.origin);
+  let destination = useSelector((state: RootState) => state.map.destination);
+  let originText = useSelector((state: RootState) => state.map.originText);
   let destinationText = useSelector(
-    (state: RootState) => state.destinationText
+    (state: RootState) => state.map.destinationText
   );
 
   //---------------------------------------------------------------------------

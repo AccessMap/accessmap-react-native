@@ -54,7 +54,7 @@ const MobilityButtonRender = props => {
 
 const mapStateToProps = state => {
 	return {
-		mobilityMode: state.mobilityMode,
+		mobilityMode: state.mobility.mobilityMode,
 	};
 };
 

@@ -3,6 +3,7 @@ import React from "react";
 import { Platform, View } from "react-native";
 import { useSelector } from "react-redux";
 import { Colors } from "./index";
+import { RootState } from "../reducers";
 
 const OUTLINE_WIDTH = 2;
 
@@ -36,7 +37,8 @@ export function renderRedDashedLine() {
 
 // Returns an object describing the style for a MapboxGL.LineLayer
 export const sidewalks = (incline) => { // ex incline: maxUphill
-  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
   const maxIncline = Math.abs(incline);
 
   const nSamples = 15;

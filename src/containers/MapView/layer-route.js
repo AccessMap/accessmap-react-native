@@ -89,9 +89,9 @@ const LayerRoute = props => {
 
 const mapStateToProps = state => {
 	return {
-		route: state.route,
-		origin: state.origin,
-		destination: state.destination,
+		route: state.map.route,
+		origin: state.map.origin,
+		destination: state.map.destination,
 	};
 }
 

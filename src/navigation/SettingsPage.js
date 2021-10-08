@@ -22,7 +22,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Buttons, Colors, Fonts, Views } from "../styles";
-import { RootState } from "../reducers";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/GreyDivider";
@@ -34,23 +33,20 @@ import Header from "../components/Header";
 import BottomCardButton from "../components/BottomCardButton";
 import AboutPage from "./Information/AboutPage";
 import Collapsible from "react-native-collapsible";
+import { RootState } from "../reducers";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [pageLoaded, setLoaded] = useState(false);
 
-  let metricSetting = useSelector((state: RootState) => {
-    return state.usingMetricSystem;
-  });
-  let trackingSetting = useSelector((state: RootState) => {
-    return state.trackUserActions;
-  });
-  let currentLanguage = useSelector((state: RootState) => {
-    return state.currLanguage;
-  });
-  let currentRegion = useSelector((state: RootState) => {
-    return state.currRegion;
-  });
+  let metricSetting = useSelector((state: RootState) => 
+    state.setting.usingMetricSystem);
+  let trackingSetting = useSelector((state: RootState) => 
+    state.setting.trackUserActions);
+  let currentLanguage = useSelector((state: RootState) => 
+    state.setting.currLanguage);
+  let currentRegion = useSelector((state: RootState) => 
+    state.setting.currRegion);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 

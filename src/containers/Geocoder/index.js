@@ -17,13 +17,14 @@ import {
 } from "../../actions";
 import { ACCESS_TOKEN } from "../../constants";
 import LoadingScreen from "../../components/LoadingScreen";
+import { RootState } from "../../reducers";
 
 export default function Geocoder(props) {
   const [searchList, setSearchList] = useState({});
   const prevSearch = usePrevious(props.search);
 
-  let bbox = useSelector((state: RootState) => state.bbox.join(","));
-  let isLoading = useSelector((state: RootState) => state.isLoading);
+  let bbox = useSelector((state: RootState) => state.setting.bbox.join(","));
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();

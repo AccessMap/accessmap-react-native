@@ -158,7 +158,7 @@ const TripInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    usingMetricSystem: state.usingMetricSystem,
+    usingMetricSystem: state.setting.usingMetricSystem,
   };
 };
 

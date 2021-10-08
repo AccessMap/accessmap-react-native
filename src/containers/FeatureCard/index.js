@@ -16,9 +16,10 @@ import CustomCard from "../../containers/CustomCard";
 import BottomCardButton from "../../components/BottomCardButton";
 import { primaryColor } from "../../styles/colors";
 import { Fonts } from "../../styles";
+import { RootState } from "../../reducers";
 
 export default function FeatureCard(props) {
-  let features = useSelector((state: RootState) => state.pinFeatures);
+  let features = useSelector((state: RootState) => state.map.pinFeatures);
   const dispatch = useDispatch();
 
   const { t, i18n } = useTranslation();

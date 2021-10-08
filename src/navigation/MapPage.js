@@ -28,24 +28,26 @@ import MobilityProfile from "../containers/MobilityProfile";
 import ToolTip from "../components/TutorialComponents/ToolTip";
 import { mapTutorialContent, routeTutorialContent } from "../constants/tutorial-content";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { RootState } from "../reducers";
 
 export default function MapPage(props) {
-  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
-  let route = useSelector((state: RootState) => state.route);
+  let pinFeatures = useSelector((state: RootState) => state.map.pinFeatures);
+  let route = useSelector((state: RootState) => state.map.route);
   let viewingDirections = useSelector(
-    (state: RootState) => state.viewingDirections
+    (state: RootState) => state.map.viewingDirections
   );
   let viewingTripInfo = useSelector(
-    (state: RootState) => state.viewingTripInfo
+    (state: RootState) => state.map.viewingTripInfo
   );
   let viewingMobilityProfile = useSelector(
-    (state: RootState) => state.viewingMobilityProfile
+    (state: RootState) => state.mobility.viewingMobilityProfile
   );
-  let isLoading = useSelector((state: RootState) => state.isLoading);
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
   let showingMapTutorial = useSelector(
-    (state: RootState) => state.showingMapTutorial
+    (state: RootState) => state.tutorial.showingMapTutorial
   );
-  let showingRouteTutorial = useSelector((state: RootState) => state.showingRouteTutorial);
+  let showingRouteTutorial = useSelector((state: RootState) => 
+    state.tutorial.showingRouteTutorial);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 

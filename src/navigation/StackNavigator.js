@@ -14,12 +14,13 @@ import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { mapLoaded } from "../actions";
+import { RootState } from "../reducers";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
   const Stack = createStackNavigator();
 
-  let isLoading = useSelector((state: RootState) => state.isLoading);
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
   const dispatch = useDispatch();
 
   const backButton = (navigation) => (
