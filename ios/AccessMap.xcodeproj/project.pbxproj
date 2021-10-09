@@ -61,7 +61,6 @@
 		CEDEF80526B8FA9D00C391C3 /* libReactCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80426B8FA9D00C391C3 /* libReactCommon.a */; };
 		CEDEF80726B8FA9D00C391C3 /* libRNCMaskedView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80626B8FA9D00C391C3 /* libRNCMaskedView.a */; };
 		CEDEF80926B8FA9D00C391C3 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80826B8FA9D00C391C3 /* libRNGestureHandler.a */; };
-		CEDEF80B26B8FA9D00C391C3 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80A26B8FA9D00C391C3 /* libRNReanimated.a */; };
 		CEDEF80D26B8FA9D00C391C3 /* libRNScreens.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80C26B8FA9D00C391C3 /* libRNScreens.a */; };
 		CEDEF80F26B8FA9D00C391C3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF80E26B8FA9D00C391C3 /* libRNSVG.a */; };
 		CEDEF81126B8FA9D00C391C3 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDEF81026B8FA9D00C391C3 /* libRNVectorIcons.a */; };
@@ -441,7 +440,6 @@
 		CEDEF80426B8FA9D00C391C3 /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDEF80626B8FA9D00C391C3 /* libRNCMaskedView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCMaskedView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDEF80826B8FA9D00C391C3 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEDEF80A26B8FA9D00C391C3 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDEF80C26B8FA9D00C391C3 /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDEF80E26B8FA9D00C391C3 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDEF81026B8FA9D00C391C3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,7 +504,6 @@
 				CEDEF80526B8FA9D00C391C3 /* libReactCommon.a in Frameworks */,
 				CEDEF80726B8FA9D00C391C3 /* libRNCMaskedView.a in Frameworks */,
 				CEDEF80926B8FA9D00C391C3 /* libRNGestureHandler.a in Frameworks */,
-				CEDEF80B26B8FA9D00C391C3 /* libRNReanimated.a in Frameworks */,
 				CEDEF80D26B8FA9D00C391C3 /* libRNScreens.a in Frameworks */,
 				CEDEF80F26B8FA9D00C391C3 /* libRNSVG.a in Frameworks */,
 				CEDEF81126B8FA9D00C391C3 /* libRNVectorIcons.a in Frameworks */,
@@ -692,7 +689,6 @@
 				CEDEF80426B8FA9D00C391C3 /* libReactCommon.a */,
 				CEDEF80626B8FA9D00C391C3 /* libRNCMaskedView.a */,
 				CEDEF80826B8FA9D00C391C3 /* libRNGestureHandler.a */,
-				CEDEF80A26B8FA9D00C391C3 /* libRNReanimated.a */,
 				CEDEF80C26B8FA9D00C391C3 /* libRNScreens.a */,
 				CEDEF80E26B8FA9D00C391C3 /* libRNSVG.a */,
 				CEDEF81026B8FA9D00C391C3 /* libRNVectorIcons.a */,

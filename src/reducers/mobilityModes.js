@@ -39,7 +39,6 @@ export function mobilityReducer(state = initialState, action) {
     case SHOWING_DOWNHILL_COLORS:
       return { ...state, showingUphillColors: false };
     case TOGGLE_MOBILITY_PROFILE:
-      console.log("TOGGLE.");
       return {
         ...state,
         viewingMobilityProfile: !state.viewingMobilityProfile,

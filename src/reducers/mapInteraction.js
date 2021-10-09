@@ -20,7 +20,6 @@ import {
 import { SEATTLE } from "../constants";
 import regions from "../constants/regions";
 
-console.log(regions)
 const seattleProps = regions[SEATTLE].properties;
 const seattleCoords = [seattleProps.lon, seattleProps.lat];
 

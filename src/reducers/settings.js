@@ -39,6 +39,7 @@ export function settingsReducer(state = initialState, action) {
       return { ...state, trackUserActions: false };
     case GO_TO_REGION:
       logEvent(action.type, ["region", action.region.properties.name]);
+      console.log("GO_TO_GREION " + action.region.properties.name.toUpperCase());
       // centerCoordinate, bbox
       return {
         ...state,
