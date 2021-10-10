@@ -5,6 +5,7 @@ import {
   CLOSE_DIRECTIONS,
   CLOSE_TRIP_INFO,
   GO_TO_LOCATION,
+  GO_TO_REGION,
   LOCATE_USER,
   PLACE_PIN,
   RECEIVE_ROUTE,
@@ -29,6 +30,8 @@ const initialState = {
   zoomLevel: 14,
   centerCoordinate: seattleCoords,
   geocodeCoords: null,
+  currRegion: seattleProps.name.toUpperCase(),
+  bbox: seattleProps.bounds,
   pinFeatures: null,
   origin: null,
   destination: null,
@@ -134,6 +137,22 @@ export function mapReducer(state = initialState, action) {
     case CLOSE_DIRECTIONS:
       logEvent(action.type, []);
       return { ...state, viewingDirections: false };
+    case GO_TO_REGION:
+      logEvent(action.type, ["region", action.region.properties.name]);
+      // centerCoordinate, bbox
+      return {
+        ...state,
+        geocodeCoords: [
+          action.region.properties.lon,
+          action.region.properties.lat,
+        ],
+        centerCoordinate: [
+          action.region.properties.lon,
+          action.region.properties.lat,
+        ],
+        bbox: action.region.properties.bounds,
+        currRegion: action.region.properties.name.toUpperCase(),
+      };
     default:
       return state;
   }

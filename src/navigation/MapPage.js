@@ -109,7 +109,6 @@ export default function MapPage(props) {
       return null;
     }
   }
-  
 
   return (
     <SafeAreaProvider>

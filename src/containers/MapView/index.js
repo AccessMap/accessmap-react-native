@@ -76,7 +76,7 @@ export default function MapView() {
   let avoidRaisedCurbs = useSelector(
     (state: RootState) => state.mobility.avoidRaisedCurbs
   );
-  //   let bbox = useSelector((state: RootState) => state.bbox);
+  //   let bbox = useSelector((state: RootState) => state.map.bbox);
   //   const bounds = {
   // 	sw: [bbox[1], bbox[0]],
   // 	ne: [bbox[3], bbox[2]],
@@ -95,6 +95,7 @@ export default function MapView() {
     // update zoom level
     zoomPress(zoomLevel, prevZoomLevel);
   }, [zoomLevel]);
+
   useEffect(() => {
     // set camera coordinates
     if (camera.current && geocodeCoords) {
@@ -104,12 +105,14 @@ export default function MapView() {
       });
     }
   }, [geocodeCoords]);
+
   useEffect(() => {
     // map pan to user location
     if (locateUserSwitch && userLoc) {
       userLocationPress();
     }
   }, [userLoc, locateUserSwitch]);
+
   useEffect(() => {
     updatePath();
   }, [route]);

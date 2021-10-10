@@ -32,6 +32,7 @@ Logger.setLogCallback((log) => {
 
 function App() {
   const { t, i18n } = useTranslation();
+
   return (
     <NavigationContainer>
       <Tab.Navigator 

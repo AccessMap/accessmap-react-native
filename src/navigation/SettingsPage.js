@@ -46,7 +46,7 @@ function SettingsPage({ props, route, navigation }) {
   let currentLanguage = useSelector((state: RootState) => 
     state.setting.currLanguage);
   let currentRegion = useSelector((state: RootState) => 
-    state.setting.currRegion);
+    state.map.currRegion);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 

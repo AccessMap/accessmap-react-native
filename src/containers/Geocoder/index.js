@@ -23,7 +23,7 @@ export default function Geocoder(props) {
   const [searchList, setSearchList] = useState({});
   const prevSearch = usePrevious(props.search);
 
-  let bbox = useSelector((state: RootState) => state.setting.bbox.join(","));
+  let bbox = useSelector((state: RootState) => state.map.bbox.join(","));
   let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
 
   const dispatch = useDispatch();
