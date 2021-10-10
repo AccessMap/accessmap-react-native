@@ -10,6 +10,9 @@ import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// https://github.com/software-mansion/react-native-gesture-handler/issues/320
+import 'react-native-gesture-handler'; 
+
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import "./i18n";
