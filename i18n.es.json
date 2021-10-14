@@ -171,5 +171,10 @@
     "USER_TRACKING_TEXT": "Activar 'rastrear datos de usuario' nos permitirá recopilar datos sobre las acciones del usuario, como la frecuencia de los botones presionados en el mapa. Esto nos permite comprender mejor cómo interactúan los usuarios con AccessMap. Ninguna información personal o de identificación será almacenada o vinculada a sus acciones. Al hacer clic en Aceptar, usted acepta esta recopilación de datos.",
     "AGREE_TEXT": "De acuerdo",
     "DISAGREE_TEXT": "Discrepar",
-    "SIDEWALK_COLORS": "Colores de acera"
+    "SIDEWALK_COLORS": "Colores de acera",
+    "MILD_INCLINE_TEXT": "Inclinación leve o sin inclinación",
+    "MODERATE_INCLINE_TEXT": "Inclinación moderada",
+    "SIGNIFICANT_INCLINE_TEXT": "Inclinación significativa",
+    "INACCESSIBLE_INCLNE": "Inaccesible",
+    "SIDEWALK_COLORS_EXPLANATION": "Estos representan la dificultad relativa de una pendiente y dependen de sus porcentajes máximos aceptados de pendiente descendente y cuesta arriba."
 }

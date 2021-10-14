@@ -9,6 +9,7 @@ import LayerCrossings from "./layer-crossings";
 import LayerElevators from "./layer-elevator-paths";
 import LayerAnnotations from "./layer-annotations";
 import LayerRoute from "./layer-route";
+import LayerBoundaries from "./layer-boundaries";
 import { Views } from "../../styles";
 import {
   //   goToLocation,
@@ -260,6 +261,7 @@ export default function MapView() {
       compassViewMargins={{ x: 19, y: 300 }}
       ref={map}
       style={Views.map}
+      styleURL="mapbox://styles/jetplanejj/ckuq6toeketnv18qxcg3s1ikp"
       onPress={handleScreenPress}
       onLongPress={handleScreenPress}
       onRegionDidChange={panMap}
@@ -291,6 +293,7 @@ export default function MapView() {
         <LayerSidewalks />
         <LayerCrossings />
         <LayerElevators />
+        <LayerBoundaries />
       </MapboxGL.VectorSource>
 
       {route && route.code == "Ok" && <LayerRoute />}

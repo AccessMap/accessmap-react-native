@@ -2,7 +2,7 @@ export const mapTutorialContent = [
   {
     // Introducing the map itself
     toolTipPositionLeft: "15%",
-    toolTipPositionTop: "30%",
+    toolTipPositionTop: "35%",
     arrowPositionLeft: 100,
     arrowPositionTop: 30,
     heading: "MAP_HEAD_0",
@@ -10,8 +10,8 @@ export const mapTutorialContent = [
   },
   {
     // Choose a destination with Search Bar
-    toolTipPositionLeft: "15%",
-    toolTipPositionTop: "10%",
+    toolTipPositionLeft: "10%",
+    toolTipPositionTop: "18%",
     arrowPositionLeft: "100%",
     arrowPositionTop: "-50%",
     heading: "MAP_HEAD_1",
@@ -19,39 +19,30 @@ export const mapTutorialContent = [
   },
   {
     // Grey enter icon to pick start and end
-    toolTipPositionLeft: "30%",
-    toolTipPositionTop: "10%",
+    toolTipPositionLeft: "35%",
+    toolTipPositionTop: "16%",
     arrowPositionLeft: "680%",
     arrowPositionTop: "-50%",
     heading: "MAP_HEAD_1",
     paragraph: "MAP_TUT_2",
   },
   {
-    // Mobility Buttons
-    toolTipPositionLeft: "5%",
-    toolTipPositionTop: "20%",
-    arrowPositionLeft: "100%",
-    arrowPositionTop: "-50%",
-    heading: "MAP_HEAD_3",
-    paragraph: "MAP_TUT_3",
-  },
-  {
-    // Three dot icon to customize
-    toolTipPositionLeft: "30%",
-    toolTipPositionTop: "20%",
-    arrowPositionLeft: "680%",
-    arrowPositionTop: "-50%",
-    heading: "MAP_HEAD_3",
-    paragraph: "MAP_TUT_4",
-  },
-  {
     // Zoom in out, find my location button
     toolTipPositionLeft: "10%",
-    toolTipPositionTop: "58%",
+    toolTipPositionTop: "50%",
     arrowPositionLeft: "785%",
     arrowPositionTop: "400%",
     heading: "MAP_HEAD_5",
     paragraph: "MAP_TUT_5",
+  },
+  {
+    // Customize Profile Bottom Right Button
+    toolTipPositionLeft: "28%",
+    toolTipPositionTop: "48%",
+    arrowPositionLeft: "620%",
+    arrowPositionTop: "720%",
+    heading: "MAP_HEAD_3",
+    paragraph: "MAP_TUT_3",
   },
 ];
 

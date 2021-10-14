@@ -15,6 +15,7 @@ import {
   closeDirections,
   closeTripInfo,
   toggleMapTutorial,
+  toggleMobilityProfile,
   toggleRouteTutorial,
 } from "../../actions";
 import GreyDivider from "../../components/GreyDivider";
@@ -36,6 +37,10 @@ export default function InformationPage({ route, navigation }) {
       state.mobility.mobilityMode
     )[showingUphillColors ? 0 : 1];
   });
+  let mobilityProfileShowing = useSelector(
+    (state: RootState) => state.mobility.viewingMobilityProfile
+  );
+
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
@@ -44,6 +49,7 @@ export default function InformationPage({ route, navigation }) {
       <Text style={[Fonts.h2, { marginBottom: 5, marginTop: 10 }]}>
         {t("SIDEWALK_COLORS")}
       </Text>
+      <Text style={[Fonts.p]}>{t("SIDEWALK_COLORS_EXPLANATION")}</Text>
       <View
         style={{ flexDirection: "row", alignItems: "center" }}
         accessibilityLabel={"A bright green line representing flat incline."}
@@ -58,7 +64,7 @@ export default function InformationPage({ route, navigation }) {
           }}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
-          {"Flat Incline"}
+          {t("MILD_INCLINE_TEXT")}
         </Text>
       </View>
       <View
@@ -77,7 +83,7 @@ export default function InformationPage({ route, navigation }) {
           }}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
-          {"Moderate Incline"}
+          {t("MODERATE_INCLINE_TEXT")}
         </Text>
       </View>
       <View
@@ -96,7 +102,7 @@ export default function InformationPage({ route, navigation }) {
           }}
         />
         <Text style={[Fonts.p, { flex: 3, marginBottom: 5, marginTop: 10 }]}>
-          {"Significant Incline"}
+          {t("SIGNIFICANT_INCLINE_TEXT")}
         </Text>
       </View>
       <View
@@ -133,7 +139,7 @@ export default function InformationPage({ route, navigation }) {
             { flex: 3, marginBottom: 5, marginTop: 10, marginLeft: 15 },
           ]}
         >
-          {"Inaccessible (with current Mobility Profile Setting)"}
+          {t("INACCESSIBLE_INCLNE")}
         </Text>
       </View>
       <SpeedLegend maxIncline={maxIncline} />
@@ -228,6 +234,19 @@ export default function InformationPage({ route, navigation }) {
   const [collapsedFirst, setCollapsedFirst] = useState(true);
   const [collapsedSecond, setCollapsedSecond] = useState(true);
 
+  const startTutorial = (tutorialName) => {
+    navigation.pop();
+    dispatch(cancelRoute());
+    dispatch(closeTripInfo());
+    dispatch(closeDirections());
+    if (mobilityProfileShowing) {
+      dispatch(toggleMobilityProfile());
+    }
+    AccessibilityInfo.announceForAccessibility(
+      "Showing " + tutorialName + " Tutorial."
+    );
+  }
+
   return (
     <ScrollView style={Views.scrollView}>
       <TouchableOpacity
@@ -270,27 +289,19 @@ export default function InformationPage({ route, navigation }) {
       </TouchableOpacity>
 
       <Collapsible collapsed={collapsedSecond}>
-        <FlatList
-          data={[{ key: t("MAP_INTERFACE") }, { key: t("ROUTE_PLANNING") }]}
-          renderItem={({ item }) => (
-            <MenuButton
-              text={item.key}
-              onPress={() => {
-                navigation.pop();
-                if (item.key == t("MAP_INTERFACE")) {
-                  dispatch(toggleMapTutorial());
-                } else {
-                  dispatch(toggleRouteTutorial());
-                }
-                dispatch(cancelRoute());
-                dispatch(closeTripInfo());
-                dispatch(closeDirections());
-                AccessibilityInfo.announceForAccessibility(
-                  "Showing " + item.key + " Tutorial."
-                );
-              }}
-            />
-          )}
+        <MenuButton
+          text={t("MAP_INTERFACE")}
+          onPress={() => {
+            dispatch(toggleMapTutorial());
+            startTutorial(t("MAP_INTERFACE"));
+          }}
+        />
+        <MenuButton
+          text={t("ROUTE_PLANNING")}
+          onPress={() => {
+            dispatch(toggleRouteTutorial());
+            startTutorial(t("ROUTE_PLANNING"))
+          }}
         />
         <View style={{ height: 200 }} />
       </Collapsible>

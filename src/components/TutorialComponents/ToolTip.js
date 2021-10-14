@@ -55,12 +55,13 @@ export default function ToolTip({
           width: 30,
           height: 30,
           backgroundColor: '#0F47A1',
-          zIndex: 98,
           transform: [{ rotate: "45deg" }],
         }}
       ></View>
 
       <View // tooltip rectangle box
+        importantForAccessibility="yes"
+        pointerEvents="auto"
         style={{ 
             position: "absolute", 
             zIndex: 99 

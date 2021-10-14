@@ -151,7 +151,7 @@ export default function MapPage(props) {
               <ToolTip
                 cardDescription={t("MAP_INTERFACE")}
                 numStep={numStep}
-                maxStep={6}
+                maxStep={mapTutorialContent.length}
                 toolTipPositionLeft={
                   mapTutorialContent[numStep].toolTipPositionLeft
                 }
@@ -172,7 +172,7 @@ export default function MapPage(props) {
               <ToolTip 
                 cardDescription={t("ROUTE_PLANNING")}
                 numStep={numStep}
-                maxStep={2}
+                maxStep={routeTutorialContent.length}
                 toolTipPositionLeft={
                   routeTutorialContent[numStep].toolTipPositionLeft
                 }

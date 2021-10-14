@@ -32,6 +32,7 @@ export default function CustomCard(props) {
     // }).start();
   }, [props.cardVisible]);
 
+  // Defines the swipe event
   const handleSwipeEvent = Animated.event(
     [
       {
@@ -45,6 +46,7 @@ export default function CustomCard(props) {
     }
   );
 
+  // Handles the threshold interaction for dismissing the card
   const handleStateChange = ({ nativeEvent }) => {
     if (nativeEvent.state === State.END && 
         (nativeEvent.translationY >= threshold || 

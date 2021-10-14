@@ -64,7 +64,7 @@
   "USE_CROSSING_TEXT": "Cross the street",
   "ABOUT_TEXT": "About",
   "CONTACT_TEXT": "Contact",
-  "TUTORIAL": "Tutorial",
+  "TUTORIAL": "Tutorials",
   "SETTINGS": "Settings",
   "OTHER_TEXT": "Other",
   "TRACK_SETTINGS": "Track user data",
@@ -177,5 +177,10 @@
   "USER_TRACKING_TEXT": "Turning on 'track user data' will allow us to collect data on user actions, such as the frequency of buttons pressed on the map. This allows us to better understand how users interact with AccessMap. No personal or identifying information will be stored or linked to your actions. By clicking Agree, you consent to this data collection.",
   "AGREE_TEXT": "Agree",
   "DISAGREE_TEXT": "Disagree",
-  "SIDEWALK_COLORS": "Sidewalk Colors"
+  "SIDEWALK_COLORS": "Sidewalk Colors",
+  "MILD_INCLINE_TEXT": "Mild or No Incline",
+  "MODERATE_INCLINE_TEXT": "Moderate Incline",
+  "SIGNIFICANT_INCLINE_TEXT": "Significant Incline",
+  "INACCESSIBLE_INCLNE": "Inaccessible",
+  "SIDEWALK_COLORS_EXPLANATION": "These represent the relative difficulty of a slope and depend on your maximum accepted downhill and uphill incline percentages."
 }
