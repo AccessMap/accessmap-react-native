@@ -1,7 +1,8 @@
 // Shows trip information with elevation changes graph
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 import {
   AreaChart,
   // LineChart,
@@ -13,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { metersToFeet, metersToMiles } from "../../utils/metric-imperial-conversion";
 
 import Header from "../Header";
+import CustomCard from "../../containers/CustomCard";
 import { Views } from "../../styles";
 
 const InfoText = (props) => {
@@ -24,29 +26,34 @@ const InfoText = (props) => {
   );
 };
 
-const TripInfo = (props) => {
+export default function TripInfo(props) {
   const { t, i18n } = useTranslation();
+  let usingMetricSystem = useSelector((state: RootState) => 
+    state.setting.usingMetricSystem)
+
   if (props.route == null || props.route.routes == null) {
     return (<Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>);
   }
+
   const route = props.route.routes[0];
   const data = route.legs[0];
   const nRoutes = [...Array(data.length + 1).keys()];
 
-  var routeDistance = props.usingMetricSystem ? 
+  var routeDistance = usingMetricSystem ? 
     route.distance.toFixed(1) : metersToMiles(route.distance); // total distance in miles
-  var units = props.usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT");
+  var units = usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT");
 
   const dist = nRoutes.map((i) => {
     if (i == 0) {
       return 0;
     }
     var metersDistance = data[i - 1].properties.length;
-    return (props.usingMetricSystem ? metersDistance : metersToFeet(metersDistance));
+    return (usingMetricSystem ? metersDistance : metersToFeet(metersDistance));
   });
 
   var maxUphill = -200;
   var maxDownhill = 200;
+
   const elevChange = nRoutes.map((i) => {
     if (i == 0) {
       return 0;
@@ -56,20 +63,22 @@ const TripInfo = (props) => {
       maxDownhill = Math.min(data[i - 1].properties.incline, maxDownhill);
       var metersHigh =
         data[i - 1].properties.incline * data[i - 1].properties.length;
-        return (props.usingMetricSystem ? metersHigh : metersToFeet(metersHigh));
+        return (usingMetricSystem ? metersHigh : metersToFeet(metersHigh));
     }
     return 0;
   });
+
   const xInc = [...Array(10).keys()];
   const xAxis = xInc.map((i) => (i * dist[dist.length - 1]) / 9);
   for (var i = 1; i < dist.length; i++) {
     dist[i] += dist[i - 1];
     elevChange[i] += elevChange[i - 1];
   }
-  return (
-    <View style={[Views.bottomCard, { height: "40%", backgroundColor: "white" }]}>
+
+  const content = (
+    <View style={[{maxHeight: 250, backgroundColor: "white" }]}>
       <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
-      <ScrollView style={{ paddingHorizontal: 10}}>
+      <ScrollView style={{ paddingHorizontal: 10 }}>
         <Text>Experienced elevation gain</Text>
         <View
           style={{
@@ -90,7 +99,7 @@ const TripInfo = (props) => {
             <Text>
               {t("GRAPH_Y_AXIS")}
               {"("}
-              {props.usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT")}
+              {usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT")}
               {")"}
             </Text>
           </View>
@@ -131,7 +140,7 @@ const TripInfo = (props) => {
           <Text>
             {t("GRAPH_X_AXIS")}
             {"("}
-            {props.usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT")}
+            {usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT")}
             {")"}
           </Text>
         </View>
@@ -154,12 +163,6 @@ const TripInfo = (props) => {
       </ScrollView>
     </View>
   );
-};
 
-const mapStateToProps = (state) => {
-  return {
-    usingMetricSystem: state.setting.usingMetricSystem,
-  };
+  return <CustomCard cardVisible={true} content={content} dismissCard={props.close}/>
 };
-
-export default connect(mapStateToProps)(TripInfo);

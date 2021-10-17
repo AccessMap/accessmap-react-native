@@ -16,8 +16,6 @@ const inner_rings = regions.map((feature) => {
   return coords;
 });
 
-console.log(inner_rings)
-
 const invertedPolygon: Feature = {
   type: "Feature",
   geometry: {
