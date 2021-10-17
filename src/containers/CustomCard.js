@@ -2,8 +2,8 @@
 // slide in, has no lowered opacity outside the card, adjusts its height
 // based on its content, and is stuck to the bottom of the screen.
 import React, { useEffect, useRef, useState } from "react";
-import { AccessibilityInfo, Animated, PanResponder, View } from "react-native"; // TODO: Vibration?
-// import { PanGestureHandler, State } from "react-native-gesture-handler";
+import { AccessibilityInfo, Animated, View } from "react-native"; // TODO: Vibration?
+import { PanGestureHandler, State } from "react-native-gesture-handler";
 import { useComponentSize } from "../utils/useComponentSize";
 
 export default function CustomCard(props) {
@@ -11,28 +11,10 @@ export default function CustomCard(props) {
   // content: [View] content to be shown in middle of card
   // dismissCard: [function]
 
-  // const translation = useRef(new Animated.Value(0)).current;
   const [cardHasLoaded, setLoaded] = useState(false);
   const [size, onLayout] = useComponentSize(); // current size width/height
   const threshold = size ? size.height - 20 : 500;
-  const pan = useRef(new Animated.ValueXY()).current;
-
-  const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([
-      null,
-      {
-        dy: pan.y,
-      },
-    ]),
-
-    onPanResponderRelease: (evt) => {
-      pan.setOffset(0, evt.y);
-      // if (evt.y >= threshold) {
-      //   props.dismissCard();
-      // }
-    },
-  });
+  const panY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (cardHasLoaded) {
@@ -46,54 +28,60 @@ export default function CustomCard(props) {
     }
   }, [props.cardVisible]);
 
-  // Handles the threshold interaction for dismissing the card
-  // const handleStateChange = ({ nativeEvent }) => {
-  //   console.log(nativeEvent)
-  //   if (nativeEvent.state === State.END) {
-  //     if (nativeEvent.translationY >= threshold || nativeEvent.velocityY >= 1420) {
-  //       props.dismissCard();
-  //     }
-  //     translateY.setOffset(nativeEvent.translationY)
-  //   }
-  // };
+  const handleSwipeEvent = Animated.event(
+    [{ nativeEvent: { translationY: panY, }, }],
+    { useNativeDriver: true }
+  );
 
+  // Handles the threshold interaction for dismissing
+  const handleStateChange = ({ nativeEvent }) => {
+    panY.extractOffset(); // prevents jumping to initial state
+    if (nativeEvent.state === State.END) {
+      if (nativeEvent.translationY >= threshold || nativeEvent.velocityY >= 1420) {
+        props.dismissCard();
+      }
+    }
+  };
+  
   return (
-    <Animated.View
-      {...panResponder.panHandlers}
-      onLayout={onLayout}
-      style={{
-        position: "absolute",
-        width: "100%",
-        bottom: 0,
-        flex: 1,
-        zIndex: 50,
-        flexDirection: "column",
-        alignItems: "center",
-        transform: [
-          {
-            translateY: pan.y.interpolate({
+    <PanGestureHandler
+      onGestureEvent={handleSwipeEvent}
+      onHandlerStateChange={handleStateChange}
+    >
+      <Animated.View
+        onLayout={onLayout}
+        style={{
+          position: "absolute",
+          width: "100%",
+          bottom: 0,
+          flex: 1,
+          zIndex: 50,
+          flexDirection: "column",
+          alignItems: "center",
+          transform: [{ 
+            translateY: panY.interpolate({
               inputRange: [0, threshold],
               outputRange: [0, threshold],
-              extrapolate: "clamp",
-            }),
-          },
-        ],
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "white",
-          width: "100%",
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          paddingTop: 15,
-          paddingLeft: 20,
-          paddingRight: 10,
-          paddingBottom: 20,
+              extrapolate: 'clamp'
+            })
+          }],
         }}
       >
-        {props.content}
-      </View>
-    </Animated.View>
+        <View
+          style={{
+            backgroundColor: "white",
+            width: "100%",
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            paddingTop: 15,
+            paddingLeft: 20,
+            paddingRight: 10,
+            paddingBottom: 20,
+          }}
+        >
+          {props.content}
+        </View>
+      </Animated.View>
+    </PanGestureHandler>
   );
 }
