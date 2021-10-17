@@ -12,12 +12,12 @@ const outer_ring = [
 ];
 
 const inner_rings = regions.map((feature) => {
-  const coords: Position[] = feature.geometry.coordinates[0][0];
+  const coords: Position[] = feature.geometry.coordinates[0];
   return coords;
 });
 
-// TODO: use a geojson inverter helper function to handle inverting
-// multipolygons in the future?
+console.log(inner_rings)
+
 const invertedPolygon: Feature = {
   type: "Feature",
   geometry: {
@@ -32,10 +32,10 @@ export default function LayerBoundaries(props) {
     <React.Fragment>
       <MapboxGL.ShapeSource id="regions-mask" shape={invertedPolygon}>
         <MapboxGL.LineLayer
-          id="region-boundary-line"
+          id="regions-mask"
           style={{ lineColor: "black", lineWidth: 2 }}
         />
       </MapboxGL.ShapeSource>
     </React.Fragment>
   );
-};
+}

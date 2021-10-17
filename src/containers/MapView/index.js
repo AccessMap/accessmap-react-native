@@ -256,6 +256,7 @@ export default function MapView() {
   return (
     <MapboxGL.MapView
       logoEnabled={false}
+      localizeLabels={true}
       attributionEnabled={false}
       compassViewPosition={3}
       compassViewMargins={{ x: 19, y: 300 }}
@@ -285,6 +286,7 @@ export default function MapView() {
       />
 
       <LayerAnnotations />
+      <LayerBoundaries />
 
       <MapboxGL.VectorSource
         id="pedestrian"
@@ -293,7 +295,6 @@ export default function MapView() {
         <LayerSidewalks />
         <LayerCrossings />
         <LayerElevators />
-        <LayerBoundaries />
       </MapboxGL.VectorSource>
 
       {route && route.code == "Ok" && <LayerRoute />}
