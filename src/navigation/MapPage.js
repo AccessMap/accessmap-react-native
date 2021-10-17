@@ -113,11 +113,11 @@ export default function MapPage(props) {
   return (
     <SafeAreaProvider>
       <SafeAreaView 
-        edges={(Platform.OS === "android") ? null : ["top"]}
+        edges={null}
         style={{ 
           flex: 1, backgroundColor: "white", 
           paddingTop: (StatusBar.currentHeight && Platform.OS === "android" ? 
-            StatusBar.currentHeight - 10 : 15)
+            StatusBar.currentHeight - 10 : 0)
         }}
         >
 

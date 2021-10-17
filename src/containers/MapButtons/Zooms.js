@@ -76,7 +76,7 @@ function Zooms(props) {
   const { t, i18n } = useTranslation();
 
   return (
-    <View accessible={true} style={Buttons.zooms} pointerEvents="box-none">
+    <View style={Buttons.zooms} pointerEvents="box-none">
       <View style={{ alignSelf: "flex-end" }}>
         <Button
           title=""

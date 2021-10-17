@@ -13,6 +13,20 @@ export const whiteButton = {
   marginTop: 10,
 };
 
+// Used in submitting Feedback form
+export const submitButtonsContainer = {
+  marginTop: 80,
+  marginBottom: 10,
+  borderRadius: 15,
+}
+
+export const submitButtonStyle = {
+  backgroundColor: primaryColor,
+  paddingVertical: 20,
+  borderColor: "white",
+  borderRadius: 5,
+}
+
 // pressable icon buttons on the OmniCard
 export const iconButton = {
   backgroundColor: "#FFFFFF",

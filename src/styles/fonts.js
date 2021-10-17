@@ -1,5 +1,12 @@
 // Stylesheet for text styles
 
+export const title = {
+  color: "black",
+  fontSize: 48,
+  fontWeight: "bold",
+  fontFamily: "Inter-SemiBold",
+}
+
 // For card or view header text
 export const h1 = {
   color: "black",

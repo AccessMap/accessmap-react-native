@@ -92,7 +92,7 @@ export default function CustomSlider(props) {
         minimumValue={minValue}
         maximumValue={maxValue}
         step={0.5}
-        trackStyle={{ height: 10, borderRadius: 20 }}
+        trackStyle={{ height: 15, borderRadius: 20 }}
         minimumTrackTintColor={
           mobilityMode == MOBILITY_MODE_CUSTOM
             ? Colors.primaryColor

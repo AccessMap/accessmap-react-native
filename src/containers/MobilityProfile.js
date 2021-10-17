@@ -31,7 +31,7 @@ export default function MobilityProfile(props) {
   const content = (
     <View style={{ height: "100%", marginRight: 0 }}>
       <Header title={t("MAP_HEAD_3")} close={props.close} />
-      <ScrollView style={{ marginRight: 15 }}>
+      <View style={{ marginRight: 15 }}>
         <MobilityButtonGroup />
         <CustomSlider title={t("MAX_UPHILL_STEEPNESS_TEXT")} uphill={true} />
         <CustomSlider title={t("MAX_DOWNHILL_STEEPNESS_TEXT")} uphill={false} />
@@ -40,7 +40,7 @@ export default function MobilityProfile(props) {
           {t("MAP_HEAD_6")}
         </Text>
         <SpeedLegend maxIncline={maxIncline} />
-      </ScrollView>
+      </View>
     </View>
   );
   return (

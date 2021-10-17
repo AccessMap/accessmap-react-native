@@ -14,6 +14,8 @@ import {
   closeDirections,
   closeTripInfo,
   cancelRoute,
+  showDownhill,
+  showUphill,
 } from "../../actions";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +35,8 @@ export default function OmniCard(props) {
   let destinationText = useSelector(
     (state: RootState) => state.map.destinationText
   );
+  let uphillMode = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors)
 
   //---------------------------------------------------------------------------
   const dispatch = useDispatch();
@@ -160,14 +164,25 @@ export default function OmniCard(props) {
           </View>
         }
       </Card>
-      <Button
-        containerStyle={[Buttons.whiteButton, 
-          {width: 50, alignSelf: "flex-end", marginTop: 10}]}
-        accessibilityLabel={t("INFORMATION")}
-        buttonStyle={{ backgroundColor: "white" }}
-        icon={<CustomIcon name="information" size={32} color={primaryColor} />}
-        onPress={() => props.navigation.push(t("INFORMATION"))}
-      />
+
+      <View style={{flexDirection: "row", justifyContent: "space-between", marginHorizontal: 5}}>
+        <Button
+          buttonStyle={{ backgroundColor: "white"}}
+          titleStyle={{color: primaryColor}}
+          containerStyle={[Buttons.whiteButton, 
+            {marginTop: 10, borderRadius: 20, paddingHorizontal: 10, paddingTop: 3}]}
+          title={uphillMode ? "Uphill Mode" : "Downhill Mode"}
+          onPress={() => dispatch(uphillMode ? showDownhill() : showUphill())}
+        />
+        <Button
+          containerStyle={[Buttons.whiteButton, 
+            {width: 50, marginTop: 10}]}
+          accessibilityLabel={t("INFORMATION")}
+          buttonStyle={{ backgroundColor: "white" }}
+          icon={<CustomIcon name="information" size={32} color={primaryColor} />}
+          onPress={() => props.navigation.push(t("INFORMATION"))}
+        />
+      </View>
     </View>
   );
 }

@@ -57,3 +57,28 @@ const setFocus = (element: React.Component | null) => {
   }
 };
 ```
+
+# Checking if screen reader active or not
+```js
+const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
+  useEffect(() => {
+    const screenReaderChangedSubscription = AccessibilityInfo.addEventListener(
+      "screenReaderChanged",
+      screenReaderEnabled => {
+        setScreenReaderEnabled(screenReaderEnabled);
+      }
+    );
+    AccessibilityInfo.addEventListener(
+      "screenReaderChanged",
+      screenReaderEnabled => {
+        setScreenReaderEnabled(screenReaderEnabled);
+      }
+    );
+    AccessibilityInfo.isScreenReaderEnabled().then(
+      screenReaderEnabled => {
+        setScreenReaderEnabled(screenReaderEnabled);
+      }
+    );
+    return () => screenReaderChangedSubscription.remove()
+  }, []);
+  ```
