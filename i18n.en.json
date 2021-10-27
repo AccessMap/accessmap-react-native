@@ -177,6 +177,7 @@
   "USER_TRACKING_TEXT": "Turning on 'track user data' will allow us to collect data on user actions, such as the frequency of buttons pressed on the map. This allows us to better understand how users interact with AccessMap. No personal or identifying information will be stored or linked to your actions. By clicking Agree, you consent to this data collection.",
   "AGREE_TEXT": "Agree",
   "DISAGREE_TEXT": "Disagree",
+  "MODE": "Mode",
   "SIDEWALK_COLORS": "Sidewalk Colors",
   "MILD_INCLINE_TEXT": "Mild or No Incline",
   "MODERATE_INCLINE_TEXT": "Moderate Incline",

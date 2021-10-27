@@ -11,6 +11,8 @@ import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
 import CustomBottomTabBar, {} from "./components/CustomBottomTabBar";
+import { deepLinking } from "./constants/urls";
+import LoadingScreen from "./components/LoadingScreen";
 
 LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -34,7 +36,7 @@ function App() {
   const { t, i18n } = useTranslation();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={deepLinking} fallback={<LoadingScreen isLoading={true}/>}>
       <Tab.Navigator 
       tabBar={props => <CustomBottomTabBar {...props}/>}
       initialRouteName={t("HOME")} 
@@ -63,8 +65,8 @@ function App() {
           name={t("SETTINGS")}
           component={SettingsPage}
           options={{
-            tabBarActiveTintColor: Colors.primaryColor,
-            tabBarInactiveTintColor: Colors.grey,
+            // tabBarActiveTintColor: Colors.primaryColor,
+            // tabBarInactiveTintColor: Colors.grey,
             tabBarIcon: ({ focused, color, size }) => {
               return (
                 <MaterialCommunityIcons

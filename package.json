@@ -22,6 +22,7 @@
     "react": "^17.0.2",
     "react-i18next": "^11.12.0",
     "react-native": "^0.66.0",
+    "react-native-app-auth": "^6.4.0",
     "react-native-collapsible": "^1.6.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",

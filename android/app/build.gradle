@@ -2,8 +2,6 @@ apply plugin: "com.android.application"
 apply plugin: 'org.owasp.dependencycheck'
 // open build/reports for the results of the security dependency check
 
-import com.android.build.OutputFile
-
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -141,8 +139,11 @@ android {
         applicationId "com.accessmap"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "2.1.0"
+        versionCode 4
+        versionName "2.2.0"
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'com.accessmap.auth'
+        ]
     }
     splits {
         abi {
@@ -195,6 +196,10 @@ android {
 }
 
 dependencies {
+    // Deep Linking
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+    
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

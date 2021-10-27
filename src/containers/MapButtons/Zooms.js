@@ -111,7 +111,7 @@ function Zooms(props) {
         buttonStyle={{backgroundColor: "white", 
           paddingHorizontal: 10, paddingVertical: 12}}
         titleStyle={{color: Colors.primaryColor, marginStart: 5}}
-        title={"Modify Profile"}
+        title={t("MAP_HEAD_3")}
         icon={<RNEIcon
           size={20}
           color={Colors.primaryColor}

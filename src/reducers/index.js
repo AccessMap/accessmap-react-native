@@ -5,6 +5,7 @@ import { mapLoadingReducer as mapLoad } from "./mapLoading";
 import { mobilityReducer as mobility } from "./mobilityModes";
 import { settingsReducer as setting } from "./settings";
 import { tutorialReducer as tutorial } from "./tutorials";
+import { signInReducer as signIn } from "./signin";
 
 const { Rakam } = NativeModules;
 export const logEvent = async (type, props) => {
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	mobility,
 	setting,
 	tutorial,
+	signIn,
 });
 
 export default rootReducer;

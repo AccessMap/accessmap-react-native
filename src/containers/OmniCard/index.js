@@ -168,11 +168,14 @@ export default function OmniCard(props) {
       <View style={{flexDirection: "row", justifyContent: "space-between", marginHorizontal: 5}}>
         <Button
           buttonStyle={{ backgroundColor: "white"}}
-          titleStyle={{color: primaryColor}}
+          titleStyle={{color: primaryColor, paddingVertical: 5}}
           containerStyle={[Buttons.whiteButton, 
-            {marginTop: 10, borderRadius: 20, paddingHorizontal: 10, paddingTop: 3}]}
-          title={uphillMode ? "Uphill Mode" : "Downhill Mode"}
-          onPress={() => dispatch(uphillMode ? showDownhill() : showUphill())}
+            {marginTop: 8, borderRadius: 15, paddingHorizontal: 10, paddingTop: 2}]}
+          title={uphillMode ? t("UPHILL_TEXT") + " " + t("MODE") : 
+            t("DOWNHILL_TEXT") + " " + t("MODE")}
+          onPress={() => 
+            dispatch(uphillMode ? 
+              showDownhill() : showUphill())}
         />
         <Button
           containerStyle={[Buttons.whiteButton, 

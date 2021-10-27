@@ -258,8 +258,8 @@ export default function MapView() {
       logoEnabled={false}
       localizeLabels={true}
       attributionEnabled={false}
-      compassViewPosition={3}
-      compassViewMargins={{ x: 19, y: 300 }}
+      compassViewPosition={2}
+      // compassViewMargins={{ x: 19, y: 300 }}
       ref={map}
       style={Views.map}
       styleURL="mapbox://styles/jetplanejj/ckuq6toeketnv18qxcg3s1ikp"

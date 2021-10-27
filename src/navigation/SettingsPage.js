@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import {
+  authenticate,
   goToLanguage,
   goToRegion,
   trackUser,
@@ -22,6 +23,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Buttons, Colors, Fonts, Views } from "../styles";
+import { Button } from "react-native-elements";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/GreyDivider";
@@ -34,6 +36,9 @@ import BottomCardButton from "../components/BottomCardButton";
 import AboutPage from "./Information/AboutPage";
 import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
+
+import { primaryColor } from "../styles/colors";
+import { h2 } from "../styles/fonts";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -80,9 +85,26 @@ function SettingsPage({ props, route, navigation }) {
   const [collapsedSecond, setCollapsedSecond] = useState(true);
   const [collapsedThird, setCollapsedThird] = useState(true);
   const [collapsedFourth, setCollapsedFourth] = useState(true);
+
   return (
     <View>
       <ScrollView style={Views.scrollView}>
+        <View>
+          <Button
+            containerStyle={[{ flex: 1, marginBottom: 20, marginRight: 5 }]}
+            buttonStyle={{
+              backgroundColor: primaryColor,
+              paddingVertical: 18,
+              borderColor: "white",
+            }}
+            titleStyle={[h2, {color: "white"}]}
+            onPress={() => dispatch(authenticate())}
+            title="Login"
+            color={primaryColor}
+            accessibilityLabel="Login"
+          />
+        </View>
+
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
