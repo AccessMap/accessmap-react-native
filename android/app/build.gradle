@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: 'org.owasp.dependencycheck'
 // open build/reports for the results of the security dependency check
+import com.android.build.OutputFile
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets

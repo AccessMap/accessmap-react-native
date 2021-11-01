@@ -12,7 +12,9 @@ export const wsdotURL = "https://wsdot.wa.gov/";
 export const twitterURL = "https://twitter.com/accessmapsea";
 export const mailURL = "mailto:accessmap.info@gmail.com";
 
-const accessmapBackEndPrefix = "https://www.accessmap.io/api/v1/";
+//-------------------------------------------------------------------------------------------------
+// Backend and Redirects
+export const accessmapBackEndPrefix = "https://www.accessmap.io/api/v1/";
 export const loginURL = accessmapBackEndPrefix + "auth/login";
 export const appRedirectURIPrefix = "com.accessmap.auth://";
 

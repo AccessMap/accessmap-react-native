@@ -38,7 +38,7 @@ import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
 import { primaryColor } from "../styles/colors";
-import { h2 } from "../styles/fonts";
+import { h1, h2 } from "../styles/fonts";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -52,6 +52,9 @@ function SettingsPage({ props, route, navigation }) {
     state.setting.currLanguage);
   let currentRegion = useSelector((state: RootState) => 
     state.map.currRegion);
+  let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
+  let displayName = useSelector((state: RootState) => state.signIn.displayName);
+
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -81,15 +84,17 @@ function SettingsPage({ props, route, navigation }) {
     </View>
   );
 
-  const [collapsedFirst, setCollapsedFirst] = useState(true);
-  const [collapsedSecond, setCollapsedSecond] = useState(true);
-  const [collapsedThird, setCollapsedThird] = useState(true);
-  const [collapsedFourth, setCollapsedFourth] = useState(true);
+  const [collapsedLang, setCollapsedLang] = useState(true);
+  const [collapsedRegion, setCollapsedRegion] = useState(true);
+  const [collapsedUnits, setCollapsedUnits] = useState(true);
+  const [collapsedPrivacy, setCollapsedPrivacy] = useState(true);
+  const [collapsedAbout, setCollapsedAbout] = useState(true);
 
   return (
     <View>
       <ScrollView style={Views.scrollView}>
         <View>
+          { isLoggedIn && <Text style={h1}>{`Hello, ${displayName}`}</Text>}
           <Button
             containerStyle={[{ flex: 1, marginBottom: 20, marginRight: 5 }]}
             buttonStyle={{
@@ -108,9 +113,9 @@ function SettingsPage({ props, route, navigation }) {
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            setCollapsedFirst(!collapsedFirst);
+            setCollapsedLang(!collapsedLang);
             AccessibilityInfo.announceForAccessibility(
-              collapsedFirst
+              collapsedLang
                 ? "Language section has been maximized."
                 : "Language section has been collapsed."
             );
@@ -118,7 +123,7 @@ function SettingsPage({ props, route, navigation }) {
         >
           <Text style={[Fonts.h2]}>{t("LANGUAGES_TEXT")}</Text>
         </TouchableOpacity>
-        <Collapsible collapsed={collapsedFirst}>
+        <Collapsible collapsed={collapsedLang}>
           <RadioButton.Group
             onValueChange={(value) => {
               var item = languages.filter((data) => {
@@ -147,9 +152,9 @@ function SettingsPage({ props, route, navigation }) {
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            setCollapsedSecond(!collapsedSecond);
+            setCollapsedRegion(!collapsedRegion);
             AccessibilityInfo.announceForAccessibility(
-              collapsedSecond
+              collapsedRegion
                 ? "Region section has been maximized."
                 : "Region section has been collapsed."
             );
@@ -158,7 +163,7 @@ function SettingsPage({ props, route, navigation }) {
         >
           <Text style={Fonts.h2}>{t("REGIONS_TEXT")}</Text>
         </TouchableOpacity>
-        <Collapsible collapsed={collapsedSecond}>
+        <Collapsible collapsed={collapsedRegion}>
           <RadioButton.Group
             onValueChange={(value) => {
               var item = regions.filter((data) => {
@@ -186,9 +191,9 @@ function SettingsPage({ props, route, navigation }) {
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            setCollapsedThird(!collapsedThird);
+            setCollapsedUnits(!collapsedUnits);
             AccessibilityInfo.announceForAccessibility(
-              collapsedThird
+              collapsedUnits
                 ? "Units section has been maximized."
                 : "Units section has been collapsed."
             );
@@ -197,7 +202,7 @@ function SettingsPage({ props, route, navigation }) {
         >
           <Text style={Fonts.h2}>{t("UNITS_TEXT")}</Text>
         </TouchableOpacity>
-        <Collapsible collapsed={collapsedThird}>
+        <Collapsible collapsed={collapsedUnits}>
           <RadioButton.Group
             onValueChange={(value) => {
               if (value) {
@@ -225,18 +230,31 @@ function SettingsPage({ props, route, navigation }) {
 
         {Platform.OS === "android" && <GreyDivider />}
         {Platform.OS === "android" && (
-          <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
+          <TouchableOpacity
+            style={{ paddingVertical: 10 }}
+            onPress={() => {
+              setCollapsedPrivacy(!collapsedPrivacy)
+              AccessibilityInfo.announceForAccessibility(
+                collapsedPrivacy
+                  ? "Privacy section has been maximized."
+                  : "Privacy section has been collapsed."
+              );
+            }}>
+            <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
+          </TouchableOpacity>
         )}
-        {Platform.OS === "android" && PrivacySection}
+        { Platform.OS === "android" && 
+          <Collapsible collapsed={collapsedPrivacy}>{PrivacySection}</Collapsible>
+        }
 
         <GreyDivider />
 
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            setCollapsedFourth(!collapsedFourth);
+            setCollapsedAbout(!collapsedAbout);
             AccessibilityInfo.announceForAccessibility(
-              collapsedFourth
+              collapsedAbout
                 ? "About section has been maximized."
                 : "About section has been collapsed."
             );
@@ -245,7 +263,7 @@ function SettingsPage({ props, route, navigation }) {
         >
           <Text style={[Fonts.h2]}>{t("ABOUT_TEXT")}</Text>
         </TouchableOpacity>
-        <Collapsible collapsed={collapsedFourth}>
+        <Collapsible collapsed={collapsedAbout}>
           <AboutPage />
         </Collapsible>
         <View style={{ height: 50 }}></View>

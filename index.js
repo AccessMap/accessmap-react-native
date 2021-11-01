@@ -28,7 +28,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
+export const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
 const persistor = persistStore(store);
 
 class Index extends Component<Props> {
