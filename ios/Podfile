@@ -30,6 +30,8 @@ target 'AccessMap' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
 
+  pod 'RNPostHog', :path => '../node_modules/posthog-react-native'
+
   target 'AccessMapTests' do
     inherit! :search_paths
     # Pods for testing

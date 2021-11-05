@@ -39,6 +39,7 @@ import { RootState } from "../reducers";
 
 import { primaryColor } from "../styles/colors";
 import { h1, h2 } from "../styles/fonts";
+import PostHog from "posthog-react-native";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,6 +71,7 @@ function SettingsPage({ props, route, navigation }) {
         onValueChange={(value) => {
           if (trackingSetting) {
             dispatch(untrackUser());
+            PostHog.disable()
             if (pageLoaded) {
               AccessibilityInfo.announceForAccessibility(t("NOT_TRACKING"));
             } else {
@@ -228,24 +230,20 @@ function SettingsPage({ props, route, navigation }) {
           </RadioButton.Group>
         </Collapsible>
 
-        {Platform.OS === "android" && <GreyDivider />}
-        {Platform.OS === "android" && (
-          <TouchableOpacity
-            style={{ paddingVertical: 10 }}
-            onPress={() => {
-              setCollapsedPrivacy(!collapsedPrivacy)
-              AccessibilityInfo.announceForAccessibility(
-                collapsedPrivacy
-                  ? "Privacy section has been maximized."
-                  : "Privacy section has been collapsed."
-              );
-            }}>
-            <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
-          </TouchableOpacity>
-        )}
-        { Platform.OS === "android" && 
-          <Collapsible collapsed={collapsedPrivacy}>{PrivacySection}</Collapsible>
-        }
+        <GreyDivider />
+        <TouchableOpacity
+          style={{ paddingVertical: 10 }}
+          onPress={() => {
+            setCollapsedPrivacy(!collapsedPrivacy)
+            AccessibilityInfo.announceForAccessibility(
+              collapsedPrivacy
+                ? "Privacy section has been maximized."
+                : "Privacy section has been collapsed."
+            );
+          }}>
+          <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
+        </TouchableOpacity>
+        <Collapsible collapsed={collapsedPrivacy}>{PrivacySection}</Collapsible>
 
         <GreyDivider />
 
@@ -314,8 +312,11 @@ function PrivacyConsentPopupContent(props) {
           style={{ marginRight: 10 }}
           title={props.t("AGREE_TEXT")}
           pressFunction={() => {
-            Rakam.toggleTracking();
+            if (Platform.OS === "android") {
+              Rakam.toggleTracking();
+            }
             dispatch(trackUser());
+            PostHog.enable()
             AccessibilityInfo.announceForAccessibility(
               props.t("CURRENTLY_TRACKING")
             );

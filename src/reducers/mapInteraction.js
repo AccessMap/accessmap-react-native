@@ -1,5 +1,4 @@
 // Reducer for map interactions
-import { logEvent } from ".";
 import {
   CANCEL_ROUTE,
   CLOSE_DIRECTIONS,
@@ -17,6 +16,7 @@ import {
   ZOOM_IN,
   ZOOM_OUT,
 } from "../actions";
+import { logEvent } from "../actions/trackUser"
 
 import { SEATTLE } from "../constants";
 import regions from "../constants/regions";

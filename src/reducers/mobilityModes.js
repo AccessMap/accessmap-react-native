@@ -1,5 +1,4 @@
 // Reducer for map loading state
-import { logEvent } from ".";
 import {
   SET_CUSTOM_DOWNHILL,
   SET_CUSTOM_UPHILL,
@@ -10,6 +9,7 @@ import {
   TOGGLE_MOBILITY_PROFILE,
 } from "../actions";
 import { MOBILITY_MODE_CUSTOM } from "../constants";
+import { logEvent } from "../actions/trackUser"
 
 const initialState = {
   mobilityMode: MOBILITY_MODE_CUSTOM,

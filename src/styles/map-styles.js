@@ -357,3 +357,21 @@ export const jogs = {
   lineJoin: "round",
   lineDasharray: [1, 2],
 };
+
+export const transportation_routes = {
+  lineColor: "#4B0082",
+  lineOpacity: 0.6,
+  lineWidth: [
+    "interpolate",
+    ["exponential", 1.5],
+    ["zoom"],
+    12,
+    0.2,
+    16,
+    3,
+    22,
+    30,
+  ],
+  lineCap: "round",
+  lineJoin: "round",
+}

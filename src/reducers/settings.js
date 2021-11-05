@@ -1,4 +1,3 @@
-import { logEvent } from ".";
 import {
   GO_TO_LANGUAGE,
   TRACK_USER_ACTIONS,
@@ -7,6 +6,7 @@ import {
   USE_METRIC_SYSTEM,
 } from "../actions";
 import languages from "../constants/languages";
+import { logEvent } from "../actions/trackUser"
 
 const englishLanguageProps = languages[0];
 

@@ -8,6 +8,7 @@ import {
 import { oauthConfig, accessmapBackEndPrefix } from "../constants/urls";
 import { authorize } from "react-native-app-auth";
 import { store } from "../../index";
+import { logEvent } from "../actions/trackUser"
 
 const defaultAuthState = {
   isLoggedIn: false,
@@ -100,6 +101,7 @@ async function saveProfile(profile, accessToken, callback) {
 export function signInReducer(state = defaultAuthState, action) {
   switch (action.type) {
     case AUTHENTICATION_REQUEST:
+      logEvent(action.type, []);
       authenticate()
       return { ...state
         // ,

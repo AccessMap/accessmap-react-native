@@ -1,0 +1,1 @@
+../../../PostHog/PostHog/Classes/PHGIntegration.h

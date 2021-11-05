@@ -3,6 +3,7 @@ import {
   TOGGLE_MAP_TUTORIAL,
   TOGGLE_ROUTE_TUTORIAL,
 } from "../actions";
+import { logEvent } from "../actions/trackUser"
 
 const initialState = {
     showingMapTutorial: false,
@@ -10,6 +11,7 @@ const initialState = {
 };
 
 export function tutorialReducer(state = initialState, action) {
+  logEvent(action.type, []);
   switch (action.type) {
     case TOGGLE_MAP_TUTORIAL:
       return {
