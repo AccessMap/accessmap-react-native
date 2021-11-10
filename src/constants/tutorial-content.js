@@ -59,9 +59,9 @@ export const routeTutorialContent = [
   {
     // Trip information general card
     toolTipPositionLeft: "15%",
-    toolTipPositionTop: "40%",
+    toolTipPositionTop: "43%",
     arrowPositionLeft: "360%",
-    arrowPositionTop: "660%",
+    arrowPositionTop: "620%",
     heading: "ROUTE_HEAD_4",
     paragraph: "ROUTE_TUT_4",
   },

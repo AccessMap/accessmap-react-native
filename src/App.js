@@ -17,6 +17,7 @@ import { postHogSetup } from "./utils/posthog-config";
 import { RootState } from "./reducers";
 import PostHog from "posthog-react-native";
 import { useSelector } from "react-redux";
+import { primaryColor } from "./styles/colors";
 
 postHogSetup()
 PostHog.disable()
@@ -77,8 +78,6 @@ function App() {
           name={t("SETTINGS")}
           component={SettingsPage}
           options={{
-            // tabBarActiveTintColor: Colors.primaryColor,
-            // tabBarInactiveTintColor: Colors.grey,
             tabBarIcon: ({ focused, color, size }) => {
               return (
                 <MaterialCommunityIcons

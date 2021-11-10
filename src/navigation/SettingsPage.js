@@ -93,9 +93,9 @@ function SettingsPage({ props, route, navigation }) {
   const [collapsedAbout, setCollapsedAbout] = useState(true);
 
   return (
-    <View>
+    <View style={{height: "100%"}}>
       <ScrollView style={Views.scrollView}>
-        <View>
+        {/* <View>
           { isLoggedIn && <Text style={h1}>{`Hello, ${displayName}`}</Text>}
           <Button
             containerStyle={[{ flex: 1, marginBottom: 20, marginRight: 5 }]}
@@ -110,7 +110,7 @@ function SettingsPage({ props, route, navigation }) {
             color={primaryColor}
             accessibilityLabel="Login"
           />
-        </View>
+        </View> */}
 
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
@@ -269,7 +269,7 @@ function SettingsPage({ props, route, navigation }) {
 
       {modalVisible && (
         <CustomCard
-          dismissCard={() => props.setModalVisible(false)}
+          dismissCard={() => setModalVisible(false)}
           cardVisible={modalVisible}
           content={
             <PrivacyConsentPopupContent
