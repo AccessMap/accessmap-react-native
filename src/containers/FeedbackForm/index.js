@@ -4,7 +4,7 @@ import { Button, CheckBox } from "react-native-elements";
 import { withTranslation } from "react-i18next";
 import { Colors, Fonts } from "../../styles";
 
-import { spreadsheetId, accountId, accountName, keyId, key } from "./secrets";
+import { spreadsheetId, accountId, accountName, keyId, key } from "../../constants/secrets";
 import { primaryColor } from "../../styles/colors";
 import GreyDivider from "../../components/GreyDivider";
 import { h2, p, title } from "../../styles/fonts";

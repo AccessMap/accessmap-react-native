@@ -11,7 +11,7 @@ export const mapTutorialContent = [
   {
     // Choose a destination with Search Bar
     toolTipPositionLeft: "10%",
-    toolTipPositionTop: "18%",
+    toolTipPositionTop: "9%",
     arrowPositionLeft: "100%",
     arrowPositionTop: "-50%",
     heading: "MAP_HEAD_1",
@@ -20,8 +20,8 @@ export const mapTutorialContent = [
   {
     // Grey enter icon to pick start and end
     toolTipPositionLeft: "35%",
-    toolTipPositionTop: "16%",
-    arrowPositionLeft: "680%",
+    toolTipPositionTop: "9%",
+    arrowPositionLeft: "675%",
     arrowPositionTop: "-50%",
     heading: "MAP_HEAD_1",
     paragraph: "MAP_TUT_2",
@@ -38,9 +38,9 @@ export const mapTutorialContent = [
   {
     // Customize Profile Bottom Right Button
     toolTipPositionLeft: "28%",
-    toolTipPositionTop: "48%",
-    arrowPositionLeft: "620%",
-    arrowPositionTop: "720%",
+    toolTipPositionTop: "58%",
+    arrowPositionLeft: "610%",
+    arrowPositionTop: "670%",
     heading: "MAP_HEAD_3",
     paragraph: "MAP_TUT_3",
   },

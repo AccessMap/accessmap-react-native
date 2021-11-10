@@ -27,6 +27,9 @@ import {
 } from "../../constants";
 import { usePrevious } from "../../utils/usePreviousHook";
 import { RootState } from "../../reducers";
+import LayerTransportationRoutes from "./layer-transportation-routes";
+
+// import LayerTransportationRoutes from "./layer-transportation-routes";
 
 const { Rakam } = NativeModules;
 
@@ -259,7 +262,6 @@ export default function MapView() {
       localizeLabels={true}
       attributionEnabled={false}
       compassViewPosition={2}
-      // compassViewMargins={{ x: 19, y: 300 }}
       ref={map}
       style={Views.map}
       styleURL="mapbox://styles/jetplanejj/ckuq6toeketnv18qxcg3s1ikp"
@@ -281,11 +283,12 @@ export default function MapView() {
         ref={camera}
         animationDuration={200}
         defaultSettings={{ centerCoordinate, zoomLevel }}
-        minZoomLevel={10}
+        minZoomLevel={8}
         maxZoomLevel={20}
       />
 
       <LayerAnnotations />
+      {/* <LayerTransportationRoutes/> */}
       <LayerBoundaries />
 
       <MapboxGL.VectorSource

@@ -68,13 +68,53 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
     20, 24,
   ];
 
+  // const widthRules2 = [ // changes line width depending on zoom level
+  //   "interpolate",
+  //   ["exponential", 1.5],
+  //   ["zoom"],
+  //   10, 0.8,
+  //   16, 10,
+  //   20, 30,
+  // ];
+
+  // const patterns = [
+  //   "pink-h-rect",
+  //   "triangle-up-teal", 
+  //   "airport-15",
+  //   "attraction-15",
+  //   "park-15",
+  //   "veterinary-15",
+  //   "volcano-11",
+  //   "bar-15",
+  //   "asterisk-grey",
+  //   "aquarium-15",
+  //   "bank-15",
+  //   "rhombus-orange",
+  //   "town-hall-15",
+  //   "playground-15",
+  //   "starburst-brown",
+  // ]
+    
+  // console.log(inclineSamples)
+
   const parameters = {
     lineCap: "round",
     lineWidth: widthRules,
     lineColor: ["interpolate", 
       ["exponential", 1.5],
-      ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
+      ["abs", ["*", 100, ["get", "incline"]]], 
+      ...inclineStops,
     ],
+    // linePattern: ["case", // from not steep to steep
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[7])], "green-asterisk",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[6])], "cemetery-15",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[5])], "triangle-up-teal",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[4])], "rhombus-orange",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[2])], "fast-food-15",
+    //   ['>=', ["abs", ["*", 100, ["get", "incline"]]], maxIncline], "pink-h-rect",
+    //   "cafe-15",
+    // ]
+    // linePattern: "airport-15"
   };
 
   if (Platform.OS === 'ios') { return parameters; }

@@ -1,7 +1,8 @@
 import PostHog from "posthog-react-native";
+import { postHogAPIKey } from "../constants/secrets";
 
 export const postHogSetup = async () => {
-  await PostHog.setup("phc_otRFsfm1atxDYQyuAQaWydcNKIZ9jomt1rX4sXhnGT4", {
+  await PostHog.setup(postHogAPIKey, {
     // PostHog API host
     host: "https://app.posthog.com",
 
