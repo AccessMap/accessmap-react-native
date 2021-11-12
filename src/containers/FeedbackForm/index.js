@@ -4,9 +4,11 @@ import { Button, CheckBox } from "react-native-elements";
 import { withTranslation } from "react-i18next";
 import { Colors, Fonts } from "../../styles";
 
-import { spreadsheetId, accountId, accountName, keyId, key } from "./secrets";
+import { spreadsheetId, accountId, accountName, keyId, key } from "../../constants/secrets";
 import { primaryColor } from "../../styles/colors";
 import GreyDivider from "../../components/GreyDivider";
+import { h2, p, title } from "../../styles/fonts";
+import { submitButtonsContainer, submitButtonStyle } from "../../styles/buttons";
 const { Rakam, SheetsManager } = NativeModules;
 
 const ZERO_CR = 0;
@@ -28,6 +30,7 @@ class FeedbackForm extends Component {
       cxAuditorySignal: false,
       cxTactileSignal: false,
       canPress: true,
+      submitted: false,
     };
   }
 
@@ -90,6 +93,7 @@ class FeedbackForm extends Component {
         body += "- This crossing has a tactile signal\n";
       }
     }
+
     return body;
   };
 
@@ -111,18 +115,57 @@ class FeedbackForm extends Component {
         title={props.title}
         checked={props.checked}
         onPress={props.onPress}
-        containerStyle={{ height: 70, width: "100%", justifyContent: "center"}}
+        containerStyle={{ height: 70, width: "100%", justifyContent: "center" }}
       />
     );
 
+    const ThankYouPage = () => (
+      <View style={{marginHorizontal: 15}}>
+        <Text style={[title, {marginTop: 40}]}>Thank You :)</Text>
+        <Text style={[h2, {marginVertical: 20}]}>
+          We have received your feedback. AccessMap will reflect these changes
+          for you and other pedestrians!
+        </Text>
+        <Text style={p}>
+          * Please note that these changes may not be reflected immediately.{" "}
+        </Text>
+
+        <Button
+          onPress={() => this.exit()}
+          buttonStyle={submitButtonStyle}
+          titleStyle={{ fontSize: 18, color: "white" }}
+          type="outline"
+          raised={true}
+          title={"Return to Map"}
+          containerStyle={submitButtonsContainer}/>
+        <Button
+          onPress={() => this.setState({submitted: false}) }
+          buttonStyle={{
+            backgroundColor: "white",
+            paddingVertical: 20,
+            borderRadius: 5
+          }}
+          titleStyle={{ fontSize: 18, color: primaryColor }}
+          type="outline"
+          raised={true}
+          title={"Submit another response"}
+          containerStyle={{marginTop: 0}}
+          />
+      </View>
+    );
+
+    if (this.state.submitted) {
+      return <ThankYouPage />
+    }
+
     return (
       <ScrollView style={{ flex: 1 }}>
-		  <View style={{marginHorizontal: 15,}}> 
-			<Text style={[Fonts.p, { marginTop: 20, marginBottom: 20}]}>
-			{this.props.t("CROWDSOURCING_INFO_TEXT")}
-			</Text>
-			<Text style={[Fonts.h1]}>{this.props.t("ISSUES")}</Text>
-		</View>
+        <View style={{ marginHorizontal: 15 }}>
+          <Text style={[Fonts.p, { marginTop: 20, marginBottom: 20 }]}>
+            {this.props.t("CROWDSOURCING_INFO_TEXT")}
+          </Text>
+          <Text style={[Fonts.h1]}>{this.props.t("ISSUES")}</Text>
+        </View>
         {this.props.info.footway == "sidewalk" ? (
           <View style={{ width: "100%", paddingVertical: 10 }}>
             <CustomCheckbox
@@ -169,8 +212,10 @@ class FeedbackForm extends Component {
               onPress={() => this.setState({ cxCurbramps: !cxCurbramps })}
             />
 
-			<GreyDivider />
-			<Text style={[Fonts.h1, {marginLeft: 15}]}>{this.props.t("FEATURES")}</Text>
+            <GreyDivider />
+            <Text style={[Fonts.h1, { marginLeft: 15 }]}>
+              {this.props.t("FEATURES")}
+            </Text>
             <CustomCheckbox
               title={this.props.t("CROSSING_PEDESTRIAN_SIGNAL_TEXT")}
               checked={cxPedSignal}
@@ -193,17 +238,14 @@ class FeedbackForm extends Component {
           </View>
         )}
         <Button
-          buttonStyle={{
-            backgroundColor: primaryColor,
-            paddingVertical: 20,
-            borderColor: "white",
-          }}
+          containerStyle={[submitButtonsContainer], {marginHorizontal: 15}}
+          buttonStyle={submitButtonStyle}
           titleStyle={{ fontSize: 18, color: "white" }}
           type="outline"
           raised={true}
           title={this.props.t("SUBMIT_TEXT")}
           disabled={!this.state.canPress}
-          containerStyle={{ marginTop: 20, marginBottom: 40, marginHorizontal: 15 }}
+          
           onPress={() => {
             if (!this.state.canPress) {
               return;
@@ -260,7 +302,8 @@ class FeedbackForm extends Component {
                 );
               }
             }
-            this.exit();
+            this.setState({canPress: true});
+            this.setState({submitted: true})
           }}
         />
       </ScrollView>

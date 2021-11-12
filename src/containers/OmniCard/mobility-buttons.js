@@ -42,7 +42,7 @@ const MobilityButtonRender = props => {
 			buttonStyle={[Buttons.button, {backgroundColor: buttonColor}]}
 			icon={<Icon
 				name={props.name}
-				size={32}
+				size={28}
 				color={iconColor}
 			/>}
 			title={selected ? shortLabel : null}
@@ -54,7 +54,7 @@ const MobilityButtonRender = props => {
 
 const mapStateToProps = state => {
 	return {
-		mobilityMode: state.mobilityMode,
+		mobilityMode: state.mobility.mobilityMode,
 	};
 };
 
@@ -72,7 +72,9 @@ const MobilityButtonGroup = props => {
 	const { t, i18n } = useTranslation();
 
 	return (
-		<View style={{flexDirection: "row", flex: 1, alignItems: "center"}}>
+		<View style={{flexDirection: "row", flex: 1, 
+			alignItems: "center", paddingBottom: 10,
+		}}>
 			<MobilityButton
 				name="wheelchair"
 				label={t("WHEELCHAIR_MODE_TEXT")}

@@ -13,14 +13,15 @@ import {
   MOBILITY_MODE_POWERED,
   MOBILITY_MODE_WHEELCHAIR,
 } from "../../constants";
+import { RootState } from "../../reducers";
 
 export default function CustomSlider(props) {
-  let customUphill = useSelector((state: RootState) => state.customUphill);
-  let customDownhill = useSelector((state: RootState) => state.customDownhill);
+  let customUphill = useSelector((state: RootState) => state.mobility.customUphill);
+  let customDownhill = useSelector((state: RootState) => state.mobility.customDownhill);
   let avoidRaisedCurbs = useSelector(
-    (state: RootState) => state.avoidRaisedCurbs
+    (state: RootState) => state.mobility.avoidRaisedCurbs
   );
-  let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
+  let mobilityMode = useSelector((state: RootState) => state.mobility.mobilityMode);
 
   const getPreferences = (mode) => {
     switch (mode) {
@@ -39,7 +40,7 @@ export default function CustomSlider(props) {
   // props: title, uphill [boolean]
   let incline = useSelector((state: RootState) => {
     if (mobilityMode == MOBILITY_MODE_CUSTOM) {
-      return props.uphill ? state.customUphill : state.customDownhill;
+      return props.uphill ? state.mobility.customUphill : state.mobility.customDownhill;
     }
     const mode = getPreferences(mobilityMode);
     const incline = mode[props.uphill ? 0 : 1];
@@ -91,7 +92,7 @@ export default function CustomSlider(props) {
         minimumValue={minValue}
         maximumValue={maxValue}
         step={0.5}
-        trackStyle={{ height: 10, borderRadius: 20 }}
+        trackStyle={{ height: 15, borderRadius: 20 }}
         minimumTrackTintColor={
           mobilityMode == MOBILITY_MODE_CUSTOM
             ? Colors.primaryColor

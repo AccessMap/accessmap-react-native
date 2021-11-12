@@ -9,6 +9,7 @@ import LayerCrossings from "./layer-crossings";
 import LayerElevators from "./layer-elevator-paths";
 import LayerAnnotations from "./layer-annotations";
 import LayerRoute from "./layer-route";
+import LayerBoundaries from "./layer-boundaries";
 import { Views } from "../../styles";
 import {
   //   goToLocation,
@@ -18,13 +19,17 @@ import {
   mapLoaded,
 } from "../../actions";
 import {
-	// MOBILITY_MODE_CUSTOM,
-	MOBILITY_MODE_WHEELCHAIR,
-	MOBILITY_MODE_POWERED,
-	MOBILITY_MODE_CANE,
-	ACCESS_TOKEN,
-  } from "../../constants";
-  import { usePrevious } from "../../utils/usePreviousHook";
+  // MOBILITY_MODE_CUSTOM,
+  MOBILITY_MODE_WHEELCHAIR,
+  MOBILITY_MODE_POWERED,
+  MOBILITY_MODE_CANE,
+  ACCESS_TOKEN,
+} from "../../constants";
+import { usePrevious } from "../../utils/usePreviousHook";
+import { RootState } from "../../reducers";
+import LayerTransportationRoutes from "./layer-transportation-routes";
+
+// import LayerTransportationRoutes from "./layer-transportation-routes";
 
 const { Rakam } = NativeModules;
 
@@ -40,39 +45,63 @@ export default function MapView() {
     MapboxGL.setConnected(true);
   }
 
-  let mobilityCode = useSelector((state: RootState) => state.mobilityMode);
-  let centerCoordinate = useSelector((state: RootState) => state.centerCoordinate);
-  let zoomLevel = useSelector((state: RootState) => state.zoomLevel);
-  let geocodeCoords = useSelector((state: RootState) => state.geocodeCoords);
-  let origin = useSelector((state: RootState) => state.origin);
-  let destination = useSelector((state: RootState) => state.destination);
-  let route = useSelector((state: RootState) => state.route);
-  let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
-  let viewingTripInfo = useSelector((state: RootState) => {return state.viewingTripInfo});
-  let canAccessLocation = useSelector((state: RootState) => state.canAccessLocation);
-  let locateUserSwitch = useSelector((state: RootState) => state.locateUserSwitch);
+  let mobilityCode = useSelector(
+    (state: RootState) => state.mobility.mobilityMode
+  );
+  let centerCoordinate = useSelector(
+    (state: RootState) => state.map.centerCoordinate
+  );
+  let zoomLevel = useSelector((state: RootState) => state.map.zoomLevel);
+  let geocodeCoords = useSelector(
+    (state: RootState) => state.map.geocodeCoords
+  );
+  let origin = useSelector((state: RootState) => state.map.origin);
+  let destination = useSelector((state: RootState) => state.map.destination);
+  let route = useSelector((state: RootState) => state.map.route);
+  let viewingDirections = useSelector(
+    (state: RootState) => state.map.viewingDirections
+  );
+  let viewingTripInfo = useSelector(
+    (state: RootState) => state.map.viewingTripInfo
+  );
+  let canAccessLocation = useSelector(
+    (state: RootState) => state.map.canAccessLocation
+  );
+  let locateUserSwitch = useSelector(
+    (state: RootState) => state.map.locateUserSwitch
+  );
 
-  let customUphill = useSelector((state: RootState) => state.customUphill);
-  let customDownhill = useSelector((state: RootState) => state.customDownhill);
-  let avoidRaisedCurbs = useSelector((state: RootState) => state.avoidRaisedCurbs);
-//   let bbox = useSelector((state: RootState) => state.bbox);
+  let customUphill = useSelector(
+    (state: RootState) => state.mobility.customUphill
+  );
+  let customDownhill = useSelector(
+    (state: RootState) => state.mobility.customDownhill
+  );
+  let avoidRaisedCurbs = useSelector(
+    (state: RootState) => state.mobility.avoidRaisedCurbs
+  );
+  //   let bbox = useSelector((state: RootState) => state.map.bbox);
   //   const bounds = {
   // 	sw: [bbox[1], bbox[0]],
   // 	ne: [bbox[3], bbox[2]],
   //   };
   let prevZoomLevel = usePrevious(zoomLevel);
 
-  useEffect(() => { // changing and displaying routes
+  useEffect(() => {
+    // changing and displaying routes
     const preferences = getPreferences(mobilityCode);
     const uphill = preferences[0] / 100;
     const downhill = preferences[1] / 100;
     const avoidCurbs = preferences[2];
     dispatch(fetchRoute(origin, destination, uphill, downhill, avoidCurbs));
   }, [origin, destination, mobilityCode]);
-  useEffect(() => { // update zoom level
+  useEffect(() => {
+    // update zoom level
     zoomPress(zoomLevel, prevZoomLevel);
   }, [zoomLevel]);
-  useEffect(() => { // set camera coordinates
+
+  useEffect(() => {
+    // set camera coordinates
     if (camera.current && geocodeCoords) {
       camera.current.setCamera({
         centerCoordinate: geocodeCoords,
@@ -80,9 +109,14 @@ export default function MapView() {
       });
     }
   }, [geocodeCoords]);
-  useEffect(() => { // map pan to user location
-    if (locateUserSwitch && userLoc) { userLocationPress() }
+
+  useEffect(() => {
+    // map pan to user location
+    if (locateUserSwitch && userLoc) {
+      userLocationPress();
+    }
   }, [userLoc, locateUserSwitch]);
+
   useEffect(() => {
     updatePath();
   }, [route]);
@@ -96,37 +130,42 @@ export default function MapView() {
       case MOBILITY_MODE_CANE:
         return [14, 14, 0];
       default:
-        return [customUphill, customDownhill, avoidRaisedCurbs,];
+        return [customUphill, customDownhill, avoidRaisedCurbs];
     }
   };
 
   const zoomPress = async (zoom, prevZoom) => {
-    if (!map.current || !camera.current || !prevZoom) { return; }
-      const currZoom = await map.current.getZoom();
-      if (zoom > prevZoom) {
-        camera.current.zoomTo(currZoom + 1, 200);
-        if (Platform.OS === "android") {
-        Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]); }
-        AccessibilityInfo.announceForAccessibility(
-          currZoom >= 20
-            ? "Zoom level unchanged. Maximum reached."
-            : "Zoom level increased to " + Math.round(currZoom + 1)
-        );
-      } else if (zoom < prevZoom) {
-        camera.current.zoomTo(currZoom - 1, 200);
-        if (Platform.OS === "android") {
-          Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]); 
-        }
-        AccessibilityInfo.announceForAccessibility(
-          currZoom <= 10
-            ? "Zoom level unchanged. Minimum reached."
-            : "Zoom level decreased to " + Math.round(currZoom - 1)
-        );
+    if (!map.current || !camera.current || !prevZoom) {
+      return;
+    }
+    const currZoom = await map.current.getZoom();
+    if (zoom > prevZoom) {
+      camera.current.zoomTo(currZoom + 1, 200);
+      if (Platform.OS === "android") {
+        Rakam.trackEvent("ZOOM_IN", ["newZoom", "" + (currZoom + 1)]);
       }
+      AccessibilityInfo.announceForAccessibility(
+        currZoom >= 20
+          ? "Zoom level unchanged. Maximum reached."
+          : "Zoom level increased to " + Math.round(currZoom + 1)
+      );
+    } else if (zoom < prevZoom) {
+      camera.current.zoomTo(currZoom - 1, 200);
+      if (Platform.OS === "android") {
+        Rakam.trackEvent("ZOOM_OUT", ["newZoom", "" + (currZoom - 1)]);
+      }
+      AccessibilityInfo.announceForAccessibility(
+        currZoom <= 10
+          ? "Zoom level unchanged. Minimum reached."
+          : "Zoom level decreased to " + Math.round(currZoom - 1)
+      );
+    }
   };
 
   const userLocationPress = async () => {
-    if (!camera.current) { return; } 
+    if (!camera.current) {
+      return;
+    }
     const ul = userLoc.coords;
     const center = [ul.longitude, ul.latitude];
 
@@ -168,18 +207,26 @@ export default function MapView() {
         }
         var northEast = [maxLon, maxLat];
         var southWest = [minLon, minLat];
-        camera.current.fitBounds(northEast, southWest, viewingDirections ? 20 : 100, 100);
+        camera.current.fitBounds(
+          northEast,
+          southWest,
+          viewingDirections ? 20 : 100,
+          100
+        );
       }
     }
   };
 
   const handleScreenPress = async (e) => {
-    if (viewingDirections || viewingTripInfo) {return;}
+    if (viewingDirections || viewingTripInfo) {
+      return;
+    }
     const center = e.geometry.coordinates;
     const { screenPointX, screenPointY } = e.properties;
     const featureCollection = await map.current.queryRenderedFeaturesAtPoint(
-      [screenPointX, screenPointY], null, 
-	  ["sidewalk-press", "crossing-press", "elevator-press"]
+      [screenPointX, screenPointY],
+      null,
+      ["sidewalk-press", "crossing-press", "elevator-press"]
     );
     dispatch(placePin({ ...featureCollection, center }));
   };
@@ -208,36 +255,41 @@ export default function MapView() {
     // const speed = location.coords.speed;
     setUserLoc(location);
   };
-  
+
   return (
     <MapboxGL.MapView
       logoEnabled={false}
+      localizeLabels={true}
       attributionEnabled={false}
-      compassViewPosition={3}
-      compassViewMargins={{x: 19, y: 190}}
+      compassViewPosition={2}
       ref={map}
       style={Views.map}
+      styleURL="mapbox://styles/jetplanejj/ckuq6toeketnv18qxcg3s1ikp"
       onPress={handleScreenPress}
       onLongPress={handleScreenPress}
       onRegionDidChange={panMap}
-      onDidFinishLoadingStyle={() => { dispatch(mapLoaded());}}
+      onDidFinishLoadingStyle={() => {
+        dispatch(mapLoaded());
+      }}
     >
       {canAccessLocation && (
-        <MapboxGL.UserLocation 
-			visible={true} 
-			onUpdate={updateUserLocation} 
-			showsUserHeadingIndicator={true}
-		/>
+        <MapboxGL.UserLocation
+          visible={true}
+          onUpdate={updateUserLocation}
+          showsUserHeadingIndicator={true}
+        />
       )}
       <MapboxGL.Camera
         ref={camera}
         animationDuration={200}
         defaultSettings={{ centerCoordinate, zoomLevel }}
-        minZoomLevel={10}
+        minZoomLevel={8}
         maxZoomLevel={20}
       />
 
       <LayerAnnotations />
+      {/* <LayerTransportationRoutes/> */}
+      <LayerBoundaries />
 
       <MapboxGL.VectorSource
         id="pedestrian"

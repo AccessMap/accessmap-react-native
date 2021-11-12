@@ -1,0 +1,1 @@
+../../../PostHog/PostHog/Classes/PHGPostHogConfiguration.h

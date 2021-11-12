@@ -1,12 +1,44 @@
 // Map Styles describe how the sidewalks, crossings, etc should be displayed.
-import { Platform } from "react-native";
+import React from "react";
+import { Platform, View } from "react-native";
 import { useSelector } from "react-redux";
 import { Colors } from "./index";
+import { RootState } from "../reducers";
+
 const OUTLINE_WIDTH = 2;
+
+// Represents an incline percentage beyond the maximum on Speed Legend bottom bar
+// and Map Legend
+export function renderRedDashedLine() {
+  return (
+    <View
+      style={{
+        height: 0,
+        borderRadius: 1,
+        borderWidth: 1,
+        borderColor: "red",
+        borderStyle: "dashed",
+        zIndex: 0,
+      }}
+    >
+      <View
+        style={{
+          left: -1,
+          bottom: 0,
+          width: "101%",
+          height: 1,
+          backgroundColor: "white",
+          zIndex: 1,
+        }}
+      />
+    </View>
+  );
+}
 
 // Returns an object describing the style for a MapboxGL.LineLayer
 export const sidewalks = (incline) => { // ex incline: maxUphill
-  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
   const maxIncline = Math.abs(incline);
 
   const nSamples = 15;
@@ -36,17 +68,54 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
     20, 24,
   ];
 
+  // const widthRules2 = [ // changes line width depending on zoom level
+  //   "interpolate",
+  //   ["exponential", 1.5],
+  //   ["zoom"],
+  //   10, 0.8,
+  //   16, 10,
+  //   20, 30,
+  // ];
+
+  // const patterns = [
+  //   "pink-h-rect",
+  //   "triangle-up-teal", 
+  //   "airport-15",
+  //   "attraction-15",
+  //   "park-15",
+  //   "veterinary-15",
+  //   "volcano-11",
+  //   "bar-15",
+  //   "asterisk-grey",
+  //   "aquarium-15",
+  //   "bank-15",
+  //   "rhombus-orange",
+  //   "town-hall-15",
+  //   "playground-15",
+  //   "starburst-brown",
+  // ]
+    
+  // console.log(inclineSamples)
+
   const parameters = {
     lineCap: "round",
     lineWidth: widthRules,
     lineColor: ["interpolate", 
       ["exponential", 1.5],
-      ["abs", ["*", 100, ["get", "incline"]]], ...inclineStops,
+      ["abs", ["*", 100, ["get", "incline"]]], 
+      ...inclineStops,
     ],
+    // linePattern: ["case", // from not steep to steep
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[7])], "green-asterisk",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[6])], "cemetery-15",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[5])], "triangle-up-teal",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[4])], "rhombus-orange",
+    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[2])], "fast-food-15",
+    //   ['>=', ["abs", ["*", 100, ["get", "incline"]]], maxIncline], "pink-h-rect",
+    //   "cafe-15",
+    // ]
+    // linePattern: "airport-15"
   };
-
-  console.log(parameters);
-  // {"lineCap": "round", "lineColor": ["interpolate", ["exponential", 1.5], ["abs", [Array]], -14, "#ff774d", -12, "#ff8a52", -10, "#ffa258", -8, "#ffbd61", -6, "#ffdf6c", -4, "#f7ff76", -2, "#ceff74", 0, "#92ff72", 2, "#ceff74", 4, "#f7ff76", 6, "#ffdf6c", 8, "#ffbd61", 10, "#ffa258", 12, "#ff8a52", 14, "#ff774d"], "lineWidth": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.1, 16, 5, 20, 24]}
 
   if (Platform.OS === 'ios') { return parameters; }
   parameters.lineColor = [
@@ -328,3 +397,21 @@ export const jogs = {
   lineJoin: "round",
   lineDasharray: [1, 2],
 };
+
+export const transportation_routes = {
+  lineColor: "#4B0082",
+  lineOpacity: 0.6,
+  lineWidth: [
+    "interpolate",
+    ["exponential", 1.5],
+    ["zoom"],
+    12,
+    0.2,
+    16,
+    3,
+    22,
+    30,
+  ],
+  lineCap: "round",
+  lineJoin: "round",
+}

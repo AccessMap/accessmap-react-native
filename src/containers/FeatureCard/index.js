@@ -16,9 +16,10 @@ import CustomCard from "../../containers/CustomCard";
 import BottomCardButton from "../../components/BottomCardButton";
 import { primaryColor } from "../../styles/colors";
 import { Fonts } from "../../styles";
+import { RootState } from "../../reducers";
 
 export default function FeatureCard(props) {
-  let features = useSelector((state: RootState) => state.pinFeatures);
+  let features = useSelector((state: RootState) => state.map.pinFeatures);
   const dispatch = useDispatch();
 
   const { t, i18n } = useTranslation();
@@ -82,7 +83,10 @@ export default function FeatureCard(props) {
     <Header
       title={heading}
       reportButton={info}
-      close={() => dispatch(placePin(null))}
+      close={() => {
+        dispatch(placePin(null)) 
+        AccessibilityInfo.announceForAccessibility("Map feature card has been closed.")
+      }}
       cs={info && (info.footway == "sidewalk" || info.footway == "crossing")}
       navigation={props.navigation}
       info={info}
@@ -205,6 +209,6 @@ export default function FeatureCard(props) {
   );
 
   return (
-    <CustomCard content={content} cardVisible={true}/>
+    <CustomCard dismissCard={() => dispatch(placePin(null))} content={content} cardVisible={true}/>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import MapboxGL from "@react-native-mapbox-gl/maps";
-import { connect } from "react-redux";
 import { MapStyles } from "../../styles";
 
 const LayerElevators = (props) => {

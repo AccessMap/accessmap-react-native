@@ -12,15 +12,17 @@ import { Views } from "../../styles";
 import Header from "../../components/Header";
 import BottomCardButton from "../../components/BottomCardButton";
 import CustomCard from "../CustomCard";
+import { RootState } from "../../reducers";
 
 export default function RouteBottomCard(props) {
-  let route = useSelector((state: RootState) => state.route);
-  let viewingTripInfo = useSelector((state: RootState) => state.viewingTripInfo);
-  let viewingDirections = useSelector((state: RootState) => state.viewingDirections);
-  let usingMetricSystem = useSelector((state: RootState) => state.usingMetricSystem);
+  let route = useSelector((state: RootState) => state.map.route);
+  let viewingTripInfo = useSelector((state: RootState) => state.map.viewingTripInfo);
+  let viewingDirections = useSelector((state: RootState) => state.map.viewingDirections);
+  let usingMetricSystem = useSelector((state: RootState) => state.setting.usingMetricSystem);
 
   const dispatch = useDispatch();
   const cancelAndCloseRoute = () => {
+    AccessibilityInfo.announceForAccessibility("Route card has been closed. Route has been canceled.");
     dispatch(cancelRoute());
     dispatch(closeDirections());
     dispatch(closeTripInfo());
@@ -83,6 +85,6 @@ export default function RouteBottomCard(props) {
   );
 
   return (
-    <CustomCard content={content} cardVisible={true}/>  
+    <CustomCard dismissCard={cancelAndCloseRoute} content={content} cardVisible={true}/>  
   );
 };

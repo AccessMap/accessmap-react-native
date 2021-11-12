@@ -7,6 +7,11 @@ import io.rakam.api.RakamClient;
 import java.net.URL;
 import android.os.Bundle;
 
+// Deep Linking imports
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -30,4 +35,15 @@ public class MainActivity extends ReactActivity {
 
     }
   }
+
+  @Override
+  protected ReactActivityDelegate createReactActivityDelegate() {
+      return new ReactActivityDelegate(this, getMainComponentName()) {
+          @Override
+          protected ReactRootView createRootView() {
+              return new RNGestureHandlerEnabledRootView(MainActivity.this);
+          }
+      };
+  }
+
 }

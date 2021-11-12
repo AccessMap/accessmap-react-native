@@ -1,9 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import { connect } from 'react-redux';
 
-import { fetchRoute } from '../../actions';
+// import { fetchRoute } from '../../actions';
 import { MapStyles } from '../../styles';
 
 const LayerRoute = props => {
@@ -90,9 +89,9 @@ const LayerRoute = props => {
 
 const mapStateToProps = state => {
 	return {
-		route: state.route,
-		origin: state.origin,
-		destination: state.destination,
+		route: state.map.route,
+		origin: state.map.origin,
+		destination: state.map.destination,
 	};
 }
 

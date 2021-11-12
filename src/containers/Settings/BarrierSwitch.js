@@ -6,13 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { Buttons, Colors, Fonts } from '../../styles';
 import { greyLight, primaryLight } from '../../styles/colors';
 import { MOBILITY_MODE_CANE, MOBILITY_MODE_CUSTOM } from '../../constants';
+import { RootState } from '../../reducers';
 
 export default function BarrierSwitch(props) {
 	const { t, i18n } = useTranslation();
-	let avoidRaisedCurbs = useSelector((state: RootState) => state.avoidRaisedCurbs);
-	let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
+
+	let avoidRaisedCurbs = useSelector((state: RootState) => state.mobility.avoidRaisedCurbs);
+	let mobilityMode = useSelector((state: RootState) => state.mobility.mobilityMode);
 	const dispatch = useDispatch();
 	var raisedCurbStatus = true;
+	
 	if (mobilityMode == MOBILITY_MODE_CANE) {
 		raisedCurbStatus = false;
 	} else if (mobilityMode == MOBILITY_MODE_CUSTOM) {

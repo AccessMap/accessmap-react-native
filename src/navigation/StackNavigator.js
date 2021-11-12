@@ -9,18 +9,18 @@ import SearchPage from "./SearchPage";
 import Crowdsourcing from "./Crowdsourcing";
 
 import InformationPage from "./Information/InformationPage";
-import RoutePlanningTutorialPage from "./Information/RoutePlanningTutorialPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { mapLoaded } from "../actions";
+import { RootState } from "../reducers";
 
 function MainStackNavigator() {
   const { t, i18n } = useTranslation();
   const Stack = createStackNavigator();
 
-  let isLoading = useSelector((state: RootState) => state.isLoading);
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
   const dispatch = useDispatch();
 
   const backButton = (navigation) => (
@@ -71,17 +71,8 @@ function MainStackNavigator() {
   // List of tutorials screen
   const tutorial = (
     <Stack.Screen
-      name={t("TUTORIAL")}
+      name={t("INFORMATION")}
       component={InformationPage}
-      options={({ navigation }) => ({
-        headerLeft: () => backButton(navigation),
-      })}
-    />
-  );
-  const routeTutorial = (
-    <Stack.Screen
-      name={t("ROUTE_PLANNING")}
-      component={RoutePlanningTutorialPage}
       options={({ navigation }) => ({
         headerLeft: () => backButton(navigation),
       })}
@@ -107,9 +98,8 @@ function MainStackNavigator() {
     <Stack.Navigator>
       {map}
       {search}
-
+    
       {tutorial}
-      {routeTutorial}
 
       {crowdSourcing}
     </Stack.Navigator>

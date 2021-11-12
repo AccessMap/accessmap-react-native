@@ -8,13 +8,11 @@ export const container = {
 
 // A centered floating card with a white background
 export const omnicard = {
-  borderBottomLeftRadius: 30,
-  borderBottomRightRadius: 30,
   backgroundColor: "#FFFFFF",
   width: "100%",
   flexDirection: "column",
   margin: 0,
-  paddingTop: 10, paddingHorizontal: 10, paddingBottom: 0,
+  paddingTop: 10, paddingHorizontal: 10, paddingBottom: 10,
   zIndex: 0,
 };
 

@@ -4,14 +4,16 @@ import MapboxGL from "@react-native-mapbox-gl/maps";
 import { MapStyles } from "../../styles";
 import { useSelector } from "react-redux";
 import getInclineLimit from "../../utils/get-incline-limit";
+import { RootState } from "../../reducers";
 
 export default function LayerSidewalks(props) {
-  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
   let incline = useSelector((state: RootState) => {
     return getInclineLimit(
-        state.customUphill,
-        state.customDownhill,
-        state.mobilityMode
+        state.mobility.customUphill,
+        state.mobility.customDownhill,
+        state.mobility.mobilityMode
     )[showingUphillColors ? 0 : 1];
   });
   const maxIncline = Math.abs(incline);

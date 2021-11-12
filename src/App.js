@@ -11,6 +11,16 @@ import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
 import CustomBottomTabBar, {} from "./components/CustomBottomTabBar";
+import { deepLinking } from "./constants/urls";
+import LoadingScreen from "./components/LoadingScreen";
+import { postHogSetup } from "./utils/posthog-config";
+import { RootState } from "./reducers";
+import PostHog from "posthog-react-native";
+import { useSelector } from "react-redux";
+import { primaryColor } from "./styles/colors";
+
+postHogSetup()
+PostHog.disable()
 
 LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
@@ -32,8 +42,14 @@ Logger.setLogCallback((log) => {
 
 function App() {
   const { t, i18n } = useTranslation();
+  let trackUser = useSelector((state: RootState) => state.setting.trackUserActions);
+
+  if (trackUser) {
+    PostHog.enable()
+  }
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={deepLinking} fallback={<LoadingScreen isLoading={true}/>}>
       <Tab.Navigator 
       tabBar={props => <CustomBottomTabBar {...props}/>}
       initialRouteName={t("HOME")} 
@@ -62,8 +78,6 @@ function App() {
           name={t("SETTINGS")}
           component={SettingsPage}
           options={{
-            tabBarActiveTintColor: Colors.primaryColor,
-            tabBarInactiveTintColor: Colors.grey,
             tabBarIcon: ({ focused, color, size }) => {
               return (
                 <MaterialCommunityIcons

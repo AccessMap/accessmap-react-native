@@ -28,7 +28,7 @@ const DirectionCard = (props) => {
 }
 
 function mapStateToProps(state) {
-	const props = { usingMetricSystem: state.usingMetricSystem };
+	const props = { usingMetricSystem: state.setting.usingMetricSystem };
 	return props;
 }
 

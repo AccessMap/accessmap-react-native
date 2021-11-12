@@ -1,7 +1,7 @@
 {
   "name": "react-native-mapbox-gl",
   "summary": "React Native Component for Mapbox GL",
-  "version": "8.2.1",
+  "version": "8.3.0",
   "authors": {
     "Nick Italiano": "ni6@njit.edu"
   },

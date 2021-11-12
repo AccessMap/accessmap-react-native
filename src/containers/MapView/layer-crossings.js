@@ -96,8 +96,8 @@ const LayerCrossings = props => {
 
 const mapStateToProps = state => {
 	return {
-		avoidRaisedCurbs: state.avoidRaisedCurbs,
-		mobilityMode: state.mobilityMode,
+		avoidRaisedCurbs: state.mobility.avoidRaisedCurbs,
+		mobilityMode: state.mobility.mobilityMode,
 	};
 }
 

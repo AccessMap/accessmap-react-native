@@ -1,6 +1,6 @@
 // The MapPage displays the map, top white card (Omnicard), and the bottom white cards.
 import React, { useEffect, useState } from "react";
-import { View, AccessibilityInfo, Alert, Platform, StatusBar, } from "react-native";
+import { View, AccessibilityInfo, Alert, StatusBar, Platform, } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeDirections,
@@ -28,24 +28,26 @@ import MobilityProfile from "../containers/MobilityProfile";
 import ToolTip from "../components/TutorialComponents/ToolTip";
 import { mapTutorialContent, routeTutorialContent } from "../constants/tutorial-content";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { RootState } from "../reducers";
 
 export default function MapPage(props) {
-  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
-  let route = useSelector((state: RootState) => state.route);
+  let pinFeatures = useSelector((state: RootState) => state.map.pinFeatures);
+  let route = useSelector((state: RootState) => state.map.route);
   let viewingDirections = useSelector(
-    (state: RootState) => state.viewingDirections
+    (state: RootState) => state.map.viewingDirections
   );
   let viewingTripInfo = useSelector(
-    (state: RootState) => state.viewingTripInfo
+    (state: RootState) => state.map.viewingTripInfo
   );
   let viewingMobilityProfile = useSelector(
-    (state: RootState) => state.viewingMobilityProfile
+    (state: RootState) => state.mobility.viewingMobilityProfile
   );
-  let isLoading = useSelector((state: RootState) => state.isLoading);
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
   let showingMapTutorial = useSelector(
-    (state: RootState) => state.showingMapTutorial
+    (state: RootState) => state.tutorial.showingMapTutorial
   );
-  let showingRouteTutorial = useSelector((state: RootState) => state.showingRouteTutorial);
+  let showingRouteTutorial = useSelector((state: RootState) => 
+    state.tutorial.showingRouteTutorial);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -74,7 +76,10 @@ export default function MapPage(props) {
       return (
         <MobilityProfile
           cardVisible={viewingMobilityProfile}
-          close={() => dispatch(toggleMobilityProfile())}
+          close={() => {
+            dispatch(toggleMobilityProfile())
+            AccessibilityInfo.announceForAccessibility("Mobility Profile closed.")
+          }}
         />
       );
     }
@@ -104,11 +109,24 @@ export default function MapPage(props) {
       return null;
     }
   }
+
   return (
     <SafeAreaProvider>
       <SafeAreaView 
-        edges={["top"]}
-        style={{ flex: 1, backgroundColor: "white", }}>
+        edges={null}
+        style={{ 
+          flex: 1, backgroundColor: "white", 
+          paddingTop: (StatusBar.currentHeight && Platform.OS === "android" ? 
+            StatusBar.currentHeight - 10 : 0)
+        }}
+        >
+
+        <StatusBar
+          translucent={true}
+          barStyle="dark-content"
+          backgroundColor={'rgba(52, 52, 52, 0)'}
+          />
+
         <View style={Views.page}>
           <View style={Views.container}>
 
@@ -129,11 +147,11 @@ export default function MapPage(props) {
             
             {isLoading && <LoadingScreen isLoading={isLoading}/>}
 
-            {showingMapTutorial ? (
+            {showingMapTutorial && (
               <ToolTip
                 cardDescription={t("MAP_INTERFACE")}
                 numStep={numStep}
-                maxStep={6}
+                maxStep={mapTutorialContent.length}
                 toolTipPositionLeft={
                   mapTutorialContent[numStep].toolTipPositionLeft
                 }
@@ -147,14 +165,14 @@ export default function MapPage(props) {
                 goToNextStep={goToNextStep}
                 navigation={props.navigation}
                 onEnd={() => dispatch(toggleMapTutorial())}
-              />
-            ) : null}
+              />)
+            }
 
-            {showingRouteTutorial ? (
+            {showingRouteTutorial && 
               <ToolTip 
                 cardDescription={t("ROUTE_PLANNING")}
                 numStep={numStep}
-                maxStep={2}
+                maxStep={routeTutorialContent.length}
                 toolTipPositionLeft={
                   routeTutorialContent[numStep].toolTipPositionLeft
                 }
@@ -169,7 +187,7 @@ export default function MapPage(props) {
                 navigation={props.navigation}
                 onEnd={() => dispatch(toggleRouteTutorial())}
               />
-            ): null}
+            }
 
             {showBottomCard(props.navigation)}
           </View>

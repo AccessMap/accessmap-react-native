@@ -1,9 +1,9 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Views, Colors, Buttons } from "../../styles";
+import React, { useState } from "react";
+import { Views, Buttons } from "../../styles";
 import { View, AccessibilityInfo } from "react-native";
 import { Button } from "react-native-elements";
 import CustomIcon from "../../components/Icon";
-import { Card, Icon } from "react-native-elements";
+import { Card } from "react-native-elements";
 
 import { useTranslation } from "react-i18next";
 import coordinatesToString from "../../utils/coordinates-to-string";
@@ -14,55 +14,29 @@ import {
   closeDirections,
   closeTripInfo,
   cancelRoute,
-  toggleMobilityProfile,
+  showDownhill,
+  showUphill,
 } from "../../actions";
 
-import MobilityButtonGroup from "./mobility-buttons";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../components/IconButton";
 import { primaryColor } from "../../styles/colors";
-import Animated, { EasingNode } from "react-native-reanimated";
+import { RootState } from "../../reducers";
 
 export default function OmniCard(props) {
-  const useComponentSize = () => {
-    const [size, setSize] = useState(null);
-    const onLayout = useCallback(event => {
-      const { width, height } = event.nativeEvent.layout;
-      setSize({ width, height });
-    }, []);
-    return [size, onLayout];
-  };
-
   const { t, i18n } = useTranslation();
-  const [size, onLayout] = useComponentSize(); // current size width/height
   const [findDirections, setFindDirections] = useState(false);
 
   //---------------------------------------------------------------------------
-  // let mobilityMode = useSelector((state: RootState) => state.mobilityMode);
-  let pinFeatures = useSelector((state: RootState) => state.pinFeatures);
-  let origin = useSelector((state: RootState) => state.origin);
-  let destination = useSelector((state: RootState) => state.destination);
-  let originText = useSelector((state: RootState) => state.originText);
+  let pinFeatures = useSelector((state: RootState) => state.map.pinFeatures);
+  let origin = useSelector((state: RootState) => state.map.origin);
+  let destination = useSelector((state: RootState) => state.map.destination);
+  let originText = useSelector((state: RootState) => state.map.originText);
   let destinationText = useSelector(
-    (state: RootState) => state.destinationText
+    (state: RootState) => state.map.destinationText
   );
-
-  //---------------------------------------------------------------------------
-  // Handles minimizing the card
-  const [showingCard, toggleCard] = useState(true);
-  const translation = useRef(new Animated.Value(0)).current;
-  const slide = () => {
-    AccessibilityInfo.announceForAccessibility(showingCard ? 
-      "Top card has been minimized." : 
-      "Top card has been maximized.");
-    Animated.timing(translation, {
-      toValue: showingCard ? -(size.height / 1.9) : 0,
-      useNativeDriver: true,
-      duration: 500,
-      easing: EasingNode.linear,
-    }).start();
-    toggleCard(!showingCard);
-  };
+  let uphillMode = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors)
 
   //---------------------------------------------------------------------------
   const dispatch = useDispatch();
@@ -74,41 +48,6 @@ export default function OmniCard(props) {
 
   let topRow = null;
   let middleRow = null;
-  const bottomRow = (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-        marginTop: 10,
-        alignItems: "center",
-        marginBottom: 5,
-        marginRight: 5,
-      }}
-    >
-      <MobilityButtonGroup />
-      <Icon
-        size={35}
-        color={Colors.primaryColor}
-        name="dots-horizontal"
-        type="material-community"
-        accessibilityLabel="Select to modify custom mobility preferences"
-        onPress={() => dispatch(toggleMobilityProfile())}
-      />
-    </View>
-  );
-  
-  const minimizerRow = (
-    <Icon
-      size={40}
-      containerStyle={{paddingHorizontal: 20, paddingTop: 8,}}
-      color={Colors.primaryColor}
-      name={showingCard ? 
-        "keyboard-arrow-up" : "keyboard-arrow-down"}
-      type="material"
-      accessibilityLabel="Minimize top card"
-      onPress={slide}
-    />
-  );
 
   // User is in the middle of choosing a route start and end
   if (origin || destination || findDirections) {
@@ -207,8 +146,7 @@ export default function OmniCard(props) {
   //---------------------------------------------------------------------------
   // Rendering the entire card and bottom row
   return (
-    <Animated.View 
-      onLayout={onLayout}
+    <View 
       style={{
         position: "absolute",
         left: 0,
@@ -216,7 +154,6 @@ export default function OmniCard(props) {
         top: 0,
         margin: 0,
         flexDirection: "column",
-        transform: [{ translateY: translation }],
       }}
     >
       <Card containerStyle={Views.omnicard}>
@@ -224,20 +161,31 @@ export default function OmniCard(props) {
           <View>
             {topRow}
             {middleRow}
-            {bottomRow}
-            {minimizerRow}
           </View>
         }
       </Card>
 
-      <Button
-        containerStyle={[Buttons.whiteButton, 
-          {width: 50, alignSelf: "flex-end", marginTop: 10}]}
-        accessibilityLabel={t("INFORMATION")}
-        buttonStyle={{ backgroundColor: "white" }}
-        icon={<CustomIcon name="information" size={32} color={primaryColor} />}
-        onPress={() => props.navigation.push(t("TUTORIAL"))}
-      />
-    </Animated.View>
+      <View style={{flexDirection: "row", justifyContent: "space-between", marginHorizontal: 5}}>
+        <Button
+          buttonStyle={{ backgroundColor: "white"}}
+          titleStyle={{color: primaryColor, paddingVertical: 5}}
+          containerStyle={[Buttons.whiteButton, 
+            {marginTop: 8, borderRadius: 15, paddingHorizontal: 10, paddingTop: 2}]}
+          title={uphillMode ? t("UPHILL_TEXT") + " " + t("MODE") : 
+            t("DOWNHILL_TEXT") + " " + t("MODE")}
+          onPress={() => 
+            dispatch(uphillMode ? 
+              showDownhill() : showUphill())}
+        />
+        <Button
+          containerStyle={[Buttons.whiteButton, 
+            {width: 50, marginTop: 10}]}
+          accessibilityLabel={t("INFORMATION")}
+          buttonStyle={{ backgroundColor: "white" }}
+          icon={<CustomIcon name="information" size={32} color={primaryColor} />}
+          onPress={() => props.navigation.push(t("INFORMATION"))}
+        />
+      </View>
+    </View>
   );
 }

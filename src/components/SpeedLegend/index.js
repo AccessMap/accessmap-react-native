@@ -3,10 +3,13 @@ import { View, Text } from "react-native";
 import { Colors } from "../../styles";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { renderRedDashedLine } from "../../styles/map-styles";
+import { RootState } from "../../reducers";
 
 const SpeedLegend = (props) => {
   // Props: Max uphill/downhill incline
-  let showingUphillColors = useSelector((state: RootState) => state.showingUphillColors);
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
   const maxIncline = Math.abs(Math.round(props.maxIncline));
   const colorMap = (showingUphillColors ? 
     Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
@@ -14,38 +17,10 @@ const SpeedLegend = (props) => {
   
   const { t, i18n } = useTranslation();
 
-  // Represents an incline percentage beyond the maximum on Speed Legend bottom bar
-  function renderRedDashedLine() {
-    return (
-      <View
-        style={{
-          height: 0,
-          borderRadius: 1,
-          borderWidth: 1,
-          borderColor: "red",
-          borderStyle: "dashed",
-          zIndex: 0,
-        }}
-      >
-        <View
-          style={{
-            position: "absolute",
-            left: -1,
-            bottom: 0,
-            width: "101%",
-            height: 1,
-            backgroundColor: "white",
-            zIndex: 1,
-          }}
-        />
-      </View>
-    );
-  }
-
   return (
     <View
       accessible={true}
-      accessibilityLabel={"Max incline at " + maxIncline + " percent"}
+      accessibilityLabel={"Max incline currently at " + maxIncline + " percent out of 15 maximum."}
       style={{
         height: 50,
         margin: 0,

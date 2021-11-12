@@ -1,0 +1,31 @@
+{
+  "name": "RNPostHog",
+  "version": "1.1.3",
+  "summary": "The hassle-free way to add PostHog to your React-Native app.",
+  "description": "PostHog for iOS",
+  "homepage": "http://posthog.com/",
+  "social_media_url": "https://twitter.com/posthoghq",
+  "license": {
+    "type": "MIT"
+  },
+  "authors": {
+    "PostHog": "hey@posthog.com"
+  },
+  "source": {
+    "git": "https://github.com/PostHog/posthog-react-native.git",
+    "tag": "1.1.3"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ios/**/*.{m,h}",
+  "static_framework": true,
+  "dependencies": {
+    "PostHog": [
+      "~> 1.2.3"
+    ],
+    "React": [
+
+    ]
+  }
+}
