@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import {
-  authenticate,
+  // authenticate,
   goToLanguage,
   goToRegion,
   trackUser,
@@ -23,7 +23,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Buttons, Colors, Fonts, Views } from "../styles";
-import { Button } from "react-native-elements";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/GreyDivider";
@@ -37,8 +36,6 @@ import AboutPage from "./Information/AboutPage";
 import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
-import { primaryColor } from "../styles/colors";
-import { h1, h2 } from "../styles/fonts";
 import PostHog from "posthog-react-native";
 
 function SettingsPage({ props, route, navigation }) {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, NativeModules, ScrollView, Platform } from "react-native";
+import { Text, View, NativeModules, ScrollView, Platform, AccessibilityInfo } from "react-native";
 import { Button, CheckBox } from "react-native-elements";
 import { withTranslation } from "react-i18next";
 import { Colors, Fonts } from "../../styles";
@@ -247,6 +247,7 @@ class FeedbackForm extends Component {
           disabled={!this.state.canPress}
           
           onPress={() => {
+            AccessibilityInfo.announceForAccessibility("Sending your report...")
             if (!this.state.canPress) {
               return;
             }
@@ -302,6 +303,7 @@ class FeedbackForm extends Component {
                 );
               }
             }
+            AccessibilityInfo.announceForAccessibility("Report successfully sent!")
             this.setState({canPress: true});
             this.setState({submitted: true})
           }}

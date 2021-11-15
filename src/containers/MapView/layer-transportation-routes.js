@@ -35,7 +35,7 @@ const LayerTransportationRoutes = (props) => {
   }
 
   if (busDetails) {
-    console.log(busDetails[0].position.longitude)
+    // console.log(busDetails[0].position.longitude)
   }
 
   return (

@@ -41,7 +41,8 @@ export default function TripInfo(props) {
 
   var routeDistance = usingMetricSystem ? 
     route.distance.toFixed(1) : metersToMiles(route.distance); // total distance in miles
-  var units = usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT");
+  var unitsLarge = usingMetricSystem ? t("METERS_TEXT") : t("MILES_TEXT");
+  var unitsSmall = usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT");
 
   const dist = nRoutes.map((i) => {
     if (i == 0) {
@@ -75,6 +76,11 @@ export default function TripInfo(props) {
     elevChange[i] += elevChange[i - 1];
   }
 
+  const chartAltText = "Area Chart of elevation gain over the course of the selected trip, where ";
+  const maximumChangeAltText = "the maximum uphill height change "  +
+    `is ${Math.round(Math.max(...elevChange))} ${unitsSmall}` +
+    `and the maximum downhill height change is ${Math.round(Math.min(...elevChange))} ${unitsSmall}`;
+
   const content = (
     <View style={[{maxHeight: 250, backgroundColor: "white" }]}>
       <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
@@ -88,6 +94,7 @@ export default function TripInfo(props) {
             alignItems: "center",
             marginLeft: 15,
           }}
+          accessibilityLabel={chartAltText + maximumChangeAltText}
         >
           <View
             style={{
@@ -137,7 +144,7 @@ export default function TripInfo(props) {
           svg={{ fontSize: 10, fill: "black" }}
         />
         <View style={{ alignItems: "center", flex: 1 }}>
-          <Text>
+          <Text importantForAccessibility="no">
             {t("GRAPH_X_AXIS")}
             {"("}
             {usingMetricSystem ? t("METERS_TEXT") : t("FEET_TEXT")}
@@ -145,7 +152,7 @@ export default function TripInfo(props) {
           </Text>
         </View>
         <InfoText
-          value={`${routeDistance} ${units}`}
+          value={`${routeDistance} ${unitsLarge}`}
           info={t("TOTAL_DISTANCE_TEXT")}
         />
         <InfoText

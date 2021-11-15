@@ -1,4 +1,7 @@
 {
   "name": "AccessMap",
-  "displayName": "AccessMap"
+  "displayName": "AccessMap",
+  "android": {
+    "permissions": ["READ_PHONE_STATE"]
+  }
 }

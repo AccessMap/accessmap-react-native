@@ -174,8 +174,9 @@ export default function FeatureCard(props) {
           title={t("ROUTE_TO_HERE_TEXT")}
           pressFunction={() => {
             dispatch(setDestination());
+            const location = features.text ? features.text : features.center
             AccessibilityInfo.announceForAccessibility(
-              "Set " + features.text + " as route destination."
+              "Set " + location + " as route destination."
             );
           }}
         />

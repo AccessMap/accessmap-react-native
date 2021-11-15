@@ -22,6 +22,7 @@ const Directions = (props) => {
             name={item.properties.description}
             distance={item.properties.length}
             index={index}
+            totalSteps={props.route.routes[0].segments.features.length}
           />
         )}
         keyExtractor={(item, index) => index.toString()}

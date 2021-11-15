@@ -12,11 +12,13 @@ const DirectionCard = (props) => {
 	// b) name of segment
 	// c) distance
 	// d) index (numbered step of direction)
+	// e) totalSteps (how many steps there are in the trip)
 	const { t, i18n } = useTranslation();
 	const action = props.footway == "sidewalk" ? t("USE_SIDEWALK_TEXT") : t("USE_CROSSING_TEXT");
 	return (
 		<Card accessible={true}>
-			<Text style={Fonts.h2}>{action}</Text>
+			<Text accessibilityLabel={`Step ${props.index + 1} out of ${props.totalSteps}: ${action}`}  
+				style={Fonts.h2}>{action}</Text>
 			<Text style={Fonts.p}>{props.name}</Text>
 			<Text style={Fonts.p}>
 				{ props.usingMetricSystem ? Math.round(props.distance) : metersToFeet(props.distance)} 

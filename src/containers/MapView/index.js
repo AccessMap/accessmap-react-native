@@ -258,6 +258,7 @@ export default function MapView() {
 
   return (
     <MapboxGL.MapView
+      importantForAccessibility="no"
       logoEnabled={false}
       localizeLabels={true}
       attributionEnabled={false}
