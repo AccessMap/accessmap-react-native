@@ -94,7 +94,7 @@ export default function MapView() {
     const downhill = preferences[1] / 100;
     const avoidCurbs = preferences[2];
     dispatch(fetchRoute(origin, destination, uphill, downhill, avoidCurbs));
-  }, [origin, destination, mobilityCode]);
+  }, [origin, destination, mobilityCode, customUphill, customDownhill, avoidRaisedCurbs]);
   useEffect(() => {
     // update zoom level
     zoomPress(zoomLevel, prevZoomLevel);

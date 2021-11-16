@@ -34,10 +34,6 @@ const LayerTransportationRoutes = (props) => {
     });
   }
 
-  if (busDetails) {
-    // console.log(busDetails[0].position.longitude)
-  }
-
   return (
     <React.Fragment>
       <MapboxGL.ShapeSource id="transportation-mask" shape={busPoints}>
