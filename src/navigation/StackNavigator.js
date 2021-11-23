@@ -58,8 +58,10 @@ function MainStackNavigator() {
         headerTitle: () => (
           <TextInput
             placeholderTextColor="black"
+            maxLength={20}
             placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
             autoFocus={true}
+            style={{color: "black", backgroundColor: "white"}}
             onChangeText={(search) => navigation.setParams({ search })}
           />
         ),

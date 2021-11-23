@@ -3,12 +3,10 @@
 // to view the Trip Info and Directions.
 import React from "react";
 import { View, Text, AccessibilityInfo } from "react-native";
-import { Card } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { cancelRoute, closeDirections, closeTripInfo, viewDirections, viewTripInfo } from "../../actions";
-import { Views } from "../../styles";
 import Header from "../../components/Header";
 import BottomCardButton from "../../components/BottomCardButton";
 import CustomCard from "../CustomCard";
@@ -34,14 +32,17 @@ export default function RouteBottomCard(props) {
     return null;
   } else if (!route || route.code != "Ok") {
     AccessibilityInfo.announceForAccessibility(
-      "No possible route found with given start and end locations."
+      "No possible route found with given start, end locations, and mobility constraints."
     );
     return (
-      <Card containerStyle={[Views.bottomCard]}>
-        <View style={{ margin: 5 }}>
-          <Text style={{ fontSize: 20 }}>{t("NO_ROUTE_TEXT")}</Text>
-        </View>
-      </Card>
+      <CustomCard 
+        dismissCard={cancelAndCloseRoute} 
+        close={cancelAndCloseRoute}
+        content={<View>
+          <Header title={t("NO_ROUTE_TEXT")}/><Text>{t("NO_ROUTE_PARAGRAPH")}</Text>
+          </View>
+        } 
+      />
     );
   }
 

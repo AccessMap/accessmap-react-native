@@ -50,6 +50,7 @@
   "IMPERIAL_TOGGLE_TEXT": "Imperial system",
   "MINUTES_TEXT": "minutes",
   "NO_ROUTE_TEXT": "No route found",
+  "NO_ROUTE_PARAGRAPH": "No route possible with the given mobility constraints.",
   "TRIP_INFO_TEXT": "Trip info",
   "DIRECTIONS_TEXT": "Directions",
   "ROUTE_INFO_TEXT": "Route Information",

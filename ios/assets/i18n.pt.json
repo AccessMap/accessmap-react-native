@@ -48,6 +48,7 @@
     "IMPERIAL_TOGGLE_TEXT": "mostrando unidades imperiais",
     "MINUTES_TEXT": "minutos",
     "NO_ROUTE_TEXT": "Nenhum trajeto encontrado",
+    "NO_ROUTE_PARAGRAPH": "Nenhuma rota possível com as restrições de mobilidade fornecidas.",
     "TRIP_INFO_TEXT": "informações de viagem",
     "DIRECTIONS_TEXT": "instruções",
     "ROUTE_INFO_TEXT": "Informações de rota",

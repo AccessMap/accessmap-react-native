@@ -15,6 +15,7 @@ export default GeocodeBar = (props) => {
           <View pointerEvents="box-only" importantForAccessibility="no-hide-descendants">
             <Searchbar
               placeholder={props.placeholder}
+              maxLength={20}
               value={props.value}
               editable={false}
               clearIcon={<View></View>}
