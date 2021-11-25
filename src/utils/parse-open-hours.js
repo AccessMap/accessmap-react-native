@@ -1,21 +1,25 @@
 export const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+// Takes a string representing opening hours of a building from a Mapbox feature.
+// Return an object representing hours of each day of the week.
+// Handled examples: 
+//    Mo-Fr 06:00-18:00
+//    24/7
+//    Mo-Th: 09:00-20:00; Fr,Sa 09:00-18:00; Su 12:15-18:00
 const parseOpenHours = (str) => {
   var today = new Date();
-  // TODO: handle 'We, Fr-Su 10:00-17:00; Th 10:00-21:00', Seattle Art Museum
-  // example: Mo-Fr 06:00-18:00
-  // example: 24/7
-  // example: Mo-Th: 09:00-20:00; Fr,Sa 09:00-18:00; Su 12:15-18:00
   hrs = {
-    Su: "",
-    Mo: "",
-    Tu: "",
-    We: "",
-    Th: "",
-    Fr: "",
-    Sa: "",
+    Su: "Closed",
+    Mo: "Closed",
+    Tu: "Closed",
+    We: "Closed",
+    Th: "Closed",
+    Fr: "Closed",
+    Sa: "Closed",
     today: days[today.getDay()],
+    open: false
   };
+
   if (str == "24/7") {
     hrs.Su = "0:00-24:00";
     hrs.Mo = "0:00-24:00";
@@ -24,38 +28,34 @@ const parseOpenHours = (str) => {
     hrs.Th = "0:00-24:00";
     hrs.Fr = "0:00-24:00";
     hrs.Sa = "0:00-24:00";
-    hrs.open = true;
     return hrs;
   } else {
-    // Split listings into chunks
-    var chunks = str.split("; ");
-    // For each chunk, update the corresponding entries in hrs
+    var chunks = str.split("; "); // Split listings into chunks separated by ;
     for (var i = 0; i < chunks.length; i++) {
-      // If there is a hyphen, it is a range
-      if (chunks[i][2] == "-") {
-        var [startDay, endDay] = chunks[i].slice(0, 5).split("-");
-        var inRange = false;
-        for (var j = 0; j < days.length; j++) {
-          if (!inRange && days[j] == startDay) {
-            inRange = true;
-          } else if (inRange && days[j] == endDay) {
-            hrs[days[j]] = chunks[i].split(" ")[1];
-            inRange = false;
-          }
+      firstDigit = chunks[i].search(chunks[i].match(/\d/)); // index of first time
+      var daysOnly = chunks[i].substring(0, firstDigit);
+      var dayChunks = daysOnly.split(", ");
+      var timePortion = chunks[i].substring(firstDigit);
 
-          if (inRange) {
-            hrs[days[j]] = chunks[i].split(" ")[1];
+      for (day in dayChunks) {
+        dayName = dayChunks[day].replace(/ /g, "")
+
+        if (dayName.includes("-")) { // range of days
+          var [startDay, endDay] = dayName.split("-");
+          hrs[startDay] = timePortion;
+          currentDayIndex = days.indexOf(startDay);
+
+          var currentDay = startDay;
+          while (currentDay != endDay) {
+            currentDayIndex += 1
+            hrs[days[currentDayIndex]] = timePortion;
+            break
           }
+          hrs[endDay] = timePortion;
+
+        } else { // single day
+          hrs[dayName] = timePortion;
         }
-        // If there is a comma, it only has two days
-      } else if (chunks[i][2] == ",") {
-        var [day1, day2] = chunks[i].slice(0, 5).split(",");
-        var time = chunks[i].split(" ")[1];
-        hrs[day1] = time;
-        hrs[day2] = time;
-      } else {
-        // If no comma or hyphen, just one day
-        hrs[chunks[i].slice(0, 2)] = chunks[i].split(" ")[1];
       }
     }
 
@@ -68,10 +68,7 @@ const parseOpenHours = (str) => {
       let formattedOpenHr = todayHrs[0].replace(regex, "");
       let formattedEndHr = todayHrs[1].replace(regex, "");
       hrs.open = now > formattedOpenHr && now < formattedEndHr;
-    } else {
-      hrs.open = false;
     }
-
     return hrs;
   }
 };

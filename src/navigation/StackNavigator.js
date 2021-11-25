@@ -13,7 +13,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Keyboard } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { mapLoaded } from "../actions";
+import { mapLoaded, setOrigin } from "../actions";
 import { RootState } from "../reducers";
 
 function MainStackNavigator() {
@@ -21,6 +21,9 @@ function MainStackNavigator() {
   const Stack = createStackNavigator();
 
   let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
+  let origin = useSelector((state: RootState) => state.map.origin);
+  let destination = useSelector((state: RootState) => state.map.destination);
+
   const dispatch = useDispatch();
 
   const backButton = (navigation) => (
@@ -58,7 +61,7 @@ function MainStackNavigator() {
         headerTitle: () => (
           <TextInput
             placeholderTextColor="black"
-            maxLength={20}
+            maxLength={40}
             placeholder={t("GEOCODER_PLACEHOLDER_TEXT_SEARCH")}
             autoFocus={true}
             style={{color: "black", backgroundColor: "white"}}

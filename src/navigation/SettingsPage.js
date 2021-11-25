@@ -63,7 +63,7 @@ function SettingsPage({ props, route, navigation }) {
       <Switch
         style={Buttons.switches}
         trackColor={{ false: greyLight, true: primaryLight }}
-        thumbColor={Colors.primaryColor}
+        thumbColor="white"
         accessibilityLabel={t("TRACKING_SETTINGS_TEXT")}
         onValueChange={(value) => {
           if (trackingSetting) {
@@ -285,7 +285,7 @@ function PrivacyConsentPopupContent(props) {
   const { Rakam } = NativeModules;
 
   return (
-    <View style={{ height: "100%" }}>
+    <View style={{ height: "100%", paddingBottom: 15 }}>
       <Header
         title={props.t("USER_TRACKING_TITLE")}
         close={() => {

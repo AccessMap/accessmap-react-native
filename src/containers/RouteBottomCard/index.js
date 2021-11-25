@@ -31,17 +31,16 @@ export default function RouteBottomCard(props) {
   if (viewingDirections || viewingTripInfo) {
     return null;
   } else if (!route || route.code != "Ok") {
-    AccessibilityInfo.announceForAccessibility(
-      "No possible route found with given start, end locations, and mobility constraints."
-    );
+    console.log(route)
     return (
       <CustomCard 
-        dismissCard={cancelAndCloseRoute} 
-        close={cancelAndCloseRoute}
+        cardVisible={true}
+        dismissCard={cancelAndCloseRoute}
         content={<View>
-          <Header title={t("NO_ROUTE_TEXT")}/><Text>{t("NO_ROUTE_PARAGRAPH")}</Text>
+          <Header close={cancelAndCloseRoute} title={t("NO_ROUTE_TEXT")}/>
+          <Text style={{color:"red"}}>{route.msg + ". " + t("NO_ROUTE_PARAGRAPH")}</Text>
           </View>
-        } 
+        }
       />
     );
   }

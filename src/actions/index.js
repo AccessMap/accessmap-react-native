@@ -159,6 +159,8 @@ function receiveRoute(json) {
 }
 
 export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
+  // console.log("Fetching route: o=" + origin + ", d=" + destination 
+  //   + ", u=" + uphill + ", d=" + downhill  + ", avoidCurbs=" + avoidCurbs)
   return (dispatch) => {
     if (origin && destination) {
       dispatch(mapLoading());

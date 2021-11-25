@@ -58,14 +58,16 @@ export default function FeatureCard(props) {
     const color = hours.open ? "green" : "red";
     return (
       <Text
-        style={{
+        style={[Fonts.p], {
           flex: 1,
-          fontSize: 12,
+          fontWeight: hours.today == day ? "bold" : "normal",
           color: hours.today == day ? color : "black",
         }}
       >
         {day}: {hours[day]}{" "}
-        {hours.open && day == hours.today ? " (Currently Open)" : null}
+        {hours.open && day == hours.today ? " (Open)" : null}
+        {!hours.open && hours.today == day && hours[day] != "Closed" ? 
+          " (Closed)" : null}
       </Text>
     );
   };
@@ -147,7 +149,7 @@ export default function FeatureCard(props) {
   };
 
   const content = (
-    <View style={{height:"100%"}}>
+    <View style={{height:"100%", paddingBottom: 15}}>
       {header}
       {details()}
       <View

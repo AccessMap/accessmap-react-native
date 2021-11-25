@@ -141,7 +141,7 @@
   "MAP_TUT_7": "Currently, AccessMap supports showing sidewalk data for Seattle, Mount Vernon, and Bellingham.",
   "ROUTE_CAPTION_1": "Home screen with the grey enter button on the top right highlighted. The Map view of Seattle is shown as an example below.",
   "ROUTE_HEAD_1": "Select Locations",
-  "ROUTE_TUT_1": "Tap on the map or the grey Enter button to enter a start and destination for your route.",
+  "ROUTE_TUT_1": "Tap on the map or the right grey button to enter a start and destination for your route.",
   "ROUTE_CAPTION_2": "Two search bars on top of each other, a cancel button to the right, and a reverse button on the bottom right. The top search bar contents read: Pike Place Market. The bottom one reads: Gum Walls.",
   "ROUTE_TUT_2": "In this example, Pike Place Market is set as the route start and Gum Wall is set as the destination.",
   "ROUTE_TUT_3": "The top right button cancels selecting a route, and the bottom right button reverses the start and destination.",

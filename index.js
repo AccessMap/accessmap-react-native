@@ -24,7 +24,7 @@ import rootReducer from "./src/reducers";
 
 const persistConfig = {
   key: "root",
-  storage: AsyncStorage
+  storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

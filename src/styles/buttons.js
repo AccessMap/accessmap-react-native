@@ -56,14 +56,11 @@ export const button = {
   backgroundColor: primaryColor, 
 };
 
-export const switches = [
-  minTouchTargetSize,
-  {
-    marginRight: 10,
-    color: primaryColor,
-    height: 50,
-  },
-];
+export const switches = {
+  marginRight: 10,
+  color: primaryColor,
+  padding: 10,
+};
 
 export const languageOrRegionSwitch = [
   minTouchTargetSize,

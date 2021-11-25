@@ -2,7 +2,7 @@
 // based on user input.
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AccessibilityInfo, Alert, FlatList, View } from "react-native";
+import { AccessibilityInfo, Alert, FlatList, Text, View } from "react-native";
 import { ListItem } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { usePrevious } from "../../utils/usePreviousHook";
@@ -20,7 +20,11 @@ import LoadingScreen from "../../components/LoadingScreen";
 import { RootState } from "../../reducers";
 
 export default function Geocoder(props) {
-  const [searchList, setSearchList] = useState({});
+  // type [string]: either searching for a place, setting origin, or setting destination
+  // navigation: window to pop out of
+  // search [string]: query
+
+  const [searchList, setSearchList] = useState([]);
   const prevSearch = usePrevious(props.search);
 
   let bbox = useSelector((state: RootState) => state.map.bbox.join(","));
@@ -51,20 +55,29 @@ export default function Geocoder(props) {
       return;
     }
     dispatch(mapLoading());
+
     const timeoutId = setTimeout(() => {
-      const query =
-        "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
-        props.search +
-        ".json?bbox=" +
-        bbox +
-        "&limit=10&access_token=" +
-        ACCESS_TOKEN;
+      var query = "";
+      if (props.search.includes(".") && props.search.includes(",")) { // coordinates
+        query = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + 
+          props.search.replace(/ /g, "") + ".json?access_token=" + ACCESS_TOKEN;
+      } else {
+        query =
+          "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+          props.search +
+          ".json?bbox=" +
+          bbox +
+          "&limit=20&access_token=" +
+          ACCESS_TOKEN;
+      }
       fetch(query)
         .then((response) => response.json())
         .then((json) => {
-          setSearchList(json.features);
-          AccessibilityInfo.announceForAccessibility(json.features.length + " results found for query: " + 
-            props.search)
+          if (json.features) {
+            setSearchList(json.features);
+            AccessibilityInfo.announceForAccessibility(json.features.length + 
+              " results found for query: " + props.search)
+          }
           dispatch(mapLoaded());
         })
         .catch((error) => {
@@ -76,51 +89,54 @@ export default function Geocoder(props) {
     return () => clearTimeout(timeoutId);
   }, [props.search]);
 
+  const search = (item) => {
+    switch (props.type) {
+      case "search":
+        AccessibilityInfo.announceForAccessibility("Showing location of " + item.place_name);
+        panToLocation(item);
+        break;
+      case "origin":
+        AccessibilityInfo.announceForAccessibility("Route origin set to " + item.place_name);
+        setAndPinOrigin(item);
+        break;
+      case "destination":
+        AccessibilityInfo.announceForAccessibility("Route destination set to " + item.place_name);
+        setAndPinDestination(item);
+    }
+    props.navigation.pop();
+  };
+
   const renderItem = ({ item, index }) => {
     return (
-      <ListItem
-        onPress={() => {
-          switch (props.type) {
-            case "search":
-              AccessibilityInfo.announceForAccessibility(
-                "Showing location of " +
-                  item.place_name +
-                  ". Select Route from here to set location as route start. Or," +
-                  "Select Route to here to set location as route end."
-              );
-              panToLocation(item);
-              break;
-            case "origin":
-              AccessibilityInfo.announceForAccessibility(
-                "Route start set to " + item.place_name
-              );
-              setAndPinOrigin(item);
-              break;
-            case "destination":
-              AccessibilityInfo.announceForAccessibility(
-                "Route destination set to " + item.place_name
-              );
-              setAndPinDestination(item);
-          }
-          props.navigation.pop();
-        }}
-      >
+      <ListItem onPress={() => search(item)}>
         <ListItem.Content>
           <ListItem.Title>{item.place_name}</ListItem.Title>
         </ListItem.Content>
       </ListItem>
     );
   };
-
+  
+  const noSuggestionsText = "No suggested locations found for query. " + 
+    "Try typing exact coordinates (longitude, latitude) or a location name.";
   return (
     <View style={{width: "100%", height: "100%"}}>
-      <FlatList
-        data={searchList}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        accessibilityLabel={"Search results"}
-      />
-        <LoadingScreen isLoading={isLoading}/>
+      {((!searchList || searchList.length == 0) && (props.search)) && 
+      <ListItem style={{height:"100%"}}>
+        <ListItem.Content>
+          <Text>{noSuggestionsText}</Text>
+        </ListItem.Content>
+      </ListItem>}
+      
+      { searchList && searchList.length > 0 &&
+        <FlatList
+          data={searchList}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderItem}
+          accessibilityLabel={"Search results"}
+        />
+      }
+
+      <LoadingScreen isLoading={isLoading}/>
     </View>
   );
 }

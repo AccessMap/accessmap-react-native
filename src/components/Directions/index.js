@@ -12,7 +12,7 @@ const Directions = (props) => {
   AccessibilityInfo.announceForAccessibility("Showing Directions screen.");
 
   const content = (
-    <View style={{maxHeight: 250}}>
+    <View style={{maxHeight: 350}}>
       <Header title={t("DIRECTIONS_TEXT")} close={props.close} />
       <FlatList
         data={props.route.routes[0].segments.features}
@@ -26,7 +26,7 @@ const Directions = (props) => {
           />
         )}
         keyExtractor={(item, index) => index.toString()}
-        style={{ marginBottom: 5, marginLeft: -20}}
+        style={{ marginBottom: 5, marginLeft: -20, height: "100%"}}
       />
     </View>
   );

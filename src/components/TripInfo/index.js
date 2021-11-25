@@ -15,7 +15,6 @@ import { metersToFeet, metersToMiles } from "../../utils/metric-imperial-convers
 
 import Header from "../Header";
 import CustomCard from "../../containers/CustomCard";
-import { Views } from "../../styles";
 
 const InfoText = (props) => {
   return (

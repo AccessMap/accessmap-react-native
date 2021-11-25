@@ -16,7 +16,7 @@ import {
   ZOOM_IN,
   ZOOM_OUT,
 } from "../actions";
-import { logEvent } from "../actions/trackUser"
+import { logEvent } from "../actions/trackUser";
 
 import { SEATTLE } from "../constants";
 import regions from "../constants/regions";
@@ -40,6 +40,26 @@ const initialState = {
   viewingTripInfo: false,
   viewingDirections: false,
   route: null,
+};
+
+// Logs a location that being set as origin or destination.  
+// Takes a state and an action within the map reducer.
+// Returns a string representing the location.
+const logLocation = (state, action) => {
+  if (state.pinFeatures && state.pinFeatures.center) {
+    const text =
+      state.pinFeatures && state.pinFeatures.text
+        ? state.pinFeatures.text
+        : null;
+    logEvent(action.type, [
+      "lat",
+      `${state.pinFeatures.center[0]}`,
+      "lon",
+      `${state.pinFeatures.center[1]}`,
+    ]);
+    return text;
+  }
+  return state.pinFeatures;
 };
 
 export function mapReducer(state = initialState, action) {
@@ -73,36 +93,18 @@ export function mapReducer(state = initialState, action) {
     case RECEIVE_ROUTE:
       return { ...state, route: action.route };
     case SET_ORIGIN:
-      const originText =
-        state.pinFeatures && state.pinFeatures.text
-          ? state.pinFeatures.text
-          : null;
-      logEvent(action.type, [
-        "lat",
-        `${state.pinFeatures.center[0]}`,
-        "lon",
-        `${state.pinFeatures.center[1]}`,
-      ]);
+      const originText = logLocation(state, action);
       return {
         ...state,
-        origin: state.pinFeatures.center,
+        origin: state.pinFeatures.center ? state.pinFeatures.center : state.pinFeatures,
         pinFeatures: null,
         originText,
       };
     case SET_DESTINATION:
-      const destinationText =
-        state.pinFeatures && state.pinFeatures.text
-          ? state.pinFeatures.text
-          : null;
-      logEvent(action.type, [
-        "lat",
-        `${state.pinFeatures.center[0]}`,
-        "lon",
-        `${state.pinFeatures.center[1]}`,
-      ]);
+      const destinationText = logLocation(state, action)
       return {
         ...state,
-        destination: state.pinFeatures.center,
+        destination: state.pinFeatures.center ? state.pinFeatures.center : state.pinFeatures,
         pinFeatures: null,
         destinationText,
       };

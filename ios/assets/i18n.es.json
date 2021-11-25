@@ -48,7 +48,7 @@
     "IMPERIAL_TOGGLE_TEXT": "el sistema imperial",
     "MINUTES_TEXT": "minutos",
     "NO_ROUTE_TEXT": "No hay ruta encontrado",
-    "NO_ROUTE_PARAGRAPH": "No es posible una ruta con las limitaciones de movilidad dadas.",
+    "NO_ROUTE_PARAGRAPH": "Pruebe una ruta diferente o ajuste las restricciones de movilidad.",
     "TRIP_INFO_TEXT": "información de viaje",
     "DIRECTIONS_TEXT": "Direcciones",
     "ROUTE_INFO_TEXT": "Información de ruta",

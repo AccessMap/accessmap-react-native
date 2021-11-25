@@ -5,7 +5,13 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Slider } from "react-native-elements";
 
-import { setCustomDownhill, setCustomUphill, setMobilityMode, showDownhill, showUphill } from "../../actions";
+import {
+  setCustomDownhill,
+  setCustomUphill,
+  setMobilityMode,
+  showDownhill,
+  showUphill,
+} from "../../actions";
 import { Colors, Fonts } from "../../styles";
 import {
   MOBILITY_MODE_CANE,
@@ -16,12 +22,18 @@ import {
 import { RootState } from "../../reducers";
 
 export default function CustomSlider(props) {
-  let customUphill = useSelector((state: RootState) => state.mobility.customUphill);
-  let customDownhill = useSelector((state: RootState) => state.mobility.customDownhill);
+  let customUphill = useSelector(
+    (state: RootState) => state.mobility.customUphill
+  );
+  let customDownhill = useSelector(
+    (state: RootState) => state.mobility.customDownhill
+  );
   let avoidRaisedCurbs = useSelector(
     (state: RootState) => state.mobility.avoidRaisedCurbs
   );
-  let mobilityMode = useSelector((state: RootState) => state.mobility.mobilityMode);
+  let mobilityMode = useSelector(
+    (state: RootState) => state.mobility.mobilityMode
+  );
 
   const getPreferences = (mode) => {
     switch (mode) {
@@ -40,7 +52,9 @@ export default function CustomSlider(props) {
   // props: title, uphill [boolean]
   let incline = useSelector((state: RootState) => {
     if (mobilityMode == MOBILITY_MODE_CUSTOM) {
-      return props.uphill ? state.mobility.customUphill : state.mobility.customDownhill;
+      return props.uphill
+        ? state.mobility.customUphill
+        : state.mobility.customDownhill;
     }
     const mode = getPreferences(mobilityMode);
     const incline = mode[props.uphill ? 0 : 1];
@@ -63,7 +77,6 @@ export default function CustomSlider(props) {
       }}
     >
       <TouchableOpacity
-        style={{ marginBottom: 5 }}
         disabled={mobilityMode != MOBILITY_MODE_CUSTOM}
         onPress={() => {
           dispatch(
@@ -78,33 +91,45 @@ export default function CustomSlider(props) {
           {props.title}: {incline}%
         </Text>
       </TouchableOpacity>
-      <Slider
-        value={incline}
-        onSlidingComplete={(value) => {
-          dispatch(
-            props.uphill
-              ? setCustomUphill(Math.round(value * 10) / 10)
-              : setCustomDownhill(Math.round(value * 10) / 10)
-          );
-          dispatch(props.uphill ? showUphill() : showDownhill());
-          dispatch(setMobilityMode(MOBILITY_MODE_CUSTOM));
-        }}
-        minimumValue={minValue}
-        maximumValue={maxValue}
-        step={0.5}
-        trackStyle={{ height: 15, borderRadius: 20 }}
-        minimumTrackTintColor={
-          mobilityMode == MOBILITY_MODE_CUSTOM
-            ? Colors.primaryColor
-            : Colors.grey
-        }
-        thumbStyle={{ height: 25, width: 25 }}
-        thumbTintColor={
-          mobilityMode == MOBILITY_MODE_CUSTOM
-            ? Colors.primaryColor
-            : Colors.grey
-        }
-      />
+
+      {mobilityMode == MOBILITY_MODE_CUSTOM && (
+        <Slider
+          value={incline}
+          allowTouchTrack={true}
+          onValueChange={(value) => {
+            dispatch(
+              props.uphill
+                ? setCustomUphill(Math.round(value * 10) / 10)
+                : setCustomDownhill(Math.round(value * 10) / 10)
+            );
+            dispatch(props.uphill ? showUphill() : showDownhill());
+            dispatch(setMobilityMode(MOBILITY_MODE_CUSTOM));
+          }}
+          minimumValue={minValue}
+          maximumValue={maxValue}
+          step={0.5}
+          trackStyle={{ height: 12, borderRadius: 20 }}
+          minimumTrackTintColor={
+            mobilityMode == MOBILITY_MODE_CUSTOM
+              ? Colors.primaryColor
+              : Colors.grey
+          }
+          thumbStyle={{
+            height: 25,
+            width: 25,
+            shadowColor: "#000000",
+            shadowOpacity: 0.8,
+            shadowRadius: 2,
+            shadowOffset: {
+              height: 2,
+              width: 0,
+            },
+          }}
+          thumbTintColor={
+            mobilityMode == MOBILITY_MODE_CUSTOM ? "white" : Colors.grey
+          }
+        />
+      )}
     </View>
   );
 }

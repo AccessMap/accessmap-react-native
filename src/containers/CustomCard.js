@@ -13,7 +13,7 @@ export default function CustomCard(props) {
 
   const [cardHasLoaded, setLoaded] = useState(false);
   const [size, onLayout] = useComponentSize(); // current size width/height
-  const threshold = size ? size.height - 20 : 500;
+  const threshold = size ? size.height - 25 : 500;
   const panY = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function CustomCard(props) {
   }, [props.cardVisible]);
 
   const handleSwipeEvent = Animated.event(
-    [{ nativeEvent: { translationY: panY, }, }],
+    [{ nativeEvent: { translationY: panY } }],
     { useNativeDriver: true }
   );
 
@@ -37,51 +37,60 @@ export default function CustomCard(props) {
   const handleStateChange = ({ nativeEvent }) => {
     panY.extractOffset(); // prevents jumping to initial state
     if (nativeEvent.state === State.END) {
-      if (nativeEvent.translationY >= threshold || nativeEvent.velocityY >= 1420) {
+      if (
+        nativeEvent.translationY >= threshold ||
+        nativeEvent.velocityY >= 1420
+      ) {
         props.dismissCard();
       }
     }
   };
-  
+
+  const content = (
+    <Animated.View
+      onLayout={onLayout}
+      style={{
+        position: "absolute",
+        width: "100%",
+        bottom: 0,
+        flex: 1,
+        zIndex: 50,
+        flexDirection: "column",
+        alignItems: "center",
+        transform: [
+          {
+            translateY: panY.interpolate({
+              inputRange: [0, threshold],
+              outputRange: [0, threshold],
+              extrapolate: "clamp",
+            }),
+          },
+        ],
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "white",
+          width: "100%",
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          paddingTop: 10,
+          paddingLeft: 20,
+          paddingRight: 10,
+        }}
+      >
+        {props.content}
+      </View>
+    </Animated.View>
+  );
+
   return (
     <PanGestureHandler
       onGestureEvent={handleSwipeEvent}
       onHandlerStateChange={handleStateChange}
+      activeOffsetY={10}
     >
-      <Animated.View
-        onLayout={onLayout}
-        style={{
-          position: "absolute",
-          width: "100%",
-          bottom: 0,
-          flex: 1,
-          zIndex: 50,
-          flexDirection: "column",
-          alignItems: "center",
-          transform: [{ 
-            translateY: panY.interpolate({
-              inputRange: [0, threshold],
-              outputRange: [0, threshold],
-              extrapolate: 'clamp'
-            })
-          }],
-        }}
-      >
-        <View
-          style={{
-            backgroundColor: "white",
-            width: "100%",
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            paddingTop: 15,
-            paddingLeft: 20,
-            paddingRight: 10,
-            paddingBottom: 20,
-          }}
-        >
-          {props.content}
-        </View>
-      </Animated.View>
+      {content}
     </PanGestureHandler>
   );
 }

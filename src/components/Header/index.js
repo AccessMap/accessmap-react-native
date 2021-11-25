@@ -14,7 +14,7 @@ const Header = (props) => {
   const info = props.info;
 
   return (
-    <View style={{ flexDirection: "row", paddingBottom: 5, justifyContent: "space-between" }}>
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
       <View style={{ flexDirection: "row", alignItems: "center", flex: 1}}>
         <TouchableWithoutFeedback>
           <Text accessible={true} ref={setFocus} style={[Fonts.h1]}>{props.title}</Text>

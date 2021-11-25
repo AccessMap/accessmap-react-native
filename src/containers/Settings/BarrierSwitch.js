@@ -1,6 +1,7 @@
 import React from 'react';
-import { AccessibilityInfo, Switch, Text, View } from 'react-native';
-import { toggleBarriers } from '../../actions';
+import { AccessibilityInfo, Text, View } from 'react-native';
+import { Switch } from 'react-native-elements';
+import { setMobilityMode, toggleBarriers } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Buttons, Colors, Fonts } from '../../styles';
@@ -26,18 +27,18 @@ export default function BarrierSwitch(props) {
 			<Text style={[{flex: 1}, Fonts.p]}>{t("AVOID_BARRIERS_TEXT")}</Text>
 			<Switch
 				style={Buttons.switches}
-				trackColor={{ false: greyLight, true: mobilityMode == MOBILITY_MODE_CUSTOM ? primaryLight : Colors.grey}}
-				thumbColor={mobilityMode == MOBILITY_MODE_CUSTOM ? Colors.primaryColor : Colors.grey}
+				trackColor={{ false: greyLight, true: Colors.primaryColor}}
+				thumbColor={"white"}
 				onValueChange={() => {
 					if (avoidRaisedCurbs) {
 						AccessibilityInfo.announceForAccessibility("Currently not avoiding raised curbs.")
 					} else {
 						AccessibilityInfo.announceForAccessibility("Currently avoiding raised curbs.")
 					}
+					dispatch(setMobilityMode(MOBILITY_MODE_CUSTOM))
 					dispatch(toggleBarriers())
 				}}
 				value={raisedCurbStatus}
-				disabled={mobilityMode != MOBILITY_MODE_CUSTOM}
 			/>
 		</View>
 	);
