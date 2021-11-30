@@ -1,8 +1,8 @@
 // Card details that show on the bottom of the screen when clicking on a sidewalk
 // or coordinate. Title describes what the feature is, ex: 'Sidewalk'
 // Includes the option to "Route from/to here".
-import React from "react";
-import { View, Text, AccessibilityInfo } from "react-native";
+import React, { useRef } from "react";
+import { View, Text, AccessibilityInfo, Animated } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,8 @@ export default function FeatureCard(props) {
   if (info && info.opening_hours) {
     openHours = parseOpenHours(info.opening_hours);
   }
+
+  const panY = useRef(new Animated.Value(0)).current;
 
   const InfoText = (props) => {
     return (
@@ -92,6 +94,7 @@ export default function FeatureCard(props) {
       cs={info && (info.footway == "sidewalk" || info.footway == "crossing")}
       navigation={props.navigation}
       info={info}
+      panY={panY}
     />
   );
 
@@ -124,7 +127,7 @@ export default function FeatureCard(props) {
             <View style={{ flex: 3 }}>
               {days.map((string) =>
                 openHours[string] ? (
-                  <OpenHours hours={openHours} day={string} />
+                  <OpenHours key={string} hours={openHours} day={string} />
                 ) : null
               )}
             </View>
@@ -159,7 +162,6 @@ export default function FeatureCard(props) {
           justifyContent: "space-between",
           alignItems: "center",
           marginTop: 5,
-          marginRight: 15,
         }}
       >
         <BottomCardButton
@@ -186,7 +188,7 @@ export default function FeatureCard(props) {
       {info && info.footway && (
         <Button
           title={t("REPORT_ISSUE")}
-          containerStyle={[{ flex: 1, marginTop: 20, marginRight: 15 }]}
+          containerStyle={[{ flex: 1, marginTop: 20}]}
           buttonStyle={{
             backgroundColor: "white",
             paddingVertical: 13,
@@ -212,6 +214,10 @@ export default function FeatureCard(props) {
   );
 
   return (
-    <CustomCard dismissCard={() => dispatch(placePin(null))} content={content} cardVisible={true}/>
+    <CustomCard 
+      dismissCard={() => dispatch(placePin(null))} 
+      content={content} cardVisible={true}
+      panY={panY}
+    />
   );
 }

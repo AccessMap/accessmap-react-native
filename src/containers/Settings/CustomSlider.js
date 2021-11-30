@@ -1,7 +1,7 @@
 // An CustomSlider contains a Slider for which the user may
 // adjust the steepness levels of either Uphill or Downhill steepness.
 import React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Slider } from "react-native-elements";
 
@@ -73,7 +73,6 @@ export default function CustomSlider(props) {
         flex: 1,
         justifyContent: "center",
         marginTop: 5,
-        marginBottom: 5,
       }}
     >
       <TouchableOpacity
@@ -118,12 +117,14 @@ export default function CustomSlider(props) {
             height: 25,
             width: 25,
             shadowColor: "#000000",
-            shadowOpacity: 0.8,
+            shadowOpacity: 0.9,
             shadowRadius: 2,
             shadowOffset: {
               height: 2,
               width: 0,
             },
+            borderColor: "black",
+            borderWidth: Platform.OS === "android" ? 0.5 : 0,
           }}
           thumbTintColor={
             mobilityMode == MOBILITY_MODE_CUSTOM ? "white" : Colors.grey

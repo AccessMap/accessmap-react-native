@@ -190,7 +190,7 @@ export function fetchRoute(origin, destination, uphill, downhill, avoidCurbs) {
         .catch((error) => {
           console.log(error);
           dispatch(mapLoaded());
-          Alert.alert("Failed to retrieve route data", { error }, [
+          Alert.alert("Failed to retrieve route data", error.message, [
             { text: "OK" },
           ]);
         });

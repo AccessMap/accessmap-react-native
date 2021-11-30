@@ -1,6 +1,6 @@
 // Shows trip information with elevation changes graph
-import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import React, { useRef } from "react";
+import { Animated, ScrollView, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import {
@@ -26,12 +26,13 @@ const InfoText = (props) => {
 };
 
 export default function TripInfo(props) {
+  const panY = useRef(new Animated.Value(0)).current;
   const { t, i18n } = useTranslation();
   let usingMetricSystem = useSelector((state: RootState) => 
     state.setting.usingMetricSystem)
 
   if (props.route == null || props.route.routes == null) {
-    return (<Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>);
+    return (<Header title={t("ROUTE_INFO_TEXT")} close={props.close} panY={panY}/>);
   }
 
   const route = props.route.routes[0];
@@ -81,9 +82,10 @@ export default function TripInfo(props) {
     `and the maximum downhill height change is ${Math.round(Math.min(...elevChange))} ${unitsSmall}`;
 
   const content = (
-    <View style={[{maxHeight: 250, backgroundColor: "white" }]}>
-      <Header title={t("ROUTE_INFO_TEXT")} close={props.close}/>
-      <ScrollView style={{ paddingHorizontal: 10 }}>
+    <View style={[{maxHeight: 350, backgroundColor: "white" }]}>
+      <Header title={t("ROUTE_INFO_TEXT")} close={props.close} panY={panY}/>
+      <ScrollView 
+        style={{ paddingHorizontal: 10 }}>
         <Text>Experienced elevation gain</Text>
         <View
           style={{
@@ -170,5 +172,7 @@ export default function TripInfo(props) {
     </View>
   );
 
-  return <CustomCard cardVisible={true} content={content} dismissCard={props.close}/>
+  return <CustomCard 
+    cardVisible={true} content={content} 
+    dismissCard={props.close} panY={panY}/>
 };

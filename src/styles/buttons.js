@@ -59,7 +59,7 @@ export const button = {
 export const switches = {
   marginRight: 10,
   color: primaryColor,
-  padding: 10,
+  padding: 11,
 };
 
 export const languageOrRegionSwitch = [

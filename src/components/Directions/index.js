@@ -1,6 +1,6 @@
 // Index for Directions and Direction Cards
-import React from "react";
-import { AccessibilityInfo, FlatList, View } from "react-native";
+import React, { useRef } from "react";
+import { AccessibilityInfo, Animated, FlatList, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import DirectionCard from "./DirectionCard";
 
@@ -11,10 +11,16 @@ const Directions = (props) => {
   const { t, i18n } = useTranslation();
   AccessibilityInfo.announceForAccessibility("Showing Directions screen.");
 
+  const panY = useRef(new Animated.Value(0)).current;
+
   const content = (
-    <View style={{maxHeight: 350}}>
-      <Header title={t("DIRECTIONS_TEXT")} close={props.close} />
+    <View style={{ maxHeight: 350 }}>
+      <Header title={t("DIRECTIONS_TEXT")} close={props.close} panY={panY} />
       <FlatList
+        onStartShouldSetResponder={() => true}
+        onStartShouldSetResponderCapture={() => true}
+        onMoveShouldSetResponderCapture={() => true}
+        onMoveShouldSetResponder={() => true}
         data={props.route.routes[0].segments.features}
         renderItem={({ item, index }) => (
           <DirectionCard
@@ -26,7 +32,7 @@ const Directions = (props) => {
           />
         )}
         keyExtractor={(item, index) => index.toString()}
-        style={{ marginBottom: 5, marginLeft: -20, height: "100%"}}
+        style={{ marginBottom: 5, marginLeft: -20, height: "100%" }}
       />
     </View>
   );
@@ -36,6 +42,7 @@ const Directions = (props) => {
       cardVisible={props.cardVisible}
       dismissCard={props.close}
       content={content}
+      panY={panY}
     />
   );
 };

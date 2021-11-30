@@ -9,8 +9,9 @@ import {
   NativeModules,
   Platform,
   TouchableOpacity,
+  Animated,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   // authenticate,
   goToLanguage,
@@ -27,7 +28,7 @@ import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/GreyDivider";
 import { RadioButton } from "react-native-paper";
-import { greyLight, primaryLight } from "../styles/colors";
+import { greyLight, primaryColor, primaryLight } from "../styles/colors";
 
 import CustomCard from "../containers/CustomCard";
 import Header from "../components/Header";
@@ -42,16 +43,18 @@ function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [pageLoaded, setLoaded] = useState(false);
 
-  let metricSetting = useSelector((state: RootState) => 
-    state.setting.usingMetricSystem);
-  let trackingSetting = useSelector((state: RootState) => 
-    state.setting.trackUserActions);
-  let currentLanguage = useSelector((state: RootState) => 
-    state.setting.currLanguage);
-  let currentRegion = useSelector((state: RootState) => 
-    state.map.currRegion);
-  let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
-  let displayName = useSelector((state: RootState) => state.signIn.displayName);
+  let metricSetting = useSelector(
+    (state: RootState) => state.setting.usingMetricSystem
+  );
+  let trackingSetting = useSelector(
+    (state: RootState) => state.setting.trackUserActions
+  );
+  let currentLanguage = useSelector(
+    (state: RootState) => state.setting.currLanguage
+  );
+  let currentRegion = useSelector((state: RootState) => state.map.currRegion);
+  // let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
+  // let displayName = useSelector((state: RootState) => state.signIn.displayName);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -62,13 +65,13 @@ function SettingsPage({ props, route, navigation }) {
       <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
       <Switch
         style={Buttons.switches}
-        trackColor={{ false: greyLight, true: primaryLight }}
+        trackColor={{ false: greyLight, true: primaryColor }}
         thumbColor="white"
         accessibilityLabel={t("TRACKING_SETTINGS_TEXT")}
         onValueChange={(value) => {
           if (trackingSetting) {
             dispatch(untrackUser());
-            PostHog.disable()
+            PostHog.disable();
             if (pageLoaded) {
               AccessibilityInfo.announceForAccessibility(t("NOT_TRACKING"));
             } else {
@@ -89,8 +92,10 @@ function SettingsPage({ props, route, navigation }) {
   const [collapsedPrivacy, setCollapsedPrivacy] = useState(true);
   const [collapsedAbout, setCollapsedAbout] = useState(true);
 
-  return (
-    <View style={{height: "100%"}}>
+  const panY = useRef(new Animated.Value(0)).current;
+
+  return ( // TODO: reinstate login
+    <View style={{ height: "100%" }}>
       <ScrollView style={Views.scrollView}>
         {/* <View>
           { isLoggedIn && <Text style={h1}>{`Hello, ${displayName}`}</Text>}
@@ -231,13 +236,14 @@ function SettingsPage({ props, route, navigation }) {
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
-            setCollapsedPrivacy(!collapsedPrivacy)
+            setCollapsedPrivacy(!collapsedPrivacy);
             AccessibilityInfo.announceForAccessibility(
               collapsedPrivacy
                 ? "Privacy section has been maximized."
                 : "Privacy section has been collapsed."
             );
-          }}>
+          }}
+        >
           <Text style={[Fonts.h2]}>{t("PRIVACY")}</Text>
         </TouchableOpacity>
         <Collapsible collapsed={collapsedPrivacy}>{PrivacySection}</Collapsible>
@@ -268,10 +274,12 @@ function SettingsPage({ props, route, navigation }) {
         <CustomCard
           dismissCard={() => setModalVisible(false)}
           cardVisible={modalVisible}
+          panY={panY}
           content={
             <PrivacyConsentPopupContent
               t={t}
               setModalVisible={setModalVisible}
+              panY={panY}
             />
           }
         />
@@ -289,12 +297,11 @@ function PrivacyConsentPopupContent(props) {
       <Header
         title={props.t("USER_TRACKING_TITLE")}
         close={() => {
-          props.setModalVisible(false)
+          props.setModalVisible(false);
         }}
+        panY={props.panY}
       />
-      <Text
-        style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]}
-      >
+      <Text style={[Fonts.p, { paddingRight: 20, paddingBottom: 20 }]}>
         {props.t("USER_TRACKING_TEXT")}
       </Text>
       <View
@@ -313,7 +320,7 @@ function PrivacyConsentPopupContent(props) {
               Rakam.toggleTracking();
             }
             dispatch(trackUser());
-            PostHog.enable()
+            PostHog.enable();
             AccessibilityInfo.announceForAccessibility(
               props.t("CURRENTLY_TRACKING")
             );

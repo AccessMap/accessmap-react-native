@@ -1,8 +1,8 @@
 // A RouteBottomCard appears at the bottom of the screen after a user selects a start and end
 // location for their route. The Card contains information about distance, time, and buttons
 // to view the Trip Info and Directions.
-import React from "react";
-import { View, Text, AccessibilityInfo } from "react-native";
+import React, { useRef } from "react";
+import { View, Text, AccessibilityInfo, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +28,8 @@ export default function RouteBottomCard(props) {
 
   const { t, i18n } = useTranslation();
 
+  const panY = useRef(new Animated.Value(0)).current;
+
   if (viewingDirections || viewingTripInfo) {
     return null;
   } else if (!route || route.code != "Ok") {
@@ -35,9 +37,13 @@ export default function RouteBottomCard(props) {
     return (
       <CustomCard 
         cardVisible={true}
+        panY={panY}
         dismissCard={cancelAndCloseRoute}
-        content={<View>
-          <Header close={cancelAndCloseRoute} title={t("NO_ROUTE_TEXT")}/>
+        content={<View style={{paddingBottom: 15}}>
+          <Header close={cancelAndCloseRoute} 
+            title={t("NO_ROUTE_TEXT")}
+            panY={panY}
+          />
           <Text style={{color:"red"}}>{route.msg + ". " + t("NO_ROUTE_PARAGRAPH")}</Text>
           </View>
         }
@@ -53,7 +59,7 @@ export default function RouteBottomCard(props) {
   );
 
   const content = (
-    <View style={{height: "100%"}}>
+    <View style={{height: "100%", paddingBottom: 15}}>
       <View>
         <Header
           title={ "" + (usingMetricSystem ? 
@@ -63,9 +69,10 @@ export default function RouteBottomCard(props) {
               (Math.round(calculatedRoute.duration / 60)) + " " + t("MINUTES_TEXT") + ")"
           }
           close={cancelAndCloseRoute}
+          panY={panY}
         />
       </View>
-      <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", marginRight: 15 }}>
+      <View style={{ flex: 1, flexDirection: "row", paddingTop: 10, justifyContent: "space-between",}}>
         <BottomCardButton
           style={{ marginRight: 10 }}
           title={t("TRIP_INFO_TEXT")}
@@ -85,6 +92,10 @@ export default function RouteBottomCard(props) {
   );
 
   return (
-    <CustomCard dismissCard={cancelAndCloseRoute} content={content} cardVisible={true}/>  
+    <CustomCard dismissCard={cancelAndCloseRoute} 
+      content={content} 
+      cardVisible={true}
+      panY={panY}
+    />  
   );
 };

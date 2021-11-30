@@ -23,6 +23,7 @@ postHogSetup()
 PostHog.disable()
 
 LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
+console.reportErrorsAsExceptions = false;
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Tab = createBottomTabNavigator();
 
