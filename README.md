@@ -28,3 +28,11 @@ First, make sure you have React Native installed. If you have not yet set it up,
 8.  If at any point you run into a message mentioning ./gradlew debug error or a server 500 error on the app relating to a dependency,
     follow the above steps again.
 9.  To do the above steps as a shortcut, run ./setup.sh in the home directory
+
+## Running the app on device
+- Android: `react-native run-android --deviceId=DEVICE_ID`
+  - For list of connected devices' IDs, run `adb devices` with android command line tools installed.
+- iOS: react-native run-ios
+  - For simulator, attach simulator tag: `--simulator="iPhone SE (1st generation)"`
+    - `xcrun simctl list devices` to see all installed simulators
+  - For physical device, attach device tag: `--device "Jay's iPhone"`

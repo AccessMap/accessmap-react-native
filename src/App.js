@@ -10,24 +10,27 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
-import CustomBottomTabBar, {} from "./components/CustomBottomTabBar";
+import CustomBottomTabBar from "./components/CustomBottomTabBar";
 import { deepLinking } from "./constants/urls";
 import LoadingScreen from "./components/LoadingScreen";
 import { postHogSetup } from "./utils/posthog-config";
 import { RootState } from "./reducers";
 import PostHog from "posthog-react-native";
 import { useSelector } from "react-redux";
-import { primaryColor } from "./styles/colors";
+import { checkLatestiOSAppVersion } from "./utils/checkAppVersion";
 
-postHogSetup()
-PostHog.disable()
+checkLatestiOSAppVersion();
 
-LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
-console.reportErrorsAsExceptions = false;
+postHogSetup();
+PostHog.disable(); // disables user tracking by default
+
 enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Tab = createBottomTabNavigator();
 
-// Suppresses Mapbox warning and error messages
+//-------------------------------------------------------------------------------------------------
+// Suppresses Mapbox-related warning and error messages
+LogBox.ignoreAllLogs(true); // hides the yellow warning boxes
+console.reportErrorsAsExceptions = false;
 Logger.setLogCallback((log) => {
   const { message } = log;
   if (
@@ -41,24 +44,30 @@ Logger.setLogCallback((log) => {
   return false;
 });
 
+//-------------------------------------------------------------------------------------------------
 function App() {
   const { t, i18n } = useTranslation();
-  let trackUser = useSelector((state: RootState) => state.setting.trackUserActions);
-
+  let trackUser = useSelector(
+    (state: RootState) => state.setting.trackUserActions
+  );
   if (trackUser) {
-    PostHog.enable()
+    PostHog.enable();
   }
 
   return (
-    <NavigationContainer linking={deepLinking} fallback={<LoadingScreen isLoading={true}/>}>
-      <Tab.Navigator 
-      tabBar={props => <CustomBottomTabBar {...props}/>}
-      initialRouteName={t("HOME")} 
-      screenOptions={{
-        tabBarActiveTintColor: Colors.primaryColor,
-        tabBarInactiveTintColor: Colors.grey,
-        tabBarLabelStyle: Fonts.p,
-      }}>
+    <NavigationContainer
+      linking={deepLinking}
+      fallback={<LoadingScreen isLoading={true} />}
+    >
+      <Tab.Navigator
+        tabBar={(props) => <CustomBottomTabBar {...props} />}
+        initialRouteName={t("HOME")}
+        screenOptions={{
+          tabBarActiveTintColor: Colors.primaryColor,
+          tabBarInactiveTintColor: Colors.grey,
+          tabBarLabelStyle: Fonts.p,
+        }}
+      >
         <Tab.Screen
           name={t("MAP")}
           component={MainStackNavigator}
