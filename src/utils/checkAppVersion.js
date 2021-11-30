@@ -54,8 +54,8 @@ export const checkLatestiOSAppVersion = async () => {
             text: "Maybe Later",
           },
         ]
-    //   );
-    // }
+      );
+    }
   } catch (e) {
     console.log(e);
   }
