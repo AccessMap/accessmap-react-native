@@ -118,24 +118,29 @@ export default function Geocoder(props) {
   
   const noSuggestionsText = "No suggested locations found for query. " + 
     "Try typing exact coordinates (longitude, latitude) or a location name.";
-  return (
-    <View style={{width: "100%", height: "100%"}}>
-      {((!searchList || searchList.length == 0) && (props.search)) && 
+
+  var listContent = null;
+
+  if ((!searchList || searchList.length == 0) && (props.search && !isLoading)) {
+    listContent = (<View>
       <ListItem style={{height:"100%"}}>
         <ListItem.Content>
           <Text>{noSuggestionsText}</Text>
         </ListItem.Content>
-      </ListItem>}
-      
-      { searchList && searchList.length > 0 &&
-        <FlatList
-          data={searchList}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={renderItem}
-          accessibilityLabel={"Search results"}
-        />
-      }
+      </ListItem>
+    </View>);
+  } else if (searchList && searchList.length > 0) {
+    listContent = (<FlatList
+      data={searchList}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={renderItem}
+      accessibilityLabel={"Search results"}
+    />);
+  }
 
+  return (
+    <View style={{width: "100%", height: "100%"}}>
+      {listContent}
       <LoadingScreen isLoading={isLoading}/>
     </View>
   );

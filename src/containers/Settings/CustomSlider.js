@@ -91,11 +91,10 @@ export default function CustomSlider(props) {
         </Text>
       </TouchableOpacity>
 
-      {mobilityMode == MOBILITY_MODE_CUSTOM && (
         <Slider
           value={incline}
           allowTouchTrack={true}
-          onValueChange={(value) => {
+          onSlidingComplete={(value) => {
             dispatch(
               props.uphill
                 ? setCustomUphill(Math.round(value * 10) / 10)
@@ -108,11 +107,7 @@ export default function CustomSlider(props) {
           maximumValue={maxValue}
           step={0.5}
           trackStyle={{ height: 12, borderRadius: 20 }}
-          minimumTrackTintColor={
-            mobilityMode == MOBILITY_MODE_CUSTOM
-              ? Colors.primaryColor
-              : Colors.grey
-          }
+          minimumTrackTintColor={Colors.primaryColor}
           thumbStyle={{
             height: 25,
             width: 25,
@@ -126,11 +121,8 @@ export default function CustomSlider(props) {
             borderColor: "black",
             borderWidth: Platform.OS === "android" ? 0.5 : 0,
           }}
-          thumbTintColor={
-            mobilityMode == MOBILITY_MODE_CUSTOM ? "white" : Colors.grey
-          }
+          thumbTintColor={"white"}
         />
-      )}
     </View>
   );
 }

@@ -10,6 +10,8 @@ import CustomCard from "../containers/CustomCard";
 import MobilityButtonGroup from "./OmniCard/mobility-buttons";
 import { ScrollView } from "react-native";
 import { Fonts } from "../styles";
+import { useDispatch, useSelector } from "react-redux";
+import { showDownhill, showUphill } from "../actions";
 
 export default function MobilityProfile(props) {
   // close: function that runs when the close button is clicked
@@ -17,7 +19,12 @@ export default function MobilityProfile(props) {
 
   const panY = useRef(new Animated.Value(0)).current;
   const { t, i18n } = useTranslation();
-  const [showingAdvancedSettings, toggleAdvancedSettings] = useState(false);
+  const [showUphillSettings, toggleUphillSettings] = useState(false);
+  const [showDownhillSettings, toggleDownhillSettings] = useState(false);
+
+  let showingUphillColors = useSelector((state: RootState) => 
+    state.mobility.showingUphillColors);
+  const dispatch = useDispatch();
 
   const mainContent = (
     <View style={{ height: "100%" }}>
@@ -25,31 +32,57 @@ export default function MobilityProfile(props) {
       <View style={{ marginRight: 15, paddingBottom: 10 }}>
         <ScrollView horizontal={true}><MobilityButtonGroup /></ScrollView>
         <BarrierSwitch/>
-        <TouchableOpacity onPress={() => { toggleAdvancedSettings(true) }}>
-          <Text style={[Fonts.p, {paddingBottom: 10}]}>Incline Settings</Text>
+        <TouchableOpacity onPress={() => { 
+          toggleUphillSettings(true);
+          dispatch(showUphill());
+        }}>
+          <Text style={[Fonts.p, {paddingBottom: 10}]}>Uphill Settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { 
+          toggleDownhillSettings(true);
+          dispatch(showDownhill());
+        }}>
+          <Text style={[Fonts.p, {paddingBottom: 5}]}>Downhill Settings</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 
-  const inclineSettings = (
+  const uphillSettings = (
     <View style={{ paddingBottom: 10 }}>
-      <Header title={t("INCLINE_TEXT") + " " + t("SETTINGS")} 
+      <Header title={"Uphill " + t("INCLINE_TEXT") + " " + t("SETTINGS")} 
         close={props.close} 
         back={true} 
-        goBack={() => {toggleAdvancedSettings(false)}}
+        goBack={() => {toggleUphillSettings(false)}}
         panY={panY}
       />
       <CustomSlider title={t("MAX_UPHILL_STEEPNESS_TEXT")} uphill={true} />
+    </View>
+  );
+  const downhillSettings = (
+    <View style={{ paddingBottom: 10 }}>
+      <Header title={"Downhill " + t("INCLINE_TEXT") + " " + t("SETTINGS")} 
+        close={props.close} 
+        back={true} 
+        goBack={() => {toggleDownhillSettings(false)}}
+        panY={panY}
+      />
       <CustomSlider title={t("MAX_DOWNHILL_STEEPNESS_TEXT")} uphill={false} /> 
     </View>
   );
+
+  var content = mainContent;
+  if (showUphillSettings) {
+    content = uphillSettings;
+  } else if (showDownhillSettings) {
+    content = downhillSettings
+  }
 
   return (
     <CustomCard
       dismissCard={props.close}
       cardVisible={props.cardVisible}
-      content={showingAdvancedSettings ? inclineSettings : mainContent }
+      content={content}
       panY={panY}
     />
   );

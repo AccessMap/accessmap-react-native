@@ -10,9 +10,11 @@ import {
   Platform,
   TouchableOpacity,
   Animated,
+  Button,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import {
+  authenticate,
   // authenticate,
   goToLanguage,
   goToRegion,
@@ -38,6 +40,7 @@ import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
 import PostHog from "posthog-react-native";
+import { h2 } from "../styles/fonts";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,8 +56,8 @@ function SettingsPage({ props, route, navigation }) {
     (state: RootState) => state.setting.currLanguage
   );
   let currentRegion = useSelector((state: RootState) => state.map.currRegion);
-  // let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
-  // let displayName = useSelector((state: RootState) => state.signIn.displayName);
+  let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
+  let displayName = useSelector((state: RootState) => state.signIn.displayName);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
