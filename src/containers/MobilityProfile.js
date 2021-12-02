@@ -36,13 +36,13 @@ export default function MobilityProfile(props) {
           toggleUphillSettings(true);
           dispatch(showUphill());
         }}>
-          <Text style={[Fonts.p, {paddingBottom: 10}]}>Uphill Settings</Text>
+          <Text style={[Fonts.p, {paddingBottom: 10, paddingTop: 10}]}>{t("UPHILL_TEXT") + " " + t("SETTINGS")}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { 
           toggleDownhillSettings(true);
           dispatch(showDownhill());
         }}>
-          <Text style={[Fonts.p, {paddingBottom: 5}]}>Downhill Settings</Text>
+          <Text style={[Fonts.p, {paddingBottom: 10}]}>{t("DOWNHILL_TEXT") + " " + t("SETTINGS")}</Text>
         </TouchableOpacity>
       </View>
     </View>

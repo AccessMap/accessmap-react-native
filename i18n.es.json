@@ -177,5 +177,6 @@
     "MODERATE_INCLINE_TEXT": "Inclinación moderada",
     "SIGNIFICANT_INCLINE_TEXT": "Inclinación significativa",
     "INACCESSIBLE_INCLNE": "Inaccesible",
-    "SIDEWALK_COLORS_EXPLANATION": "Estos representan la dificultad relativa de una pendiente y dependen de sus porcentajes máximos aceptados de pendiente descendente y cuesta arriba."
+    "SIDEWALK_COLORS_EXPLANATION": "Estos representan la dificultad relativa de una pendiente y dependen de sus porcentajes máximos aceptados de pendiente descendente y cuesta arriba.",
+    "DISCLAIMER": "Descargo de responsabilidad: ofrecemos a los usuarios enviar comentarios sobre los obstáculos en los senderos, pero NO actualizamos los datos en tiempo real y no tenemos acceso a la información actual de la construcción (por ejemplo, trabajos de construcción que bloquean las aceras). Utilice la aplicación bajo su propia responsabilidad."
 }

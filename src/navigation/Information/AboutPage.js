@@ -109,6 +109,8 @@ export default function AboutPage({ route, navigation }) {
       {iconAndTextRow(t("TWITTER"), "twitter", twitterURL, t("TWITTER_TEXT"))}
 
       {iconAndTextRow(t("EMAIL"), "envelope", mailURL, t("EMAIL_TEXT"))}
+
+      <Text>{t("DISCLAIMER")}</Text>
       
     </View>
   );

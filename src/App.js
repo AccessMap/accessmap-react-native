@@ -1,4 +1,4 @@
-import { LogBox } from "react-native";
+import { LogBox, Platform } from "react-native";
 import * as React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,7 +19,9 @@ import PostHog from "posthog-react-native";
 import { useSelector } from "react-redux";
 import { checkLatestiOSAppVersion } from "./utils/checkAppVersion";
 
-checkLatestiOSAppVersion();
+if (Platform.OS === "ios") {
+  checkLatestiOSAppVersion();
+}
 
 postHogSetup();
 PostHog.disable(); // disables user tracking by default

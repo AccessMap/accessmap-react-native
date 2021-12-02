@@ -164,6 +164,7 @@ class FeedbackForm extends Component {
           <Text style={[Fonts.p, { marginTop: 20, marginBottom: 20 }]}>
             {this.props.t("CROWDSOURCING_INFO_TEXT")}
           </Text>
+          <Text style={[Fonts.p, {marginBottom: 20} ]}>{this.props.t("DISCLAIMER")}</Text>
           <Text style={[Fonts.h1]}>{this.props.t("ISSUES")}</Text>
         </View>
         {this.props.info.footway == "sidewalk" ? (

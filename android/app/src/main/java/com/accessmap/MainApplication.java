@@ -1,17 +1,15 @@
 package com.accessmap;
 
-import com.facebook.react.bridge.JSIModulePackage;
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
-import com.posthog.reactnative.core.RNPostHogPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 

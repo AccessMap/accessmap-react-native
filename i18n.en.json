@@ -184,5 +184,6 @@
   "MODERATE_INCLINE_TEXT": "Moderate Incline",
   "SIGNIFICANT_INCLINE_TEXT": "Significant Incline",
   "INACCESSIBLE_INCLNE": "Inaccessible",
-  "SIDEWALK_COLORS_EXPLANATION": "These represent the relative difficulty of a slope and depend on your maximum accepted downhill and uphill incline percentages."
+  "SIDEWALK_COLORS_EXPLANATION": "These represent the relative difficulty of a slope and depend on your maximum accepted downhill and uphill incline percentages.",
+  "DISCLAIMER": "Disclaimer: we offer users to submit feedback about footpath obstacles, but do NOT update data in real-time and don’t have access to current construction information (ex: construction work blocking sidewalks). Please use the app at your own risk."
 }

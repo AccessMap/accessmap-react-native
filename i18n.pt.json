@@ -176,5 +176,6 @@
     "MODERATE_INCLINE_TEXT": "Inclinação Moderada",
     "SIGNIFICANT_INCLINE_TEXT": "Inclinación significativa",
     "INACCESSIBLE_INCLNE": "Inacessível",
-    "SIDEWALK_COLORS_EXPLANATION": "Estes representam a dificuldade relativa de uma inclinação e dependem das suas percentagens máximas aceites de inclinação descendente e subida."
+    "SIDEWALK_COLORS_EXPLANATION": "Estes representam a dificuldade relativa de uma inclinação e dependem das suas percentagens máximas aceites de inclinação descendente e subida.",
+    "DISCLAIMER": "Exoneração de responsabilidade: oferecemos aos usuários o envio de feedback sobre obstáculos na trilha, mas NÃO atualizamos os dados em tempo real e não temos acesso às informações atuais de construção (por exemplo: obras bloqueando calçadas). Use o aplicativo por sua própria conta e risco."
 }
