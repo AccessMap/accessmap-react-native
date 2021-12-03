@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Views, Buttons } from "../../styles";
-import { View, AccessibilityInfo } from "react-native";
+import { View, AccessibilityInfo, useWindowDimensions } from "react-native";
 import { Button } from "react-native-elements";
 import CustomIcon from "../../components/Icon";
 import { Card } from "react-native-elements";
@@ -26,6 +26,7 @@ import { RootState } from "../../reducers";
 export default function OmniCard(props) {
   const { t, i18n } = useTranslation();
   const [findDirections, setFindDirections] = useState(false);
+  const window = useWindowDimensions();
 
   //---------------------------------------------------------------------------
   let pinFeatures = useSelector((state: RootState) => state.map.pinFeatures);
@@ -177,6 +178,8 @@ export default function OmniCard(props) {
             dispatch(uphillMode ? 
               showDownhill() : showUphill())}
         />
+
+        { window.height > window.width ?
         <Button
           containerStyle={[Buttons.whiteButton, 
             {width: 50, marginTop: 10}]}
@@ -184,7 +187,8 @@ export default function OmniCard(props) {
           buttonStyle={{ backgroundColor: "white" }}
           icon={<CustomIcon name="information" size={32} color={primaryColor} />}
           onPress={() => props.navigation.push(t("INFORMATION"))}
-        />
+        /> : null
+        }
       </View>
     </View>
   );

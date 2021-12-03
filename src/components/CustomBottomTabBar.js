@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { bottomTabHeight } from '../constants';
 import { Fonts, Position } from '../styles';
 import { primaryColor } from '../styles/colors';
 
 export default function CustomBottomTabBar({ state, descriptors, navigation }) {
+  const window = useWindowDimensions();
+
   return (
     <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {
@@ -48,7 +50,7 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[{ flex: 1, height: bottomTabHeight,
+            style={[{ flex: 1, height: (window.height > window.width) ? bottomTabHeight : 0,
                 backgroundColor: isFocused ? primaryColor: "white"}, 
                 Position.center]}
           >

@@ -140,7 +140,7 @@ android {
         applicationId "com.accessmap"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
+        versionCode 8
         versionName "2.2.2"
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.accessmap.auth'
