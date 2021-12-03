@@ -40,7 +40,6 @@ import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
 import PostHog from "posthog-react-native";
-import { h2 } from "../styles/fonts";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);

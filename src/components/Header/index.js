@@ -12,7 +12,7 @@ import { PanGestureHandler, State } from "react-native-gesture-handler";
 const Header = (props) => {
   // Props:
   // 1) title [string]
-  // 2) close [function]
+  // 2) close? [function]
   // 3) back [boolean]: true if the header should contain a back button
   // 4) goBack [function]
   // 5) panY [Animated.Value]: controls the y offset of the CustomCard the Header is in
@@ -62,12 +62,12 @@ const Header = (props) => {
           </TouchableWithoutFeedback>
         </View>
 
-        <Button
+        { props.close ? (<Button
           accessibilityLabel={t("Header-close-accessibilityLabel")}
           buttonStyle={{ backgroundColor: "#FFFFFF", margin: 0, padding: 0, right: -5,}}
           icon={<Icon name="close" size={40} color="black"/>}
-          onPress={props.close}
-        />
+          onPress={props.close} 
+        />) : null }
       </Animated.View>
     </PanGestureHandler>
   );

@@ -55,6 +55,7 @@ export default function CustomCard(props) {
       }}
     >
       <View
+        accessible={true}
         style={{
           backgroundColor: "white",
           width: "100%",
