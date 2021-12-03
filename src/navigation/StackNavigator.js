@@ -1,4 +1,4 @@
-import { AccessibilityInfo, TextInput, View } from "react-native";
+import { AccessibilityInfo, TextInput } from "react-native";
 import * as React from "react";
 
 import { Button } from "react-native-elements";
@@ -21,8 +21,8 @@ function MainStackNavigator() {
   const Stack = createStackNavigator();
 
   let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
-  let origin = useSelector((state: RootState) => state.map.origin);
-  let destination = useSelector((state: RootState) => state.map.destination);
+  // let origin = useSelector((state: RootState) => state.map.origin);
+  // let destination = useSelector((state: RootState) => state.map.destination);
 
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ function MainStackNavigator() {
     <Button
       accessibilityLabel={"Select to go back"}
       icon={<Icon name="arrow-left" size={25} />}
-      buttonStyle={{ backgroundColor: "transparent", margin: 5, height: 50, width: 50 }}
+      buttonStyle={{backgroundColor: "transparent", margin: 5, height: 50, width: 50 }}
       onPress={() => {
         navigation.goBack();
         Keyboard.dismiss();

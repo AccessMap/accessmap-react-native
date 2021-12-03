@@ -68,6 +68,7 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
     20, 24,
   ];
 
+  // TODO: shapes along with colors
   // const widthRules2 = [ // changes line width depending on zoom level
   //   "interpolate",
   //   ["exponential", 1.5],
