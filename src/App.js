@@ -2,7 +2,6 @@ import { LogBox, Platform } from "react-native";
 import * as React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { enableScreens } from "react-native-screens";
 import MainStackNavigator from "./navigation/StackNavigator";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SettingsPage from "./navigation/SettingsPage";
@@ -25,8 +24,6 @@ if (Platform.OS === "ios") {
 
 postHogSetup();
 PostHog.disable(); // disables user tracking by default
-
-enableScreens(true); // https://github.com/software-mansion/react-native-screens/issues/53
 const Tab = createBottomTabNavigator();
 
 //-------------------------------------------------------------------------------------------------
@@ -56,7 +53,7 @@ function App() {
     PostHog.enable();
   }
 
-  return (
+  const navigation = (
     <NavigationContainer
       linking={deepLinking}
       fallback={<LoadingScreen isLoading={true} />}
@@ -104,6 +101,8 @@ function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
+
+  return navigation;
 }
 
 export default App;
