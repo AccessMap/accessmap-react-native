@@ -7,6 +7,26 @@ import { RootState } from "../reducers";
 
 const OUTLINE_WIDTH = 2;
 
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
+  // filters for Mapbox GL JS to categorize sidewalk colors.
+const widthRules = [ // changes line width depending on zoom level
+  "interpolate",
+  ["exponential", 1.5],
+  ["zoom"],
+  10, 0.1,
+  16, 5,
+  20, 24,
+];
+
+const widthRules2 = [ // changes line width depending on zoom level
+  "interpolate",
+  ["exponential", 1.5],
+  ["zoom"],
+  10, 0.8,
+  16, 10,
+  20, 30,
+];
+
 // Represents an incline percentage beyond the maximum on Speed Legend bottom bar
 // and Map Legend
 export function renderRedDashedLine() {
@@ -35,49 +55,32 @@ export function renderRedDashedLine() {
   );
 }
 
-// Returns an object describing the style for a MapboxGL.LineLayer
-export const sidewalks = (incline) => { // ex incline: maxUphill
+// Returns an array of incline stops to serve as reference for a gradient line or shapes.
+const getInclineStops = (incline) => {
   let showingUphillColors = useSelector((state: RootState) => 
     state.mobility.showingUphillColors);
-  const maxIncline = Math.abs(incline);
+    const maxIncline = Math.abs(incline);
+    const nSamples = 15;
+    const nSide = parseInt(nSamples / 2);
+    const range = [...Array(nSamples).keys()].map((d) => (d - nSide) / nSide);
 
-  const nSamples = 15;
-  const nSide = parseInt(nSamples / 2);
-  const range = [...Array(nSamples).keys()].map((d) => (d - nSide) / nSide);
+    const colorMap = (showingUphillColors ? 
+      Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
+      Colors.downhillColorMap(maxIncline, maxIncline, maxIncline));
 
-  const colorMap = (showingUphillColors ? 
-    Colors.uphillColorMap(maxIncline, maxIncline, maxIncline) : 
-    Colors.downhillColorMap(maxIncline, maxIncline, maxIncline));
+    const inclineSamples = range.map((d) => d * maxIncline);
+    const inclineStops = [];
+    inclineSamples.map((d) => {
+      const color = colorMap(d);
+      inclineStops.push(d);
+      inclineStops.push(color.hex());
+    }); 
+    return [inclineStops, inclineSamples, maxIncline];
+}
 
-  const inclineSamples = range.map((d) => d * maxIncline);
-  const inclineStops = [];
-  inclineSamples.map((d) => {
-    const color = colorMap(d);
-    inclineStops.push(d);
-    inclineStops.push(color.hex());
-  });
-
-  // https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
-  // filters for Mapbox GL JS to categorize sidewalk colors.
-  const widthRules = [ // changes line width depending on zoom level
-    "interpolate",
-    ["exponential", 1.5],
-    ["zoom"],
-    10, 0.1,
-    16, 5,
-    20, 24,
-  ];
-
-  // TODO: shapes along with colors
-  // const widthRules2 = [ // changes line width depending on zoom level
-  //   "interpolate",
-  //   ["exponential", 1.5],
-  //   ["zoom"],
-  //   10, 0.8,
-  //   16, 10,
-  //   20, 30,
-  // ];
-
+// TODO: shapes along with colors
+export const shapes = (incline) => {
+  [inclineStops, inclineSamples, maxIncline] = getInclineStops(incline);
   // const patterns = [
   //   "pink-h-rect",
   //   "triangle-up-teal", 
@@ -95,8 +98,26 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
   //   "playground-15",
   //   "starburst-brown",
   // ]
-    
   // console.log(inclineSamples)
+
+  return {
+    lineWidth: widthRules2,
+    linePattern: ["case", // from not steep to steep
+      ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[7])], "green-asterisk",
+      ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[6])], "cemetery-15",
+      ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[5])], "triangle-up-teal",
+      ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[4])], "rhombus-orange",
+      ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[2])], "fast-food-15",
+      ['>=', ["abs", ["*", 100, ["get", "incline"]]], maxIncline], "pink-h-rect",
+      "cafe-15",
+    ]
+    // linePattern: "airport-15"
+  };
+}
+
+// Returns an object describing the style for a MapboxGL.LineLayer
+export const sidewalks = (incline) => { // ex incline: maxUphill
+  [inclineStops, inclineSamples, maxIncline] = getInclineStops(incline);
 
   const parameters = {
     lineCap: "round",
@@ -106,16 +127,6 @@ export const sidewalks = (incline) => { // ex incline: maxUphill
       ["abs", ["*", 100, ["get", "incline"]]], 
       ...inclineStops,
     ],
-    // linePattern: ["case", // from not steep to steep
-    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[7])], "green-asterisk",
-    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[6])], "cemetery-15",
-    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[5])], "triangle-up-teal",
-    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[4])], "rhombus-orange",
-    //   ['<=', ["abs", ["*", 100, ["get", "incline"]]], Math.abs(inclineSamples[2])], "fast-food-15",
-    //   ['>=', ["abs", ["*", 100, ["get", "incline"]]], maxIncline], "pink-h-rect",
-    //   "cafe-15",
-    // ]
-    // linePattern: "airport-15"
   };
 
   if (Platform.OS === 'ios') { return parameters; }
