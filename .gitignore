@@ -57,6 +57,7 @@ buck-out/
 
 # src
 src/containers/FeedbackForm/secrets.js
+upload-keystore.jks
 
 android/app/src/main/java/com/accessmap/MainActivity.java
 android/gradle.properties
