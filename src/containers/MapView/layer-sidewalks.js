@@ -34,14 +34,14 @@ export default function LayerSidewalks(props) {
 
   return (
     <React.Fragment>
-      <MapboxGL.LineLayer
+      {/* <MapboxGL.LineLayer
         id="sidewalk-shapes"
         sourceID="pedestrian"
         sourceLayerID="transportation"
         filter={isAccessibleSidewalk}
         layerIndex={80}
         style={MapStyles.shapes(incline)}
-      />
+      /> */}
       <MapboxGL.LineLayer
         id="sidewalk-press"
         sourceID="pedestrian"
@@ -58,7 +58,7 @@ export default function LayerSidewalks(props) {
         layerIndex={80}
         style={MapStyles.sidewalks(incline)}
       />
-      {/* <MapboxGL.LineLayer
+      <MapboxGL.LineLayer
         id="sidewalk-outline"
         sourceID="pedestrian"
         sourceLayerID="transportation"
@@ -66,7 +66,7 @@ export default function LayerSidewalks(props) {
         layerIndex={80}
         style={{ ...MapStyles.sidewalkOutlines, ...MapStyles.fadeOut }}
         minZoomLevel={13}
-      /> */}
+      />
       
       <MapboxGL.LineLayer
         id="sidewalk-inaccessible"

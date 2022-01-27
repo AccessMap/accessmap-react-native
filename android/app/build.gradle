@@ -197,6 +197,9 @@ android {
 }
 
 dependencies {
+    // Mapbox Security
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.2.2'
+
     // Android Flexible Updates
     implementation 'com.google.android.play:core:1.10.2'
 

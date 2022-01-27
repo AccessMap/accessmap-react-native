@@ -1,8 +1,6 @@
 # AccessMap React Native
 
-This is the official repository for AccessMap React Native, currently only available for Android. AccessMap is an open source project developed via the Taskar Center at the University of Washington.
-
-We have plans to add iOS compatibility in the future. We also plan to switch from Mapbox to MapLibre.
+This is the official repository for AccessMap React Native, currently only available for Android. AccessMap is an open source project developed via the Taskar Center at the University of Washington. The app is currently runnable on Android and iOS.
 
 ## Using the mobile app
 Please see [this](docs/quickstart.md) document for quickstart instructions.
