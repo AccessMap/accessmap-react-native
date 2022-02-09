@@ -18,7 +18,7 @@ const Header = (props) => {
   // 5) panY [Animated.Value]: controls the y offset of the CustomCard the Header is in
 
   const { t, i18n } = useTranslation();
-  const info = props.info;
+  // const info = props.info;
 
   const threshold = 500;
   const handleSwipeEvent = Animated.event(
@@ -63,7 +63,7 @@ const Header = (props) => {
         </View>
 
         { props.close ? (<Button
-          accessibilityLabel={t("Header-close-accessibilityLabel")}
+          accessibilityLabel={t("Header-close-accessibilityLabel") || "Close"}
           buttonStyle={{ backgroundColor: "#FFFFFF", margin: 0, padding: 0, right: -5,}}
           icon={<Icon name="close" size={40} color="black"/>}
           onPress={props.close} 

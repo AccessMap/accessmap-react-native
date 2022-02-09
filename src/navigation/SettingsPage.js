@@ -40,6 +40,7 @@ import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
 import PostHog from "posthog-react-native";
+import { universalSideMargin } from "../styles/positioning";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -55,8 +56,6 @@ function SettingsPage({ props, route, navigation }) {
     (state: RootState) => state.setting.currLanguage
   );
   let currentRegion = useSelector((state: RootState) => state.map.currRegion);
-  let isLoggedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
-  let displayName = useSelector((state: RootState) => state.signIn.displayName);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -98,24 +97,7 @@ function SettingsPage({ props, route, navigation }) {
 
   return ( // TODO: reinstate login
     <View style={{ height: "100%" }}>
-      <ScrollView style={Views.scrollView}>
-        {/* <View>
-          { isLoggedIn && <Text style={h1}>{`Hello, ${displayName}`}</Text>}
-          <Button
-            containerStyle={[{ flex: 1, marginBottom: 20, marginRight: 5 }]}
-            buttonStyle={{
-              backgroundColor: primaryColor,
-              paddingVertical: 18,
-              borderColor: "white",
-            }}
-            titleStyle={[h2, {color: "white"}]}
-            onPress={() => dispatch(authenticate())}
-            title="Login"
-            color={primaryColor}
-            accessibilityLabel="Login"
-          />
-        </View> */}
-
+      <ScrollView style={[universalSideMargin]}>
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {

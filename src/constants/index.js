@@ -7,7 +7,7 @@ export const APPLE_STORE_VERSION_URL = "https://itunes.apple.com/lookup?bundleId
 export const APPLE_STORE_APP_URL = "https://apps.apple.com/us/app/accessmap/id1123199015";
 export const DIVISOR = 5;
 export const INCLINE_IDEAL = -0.0087;
-export const bottomTabHeight = 60;
+export const bottomTabHeight = 75;
 
 export const SEATTLE = 0;
 export const MT_VERNON = 1;

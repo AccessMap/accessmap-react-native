@@ -8,5 +8,6 @@ export const setFocus = (element: React.Component | null) => {
   // console.log("attempt sending a11y event to " + id);
   if (id) {
     AccessibilityInfo.setAccessibilityFocus(id);
+    AccessibilityInfo.setAccessibilityFocus(id);
   }
 };

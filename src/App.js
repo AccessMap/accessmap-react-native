@@ -17,6 +17,7 @@ import { RootState } from "./reducers";
 import PostHog from "posthog-react-native";
 import { useSelector } from "react-redux";
 import { checkLatestiOSAppVersion } from "./utils/checkAppVersion";
+import ProfilePage from "./navigation/ProfilePage";
 
 if (Platform.OS === "ios") {
   checkLatestiOSAppVersion();
@@ -76,6 +77,21 @@ function App() {
               return (
                 <MaterialCommunityIcons
                   name={"map"}
+                  color={focused ? Colors.primaryColor : Colors.grey}
+                  size={35}
+                />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name={t("User")}
+          component={ProfilePage}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="account"
                   color={focused ? Colors.primaryColor : Colors.grey}
                   size={35}
                 />

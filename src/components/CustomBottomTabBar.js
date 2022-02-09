@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { bottomTabHeight } from '../constants';
-import { Fonts, Position } from '../styles';
+import { Colors, Fonts, Position } from '../styles';
 import { primaryColor } from '../styles/colors';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function CustomBottomTabBar({ state, descriptors, navigation }) {
   const window = useWindowDimensions();
@@ -20,6 +21,15 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
 
         const isFocused = state.index === index;
 
+        var iconName = "";
+        if (index == 0) {
+          iconName = "map";
+        } else if (index == 1) {
+          iconName = "account";
+        } else {
+          iconName = "cog";
+        }
+
         const onPress = () => {
           const event = navigation.emit({
             type: 'tabPress',
@@ -28,7 +38,7 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params 
+            // The `merge: true`option makes sure that the params 
             // inside the tab screen are preserved
             navigation.navigate({ name: route.name, merge: true });
           }
@@ -54,7 +64,13 @@ export default function CustomBottomTabBar({ state, descriptors, navigation }) {
                 backgroundColor: isFocused ? primaryColor: "white"}, 
                 Position.center]}
           >
-            <Text style={[Fonts.h1,{ color: isFocused ? 'white' : primaryColor, top: -5 }]}>
+            <MaterialCommunityIcons
+                name={iconName}
+                color={isFocused ? 'white' : primaryColor}
+                size={30}
+                style={{top: 0}}
+              />
+            <Text style={[Fonts.p,{ color: isFocused ? 'white' : primaryColor, top: -12}]}>
               {label}
             </Text>
           </TouchableOpacity>
