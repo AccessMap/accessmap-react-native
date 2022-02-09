@@ -97,7 +97,7 @@ function SettingsPage({ props, route, navigation }) {
 
   return ( // TODO: reinstate login
     <View style={{ height: "100%" }}>
-      <ScrollView style={[universalSideMargin]}>
+      <ScrollView style={Views.scrollView}>
         <TouchableOpacity
           style={{ paddingVertical: 10 }}
           onPress={() => {
