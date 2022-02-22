@@ -85,7 +85,7 @@ function App() {
           }}
         />
         <Tab.Screen
-          name={t("User")}
+          name={t("Profile")}
           component={ProfilePage}
           options={{
             tabBarIcon: ({ focused, color, size }) => {

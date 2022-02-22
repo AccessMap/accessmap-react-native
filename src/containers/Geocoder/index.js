@@ -81,7 +81,7 @@ export default function Geocoder(props) {
           dispatch(mapLoaded());
         })
         .catch((error) => {
-          console.log(error);
+          console.log("Could not make query: " + error);
           dispatch(mapLoaded());
           Alert.alert(t("NO_LOCATION"), t("NO_INTERNET"), [{ text: "OK" }]);
         });

@@ -16,3 +16,4 @@ changeToAndroidFolder;
 # Run the project on an Android device or emulator
 # If this task fails, try uninstalling the app if it already exists on the phone.
 npm run android;
+# npm run ios;

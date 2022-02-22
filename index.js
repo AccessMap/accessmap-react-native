@@ -1,5 +1,6 @@
 /**
  * @format
+ * The entry point for the AccessMap Application.
  */
 
 import React from "react";

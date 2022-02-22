@@ -1,36 +1,74 @@
-import React from 'react';
-import { View, Text } from "react-native"
+import React, { useEffect } from 'react';
+import { View, Text, Image } from "react-native"
 import { useKeycloak } from '@react-keycloak/native';
 import BottomCardButton from '../../components/BottomCardButton';
-import { p } from '../../styles/fonts';
-// import { universalSideMargin } from '../../styles/positioning';
+import { h1, p } from '../../styles/fonts';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Views } from '../../styles';
+import { greyLight } from '../../styles/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from "./reducers";
+import { signIn, signOut } from '../../reducers/signin';
 
 export default () => {
   const { keycloak } = useKeycloak();
+  let signedIn = useSelector(
+    (state: RootState) => state.signIn.isLoggedIn
+  );
+  const dispatch = useDispatch();
+  var token = keycloak?.token;
+
+  useEffect(() => {
+    if (!keycloak?.authenticated) {
+      dispatch(signOut())
+    } else {
+      dispatch(signIn())
+    }
+  }, [keycloak?.authenticated])
+  
+  console.log("USER SIGNED IN ? " + signedIn + ", Token = " + token)
 
   function showButton() {
-    return (<BottomCardButton 
-      title={!!keycloak.authenticated ? "Logout" : "Login"}
-      pressFunction={() => !!keycloak.authenticated ? 
+    return (<BottomCardButton
+      title={signedIn ? "Logout" : "Login"}
+      pressFunction={() => signedIn ?
         keycloak.logout(): keycloak.login()} 
       />);
   }
 
   return (
-    <ScrollView style={Views.scrollView}>
-      <Text style={p}>{`Authentication: ${keycloak?.authenticated}, Token: ${keycloak?.token}`}</Text>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: 25
-        }}
-      >
-        { showButton() }
+    <ScrollView style={{backgroundColor: "white"}}>
+      <View style={{backgroundColor: greyLight, height: 120}}>
+      </View>
+      <View style={{padding: 20, height: "100%", marginTop: -65}}>
+        <Image
+            accessibilityLabel="Accessmap logo"
+            style={{width: 90, height: 90, alignSelf: "center",
+              borderRadius: 45, marginBottom: 25, marginTop: 0,
+            }}
+            source={signedIn ? require("../../../res/images/dog.png") : 
+            require("../../../res/images/placeholder-profile.png")}
+            resizeMode="cover"
+            resizeMethod="scale"
+          />
+        <Text style={h1}>{signedIn ? "Test User" : 
+          "Welcome to Accessmap! Please Login or Register below to Save Your Mobility Profile."}</Text>
+        
+        { signedIn &&
+          <View>
+            <Text style={[p, {}]}>Use Frequency</Text>
+            <Text>Custom:  Wheelchair:  Cane: </Text>
+          </View>
+        }
+        
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 25
+          }}
+        >
+          { showButton() }
+        </View>
       </View>
     </ScrollView>
   );
