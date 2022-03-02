@@ -16,4 +16,9 @@ changeToAndroidFolder;
 # Run the project on an Android device or emulator
 # If this task fails, try uninstalling the app if it already exists on the phone.
 npm run android;
+
+# To run on IOS default device,
 # npm run ios;
+
+# To run on a physical device of your choice
+# react-native run-ios --device="Jay's iPhone"
