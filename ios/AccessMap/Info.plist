@@ -56,7 +56,7 @@
 	<string>Your location will be used in the Find My Location feature on the map.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string/>
 		<string>MaterialIcons.ttf</string>
 		<string>Roboto_medium.ttf</string>
 		<string>Roboto.ttf</string>

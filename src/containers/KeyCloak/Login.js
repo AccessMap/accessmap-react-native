@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./reducers";
 import { signIn, signOut } from "../../reducers/signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { accessmapTestBackEndPrefix } from "../../constants/urls";
 
 export default () => {
   const { keycloak } = useKeycloak();
@@ -43,7 +44,7 @@ export default () => {
   console.log("USER SIGNED IN ? " + signedIn + ", Username = " + username);
 
   async function uploadProfile(
-    url = "https://accessmap-backend.herokuapp.com/api/v1/users",
+    url = accessmapTestBackEndPrefix + "users/",
     data = {
       user_id: username,
       uphill_max: customUphill,
@@ -75,7 +76,7 @@ export default () => {
   }
 
   async function deleteProfile(
-    url = "https://accessmap-backend.herokuapp.com/api/v1/users/" + username,
+    url = accessmapTestBackEndPrefix + "users/" + username,
   ) {
     fetch(url, {
       method: "DELETE",
@@ -90,6 +91,30 @@ export default () => {
       Alert.alert(
         "Deleted Mobility Profile",
         "Your Mobility Profile is no longer saved on your account."
+        [
+          { text: "OK" }
+        ]
+      );
+    })
+    .catch((e) => console.error(e))
+  }
+
+  async function loadProfile(
+    url = accessmapTestBackEndPrefix + "users/" + username,
+  ) {
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + access_token,
+      },
+      redirect: "follow",
+    })
+    .then(response => {
+      console.log(response) 
+      Alert.alert(
+        "Loaded Mobility Profile",
+        "Your saved mobility profile has been loaded!"
         [
           { text: "OK" }
         ]
@@ -135,6 +160,15 @@ export default () => {
     );
   }
 
+  function showLoadSavedProfile() {
+    return (
+      <BottomCardButton
+        title={"Load Saved Profile"}
+        pressFunction={() => loadProfile()}
+      />
+    );
+  }
+
   if (signedIn) {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
@@ -176,6 +210,15 @@ export default () => {
               marginTop: 25,
             }}
           >
+            {showLoadSavedProfile()}
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 25,
+            }}
+          >
             {showDeleteProfilesButton()}
           </View>
 
@@ -188,6 +231,7 @@ export default () => {
           >
             {showLoginLogoutButton()}
           </View>
+
         </View>
       </ScrollView>
     );

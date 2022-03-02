@@ -65,3 +65,8 @@ async function authenticate() {
   }
 }
 ```
+
+# Keycloak
+As of February 2022, we are switching from OAuth 1.0 to OAuth 2.0 + Open ID Connect (OIDC).
+Keycloak is an intermediary authentication server that handles identity providers for us.
+This way, we don't need to manually write an authentication server that handles access and refresh tokens.

@@ -18,6 +18,8 @@ export const accessmapBackEndPrefix = "https://www.accessmap.io/api/v1/";
 export const loginURL = accessmapBackEndPrefix + "auth/login";
 export const appRedirectURIPrefix = "com.accessmap.auth://";
 
+export const accessmapTestBackEndPrefix = "https://accessmap-backend.herokuapp.com/api/v1/";
+
 export const openLink = async (url) => {
   var supported = await Linking.canOpenURL(url);
   if (supported) {
