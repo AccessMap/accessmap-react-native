@@ -18,9 +18,9 @@ import {
   toggleMobilityProfile,
   toggleRouteTutorial,
 } from "../../actions";
-import GreyDivider from "../../components/GreyDivider";
-import MenuButton from "../../components/MenuButton";
-import SpeedLegend from "../../components/SpeedLegend";
+import GreyDivider from "../../components/atoms/GreyDivider";
+import MenuButton from "../../components/atoms/Button/MenuButton";
+import SpeedLegend from "../../components/molecules/SpeedLegend";
 import { Fonts, Views } from "../../styles";
 import getInclineLimit from "../../utils/get-incline-limit";
 import Collapsible from "react-native-collapsible";

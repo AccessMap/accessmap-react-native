@@ -28,13 +28,13 @@ import { useTranslation } from "react-i18next";
 import { Buttons, Colors, Fonts, Views } from "../styles";
 import languages from "../constants/languages";
 import regions from "../constants/regions";
-import GreyDivider from "../components/GreyDivider";
+import GreyDivider from "../components/atoms/GreyDivider";
 import { RadioButton } from "react-native-paper";
 import { greyLight, primaryColor, primaryLight } from "../styles/colors";
 
-import CustomCard from "../containers/CustomCard";
-import Header from "../components/Header";
-import BottomCardButton from "../components/BottomCardButton";
+import CustomCard from "../components/atoms/Card/CustomCard";
+import Header from "../components/molecules/Header";
+import BottomCardButton from "../components/atoms/Button/BottomCardButton";
 import AboutPage from "./Information/AboutPage";
 import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";

@@ -11,21 +11,21 @@ import {
 } from "../actions";
 import { Views } from "../styles";
 
-import MapView from "../containers/MapView";
-import LoadingScreen from "../components/LoadingScreen";
-import Zooms from "../containers/MapButtons/Zooms";
-import OmniCard from "../containers/OmniCard";
-import FeatureCard from "../containers/FeatureCard";
-import RouteBottomCard from "../containers/RouteBottomCard";
+import MapView from "../components/organisms/MapView";
+import LoadingScreen from "../components/atoms/LoadingScreen";
+import Zooms from "../components/atoms/Button/MapButtons/Zooms";
+import OmniCard from "../components/molecules/OmniCard";
+import FeatureCard from "../components/molecules/FeatureCard";
+import RouteBottomCard from "../components/molecules/RouteBottomCard";
 
-import Directions from "../components/Directions";
-import TripInfo from "../components/TripInfo";
+import Directions from "../components/organisms/Directions";
+import TripInfo from "../components/organisms/TripInfo";
 
 import { useTranslation } from "react-i18next";
 import { useNetInfo } from "@react-native-community/netinfo";
-import MobilityProfile from "../containers/MobilityProfile";
+import MobilityProfile from "../components/organisms/MobilityProfile";
 
-import ToolTip from "../components/TutorialComponents/ToolTip";
+import ToolTip from "../components/molecules/TutorialComponents/ToolTip";
 import { mapTutorialContent, routeTutorialContent } from "../constants/tutorial-content";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { RootState } from "../reducers";

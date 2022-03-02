@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FeedbackForm from '../containers/FeedbackForm';
+import FeedbackForm from '../components/organisms/FeedbackForm';
 
 
 export default function Crowdsourcing({ route, navigation }) {

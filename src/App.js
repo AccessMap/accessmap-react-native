@@ -9,9 +9,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Colors, Fonts } from "./styles";
 import { useTranslation } from "react-i18next";
 import { Logger } from "@react-native-mapbox-gl/maps";
-import CustomBottomTabBar from "./components/CustomBottomTabBar";
+import CustomBottomTabBar from "./components/molecules/CustomBottomTabBar";
 import { deepLinking } from "./constants/urls";
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen from "./components/atoms/LoadingScreen";
 import { postHogSetup } from "./utils/posthog-config";
 import { RootState } from "./reducers";
 import PostHog from "posthog-react-native";
