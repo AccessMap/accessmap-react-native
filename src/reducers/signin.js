@@ -32,7 +32,7 @@ export function signInReducer(state = defaultAuthState, action) {
     case SIGNIN: 
       return {...state, 
         isLoggedIn: true, 
-        accessToken: action.token.token,
+        accessToken: action.token.tokenParsed,
         username: action.token.tokenParsed.email
       }
     case SIGNOUT:

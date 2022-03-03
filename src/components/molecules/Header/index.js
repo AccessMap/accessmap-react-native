@@ -50,8 +50,8 @@ const Header = (props) => {
         { props.back &&
         <Button 
           accessibilityLabel={t("Header-close-accessibilityLabel")}
-          containerStyle={{margin: 0, padding: 0, left: -10, top: -5}}
-          buttonStyle={{ backgroundColor: "#FFFFFF", margin: 0, padding: 0, }}
+          containerStyle={{margin: 0, padding: 0, left: -10}}
+          buttonStyle={{ backgroundColor: "#FFFFFF", margin: 0, padding: 0}}
           icon={<Icon name="chevron-back" size={40} color="black" type="ionicon"/>}
           onPress={props.goBack}
         />}
