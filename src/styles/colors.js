@@ -1,7 +1,7 @@
 // Represents the colors used on the map
 import chroma from "chroma-js";
 
-import { uphillSpeed, downhillSpeed } from "../profiles/cost-function";
+import { uphillSpeed, downhillSpeed } from "../utils/cost-function";
 import { DIVISOR } from "../constants";
 
 const inclineColorScale = chroma

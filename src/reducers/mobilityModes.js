@@ -1,5 +1,6 @@
 // Reducer for map loading state
 import {
+  SET_CUSTOM_AVOID_CURBS,
   SET_CUSTOM_DOWNHILL,
   SET_CUSTOM_UPHILL,
   SET_MOBILITY_MODE,
@@ -31,6 +32,8 @@ export function mobilityReducer(state = initialState, action) {
     case SET_CUSTOM_DOWNHILL:
       // logEvent(action.type, ["incline", `${action.incline}`]);
       return { ...state, customDownhill: action.incline };
+    case SET_CUSTOM_AVOID_CURBS:
+      return { ...state, avoidRaisedCurbs: action.avoid_curbs };
     case TOGGLE_BARRIERS:
       logEvent(action.type, ["avoidRaisedCurbs", `${!state.avoidRaisedCurbs}`]);
       return { ...state, avoidRaisedCurbs: !state.avoidRaisedCurbs };

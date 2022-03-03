@@ -30,6 +30,10 @@ export const SET_CUSTOM_DOWNHILL = "SET_CUSTOM_DOWNHILL";
 export function setCustomDownhill(incline) {
   return { type: SET_CUSTOM_DOWNHILL, incline };
 }
+export const SET_CUSTOM_AVOID_CURBS = "SET_CUSTOM_AVOID_CURBS";
+export function setCustomAvoidCurbs(avoid_curbs) {
+  return { type: SET_CUSTOM_AVOID_CURBS, avoid_curbs };
+}
 export const SHOWING_UPHILL_COLORS = "SHOWING_UPHILL_COLORS";
 export function showUphill() {
   return { type: SHOWING_UPHILL_COLORS };

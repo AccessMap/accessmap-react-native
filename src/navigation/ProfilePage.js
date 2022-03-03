@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reducers";
 import { signIn, signOut } from "../reducers/signin";
 import { deleteProfile, uploadProfile, loadProfile } from "../utils/authentication";
+import { mapLoaded, mapLoading } from "../actions";
+import LoadingScreen from "../components/atoms/LoadingScreen";
 
 export default function ProfilePage() {
   const { keycloak } = useKeycloak();
@@ -22,6 +24,7 @@ export default function ProfilePage() {
   //       console.log('successfully get a new token', keycloak.token);
   //   }).error((e) => console.log(e));
   // }
+  let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
 
   let signedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
   let access_token = useSelector((state: RootState) => state.signIn.token);
@@ -63,7 +66,18 @@ export default function ProfilePage() {
     return (
       <BottomCardButton
         title={"Save Mobility Profile"}
-        pressFunction={() => uploadProfile(access_token)}
+        pressFunction={() => {
+            data = {
+                user_id: username,
+                uphill_max: customUphill,
+                downhill_max: customDownhill,
+                avoid_curbs: avoidRaisedCurbs,
+            }
+            uploadProfile(dispatch, 
+                access_token,
+                data
+            );
+        }}
       />
     );
   }
@@ -72,7 +86,7 @@ export default function ProfilePage() {
     return (
       <BottomCardButton
         title={"Delete Mobility Profile"}
-        pressFunction={() => deleteProfile(access_token)}
+        pressFunction={() => deleteProfile(dispatch, username, access_token)}
       />
     );
   }
@@ -81,7 +95,7 @@ export default function ProfilePage() {
     return (
       <BottomCardButton
         title={"Load Saved Profile"}
-        pressFunction={() => loadProfile(access_token)}
+        pressFunction={() => loadProfile(dispatch,  username, access_token)}
       />
     );
   }
@@ -150,6 +164,7 @@ export default function ProfilePage() {
           </View>
 
         </View>
+        { isLoading && <LoadingScreen isLoading={true}/> }
       </ScrollView>
     );
   }
@@ -188,6 +203,7 @@ export default function ProfilePage() {
           {showLoginLogoutButton()}
         </View>
       </View>
+      { isLoading && <LoadingScreen isLoading={true}/> }
     </ScrollView>
   );
 };
