@@ -46,9 +46,9 @@ export async function uploadProfile(
 // url: backend endpoint for users
 export async function deleteProfile(
   dispatch,
-  username,
+  uid,
   access_token,
-  url = accessmapTestBackEndPrefix + "users/" + username
+  url = accessmapTestBackEndPrefix + "users/" + uid
 ) {
   dispatch(mapLoading())
   fetch(url, {
@@ -60,6 +60,7 @@ export async function deleteProfile(
     redirect: "follow",
   })
     .then((res) => {
+      console.log(res)
       Alert.alert(
         "Deleted Mobility Profile",
         "Your Mobility Profile is no longer saved on your account."[
@@ -67,7 +68,7 @@ export async function deleteProfile(
         ]
       );
     })
-    .catch((e) => console.error(e))
+    .catch((e) => console.log(e))
     .finally(() => dispatch(mapLoaded()))
 }
 
@@ -77,9 +78,9 @@ export async function deleteProfile(
 // url: backend endpoint for users
 export async function loadProfile(
   dispatch,
-  username,
+  uid,
   access_token,
-  url = accessmapTestBackEndPrefix + "users/" + username
+  url = accessmapTestBackEndPrefix + "users/" + uid
 ) {
   dispatch(mapLoading())
   fetch(url, {

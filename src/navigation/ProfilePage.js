@@ -12,24 +12,35 @@ import { greyLight } from "../styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reducers";
 import { signIn, signOut } from "../reducers/signin";
-import { deleteProfile, uploadProfile, loadProfile } from "../utils/authentication";
-import { mapLoaded, mapLoading } from "../actions";
+import {
+  deleteProfile,
+  uploadProfile,
+  loadProfile,
+} from "../utils/authentication";
 import LoadingScreen from "../components/atoms/LoadingScreen";
 
 export default function ProfilePage() {
   const { keycloak } = useKeycloak();
- 
-  keycloak.updateToken(10)
-    .then((refreshed) => {
-        if (refreshed) { console.log('Token was successfully refreshed'); }
-    }).catch(function() {
-      console.log('Failed to refresh the token, or the session has expired');
-    });
+
+  // keycloak.onTokenExpired = () => { // refresh access token if expired
+    // console.log("expired " + new Date());
+    // keycloak
+    //   .updateToken(170)
+    //   .then(() => {
+    //     console.log("refreshed " + new Date());
+    //   })
+    //   .error(() => {
+    //     console.error("Failed to refresh token " + new Date());
+    //   });
+  // };
 
   let isLoading = useSelector((state: RootState) => state.mapLoad.isLoading);
 
   let signedIn = useSelector((state: RootState) => state.signIn.isLoggedIn);
   let access_token = useSelector((state: RootState) => state.signIn.accessToken);
+  let tokenParsed = useSelector(
+    (state: RootState) => state.signIn.tokenParsed
+  );
   let username = useSelector((state: RootState) => state.signIn.username);
 
   let customUphill = useSelector(
@@ -43,20 +54,27 @@ export default function ProfilePage() {
   );
 
   const dispatch = useDispatch();
-  console.log("USER SIGNED IN ? " + signedIn + ", Username = " + username, 
-    "Access=" + JSON.stringify(access_token));
+  console.log(
+    "USER SIGNED IN ? " + signedIn + ", Username = " + username,
+    "tokenParsed=" + JSON.stringify(tokenParsed) + 
+    ", access=" + JSON.stringify(access_token)
+  );
 
   const loginOut = () => {
     if (signedIn) {
-      keycloak.logout()
-        .then(() => dispatch(signOut()) )
-        .catch((e) => console.error(e))
+      keycloak
+        .logout()
+        .then(() => dispatch(signOut()))
+        .catch((e) => console.error(e));
     } else {
-      keycloak.login()
-        .then(() => { dispatch(signIn(keycloak))})
-        .catch((e) => console.error(e))
+      keycloak
+        .login()
+        .then(() => {
+          dispatch(signIn(keycloak));
+        })
+        .catch((e) => console.error(e));
     }
-  }
+  };
 
   function showLoginLogoutButton() {
     return (
@@ -72,16 +90,13 @@ export default function ProfilePage() {
       <BottomCardButton
         title={"Save Mobility Profile"}
         pressFunction={() => {
-            data = {
-                user_id: access_token?.sub,
-                uphill_max: customUphill,
-                downhill_max: customDownhill,
-                avoid_curbs: avoidRaisedCurbs,
-            }
-            uploadProfile(dispatch, 
-                access_token,
-                data
-            );
+          data = {
+            user_id: tokenParsed?.sub,
+            uphill_max: customUphill,
+            downhill_max: customDownhill,
+            avoid_curbs: avoidRaisedCurbs,
+          };
+          uploadProfile(dispatch, tokenParsed, data);
         }}
       />
     );
@@ -91,7 +106,9 @@ export default function ProfilePage() {
     return (
       <BottomCardButton
         title={"Delete Mobility Profile"}
-        pressFunction={() => deleteProfile(dispatch, access_token?.sub, access_token)}
+        pressFunction={() =>
+          deleteProfile(dispatch, tokenParsed?.sub, tokenParsed)
+        }
       />
     );
   }
@@ -100,7 +117,9 @@ export default function ProfilePage() {
     return (
       <BottomCardButton
         title={"Load Saved Profile"}
-        pressFunction={() => loadProfile(dispatch, access_token?.sub, access_token)}
+        pressFunction={() =>
+          loadProfile(dispatch, tokenParsed?.sub, tokenParsed)
+        }
       />
     );
   }
@@ -167,9 +186,8 @@ export default function ProfilePage() {
           >
             {showLoginLogoutButton()}
           </View>
-
         </View>
-        { isLoading && <LoadingScreen isLoading={true}/> }
+        {isLoading && <LoadingScreen isLoading={true} />}
       </ScrollView>
     );
   }
@@ -208,7 +226,7 @@ export default function ProfilePage() {
           {showLoginLogoutButton()}
         </View>
       </View>
-      { isLoading && <LoadingScreen isLoading={true}/> }
+      {isLoading && <LoadingScreen isLoading={true} />}
     </ScrollView>
   );
-};
+}

@@ -84,7 +84,7 @@ function App() {
             },
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name={t("Profile")}
           component={ProfilePage}
           options={{
@@ -98,7 +98,7 @@ function App() {
               );
             },
           }}
-        />
+        /> */}
         <Tab.Screen
           name={t("SETTINGS")}
           component={SettingsPage}

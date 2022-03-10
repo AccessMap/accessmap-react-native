@@ -68,6 +68,7 @@ export default function MobilityProfile(props) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center"
           }}
           onPress={() => {
             toggleUphillSettings(true);
@@ -92,6 +93,7 @@ export default function MobilityProfile(props) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center"
           }}
           onPress={() => {
             toggleDownhillSettings(true);

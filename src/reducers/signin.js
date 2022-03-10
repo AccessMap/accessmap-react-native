@@ -13,6 +13,7 @@ import { logEvent } from "../actions/trackUser"
 const defaultAuthState = {
   isLoggedIn: false,
   accessToken: null,
+  tokenParsed: null,
   username: null,
   displayName: null,
 };
@@ -32,13 +33,15 @@ export function signInReducer(state = defaultAuthState, action) {
     case SIGNIN: 
       return {...state, 
         isLoggedIn: true, 
-        accessToken: action.token.tokenParsed,
+        accessToken: action.token.token,
+        tokenParsed: action.token.tokenParsed,
         username: action.token.tokenParsed.email
       }
     case SIGNOUT:
       return {...state, 
         isLoggedIn: false, 
         accessToken: null, 
+        tokenParsed: null,
         refreshToken: null,
         username: null
       }

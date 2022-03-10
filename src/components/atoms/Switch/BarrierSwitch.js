@@ -26,6 +26,7 @@ export default function BarrierSwitch(props) {
 		<View style={{flex: 1, flexDirection: "row", alignItems: "center" }}>
 			<Text style={[{flex: 1}, Fonts.p]}>{t("AVOID_BARRIERS_TEXT")}</Text>
 			<Switch
+				accessibilityLabel={t("AVOID_BARRIERS_TEXT")}
 				style={[Buttons.switches, {marginRight: 0}]}
 				trackColor={{ false: greyLight, true: Colors.primaryColor}}
 				thumbColor={"white"}
