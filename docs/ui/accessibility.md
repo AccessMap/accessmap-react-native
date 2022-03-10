@@ -40,7 +40,7 @@ const setFocus = () => {
   }
 ```
 
-# Example that works (with suspected race condition on AccessibilityInfo, needs WIP) 
+## Example that works (with suspected race condition on AccessibilityInfo, needs WIP) 
 ```js
 // Assign ref={setFocus} on the element you want to focus on. Be sure to 
 // set it to something "accessible", like Text.
@@ -58,7 +58,7 @@ const setFocus = (element: React.Component | null) => {
 };
 ```
 
-# Checking if screen reader active or not
+## Checking if screen reader active or not
 ```js
 const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
   useEffect(() => {
@@ -83,7 +83,7 @@ const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
   }, []);
   ```
 
-  # Checking if Screenreader is on
+  ## Checking if Screenreader is on
   ```js
   const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
   useEffect(() => {
@@ -99,4 +99,11 @@ const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
     return () => {
       screenReaderChangedSubscription.remove();
     };
-  }, []);```
+  }, []);
+  ```
+
+  ##  Problem with iOS-specific VoiceOver
+  You need to set accessible={false} to a Button's children (if it includes an Icon),
+  then set accessible={true} to the parent to prevent VoiceOver from trying to read the 
+  Icon image itself (which produces "?" as the alt text). 
+  - Other noted problems: Our MobilityProfile Card doesn't read in linear order 

@@ -2,7 +2,7 @@ import { Linking } from "react-native";
 
 //-------------------------------------------------------------------------------------------------
 // Absolute Links
-export const privacyPolicyURL = "https://www.freeprivacypolicy.com/live/b0fb1c91-d28b-490e-ae78-e5b5202a0c1d";
+export const privacyPolicyURL = "https://tcat.cs.washington.edu/wp-content/uploads/privacy-policies/AccessMap%20Privacy%20Policy.pdf?_t=1646954167";
 export const githubURL = "https://github.com/AccessMap/accessmap-react-native";
 export const taskarURL = "https://tcat.cs.washington.edu";
 export const donateURL =
