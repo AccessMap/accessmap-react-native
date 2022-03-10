@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 import {
-  authenticate,
   // authenticate,
   goToLanguage,
   goToRegion,
@@ -30,7 +29,7 @@ import languages from "../constants/languages";
 import regions from "../constants/regions";
 import GreyDivider from "../components/atoms/GreyDivider";
 import { RadioButton } from "react-native-paper";
-import { greyLight, primaryColor, primaryLight } from "../styles/colors";
+import { greyLight, primaryColor } from "../styles/colors";
 
 import CustomCard from "../components/atoms/Card/CustomCard";
 import Header from "../components/molecules/Header";
@@ -40,7 +39,7 @@ import Collapsible from "react-native-collapsible";
 import { RootState } from "../reducers";
 
 import PostHog from "posthog-react-native";
-import { universalSideMargin } from "../styles/positioning";
+import { openLink, privacyPolicyURL } from "../constants/urls";
 
 function SettingsPage({ props, route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -62,28 +61,39 @@ function SettingsPage({ props, route, navigation }) {
 
   // Only displays on Android side for now since Rakam iOS is not set up
   const PrivacySection = (
-    <View style={[Views.settingsRow]}>
-      <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
-      <Switch
-        style={Buttons.switches}
-        trackColor={{ false: greyLight, true: primaryColor }}
-        thumbColor="white"
-        accessibilityLabel={t("TRACKING_SETTINGS_TEXT")}
-        onValueChange={(value) => {
-          if (trackingSetting) {
-            dispatch(untrackUser());
-            PostHog.disable();
-            if (pageLoaded) {
-              AccessibilityInfo.announceForAccessibility(t("NOT_TRACKING"));
-            } else {
-              setLoaded(true);
-            }
-          } else {
-            setModalVisible(true);
-          }
+    <View style={{}}>
+      <TouchableOpacity
+        style={{ paddingVertical: 15 }}
+        onPress={() => {
+          openLink(privacyPolicyURL);
         }}
-        value={trackingSetting}
-      />
+        accessibilityRole="button"
+      >
+        <Text style={Fonts.p}>{t("PRIVACY_POLICY")}</Text>
+      </TouchableOpacity>
+      <View style={[Views.settingsRow, {paddingTop: 0}]}>
+        <Text style={[Fonts.p]}>{t("TRACK_SETTINGS")}</Text>
+        <Switch
+          style={Buttons.switches}
+          trackColor={{ false: greyLight, true: primaryColor }}
+          thumbColor="white"
+          accessibilityLabel={t("TRACKING_SETTINGS_TEXT")}
+          onValueChange={(value) => {
+            if (trackingSetting) {
+              dispatch(untrackUser());
+              PostHog.disable();
+              if (pageLoaded) {
+                AccessibilityInfo.announceForAccessibility(t("NOT_TRACKING"));
+              } else {
+                setLoaded(true);
+              }
+            } else {
+              setModalVisible(true);
+            }
+          }}
+          value={trackingSetting}
+        />
+      </View>
     </View>
   );
 
@@ -95,7 +105,7 @@ function SettingsPage({ props, route, navigation }) {
 
   const panY = useRef(new Animated.Value(0)).current;
 
-  return ( // TODO: reinstate login
+  return (
     <View style={{ height: "100%" }}>
       <ScrollView style={Views.scrollView}>
         <TouchableOpacity
@@ -104,8 +114,8 @@ function SettingsPage({ props, route, navigation }) {
             setCollapsedLang(!collapsedLang);
             AccessibilityInfo.announceForAccessibility(
               collapsedLang
-                ? "Language section has been maximized."
-                : "Language section has been collapsed."
+                ? t("Language section has been maximized.")
+                : t("Language section has been collapsed.")
             );
           }}
         >
@@ -119,7 +129,7 @@ function SettingsPage({ props, route, navigation }) {
               });
               dispatch(goToLanguage(item[0]));
               AccessibilityInfo.announceForAccessibility(
-                "Changed language to " + item[0].name
+                t("Changed language to ") + item[0].name
               );
               i18n.changeLanguage(value.toLowerCase());
             }}
@@ -142,9 +152,7 @@ function SettingsPage({ props, route, navigation }) {
           onPress={() => {
             setCollapsedRegion(!collapsedRegion);
             AccessibilityInfo.announceForAccessibility(
-              collapsedRegion
-                ? "Region section has been maximized."
-                : "Region section has been collapsed."
+              collapsedRegion ? t("REGION_MAXIMIZED") : t("REGION_COLLAPSED")
             );
           }}
           accessibilityRole="button"
@@ -182,8 +190,8 @@ function SettingsPage({ props, route, navigation }) {
             setCollapsedUnits(!collapsedUnits);
             AccessibilityInfo.announceForAccessibility(
               collapsedUnits
-                ? "Units section has been maximized."
-                : "Units section has been collapsed."
+                ? t("Units section has been maximized.")
+                : t("Units section has been collapsed.")
             );
           }}
           accessibilityRole="button"
@@ -223,8 +231,8 @@ function SettingsPage({ props, route, navigation }) {
             setCollapsedPrivacy(!collapsedPrivacy);
             AccessibilityInfo.announceForAccessibility(
               collapsedPrivacy
-                ? "Privacy section has been maximized."
-                : "Privacy section has been collapsed."
+                ? t("Privacy section has been maximized.")
+                : t("Privacy section has been collapsed.")
             );
           }}
         >
@@ -240,8 +248,8 @@ function SettingsPage({ props, route, navigation }) {
             setCollapsedAbout(!collapsedAbout);
             AccessibilityInfo.announceForAccessibility(
               collapsedAbout
-                ? "About section has been maximized."
-                : "About section has been collapsed."
+                ? t("About section has been maximized.")
+                : t("About section has been collapsed.")
             );
           }}
           accessibilityRole="button"

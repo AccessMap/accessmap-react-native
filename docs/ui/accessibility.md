@@ -82,3 +82,21 @@ const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
     return () => screenReaderChangedSubscription.remove()
   }, []);
   ```
+
+  # Checking if Screenreader is on
+  ```js
+  const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
+  useEffect(() => {
+    const screenReaderChangedSubscription = AccessibilityInfo.addEventListener(
+      "screenReaderChanged",
+      (screenReaderEnabled) => {
+        setScreenReaderEnabled(screenReaderEnabled);
+      }
+    );
+    AccessibilityInfo.isScreenReaderEnabled().then((screenReaderEnabled) => {
+      setScreenReaderEnabled(screenReaderEnabled);
+    });
+    return () => {
+      screenReaderChangedSubscription.remove();
+    };
+  }, []);```

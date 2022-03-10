@@ -177,5 +177,17 @@
     "SIGNIFICANT_INCLINE_TEXT": "Inclinación significativa",
     "INACCESSIBLE_INCLNE": "Inacessível",
     "SIDEWALK_COLORS_EXPLANATION": "Estes representam a dificuldade relativa de uma inclinação e dependem das suas percentagens máximas aceites de inclinação descendente e subida.",
-    "DISCLAIMER": "Exoneração de responsabilidade: oferecemos aos usuários o envio de feedback sobre obstáculos na trilha, mas NÃO atualizamos os dados em tempo real e não temos acesso às informações atuais de construção (por exemplo: obras bloqueando calçadas). Use o aplicativo por sua própria conta e risco."
+    "DISCLAIMER": "Isenção de responsabilidade: oferecemos aos usuários feedback sobre os obstáculos da trilha, mas NÃO atualizamos os dados em tempo real e não temos acesso às informações atuais da construção (ex: obras de construção bloqueando calçadas). Use o aplicativo por sua conta e risco.",
+    "PRIVACY_POLICY": "Política de Privacidade",
+    "REGION_MAXIMIZED": "A seção da região foi maximizada.",
+    "REGION_COLLAPSED": "A seção da região foi recolhida.",
+    "Language section has been maximized.": "A seção de idioma foi maximizada.",
+    "Language section has been collapsed.": "A seção de idioma foi recolhida.",
+    "Units section has been maximized.": "A seção de unidades foi reduzida. foi maximizada.",
+    "Changed language to ": "Idioma alterado para ",
+    "Units section has been collapsed.": "A seção de unidades foi recolhida.",
+    "Privacy section has been maximized.": "A seção de privacidade foi maximizada.",
+    "Privacy section has been collapsed.": "Política de Privacidade0",
+    "About section has been maximized.": "Política de Privacidade1",
+    "About section has been collapsed.": "Política de Privacidade2"
 }

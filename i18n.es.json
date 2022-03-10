@@ -178,5 +178,17 @@
     "SIGNIFICANT_INCLINE_TEXT": "Inclinación significativa",
     "INACCESSIBLE_INCLNE": "Inaccesible",
     "SIDEWALK_COLORS_EXPLANATION": "Estos representan la dificultad relativa de una pendiente y dependen de sus porcentajes máximos aceptados de pendiente descendente y cuesta arriba.",
-    "DISCLAIMER": "Descargo de responsabilidad: ofrecemos a los usuarios enviar comentarios sobre los obstáculos en los senderos, pero NO actualizamos los datos en tiempo real y no tenemos acceso a la información actual de la construcción (por ejemplo, trabajos de construcción que bloquean las aceras). Utilice la aplicación bajo su propia responsabilidad."
+    "DISCLAIMER": "Descargo de responsabilidad: ofrecemos a los usuarios enviar comentarios sobre los obstáculos en los senderos, pero NO actualizamos los datos en tiempo real y no tenemos acceso a la información actual de la construcción (por ejemplo, trabajos de construcción que bloquean las aceras). Utilice la aplicación bajo su propia responsabilidad.",
+    "PRIVACY_POLICY": "Política de privacidad",
+    "REGION_MAXIMIZED": "La sección de región se ha maximizado.",
+    "REGION_COLLAPSED": "La sección de región se ha contraído.",
+    "Language section has been maximized.": "La sección de idioma se ha maximizado.",
+    "Language section has been collapsed.": "La sección de idioma se ha contraído.",
+    "Units section has been maximized.": "La sección de unidades se ha se ha maximizado.",
+    "Changed language to ": "Se cambió el idioma a",
+    "Units section has been collapsed.": "La sección de unidades se ha contraído.",
+    "Privacy section has been maximized.": "La sección de privacidad se ha maximizado.",
+    "Privacy section has been collapsed.": "Política de privacidad0",
+    "About section has been maximized.": "Política de privacidad1",
+    "About section has been collapsed.": "Política de privacidad2"
 }

@@ -12,8 +12,13 @@ import { ScrollView } from "react-native";
 import { Colors, Fonts } from "../../styles";
 import { useDispatch, useSelector } from "react-redux";
 import { showDownhill, showUphill } from "../../actions";
-import { Icon } from "react-native-elements";
-import { MOBILITY_MODE_CANE, MOBILITY_MODE_POWERED, MOBILITY_MODE_WHEELCHAIR } from "../../constants";
+import { Button } from "react-native-elements";
+import {
+  MOBILITY_MODE_CANE,
+  MOBILITY_MODE_POWERED,
+  MOBILITY_MODE_WHEELCHAIR,
+} from "../../constants";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function MobilityProfile(props) {
   // close: function that runs when the close button is clicked
@@ -55,34 +60,46 @@ export default function MobilityProfile(props) {
   const mainContent = (
     <View style={{ height: "100%" }}>
       <Header title={t("MAP_HEAD_3")} close={props.close} panY={panY} />
-      <View style={{ marginRight: 15, paddingBottom: 10 }}>
+      <View style={{ marginRight: 5, paddingBottom: 10, top: -5 }}>
         <ScrollView horizontal={true}>
           <MobilityButtonGroup />
         </ScrollView>
         <TouchableOpacity
           style={{
-            borderColor: Colors.greyx,
+            borderColor: Colors.grey,
             borderWidth: 0.5,
             marginBottom: 10,
             marginTop: 10,
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
           }}
+          accessible={true}
           onPress={() => {
             toggleUphillSettings(true);
             dispatch(showUphill());
           }}
         >
-          <Text style={[Fonts.p, { padding: 10 }]}>
+          <Text accessible={false} style={[Fonts.p, { padding: 10 }]}>
             {t("UPHILL_TEXT") + " " + t("SETTINGS")}
           </Text>
-          <View style={{flexDirection: "row", alignItems: "center"}}>
-            <Text style={[Fonts.p]}>
-              {getPreferences(mobilityMode)[0]}
-            </Text>
-            <Icon name="chevron-forward" size={40} color="black" type="ionicon" />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={[Fonts.p]}>{getPreferences(mobilityMode)[0]}</Text>
+            <Button
+              accessibilityLabel={"Enter Uphill Settings page"}
+              icon={<Icon name="angle-right" size={35} />}
+              buttonStyle={{
+                backgroundColor: "transparent",
+                margin: 0,
+                padding: 0,
+                paddingHorizontal: 10,
+              }}
+              onPress={() => {
+                toggleUphillSettings(true);
+                dispatch(showUphill());
+              }}
+            />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -93,7 +110,7 @@ export default function MobilityProfile(props) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
           }}
           onPress={() => {
             toggleDownhillSettings(true);
@@ -103,11 +120,22 @@ export default function MobilityProfile(props) {
           <Text style={[Fonts.p, { padding: 10 }]}>
             {t("DOWNHILL_TEXT") + " " + t("SETTINGS")}
           </Text>
-          <View style={{flexDirection: "row", alignItems: "center"}}>
-            <Text style={[Fonts.p]}>
-              {getPreferences(mobilityMode)[1]}
-            </Text>
-            <Icon name="chevron-forward" size={40} color="black" type="ionicon" />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={[Fonts.p]}>{getPreferences(mobilityMode)[1]}</Text>
+            <Button
+              accessibilityLabel={"Enter Downhill Settings page"}
+              icon={<Icon name="angle-right" size={35} />}
+              buttonStyle={{
+                backgroundColor: "transparent",
+                margin: 0,
+                padding: 0,
+                paddingHorizontal: 10,
+              }}
+              onPress={() => {
+                toggleDownhillSettings(true);
+                dispatch(showDownhill());
+              }}
+            />
           </View>
         </TouchableOpacity>
         <BarrierSwitch />

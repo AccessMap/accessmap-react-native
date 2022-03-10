@@ -207,7 +207,7 @@ export default function ProfilePage() {
             marginBottom: 25,
             marginTop: 0,
           }}
-          source={require("../../res/images/placeholder-profile.png")}
+          source={require("../../res/images/default-profile.png")}
           resizeMode="cover"
           resizeMethod="scale"
         />

@@ -73,7 +73,7 @@ const MobilityButtonGroup = props => {
 
 	return (
 		<View style={{flexDirection: "row", flex: 1, 
-			alignItems: "center", paddingBottom: 5,
+			alignItems: "center", paddingBottom: 5
 		}}>
 			<MobilityButton
 				name="wheelchair"
